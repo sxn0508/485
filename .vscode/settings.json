@@ -1,0 +1,15 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "gpio.h": "c",
+        "uart.h": "c",
+        "timer.h": "c",
+        "stm32f37x_it.h": "c",
+        "main.h": "c",
+        "dlt645.h": "c",
+        "string.h": "c",
+        "stm32f37x.h": "c",
+        "protocol.h": "c"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled"
+}

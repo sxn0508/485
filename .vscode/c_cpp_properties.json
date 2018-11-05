@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "D:/cpp-neon/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/arm-none-eabi/include",
+                "${workspaceFolder}/cmsis/include",
+                "${workspaceFolder}/stdperiph/include",
+                "${workspaceFolder}/user/include"
+            ],
+            "defines": [
+                "USE_STDPERIPH_DRIVER"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "msvc-x64"
+        }
+    ],
+    "version": 4
+}
