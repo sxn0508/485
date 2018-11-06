@@ -564,11 +564,6 @@
               <FilePath>..\user\source\stm32f37x_it.c</FilePath>
             </File>
             <File>
-              <FileName>syscalls.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user\source\syscalls.c</FilePath>
-            </File>
-            <File>
               <FileName>system_stm32f37x.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user\source\system_stm32f37x.c</FilePath>

@@ -34,7 +34,6 @@
 #include "Uart.h"
 #include "Time.h"
 
-
 uint16_t capture = 0;
 /** @addtogroup Template_Project
   * @{
@@ -67,14 +66,14 @@ void NMI_Handler(void)
   */
 void HardFault_Handler(void)
 {
-//	if (CoreDebug->DHCSR & 1) {  //check C_DEBUGEN == 1 -> Debugger Connected  
-//      __breakpoint(0);  // halt program execution here         
-//  } 
+    //	if (CoreDebug->DHCSR & 1) {  //check C_DEBUGEN == 1 -> Debugger Connected
+    //      __breakpoint(0);  // halt program execution here
+    //  }
 
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while (1)
+    {
+    }
 }
 
 /**
@@ -84,10 +83,10 @@ void HardFault_Handler(void)
   */
 void MemManage_Handler(void)
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while (1)
+    {
+    }
 }
 
 /**
@@ -97,10 +96,10 @@ void MemManage_Handler(void)
   */
 void BusFault_Handler(void)
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while (1)
+    {
+    }
 }
 
 /**
@@ -110,10 +109,10 @@ void BusFault_Handler(void)
   */
 void UsageFault_Handler(void)
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while (1)
+    {
+    }
 }
 
 /**
@@ -150,14 +149,14 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-	if (Bit_SET == GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13))
-	{
-		GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET);    //拉低PC13
-	}
-	else	
-	{
-		GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);
-	}
+    if (Bit_SET == GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13))
+    {
+        GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET); //拉低PC13
+    }
+    else
+    {
+        GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);
+    }
 }
 
 /******************************************************************************/
@@ -176,7 +175,6 @@ void SysTick_Handler(void)
 {
 }*/
 
-
 /********************************************************************
 * 功    能：USART1_IRQHandler中断函数
             将串口数据写到Uart1缓存结构体中的数组
@@ -188,26 +186,31 @@ void SysTick_Handler(void)
 **********************************************************************/
 void USART1_IRQHandler(void)
 {
-	if (USART_GetITStatus(USART1,USART_IT_RXNE) != RESET )
-	{
-		if(blDrv_Buf_IsFull(&ucDrv_Buf_Uart1_Rcv) != true) //if串口1接收缓存区不满
-		{
-			ucDrv_Buf_Uart1_Rcv.ucBuf[ucDrv_Buf_Uart1_Rcv.WR_Index]=(uint8_t)USART_ReceiveData(USART1);
-			ucDrv_Buf_Uart1_Rcv.WR_Index=(ucDrv_Buf_Uart1_Rcv.WR_Index+1)%DRV_BUF_SIZE;
-		}
-	};
+    if (USART_GetFlagStatus(USART1, USART_FLAG_ORE))
+    {
+        USART_ClearFlag(USART1, USART_FLAG_ORE);
+    }
 
-	//从串口1的发送缓存向外发一个字节
-	if (USART_GetITStatus(USART1,USART_IT_TXE) != RESET)
-	{
-		USART_ClearITPendingBit(USART1,USART_IT_TXE);
-		USART_SendData(USART1,(uint16_t)ucDrv_Buf_Uart1_Snd.ucBuf[ucDrv_Buf_Uart1_Snd.RD_Index]);
-		ucDrv_Buf_Uart1_Snd.RD_Index = (ucDrv_Buf_Uart1_Snd.RD_Index + 1)% DRV_BUF_SIZE;
-		if(blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart1_Snd) == true)
-		{
-			USART_ITConfig(USART1,USART_IT_TXE,DISABLE);
-		}
-	}
+    if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
+    {
+        if (blDrv_Buf_IsFull(&ucDrv_Buf_Uart1_Rcv) != true) //if串口1接收缓存区不满
+        {
+            ucDrv_Buf_Uart1_Rcv.ucBuf[ucDrv_Buf_Uart1_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(USART1);
+            ucDrv_Buf_Uart1_Rcv.WR_Index = (ucDrv_Buf_Uart1_Rcv.WR_Index + 1) % DRV_BUF_SIZE;
+        }
+    };
+
+    //从串口1的发送缓存向外发一个字节
+    if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
+    {
+        USART_ClearITPendingBit(USART1, USART_IT_TXE);
+        USART_SendData(USART1, (uint16_t)ucDrv_Buf_Uart1_Snd.ucBuf[ucDrv_Buf_Uart1_Snd.RD_Index]);
+        ucDrv_Buf_Uart1_Snd.RD_Index = (ucDrv_Buf_Uart1_Snd.RD_Index + 1) % DRV_BUF_SIZE;
+        if (blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart1_Snd) == true)
+        {
+            USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
+        }
+    }
 }
 
 /********************************************************************
@@ -222,32 +225,32 @@ void USART1_IRQHandler(void)
 void USART2_IRQHandler(void)
 {
 #ifdef ENABLE_INFR
-	if(USART_GetFlagStatus(USART2,USART_FLAG_ORE)== SET)
-		USART_ClearFlag(USART2, USART_FLAG_ORE);
-	if (USART_GetITStatus(USART2,USART_IT_RXNE) != RESET )
-	{
-		USART_ClearITPendingBit(USART2,USART_IT_RXNE);
-		if(blDrv_Buf_IsFull(&ucDrv_Buf_Uart2_Rcv) != true) //if串口2接收缓存区不满
-		{
-			ucDrv_Buf_Uart2_Rcv.ucBuf[ucDrv_Buf_Uart2_Rcv.WR_Index]=(uint8_t)USART_ReceiveData(USART2);
-			ucDrv_Buf_Uart2_Rcv.WR_Index=(ucDrv_Buf_Uart2_Rcv.WR_Index+1)%DRV_BUF_SIZE;
-		}
-	};
-	if (USART_GetITStatus(USART2,USART_IT_TXE) != RESET)
-	{
-		USART_ClearITPendingBit(USART2,USART_IT_TXE);
-		USART_SendData(USART2,(uint16_t)ucDrv_Buf_Uart2_Snd.ucBuf[ucDrv_Buf_Uart2_Snd.RD_Index]);
-		ucDrv_Buf_Uart2_Snd.RD_Index = (ucDrv_Buf_Uart2_Snd.RD_Index + 1)% DRV_BUF_SIZE;
-		if(blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd) == true)
-		{
-			USART_ITConfig(USART2,USART_IT_TXE,DISABLE);
-			//TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Disable);
-			while (RESET == USART_GetFlagStatus(USART2, USART_FLAG_TC))
-			{
-			}
-			USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
-		}
-	}
+    if (USART_GetFlagStatus(USART2, USART_FLAG_ORE) == SET)
+        USART_ClearFlag(USART2, USART_FLAG_ORE);
+    if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
+    {
+        USART_ClearITPendingBit(USART2, USART_IT_RXNE);
+        if (blDrv_Buf_IsFull(&ucDrv_Buf_Uart2_Rcv) != true) //if串口2接收缓存区不满
+        {
+            ucDrv_Buf_Uart2_Rcv.ucBuf[ucDrv_Buf_Uart2_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(USART2);
+            ucDrv_Buf_Uart2_Rcv.WR_Index = (ucDrv_Buf_Uart2_Rcv.WR_Index + 1) % DRV_BUF_SIZE;
+        }
+    };
+    if (USART_GetITStatus(USART2, USART_IT_TXE) != RESET)
+    {
+        USART_ClearITPendingBit(USART2, USART_IT_TXE);
+        USART_SendData(USART2, (uint16_t)ucDrv_Buf_Uart2_Snd.ucBuf[ucDrv_Buf_Uart2_Snd.RD_Index]);
+        ucDrv_Buf_Uart2_Snd.RD_Index = (ucDrv_Buf_Uart2_Snd.RD_Index + 1) % DRV_BUF_SIZE;
+        if (blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd) == true)
+        {
+            USART_ITConfig(USART2, USART_IT_TXE, DISABLE);
+            //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Disable);
+            while (RESET == USART_GetFlagStatus(USART2, USART_FLAG_TC))
+            {
+            }
+            USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
+        }
+    }
 #endif
 }
 
@@ -262,22 +265,26 @@ void USART2_IRQHandler(void)
 **********************************************************************/
 void USART3_IRQHandler(void)
 {
-	if (RESET != USART_GetITStatus(USART3,USART_IT_RXNE)) //读一个字节入串口3接收缓存
-	{
-		if(blDrv_Buf_IsFull(&ucDrv_Buf_Uart3_Rcv) != true) //if串口3接收缓存区不满
-		{
-			ucDrv_Buf_Uart3_Rcv.ucBuf[ucDrv_Buf_Uart3_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(USART3);
-			ucDrv_Buf_Uart3_Rcv.WR_Index = (ucDrv_Buf_Uart3_Rcv.WR_Index+1) % DRV_BUF_SIZE;	
-		}
-	}
-	if (USART_GetITStatus(USART3,USART_IT_TXE) != RESET) 
-	{
-		//USART_ClearITPendingBit(USART3,USART_IT_TXE);
-		USART_SendData(USART3,(uint16_t)ucDrv_Buf_Uart3_Snd.ucBuf[ucDrv_Buf_Uart3_Snd.RD_Index]);
-		ucDrv_Buf_Uart3_Snd.RD_Index = (ucDrv_Buf_Uart3_Snd.RD_Index + 1) % DRV_BUF_SIZE;
-		if(blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd) == true)
-			USART_ITConfig(USART3,USART_IT_TXE,DISABLE);
-	}
+    if (USART_GetFlagStatus(USART3, USART_FLAG_ORE))
+    {
+        USART_ClearFlag(USART3, USART_FLAG_ORE);
+    }
+    if (RESET != USART_GetITStatus(USART3, USART_IT_RXNE)) //读一个字节入串口3接收缓存
+    {
+        if (blDrv_Buf_IsFull(&ucDrv_Buf_Uart3_Rcv) != true) //if串口3接收缓存区不满
+        {
+            ucDrv_Buf_Uart3_Rcv.ucBuf[ucDrv_Buf_Uart3_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(USART3);
+            ucDrv_Buf_Uart3_Rcv.WR_Index = (ucDrv_Buf_Uart3_Rcv.WR_Index + 1) % DRV_BUF_SIZE;
+        }
+    }
+    if (USART_GetITStatus(USART3, USART_IT_TXE) != RESET)
+    {
+        //USART_ClearITPendingBit(USART3,USART_IT_TXE);
+        USART_SendData(USART3, (uint16_t)ucDrv_Buf_Uart3_Snd.ucBuf[ucDrv_Buf_Uart3_Snd.RD_Index]);
+        ucDrv_Buf_Uart3_Snd.RD_Index = (ucDrv_Buf_Uart3_Snd.RD_Index + 1) % DRV_BUF_SIZE;
+        if (blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd) == true)
+            USART_ITConfig(USART3, USART_IT_TXE, DISABLE);
+    }
 }
 
 /********************************************************************
@@ -291,18 +298,18 @@ void USART3_IRQHandler(void)
 **********************************************************************/
 void TIM2_IRQHandler(void)
 {
-	if(TIM_GetITStatus(TIM2,TIM_IT_Update) != RESET)
-	{
-		TIM_ClearITPendingBit(TIM2,TIM_IT_Update);
-		if(blWordsCounterStatus == true)
-		{
-			uwTime2WordsCounter++;
-		}
-		if(blFramesCounterStatus == true)
-		{
-			uwTime2FramesCounter++;
-		}
-	}
+    if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+    {
+        TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+        if (blWordsCounterStatus == true)
+        {
+            uwTime2WordsCounter++;
+        }
+        if (blFramesCounterStatus == true)
+        {
+            uwTime2FramesCounter++;
+        }
+    }
 }
 
 /********************************************************************
@@ -316,7 +323,7 @@ void TIM2_IRQHandler(void)
 **********************************************************************/
 void TIM5_IRQHandler(void)
 {
- /*
+    /*
 	if (TIM_GetITStatus(TIM5, TIM_IT_CC2) != RESET)
 	{
 		TIM_ClearITPendingBit(TIM5, TIM_IT_CC2);

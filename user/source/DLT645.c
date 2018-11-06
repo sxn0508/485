@@ -85,9 +85,11 @@ const DefDataIDHandle DBDataID_Handle_List[] = {
     {{0X33, 0X3A, 0X35, 0X35}, vCurrent_CTRatio_ReadSet},              //扩充：读取电流重过载参数:二次侧CT变比
     {{0X33, 0X3B, 0X35, 0X35}, vCurrent_TransFormer_Capacity_ReadSet}, //扩充：读取电流重过载参数:变压器容量
 
-    {{0X33, 0X73, 0X34, 0X33}, vEnergy_Modify_AbleSet},  //扩充：正向有功电能量修改使能/禁能ID_00014000,
-    {{0X33, 0X74, 0X34, 0X33}, vEnergy_Modify_RaitoSet}, //扩充：正向有功电能量修改比例设置ID_00014100,
-    {{0X33, 0X75, 0X34, 0X33}, vEnergy_Modify_Reset},    //扩充：正向有功电能量回复出厂设置ID_00014200,
+    {{0X33, 0X73, 0X34, 0X33}, vEnergy_Modify_AbleSet},   //扩充：正向有功电能量修改使能/禁能ID_00014000,
+    {{0X33, 0X74, 0X34, 0X33}, vEnergy_Modify_RaitoSet},  //扩充：正向有功电能量修改比例设置ID_00014100,
+    {{0X33, 0X75, 0X34, 0X33}, vEnergy_Modify_Reset},     //扩充：正向有功电能量回复出厂设置ID_00014200,
+    {{0X33, 0X76, 0X34, 0X33}, vEnergy_Modify_ReadSet},   //扩充：正向有功电能量修改读取设置
+    {{0X33, 0X77, 0X34, 0X33}, vEnergy_Modify_ReadValue}, //扩充：正向有功电能量读取存储的真实值和修改值ID_00014200,
     /*4号补遗负荷曲线连续抄读部分中的电压曲线、电流曲线修改,2018年8月7日20:53:4：0*/
     {{0X33, 0X34, 0X43, 0X39}, vLoadProfile_Voltage_Modify}, //A相电压曲线连续抄读ID_06100101,
     {{0X34, 0X34, 0X43, 0X39}, vLoadProfile_Voltage_Modify}, //B电压数据块曲线连续抄读ID_06100102,
@@ -352,7 +354,9 @@ void vINFRDataID_Handle(uint8_t *pucBuffer)
 #ifndef ENABLE_ENERGY_MODIFY
         if (((DBDataID_Handle_List[i].Handle == vEnergy_Modify_AbleSet)) ||
             ((DBDataID_Handle_List[i].Handle == vEnergy_Modify_RaitoSet)) ||
-            ((DBDataID_Handle_List[i].Handle == vEnergy_Modify_Reset)))
+            ((DBDataID_Handle_List[i].Handle == vEnergy_Modify_Reset)) ||
+            ((DBDataID_Handle_List[i].Handle == vEnergy_Modify_ReadSet)) ||
+            ((DBDataID_Handle_List[i].Handle == vEnergy_Modify_ReadValue)))
             return;
 #endif
         INFRDataID_Handle_List[i].Handle(pucBuffer);
@@ -399,13 +403,15 @@ void Get_VChange_State(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 /********************************************************************
  * 功    能：扩充帧：电压限值设置
@@ -450,13 +456,15 @@ void Set_Voltage_Limit(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /********************************************************************
@@ -492,13 +500,15 @@ void Query_Voltage_Limit(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 24);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /********************************************************************
@@ -537,13 +547,15 @@ void Default_Reset(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口发送*/
+/*红外口发送*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /********************************************************************
@@ -1303,7 +1315,7 @@ void vCurrent_Limit_DefaultSet(void)
  **********************************************************************/
 void vCurrent_Limit_Modify(uint8_t *pucBuffer)
 {
-	  uint32_t ABCcurrent;
+    uint32_t ABCcurrent;
     uint8_t i;
     uint8_t ucCheckData = 0;
 #ifndef ENABLE_CURRENT_LIMIT
@@ -1501,13 +1513,15 @@ void vCurrent_Limit_Set(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /********************************************************************
@@ -1557,13 +1571,15 @@ void vCurrent_CTRatio_Set(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /********************************************************************
@@ -1598,13 +1614,15 @@ void vCurrent_Limit_ReadSet(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 19);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /********************************************************************
@@ -1638,13 +1656,15 @@ void vCurrent_CTRatio_ReadSet(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 18);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /********************************************************************
@@ -1677,13 +1697,15 @@ void vCurrent_TransFormer_Capacity_ReadSet(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 18);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /*****************************************************
@@ -2228,13 +2250,15 @@ void vEnergy_Modify_AbleSet(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /********************************************************************
@@ -2251,9 +2275,9 @@ void vEnergy_Modify_RaitoSet(uint8_t *pucBuffer)
     bool ratioValid;
     uint16_t i;
 
-	/*ratio = BCD2DEC(pucBuffer[14]);*/
-	//68 AA AA AA AA AA AA 68 91 05 33 74 34 33 20 01 00 16  120%
-	ratio = BCD2DEC(pucBuffer[14]) * 100 + BCD2DEC(pucBuffer[15]);
+    /*ratio = BCD2DEC(pucBuffer[14]);*/
+    //68 AA AA AA AA AA AA 68 91 05 33 74 34 33 20 01 00 16  120%
+    ratio = BCD2DEC(pucBuffer[14]) + BCD2DEC(pucBuffer[15]) * 100;
     ratioValid = (ratio > 0 && ratio <= 255);
     if (ratioValid)
     {
@@ -2286,13 +2310,15 @@ void vEnergy_Modify_RaitoSet(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /********************************************************************
@@ -2300,6 +2326,7 @@ void vEnergy_Modify_RaitoSet(uint8_t *pucBuffer)
  * 输    入：应用层缓存指针
  * 输    出：	none
  * 编 写 人：王君龙
+ * 修改记录：程序需支持电能量调高，所以复位时日冻结修改比例，不再复位:2018年11月5日16:11:34
  * 编写日期：2018.5.6
  **********************************************************************/
 void vEnergy_Modify_Reset(uint8_t *pucBuffer)
@@ -2314,13 +2341,13 @@ void vEnergy_Modify_Reset(uint8_t *pucBuffer)
         Flash_Write_Word(FLASH_DAYFROZENCHANGESTATE_ADDR, 0xff);
         Dayfrozen_Change_State = 0xff;
         /*日冻结修改比例设置为90*/
-        Flash_Write_Word(FLASH_DAYFROZEN_MODIFY_RATIO_ADDR, 90);
-        ucDayfrozen_Modify_Ratio = 90;
+        /*Flash_Write_Word(FLASH_DAYFROZEN_MODIFY_RATIO_ADDR, 90);*/
+        /*ucDayfrozen_Modify_Ratio = 90;*/
         /*删除存储的原始和修改后的电量值（擦除存储页）*/
         FLASH_Unlock();
         FLASH_ErasePage(FLASH_ENERGY_PAGE);
         FLASH_Lock();
-        if ((EEProm_Read(FLASH_DAYFROZEN_MODIFY_RATIO_ADDR) == 90) &&
+        if ( //(EEProm_Read(FLASH_DAYFROZEN_MODIFY_RATIO_ADDR) == 90) &&
             (EEProm_Read(FLASH_DAYFROZENCHANGESTATE_ADDR) == 0xff))
         {
             pucBuffer[8] = 0x94;
@@ -2348,14 +2375,119 @@ void vEnergy_Modify_Reset(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
+#if 1
+/********************************************************************
+ * 功    能：正向有功电能量查询修改比例
+ * 输    入：应用层缓存指针
+ * 输    出：	none
+ * 编 写 人：王君龙
+ * 修改记录：
+ * 编写日期：2018-11-5 16:12:03
+ **********************************************************************/
+void vEnergy_Modify_ReadSet(uint8_t *pucbuffer)
+{
+    //68 AA AA AA AA AA AA 68 91 04 33 76 34 33 71 16
+    uint8_t ratio;
+    uint32_t i;
+    if (pucbuffer[8] != 0x91)
+        return;
+    //pucbuffer[8] = 0x11;
+    pucbuffer[9] = 0x06;
+    //ratio = EEProm_Read(FLASH_DAYFROZEN_MODIFY_RATIO_ADDR);
+    ratio = ucDayfrozen_Modify_Ratio;
+
+    pucbuffer[14] = DEC2BCD(ratio % 100); //低位在前
+    pucbuffer[15] = DEC2BCD(ratio / 100); //高位在后
+    pucbuffer[16] = 0;
+    for (i = 0; i < 16; i++)
+    {
+        pucbuffer[16] += pucbuffer[i];
+    }
+    pucbuffer[17] = 0x16;
+    /*电表口回复*/
+    uc645DataDomainLength = 4;
+    ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart3_Snd, 18);
+    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    {
+        Uart_DataPut(USART3);
+    }
+#ifdef ENABLE_INFR
+    /*红外口回复*/
+    ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart2_Snd, 18);
+    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    {
+        USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
+        USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
+    }
+#endif
+}
+#endif
+/********************************************************************
+ * 功    能：查询日冻结正向有功总当前真实值和修改值
+ * 输    入：应用层缓存指针
+ * 输    出：	none
+ * 编 写 人：王君龙
+ * 修改记录：
+ * 编写日期：2018-11-5 16:12:03
+ **********************************************************************/
+void vEnergy_Modify_ReadValue(uint8_t *pucbuffer)
+{
+    uint8_t i;
+    int dayFrozen;
+    uint32_t realValue;
+    uint32_t modifiedValue;
+
+    pucbuffer[8] = 0x91;
+    pucbuffer[9] = 0x0C;
+
+    /*读取存储的上次真实值和修改值*/
+    realValue = Flash_Read_Word(FLASH_REAL_1DAYFROZEN_ADDR + 4);
+    modifiedValue = Flash_Read_Word(FLASH_MODIFIED_1DAYFROZEN_ADDR + 4);
+    /*终端第一次使用*/
+    if (realValue == 0XFFFFFFFF)
+    {
+        realValue = 0;
+    }
+    Fill_Energy(realValue, &pucbuffer[14], &pucbuffer[15], &pucbuffer[16], &pucbuffer[17]);
+    if (modifiedValue == 0XFFFFFFFF)
+    {
+        modifiedValue = 0;
+    }
+    Fill_Energy(modifiedValue, &pucbuffer[18], &pucbuffer[19], &pucbuffer[20], &pucbuffer[21]);
+    pucbuffer[22] = 0;
+    for (i = 0; i < 22; i++)
+    {
+        pucbuffer[22] += pucbuffer[i];
+    }
+    pucbuffer[23] = 0x16;
+    /*电表口回复*/
+    uc645DataDomainLength = 0;
+    ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart3_Snd, 24);
+    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    {
+        Uart_DataPut(USART3);
+    }
+/*红外口回复*/
+#ifdef ENABLE_INFR
+    ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart2_Snd, 24);
+    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    {
+        USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
+        USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
+    }
+#endif
+}
+
 /********************************************************************
  * 功    能：电压合格上限修改函数（红外口收帧处理）
  * 输    入：应用层缓存指针
@@ -2394,12 +2526,14 @@ void vVoltage_SetMaxValue(uint8_t *pucBuffer)
         pucBuffer[10] += pucBuffer[i];
     }
     pucBuffer[11] = 0x16; //结束符
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 /********************************************************************
  * 功    能：电压合格下限修改函数（红外口收帧处理：）
@@ -2439,12 +2573,14 @@ void vVoltage_SetMinValue(uint8_t *pucBuffer)
         pucBuffer[10] += pucBuffer[i];
     }
     pucBuffer[11] = 0x16;
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
 
 /********************************************************************
@@ -2467,6 +2603,7 @@ void vVoltage_SetMaxMaxValue(uint8_t *pucBuffer)
 void vVoltage_SetMinMinValue(uint8_t *pucBuffer)
 {
 }
+#if 0
 /********************************************************************
  * 功    能：读取电量修改参数：是否修改/修改比例
  * 输    入：应用层缓存指针
@@ -2489,6 +2626,14 @@ void vEnergy_Modify_ReadSet(uint8_t *pucBuffer)
         pucBuffer[16] += pucBuffer[i];
     }
     pucBuffer[17] = 0x16;
+    /*电表口回复*/
+    uc645DataDomainLength = 0;
+    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 18);
+    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    {
+        Uart_DataPut(USART3);
+    }
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 18);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
@@ -2496,6 +2641,7 @@ void vEnergy_Modify_ReadSet(uint8_t *pucBuffer)
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
 }
+#endif
 
 /********************************************************************
  * 功    能：负荷记录连续抄读电压数据修改函数
@@ -2796,14 +2942,19 @@ void vLoadProfile_Current_Modify(uint8_t *pucbuffer)
     }
 }
 
+/*
+江西：01
+山东：02
+重庆：03
+*/
 void vRead_Version(uint8_t *pucbuffer)
 {
     uint8_t i;
     pucbuffer[8] = 0x91;
     pucbuffer[9] = 0x08;
-    pucbuffer[14] = 0x01; //地区
-    pucbuffer[15] = 0x14; //日月年
-    pucbuffer[16] = 0x08;
+    pucbuffer[14] = 0x03; //地区
+    pucbuffer[15] = 0x05; //日月年
+    pucbuffer[16] = 0x11;
     pucbuffer[17] = 0x18;
     pucbuffer[18] = 0;
     for (i = 0; i < 18; i++)
@@ -2817,11 +2968,13 @@ void vRead_Version(uint8_t *pucbuffer)
     {
         Uart_DataPut(USART3);
     }
-    /*红外口回复*/
+/*红外口回复*/
+#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart2_Snd, 20);
     if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
+#endif
 }
