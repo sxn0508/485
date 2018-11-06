@@ -1,0 +1,870 @@
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.eabi_attribute 28, 1
+   5              		.fpu fpv4-sp-d16
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.thumb
+  16              		.syntax unified
+  17              		.file	"syscalls.c"
+  18              		.text
+  19              	.Ltext0:
+  20              		.cfi_sections	.debug_frame
+  21              		.section	.text.initialise_monitor_handles,"ax",%progbits
+  22              		.align	2
+  23              		.global	initialise_monitor_handles
+  24              		.thumb
+  25              		.thumb_func
+  27              	initialise_monitor_handles:
+  28              	.LFB128:
+  29              		.file 1 "../user/source/syscalls.c"
+   1:../user/source/syscalls.c **** /**
+   2:../user/source/syscalls.c **** *****************************************************************************
+   3:../user/source/syscalls.c **** **
+   4:../user/source/syscalls.c **** **  File        : syscalls.c
+   5:../user/source/syscalls.c **** **
+   6:../user/source/syscalls.c **** **  Abstract    : Atollic TrueSTUDIO Minimal System calls file
+   7:../user/source/syscalls.c **** **
+   8:../user/source/syscalls.c **** ** 		          For more information about which c-functions
+   9:../user/source/syscalls.c **** **                need which of these lowlevel functions
+  10:../user/source/syscalls.c **** **                please consult the Newlib libc-manual
+  11:../user/source/syscalls.c **** **
+  12:../user/source/syscalls.c **** **  Environment : Atollic TrueSTUDIO
+  13:../user/source/syscalls.c **** **
+  14:../user/source/syscalls.c **** **  Distribution: The file is distributed “as is,?without any warranty
+  15:../user/source/syscalls.c **** **                of any kind.
+  16:../user/source/syscalls.c **** **
+  17:../user/source/syscalls.c **** **  (c)Copyright Atollic AB.
+  18:../user/source/syscalls.c **** **  You may use this file as-is or modify it according to the needs of your
+  19:../user/source/syscalls.c **** **  project. Distribution of this file (unmodified or modified) is not
+  20:../user/source/syscalls.c **** **  permitted. Atollic AB permit registered Atollic TrueSTUDIO(R) users the
+  21:../user/source/syscalls.c **** **  rights to distribute the assembled, compiled & linked contents of this
+  22:../user/source/syscalls.c **** **  file as part of an application binary file, provided that it is built
+  23:../user/source/syscalls.c **** **  using the Atollic TrueSTUDIO(R) Pro toolchain.
+  24:../user/source/syscalls.c **** **
+  25:../user/source/syscalls.c **** *****************************************************************************
+  26:../user/source/syscalls.c **** */
+  27:../user/source/syscalls.c **** 
+  28:../user/source/syscalls.c **** /* Includes */
+  29:../user/source/syscalls.c **** #include <sys/stat.h>
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 2
+
+
+  30:../user/source/syscalls.c **** #include <stdlib.h>
+  31:../user/source/syscalls.c **** #include <errno.h>
+  32:../user/source/syscalls.c **** #include <stdio.h>
+  33:../user/source/syscalls.c **** #include <signal.h>
+  34:../user/source/syscalls.c **** #include <time.h>
+  35:../user/source/syscalls.c **** #include <sys/time.h>
+  36:../user/source/syscalls.c **** #include <sys/times.h>
+  37:../user/source/syscalls.c **** 
+  38:../user/source/syscalls.c **** 
+  39:../user/source/syscalls.c **** /* Variables */
+  40:../user/source/syscalls.c **** #undef errno
+  41:../user/source/syscalls.c **** extern int errno;
+  42:../user/source/syscalls.c **** extern int __io_putchar(int ch) __attribute__((weak));
+  43:../user/source/syscalls.c **** extern int __io_getchar(void) __attribute__((weak));
+  44:../user/source/syscalls.c **** 
+  45:../user/source/syscalls.c **** register char * stack_ptr asm("sp");
+  46:../user/source/syscalls.c **** 
+  47:../user/source/syscalls.c **** char *__env[1] = { 0 };
+  48:../user/source/syscalls.c **** char **environ = __env;
+  49:../user/source/syscalls.c **** 
+  50:../user/source/syscalls.c **** 
+  51:../user/source/syscalls.c **** /* Functions */
+  52:../user/source/syscalls.c **** void initialise_monitor_handles()
+  53:../user/source/syscalls.c **** {
+  30              		.loc 1 53 0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35 0000 7047     		bx	lr
+  36              		.cfi_endproc
+  37              	.LFE128:
+  39 0002 00BF     		.section	.text._getpid,"ax",%progbits
+  40              		.align	2
+  41              		.global	_getpid
+  42              		.thumb
+  43              		.thumb_func
+  45              	_getpid:
+  46              	.LFB129:
+  54:../user/source/syscalls.c **** }
+  55:../user/source/syscalls.c **** 
+  56:../user/source/syscalls.c **** int _getpid(void)
+  57:../user/source/syscalls.c **** {
+  47              		.loc 1 57 0
+  48              		.cfi_startproc
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  58:../user/source/syscalls.c **** 	return 1;
+  59:../user/source/syscalls.c **** }
+  52              		.loc 1 59 0
+  53 0000 0120     		movs	r0, #1
+  54 0002 7047     		bx	lr
+  55              		.cfi_endproc
+  56              	.LFE129:
+  58              		.section	.text._kill,"ax",%progbits
+  59              		.align	2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 3
+
+
+  60              		.global	_kill
+  61              		.thumb
+  62              		.thumb_func
+  64              	_kill:
+  65              	.LFB130:
+  60:../user/source/syscalls.c **** 
+  61:../user/source/syscalls.c **** int _kill(int pid, int sig)
+  62:../user/source/syscalls.c **** {
+  66              		.loc 1 62 0
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 0
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70              		@ link register save eliminated.
+  71              	.LVL0:
+  63:../user/source/syscalls.c **** 	errno = EINVAL;
+  72              		.loc 1 63 0
+  73 0000 1622     		movs	r2, #22
+  74 0002 024B     		ldr	r3, .L4
+  75 0004 1A60     		str	r2, [r3]
+  64:../user/source/syscalls.c **** 	return -1;
+  65:../user/source/syscalls.c **** }
+  76              		.loc 1 65 0
+  77 0006 4FF0FF30 		mov	r0, #-1
+  78              	.LVL1:
+  79 000a 7047     		bx	lr
+  80              	.L5:
+  81              		.align	2
+  82              	.L4:
+  83 000c 00000000 		.word	errno
+  84              		.cfi_endproc
+  85              	.LFE130:
+  87              		.section	.text._exit,"ax",%progbits
+  88              		.align	2
+  89              		.global	_exit
+  90              		.thumb
+  91              		.thumb_func
+  93              	_exit:
+  94              	.LFB131:
+  66:../user/source/syscalls.c **** 
+  67:../user/source/syscalls.c **** void _exit (int status)
+  68:../user/source/syscalls.c **** {
+  95              		.loc 1 68 0
+  96              		.cfi_startproc
+  97              		@ Volatile: function does not return.
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              	.LVL2:
+ 101 0000 08B5     		push	{r3, lr}
+ 102              	.LCFI0:
+ 103              		.cfi_def_cfa_offset 8
+ 104              		.cfi_offset 3, -8
+ 105              		.cfi_offset 14, -4
+  69:../user/source/syscalls.c **** 	_kill(status, -1);
+ 106              		.loc 1 69 0
+ 107 0002 4FF0FF31 		mov	r1, #-1
+ 108 0006 FFF7FEFF 		bl	_kill
+ 109              	.LVL3:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 4
+
+
+ 110              	.L7:
+ 111 000a FEE7     		b	.L7
+ 112              		.cfi_endproc
+ 113              	.LFE131:
+ 115              		.section	.text._read,"ax",%progbits
+ 116              		.align	2
+ 117              		.global	_read
+ 118              		.thumb
+ 119              		.thumb_func
+ 121              	_read:
+ 122              	.LFB132:
+  70:../user/source/syscalls.c **** 	while (1) {}		/* Make sure we hang here */
+  71:../user/source/syscalls.c **** }
+  72:../user/source/syscalls.c **** 
+  73:../user/source/syscalls.c **** int _read (int file, char *ptr, int len)
+  74:../user/source/syscalls.c **** {
+ 123              		.loc 1 74 0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127              	.LVL4:
+ 128 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 129              	.LCFI1:
+ 130              		.cfi_def_cfa_offset 24
+ 131              		.cfi_offset 3, -24
+ 132              		.cfi_offset 4, -20
+ 133              		.cfi_offset 5, -16
+ 134              		.cfi_offset 6, -12
+ 135              		.cfi_offset 7, -8
+ 136              		.cfi_offset 14, -4
+ 137 0002 0D46     		mov	r5, r1
+ 138 0004 1746     		mov	r7, r2
+ 139              	.LVL5:
+  75:../user/source/syscalls.c **** 	int DataIdx;
+  76:../user/source/syscalls.c **** 
+  77:../user/source/syscalls.c **** 	for (DataIdx = 0; DataIdx < len; DataIdx++)
+ 140              		.loc 1 77 0
+ 141 0006 0024     		movs	r4, #0
+ 142 0008 05E0     		b	.L10
+ 143              	.LVL6:
+ 144              	.L11:
+  78:../user/source/syscalls.c **** 	{
+  79:../user/source/syscalls.c **** 	  *ptr++ = __io_getchar();
+ 145              		.loc 1 79 0 discriminator 3
+ 146 000a 6E1C     		adds	r6, r5, #1
+ 147              	.LVL7:
+ 148 000c FFF7FEFF 		bl	__io_getchar
+ 149              	.LVL8:
+ 150 0010 2870     		strb	r0, [r5]
+  77:../user/source/syscalls.c **** 	{
+ 151              		.loc 1 77 0 discriminator 3
+ 152 0012 0134     		adds	r4, r4, #1
+ 153              	.LVL9:
+ 154              		.loc 1 79 0 discriminator 3
+ 155 0014 3546     		mov	r5, r6
+ 156              	.LVL10:
+ 157              	.L10:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 5
+
+
+  77:../user/source/syscalls.c **** 	{
+ 158              		.loc 1 77 0 discriminator 1
+ 159 0016 BC42     		cmp	r4, r7
+ 160 0018 F7DB     		blt	.L11
+  80:../user/source/syscalls.c **** 	}
+  81:../user/source/syscalls.c **** 
+  82:../user/source/syscalls.c **** return len;
+  83:../user/source/syscalls.c **** }
+ 161              		.loc 1 83 0
+ 162 001a 3846     		mov	r0, r7
+ 163 001c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 164              		.cfi_endproc
+ 165              	.LFE132:
+ 167 001e 00BF     		.section	.text._write,"ax",%progbits
+ 168              		.align	2
+ 169              		.global	_write
+ 170              		.thumb
+ 171              		.thumb_func
+ 173              	_write:
+ 174              	.LFB133:
+  84:../user/source/syscalls.c **** 
+  85:../user/source/syscalls.c **** int _write(int file, char *ptr, int len)
+  86:../user/source/syscalls.c **** {
+ 175              		.loc 1 86 0
+ 176              		.cfi_startproc
+ 177              		@ args = 0, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179              	.LVL11:
+ 180 0000 70B5     		push	{r4, r5, r6, lr}
+ 181              	.LCFI2:
+ 182              		.cfi_def_cfa_offset 16
+ 183              		.cfi_offset 4, -16
+ 184              		.cfi_offset 5, -12
+ 185              		.cfi_offset 6, -8
+ 186              		.cfi_offset 14, -4
+ 187 0002 1646     		mov	r6, r2
+ 188              	.LVL12:
+  87:../user/source/syscalls.c **** 	int DataIdx;
+  88:../user/source/syscalls.c **** 
+  89:../user/source/syscalls.c **** 	for (DataIdx = 0; DataIdx < len; DataIdx++)
+ 189              		.loc 1 89 0
+ 190 0004 0024     		movs	r4, #0
+ 191 0006 05E0     		b	.L14
+ 192              	.LVL13:
+ 193              	.L15:
+  90:../user/source/syscalls.c **** 	{
+  91:../user/source/syscalls.c **** 	   __io_putchar( *ptr++ );
+ 194              		.loc 1 91 0 discriminator 3
+ 195 0008 4D1C     		adds	r5, r1, #1
+ 196              	.LVL14:
+ 197 000a 0878     		ldrb	r0, [r1]	@ zero_extendqisi2
+ 198 000c FFF7FEFF 		bl	__io_putchar
+ 199              	.LVL15:
+  89:../user/source/syscalls.c **** 	{
+ 200              		.loc 1 89 0 discriminator 3
+ 201 0010 0134     		adds	r4, r4, #1
+ 202              	.LVL16:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 6
+
+
+ 203              		.loc 1 91 0 discriminator 3
+ 204 0012 2946     		mov	r1, r5
+ 205              	.LVL17:
+ 206              	.L14:
+  89:../user/source/syscalls.c **** 	{
+ 207              		.loc 1 89 0 discriminator 1
+ 208 0014 B442     		cmp	r4, r6
+ 209 0016 F7DB     		blt	.L15
+  92:../user/source/syscalls.c **** 	}
+  93:../user/source/syscalls.c **** 	return len;
+  94:../user/source/syscalls.c **** }
+ 210              		.loc 1 94 0
+ 211 0018 3046     		mov	r0, r6
+ 212 001a 70BD     		pop	{r4, r5, r6, pc}
+ 213              		.cfi_endproc
+ 214              	.LFE133:
+ 216              		.section	.text._sbrk,"ax",%progbits
+ 217              		.align	2
+ 218              		.global	_sbrk
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	_sbrk:
+ 223              	.LFB134:
+  95:../user/source/syscalls.c **** 
+  96:../user/source/syscalls.c **** caddr_t _sbrk(int incr)
+  97:../user/source/syscalls.c **** {
+ 224              		.loc 1 97 0
+ 225              		.cfi_startproc
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228              		@ link register save eliminated.
+ 229              	.LVL18:
+  98:../user/source/syscalls.c **** 	extern char end asm("end");
+  99:../user/source/syscalls.c **** 	static char *heap_end;
+ 100:../user/source/syscalls.c **** 	char *prev_heap_end;
+ 101:../user/source/syscalls.c **** 
+ 102:../user/source/syscalls.c **** 	if (heap_end == 0)
+ 230              		.loc 1 102 0
+ 231 0000 0A4B     		ldr	r3, .L21
+ 232 0002 1B68     		ldr	r3, [r3]
+ 233 0004 13B9     		cbnz	r3, .L18
+ 103:../user/source/syscalls.c **** 		heap_end = &end;
+ 234              		.loc 1 103 0
+ 235 0006 0A4A     		ldr	r2, .L21+4
+ 236 0008 084B     		ldr	r3, .L21
+ 237 000a 1A60     		str	r2, [r3]
+ 238              	.L18:
+ 104:../user/source/syscalls.c **** 
+ 105:../user/source/syscalls.c **** 	prev_heap_end = heap_end;
+ 239              		.loc 1 105 0
+ 240 000c 074B     		ldr	r3, .L21
+ 241 000e 1B68     		ldr	r3, [r3]
+ 242              	.LVL19:
+ 106:../user/source/syscalls.c **** 	if (heap_end + incr > stack_ptr)
+ 243              		.loc 1 106 0
+ 244 0010 1844     		add	r0, r0, r3
+ 245              	.LVL20:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 7
+
+
+ 246 0012 6A46     		mov	r2, sp
+ 247 0014 9042     		cmp	r0, r2
+ 248 0016 05D9     		bls	.L19
+ 107:../user/source/syscalls.c **** 	{
+ 108:../user/source/syscalls.c **** //		write(1, "Heap and stack collision\n", 25);
+ 109:../user/source/syscalls.c **** //		abort();
+ 110:../user/source/syscalls.c **** 		errno = ENOMEM;
+ 249              		.loc 1 110 0
+ 250 0018 0C22     		movs	r2, #12
+ 251 001a 064B     		ldr	r3, .L21+8
+ 252              	.LVL21:
+ 253 001c 1A60     		str	r2, [r3]
+ 111:../user/source/syscalls.c **** 		return (caddr_t) -1;
+ 254              		.loc 1 111 0
+ 255 001e 4FF0FF30 		mov	r0, #-1
+ 256 0022 7047     		bx	lr
+ 257              	.LVL22:
+ 258              	.L19:
+ 112:../user/source/syscalls.c **** 	}
+ 113:../user/source/syscalls.c **** 
+ 114:../user/source/syscalls.c **** 	heap_end += incr;
+ 259              		.loc 1 114 0
+ 260 0024 014A     		ldr	r2, .L21
+ 261 0026 1060     		str	r0, [r2]
+ 115:../user/source/syscalls.c **** 
+ 116:../user/source/syscalls.c **** 	return (caddr_t) prev_heap_end;
+ 262              		.loc 1 116 0
+ 263 0028 1846     		mov	r0, r3
+ 117:../user/source/syscalls.c **** }
+ 264              		.loc 1 117 0
+ 265 002a 7047     		bx	lr
+ 266              	.L22:
+ 267              		.align	2
+ 268              	.L21:
+ 269 002c 00000000 		.word	.LANCHOR0
+ 270 0030 00000000 		.word	end
+ 271 0034 00000000 		.word	errno
+ 272              		.cfi_endproc
+ 273              	.LFE134:
+ 275              		.section	.text._close,"ax",%progbits
+ 276              		.align	2
+ 277              		.global	_close
+ 278              		.thumb
+ 279              		.thumb_func
+ 281              	_close:
+ 282              	.LFB135:
+ 118:../user/source/syscalls.c **** 
+ 119:../user/source/syscalls.c **** int _close(int file)
+ 120:../user/source/syscalls.c **** {
+ 283              		.loc 1 120 0
+ 284              		.cfi_startproc
+ 285              		@ args = 0, pretend = 0, frame = 0
+ 286              		@ frame_needed = 0, uses_anonymous_args = 0
+ 287              		@ link register save eliminated.
+ 288              	.LVL23:
+ 121:../user/source/syscalls.c **** 	return -1;
+ 122:../user/source/syscalls.c **** }
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 8
+
+
+ 289              		.loc 1 122 0
+ 290 0000 4FF0FF30 		mov	r0, #-1
+ 291              	.LVL24:
+ 292 0004 7047     		bx	lr
+ 293              		.cfi_endproc
+ 294              	.LFE135:
+ 296 0006 00BF     		.section	.text._fstat,"ax",%progbits
+ 297              		.align	2
+ 298              		.global	_fstat
+ 299              		.thumb
+ 300              		.thumb_func
+ 302              	_fstat:
+ 303              	.LFB136:
+ 123:../user/source/syscalls.c **** 
+ 124:../user/source/syscalls.c **** 
+ 125:../user/source/syscalls.c **** int _fstat(int file, struct stat *st)
+ 126:../user/source/syscalls.c **** {
+ 304              		.loc 1 126 0
+ 305              		.cfi_startproc
+ 306              		@ args = 0, pretend = 0, frame = 0
+ 307              		@ frame_needed = 0, uses_anonymous_args = 0
+ 308              		@ link register save eliminated.
+ 309              	.LVL25:
+ 127:../user/source/syscalls.c **** 	st->st_mode = S_IFCHR;
+ 310              		.loc 1 127 0
+ 311 0000 4FF40053 		mov	r3, #8192
+ 312 0004 4B60     		str	r3, [r1, #4]
+ 128:../user/source/syscalls.c **** 	return 0;
+ 129:../user/source/syscalls.c **** }
+ 313              		.loc 1 129 0
+ 314 0006 0020     		movs	r0, #0
+ 315              	.LVL26:
+ 316 0008 7047     		bx	lr
+ 317              		.cfi_endproc
+ 318              	.LFE136:
+ 320              		.section	.text._isatty,"ax",%progbits
+ 321              		.align	2
+ 322              		.global	_isatty
+ 323              		.thumb
+ 324              		.thumb_func
+ 326              	_isatty:
+ 327              	.LFB137:
+ 130:../user/source/syscalls.c **** 
+ 131:../user/source/syscalls.c **** int _isatty(int file)
+ 132:../user/source/syscalls.c **** {
+ 328              		.loc 1 132 0
+ 329              		.cfi_startproc
+ 330              		@ args = 0, pretend = 0, frame = 0
+ 331              		@ frame_needed = 0, uses_anonymous_args = 0
+ 332              		@ link register save eliminated.
+ 333              	.LVL27:
+ 133:../user/source/syscalls.c **** 	return 1;
+ 134:../user/source/syscalls.c **** }
+ 334              		.loc 1 134 0
+ 335 0000 0120     		movs	r0, #1
+ 336              	.LVL28:
+ 337 0002 7047     		bx	lr
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 9
+
+
+ 338              		.cfi_endproc
+ 339              	.LFE137:
+ 341              		.section	.text._lseek,"ax",%progbits
+ 342              		.align	2
+ 343              		.global	_lseek
+ 344              		.thumb
+ 345              		.thumb_func
+ 347              	_lseek:
+ 348              	.LFB138:
+ 135:../user/source/syscalls.c **** 
+ 136:../user/source/syscalls.c **** int _lseek(int file, int ptr, int dir)
+ 137:../user/source/syscalls.c **** {
+ 349              		.loc 1 137 0
+ 350              		.cfi_startproc
+ 351              		@ args = 0, pretend = 0, frame = 0
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353              		@ link register save eliminated.
+ 354              	.LVL29:
+ 138:../user/source/syscalls.c **** 	return 0;
+ 139:../user/source/syscalls.c **** }
+ 355              		.loc 1 139 0
+ 356 0000 0020     		movs	r0, #0
+ 357              	.LVL30:
+ 358 0002 7047     		bx	lr
+ 359              		.cfi_endproc
+ 360              	.LFE138:
+ 362              		.section	.text._open,"ax",%progbits
+ 363              		.align	2
+ 364              		.global	_open
+ 365              		.thumb
+ 366              		.thumb_func
+ 368              	_open:
+ 369              	.LFB139:
+ 140:../user/source/syscalls.c **** 
+ 141:../user/source/syscalls.c **** int _open(char *path, int flags, ...)
+ 142:../user/source/syscalls.c **** {
+ 370              		.loc 1 142 0
+ 371              		.cfi_startproc
+ 372              		@ args = 4, pretend = 12, frame = 0
+ 373              		@ frame_needed = 0, uses_anonymous_args = 1
+ 374              		@ link register save eliminated.
+ 375              	.LVL31:
+ 376 0000 0EB4     		push	{r1, r2, r3}
+ 377              	.LCFI3:
+ 378              		.cfi_def_cfa_offset 12
+ 379              		.cfi_offset 1, -12
+ 380              		.cfi_offset 2, -8
+ 381              		.cfi_offset 3, -4
+ 143:../user/source/syscalls.c **** 	/* Pretend like we always fail */
+ 144:../user/source/syscalls.c **** 	return -1;
+ 145:../user/source/syscalls.c **** }
+ 382              		.loc 1 145 0
+ 383 0002 4FF0FF30 		mov	r0, #-1
+ 384              	.LVL32:
+ 385 0006 03B0     		add	sp, sp, #12
+ 386              	.LCFI4:
+ 387              		.cfi_restore 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 10
+
+
+ 388              		.cfi_restore 2
+ 389              		.cfi_restore 1
+ 390              		.cfi_def_cfa_offset 0
+ 391 0008 7047     		bx	lr
+ 392              		.cfi_endproc
+ 393              	.LFE139:
+ 395 000a 00BF     		.section	.text._wait,"ax",%progbits
+ 396              		.align	2
+ 397              		.global	_wait
+ 398              		.thumb
+ 399              		.thumb_func
+ 401              	_wait:
+ 402              	.LFB140:
+ 146:../user/source/syscalls.c **** 
+ 147:../user/source/syscalls.c **** int _wait(int *status)
+ 148:../user/source/syscalls.c **** {
+ 403              		.loc 1 148 0
+ 404              		.cfi_startproc
+ 405              		@ args = 0, pretend = 0, frame = 0
+ 406              		@ frame_needed = 0, uses_anonymous_args = 0
+ 407              		@ link register save eliminated.
+ 408              	.LVL33:
+ 149:../user/source/syscalls.c **** 	errno = ECHILD;
+ 409              		.loc 1 149 0
+ 410 0000 0A22     		movs	r2, #10
+ 411 0002 024B     		ldr	r3, .L30
+ 412 0004 1A60     		str	r2, [r3]
+ 150:../user/source/syscalls.c **** 	return -1;
+ 151:../user/source/syscalls.c **** }
+ 413              		.loc 1 151 0
+ 414 0006 4FF0FF30 		mov	r0, #-1
+ 415              	.LVL34:
+ 416 000a 7047     		bx	lr
+ 417              	.L31:
+ 418              		.align	2
+ 419              	.L30:
+ 420 000c 00000000 		.word	errno
+ 421              		.cfi_endproc
+ 422              	.LFE140:
+ 424              		.section	.text._unlink,"ax",%progbits
+ 425              		.align	2
+ 426              		.global	_unlink
+ 427              		.thumb
+ 428              		.thumb_func
+ 430              	_unlink:
+ 431              	.LFB141:
+ 152:../user/source/syscalls.c **** 
+ 153:../user/source/syscalls.c **** int _unlink(char *name)
+ 154:../user/source/syscalls.c **** {
+ 432              		.loc 1 154 0
+ 433              		.cfi_startproc
+ 434              		@ args = 0, pretend = 0, frame = 0
+ 435              		@ frame_needed = 0, uses_anonymous_args = 0
+ 436              		@ link register save eliminated.
+ 437              	.LVL35:
+ 155:../user/source/syscalls.c **** 	errno = ENOENT;
+ 438              		.loc 1 155 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 11
+
+
+ 439 0000 0222     		movs	r2, #2
+ 440 0002 024B     		ldr	r3, .L33
+ 441 0004 1A60     		str	r2, [r3]
+ 156:../user/source/syscalls.c **** 	return -1;
+ 157:../user/source/syscalls.c **** }
+ 442              		.loc 1 157 0
+ 443 0006 4FF0FF30 		mov	r0, #-1
+ 444              	.LVL36:
+ 445 000a 7047     		bx	lr
+ 446              	.L34:
+ 447              		.align	2
+ 448              	.L33:
+ 449 000c 00000000 		.word	errno
+ 450              		.cfi_endproc
+ 451              	.LFE141:
+ 453              		.section	.text._times,"ax",%progbits
+ 454              		.align	2
+ 455              		.global	_times
+ 456              		.thumb
+ 457              		.thumb_func
+ 459              	_times:
+ 460              	.LFB142:
+ 158:../user/source/syscalls.c **** 
+ 159:../user/source/syscalls.c **** int _times(struct tms *buf)
+ 160:../user/source/syscalls.c **** {
+ 461              		.loc 1 160 0
+ 462              		.cfi_startproc
+ 463              		@ args = 0, pretend = 0, frame = 0
+ 464              		@ frame_needed = 0, uses_anonymous_args = 0
+ 465              		@ link register save eliminated.
+ 466              	.LVL37:
+ 161:../user/source/syscalls.c **** 	return -1;
+ 162:../user/source/syscalls.c **** }
+ 467              		.loc 1 162 0
+ 468 0000 4FF0FF30 		mov	r0, #-1
+ 469              	.LVL38:
+ 470 0004 7047     		bx	lr
+ 471              		.cfi_endproc
+ 472              	.LFE142:
+ 474 0006 00BF     		.section	.text._stat,"ax",%progbits
+ 475              		.align	2
+ 476              		.global	_stat
+ 477              		.thumb
+ 478              		.thumb_func
+ 480              	_stat:
+ 481              	.LFB143:
+ 163:../user/source/syscalls.c **** 
+ 164:../user/source/syscalls.c **** int _stat(char *file, struct stat *st)
+ 165:../user/source/syscalls.c **** {
+ 482              		.loc 1 165 0
+ 483              		.cfi_startproc
+ 484              		@ args = 0, pretend = 0, frame = 0
+ 485              		@ frame_needed = 0, uses_anonymous_args = 0
+ 486              		@ link register save eliminated.
+ 487              	.LVL39:
+ 166:../user/source/syscalls.c **** 	st->st_mode = S_IFCHR;
+ 488              		.loc 1 166 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 12
+
+
+ 489 0000 4FF40053 		mov	r3, #8192
+ 490 0004 4B60     		str	r3, [r1, #4]
+ 167:../user/source/syscalls.c **** 	return 0;
+ 168:../user/source/syscalls.c **** }
+ 491              		.loc 1 168 0
+ 492 0006 0020     		movs	r0, #0
+ 493              	.LVL40:
+ 494 0008 7047     		bx	lr
+ 495              		.cfi_endproc
+ 496              	.LFE143:
+ 498              		.section	.text._link,"ax",%progbits
+ 499              		.align	2
+ 500              		.global	_link
+ 501              		.thumb
+ 502              		.thumb_func
+ 504              	_link:
+ 505              	.LFB144:
+ 169:../user/source/syscalls.c **** 
+ 170:../user/source/syscalls.c **** int _link(char *old, char *new)
+ 171:../user/source/syscalls.c **** {
+ 506              		.loc 1 171 0
+ 507              		.cfi_startproc
+ 508              		@ args = 0, pretend = 0, frame = 0
+ 509              		@ frame_needed = 0, uses_anonymous_args = 0
+ 510              		@ link register save eliminated.
+ 511              	.LVL41:
+ 172:../user/source/syscalls.c **** 	errno = EMLINK;
+ 512              		.loc 1 172 0
+ 513 0000 1F22     		movs	r2, #31
+ 514 0002 024B     		ldr	r3, .L38
+ 515 0004 1A60     		str	r2, [r3]
+ 173:../user/source/syscalls.c **** 	return -1;
+ 174:../user/source/syscalls.c **** }
+ 516              		.loc 1 174 0
+ 517 0006 4FF0FF30 		mov	r0, #-1
+ 518              	.LVL42:
+ 519 000a 7047     		bx	lr
+ 520              	.L39:
+ 521              		.align	2
+ 522              	.L38:
+ 523 000c 00000000 		.word	errno
+ 524              		.cfi_endproc
+ 525              	.LFE144:
+ 527              		.section	.text._fork,"ax",%progbits
+ 528              		.align	2
+ 529              		.global	_fork
+ 530              		.thumb
+ 531              		.thumb_func
+ 533              	_fork:
+ 534              	.LFB145:
+ 175:../user/source/syscalls.c **** 
+ 176:../user/source/syscalls.c **** int _fork(void)
+ 177:../user/source/syscalls.c **** {
+ 535              		.loc 1 177 0
+ 536              		.cfi_startproc
+ 537              		@ args = 0, pretend = 0, frame = 0
+ 538              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 13
+
+
+ 539              		@ link register save eliminated.
+ 178:../user/source/syscalls.c **** 	errno = EAGAIN;
+ 540              		.loc 1 178 0
+ 541 0000 0B22     		movs	r2, #11
+ 542 0002 024B     		ldr	r3, .L41
+ 543 0004 1A60     		str	r2, [r3]
+ 179:../user/source/syscalls.c **** 	return -1;
+ 180:../user/source/syscalls.c **** }
+ 544              		.loc 1 180 0
+ 545 0006 4FF0FF30 		mov	r0, #-1
+ 546 000a 7047     		bx	lr
+ 547              	.L42:
+ 548              		.align	2
+ 549              	.L41:
+ 550 000c 00000000 		.word	errno
+ 551              		.cfi_endproc
+ 552              	.LFE145:
+ 554              		.section	.text._execve,"ax",%progbits
+ 555              		.align	2
+ 556              		.global	_execve
+ 557              		.thumb
+ 558              		.thumb_func
+ 560              	_execve:
+ 561              	.LFB146:
+ 181:../user/source/syscalls.c **** 
+ 182:../user/source/syscalls.c **** int _execve(char *name, char **argv, char **env)
+ 183:../user/source/syscalls.c **** {
+ 562              		.loc 1 183 0
+ 563              		.cfi_startproc
+ 564              		@ args = 0, pretend = 0, frame = 0
+ 565              		@ frame_needed = 0, uses_anonymous_args = 0
+ 566              		@ link register save eliminated.
+ 567              	.LVL43:
+ 184:../user/source/syscalls.c **** 	errno = ENOMEM;
+ 568              		.loc 1 184 0
+ 569 0000 0C22     		movs	r2, #12
+ 570              	.LVL44:
+ 571 0002 024B     		ldr	r3, .L44
+ 572 0004 1A60     		str	r2, [r3]
+ 185:../user/source/syscalls.c **** 	return -1;
+ 186:../user/source/syscalls.c **** }
+ 573              		.loc 1 186 0
+ 574 0006 4FF0FF30 		mov	r0, #-1
+ 575              	.LVL45:
+ 576 000a 7047     		bx	lr
+ 577              	.L45:
+ 578              		.align	2
+ 579              	.L44:
+ 580 000c 00000000 		.word	errno
+ 581              		.cfi_endproc
+ 582              	.LFE146:
+ 584              		.global	environ
+ 585              		.global	__env
+ 586              		.section	.data.environ,"aw",%progbits
+ 587              		.align	2
+ 590              	environ:
+ 591 0000 00000000 		.word	__env
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 14
+
+
+ 592              		.section	.bss.heap_end.7870,"aw",%nobits
+ 593              		.align	2
+ 594              		.set	.LANCHOR0,. + 0
+ 597              	heap_end.7870:
+ 598 0000 00000000 		.space	4
+ 599              		.section	.bss.__env,"aw",%nobits
+ 600              		.align	2
+ 603              	__env:
+ 604 0000 00000000 		.space	4
+ 605              		.weak	__io_putchar
+ 606              		.weak	__io_getchar
+ 607              		.text
+ 608              	.Letext0:
+ 609              		.file 2 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\machine\\_defaul
+ 610              		.file 3 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 611              		.file 4 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_types.h"
+ 612              		.file 5 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_timeval.h"
+ 613              		.file 6 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\types.h"
+ 614              		.file 7 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\stat.h"
+ 615              		.file 8 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\times.h"
+ 616              		.file 9 "../cmsis/include/core_cm4.h"
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 syscalls.c
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:22     .text.initialise_monitor_handles:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:27     .text.initialise_monitor_handles:00000000 initialise_monitor_handles
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:40     .text._getpid:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:45     .text._getpid:00000000 _getpid
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:59     .text._kill:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:64     .text._kill:00000000 _kill
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:83     .text._kill:0000000c $d
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:88     .text._exit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:93     .text._exit:00000000 _exit
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:116    .text._read:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:121    .text._read:00000000 _read
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:168    .text._write:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:173    .text._write:00000000 _write
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:217    .text._sbrk:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:222    .text._sbrk:00000000 _sbrk
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:269    .text._sbrk:0000002c $d
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:276    .text._close:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:281    .text._close:00000000 _close
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:297    .text._fstat:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:302    .text._fstat:00000000 _fstat
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:321    .text._isatty:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:326    .text._isatty:00000000 _isatty
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:342    .text._lseek:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:347    .text._lseek:00000000 _lseek
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:363    .text._open:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:368    .text._open:00000000 _open
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:396    .text._wait:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:401    .text._wait:00000000 _wait
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:420    .text._wait:0000000c $d
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:425    .text._unlink:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:430    .text._unlink:00000000 _unlink
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:449    .text._unlink:0000000c $d
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:454    .text._times:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:459    .text._times:00000000 _times
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:475    .text._stat:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:480    .text._stat:00000000 _stat
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:499    .text._link:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:504    .text._link:00000000 _link
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:523    .text._link:0000000c $d
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:528    .text._fork:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:533    .text._fork:00000000 _fork
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:550    .text._fork:0000000c $d
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:555    .text._execve:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:560    .text._execve:00000000 _execve
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:580    .text._execve:0000000c $d
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:590    .data.environ:00000000 environ
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:603    .bss.__env:00000000 __env
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:587    .data.environ:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:593    .bss.heap_end.7870:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:597    .bss.heap_end.7870:00000000 heap_end.7870
+C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s:600    .bss.__env:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+errno
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccyZ87gu.s 			page 16
+
+
+__io_getchar
+__io_putchar
+end

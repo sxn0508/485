@@ -1,0 +1,434 @@
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.eabi_attribute 28, 1
+   5              		.fpu fpv4-sp-d16
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.thumb
+  16              		.syntax unified
+  17              		.file	"Time.c"
+  18              		.text
+  19              	.Ltext0:
+  20              		.cfi_sections	.debug_frame
+  21              		.section	.text.vIRQ_TIME_Config,"ax",%progbits
+  22              		.align	2
+  23              		.thumb
+  24              		.thumb_func
+  26              	vIRQ_TIME_Config:
+  27              	.LFB112:
+  28              		.file 1 "../user/source/Time.c"
+   1:../user/source/Time.c **** 
+   2:../user/source/Time.c **** #include "Time.h"
+   3:../user/source/Time.c **** 
+   4:../user/source/Time.c **** bool blWordsCounterStatus = false;//默认不计时
+   5:../user/source/Time.c **** bool blFramesCounterStatus = false;
+   6:../user/source/Time.c **** uint16_t uwTime2WordsCounter = 0;//计数值默认为0
+   7:../user/source/Time.c **** uint16_t uwTime2FramesCounter = 0;//计数值默认为0
+   8:../user/source/Time.c **** 
+   9:../user/source/Time.c **** /********************************************************************
+  10:../user/source/Time.c **** * 功    能：计时器初始化函数
+  11:../user/source/Time.c **** * 输    入：None
+  12:../user/source/Time.c **** * 输    出：None
+  13:../user/source/Time.c **** *           
+  14:../user/source/Time.c **** * 编 写 人：
+  15:../user/source/Time.c **** * 编写日期：2016.8.7
+  16:../user/source/Time.c **** **********************************************************************/
+  17:../user/source/Time.c **** void vTimer_Init(void)
+  18:../user/source/Time.c **** {
+  19:../user/source/Time.c **** 	/*定时器2用作帧超时判断*/
+  20:../user/source/Time.c **** 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseInitStruc;
+  21:../user/source/Time.c **** 	TIM_OCInitTypeDef  TIM_OCInitStructure;
+  22:../user/source/Time.c **** 	vIRQ_TIME_Config();
+  23:../user/source/Time.c **** 
+  24:../user/source/Time.c **** 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+  25:../user/source/Time.c **** 	//TIM_TimeBaseInitStruc.TIM_Period = (1000 - 1); //计数1000时溢出，1ms
+  26:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_Period = (50000 - 1); //计数50000时溢出，50ms __2017-3-21
+  27:../user/source/Time.c **** 	//TIM_TimeBaseInitStruc.TIM_Prescaler=16;//系统频率16M，16分频，1Mhz计时频率；
+  28:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_Prescaler=64;//系统频率64M，64分频，1Mhz计时频率；
+  29:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_ClockDivision=0;//数字滤波器功能关闭
+  30:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_CounterMode=TIM_CounterMode_Up;//向上计数
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s 			page 2
+
+
+  31:../user/source/Time.c **** //	TIM_TimeBaseInitStruc.TIM_RepetitionCounter 向下自动填装，对TIM15, TIM16 and TIM17有效
+  32:../user/source/Time.c **** 	TIM_TimeBaseInit(TIM2,&TIM_TimeBaseInitStruc);
+  33:../user/source/Time.c **** 	TIM_Cmd(TIM2,ENABLE);
+  34:../user/source/Time.c **** 	TIM_ITConfig(TIM2,TIM_IT_Update,ENABLE);
+  35:../user/source/Time.c **** 
+  36:../user/source/Time.c **** 	/*定时器5用作红外PWM波38KHZ输出*/
+  37:../user/source/Time.c **** 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
+  38:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_Period = SystemCoreClock / 38400 - 1;
+  39:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_Prescaler=0;		//系统频率64M
+  40:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_ClockDivision=0;//数字滤波器功能关闭
+  41:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_CounterMode=TIM_CounterMode_Up;//向上计数
+  42:../user/source/Time.c **** 	TIM_TimeBaseInit(TIM5,&TIM_TimeBaseInitStruc);
+  43:../user/source/Time.c **** 	TIM_OC2PreloadConfig(TIM5, TIM_OCPreload_Disable);
+  44:../user/source/Time.c **** 	TIM_Cmd(TIM5, ENABLE);//使能定时器5
+  45:../user/source/Time.c **** 	//PWM配置
+  46:../user/source/Time.c **** 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
+  47:../user/source/Time.c **** 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+  48:../user/source/Time.c **** 	TIM_OCInitStructure.TIM_Pulse = uwCCR2_Val;
+  49:../user/source/Time.c **** 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+  50:../user/source/Time.c **** 	TIM_OC2Init(TIM5, &TIM_OCInitStructure);
+  51:../user/source/Time.c **** 	//TIM_ITConfig(TIM5, TIM_IT_CC2, ENABLE);//使能定时器5通道2中断
+  52:../user/source/Time.c **** 	TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Enable);
+  53:../user/source/Time.c **** }
+  54:../user/source/Time.c **** 
+  55:../user/source/Time.c **** /********************************************************************
+  56:../user/source/Time.c **** * 功    能：计时器中断配置函数
+  57:../user/source/Time.c **** * 输    入：None
+  58:../user/source/Time.c **** * 输    出：None
+  59:../user/source/Time.c **** *           
+  60:../user/source/Time.c **** * 编 写 人：
+  61:../user/source/Time.c **** * 编写日期：2016.8.7
+  62:../user/source/Time.c **** **********************************************************************/
+  63:../user/source/Time.c **** void vIRQ_TIME_Config(void)
+  64:../user/source/Time.c **** {
+  29              		.loc 1 64 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 30B5     		push	{r4, r5, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 12
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 5, -8
+  38              		.cfi_offset 14, -4
+  39 0002 83B0     		sub	sp, sp, #12
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 24
+  65:../user/source/Time.c **** 	/*定时器2中断配置*/
+  66:../user/source/Time.c **** 	NVIC_InitTypeDef NVIC_Initstruc;
+  67:../user/source/Time.c **** 	NVIC_Initstruc.NVIC_IRQChannel=TIM2_IRQn;
+  42              		.loc 1 67 0
+  43 0004 1C23     		movs	r3, #28
+  44 0006 8DF80430 		strb	r3, [sp, #4]
+  68:../user/source/Time.c **** 	NVIC_Initstruc.NVIC_IRQChannelPreemptionPriority=0;
+  45              		.loc 1 68 0
+  46 000a 0025     		movs	r5, #0
+  47 000c 8DF80550 		strb	r5, [sp, #5]
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s 			page 3
+
+
+  69:../user/source/Time.c **** 	NVIC_Initstruc.NVIC_IRQChannelSubPriority=1;
+  48              		.loc 1 69 0
+  49 0010 0124     		movs	r4, #1
+  50 0012 8DF80640 		strb	r4, [sp, #6]
+  70:../user/source/Time.c **** 	NVIC_Initstruc.NVIC_IRQChannelCmd=ENABLE;
+  51              		.loc 1 70 0
+  52 0016 8DF80740 		strb	r4, [sp, #7]
+  71:../user/source/Time.c **** 	NVIC_Init(&NVIC_Initstruc);
+  53              		.loc 1 71 0
+  54 001a 01A8     		add	r0, sp, #4
+  55 001c FFF7FEFF 		bl	NVIC_Init
+  56              	.LVL0:
+  72:../user/source/Time.c **** 
+  73:../user/source/Time.c **** 	/*定时器5中断优先级配置*/
+  74:../user/source/Time.c **** 	NVIC_Initstruc.NVIC_IRQChannel=TIM5_IRQn;
+  57              		.loc 1 74 0
+  58 0020 3223     		movs	r3, #50
+  59 0022 8DF80430 		strb	r3, [sp, #4]
+  75:../user/source/Time.c **** 	NVIC_Initstruc.NVIC_IRQChannelPreemptionPriority=0;
+  60              		.loc 1 75 0
+  61 0026 8DF80550 		strb	r5, [sp, #5]
+  76:../user/source/Time.c **** 	NVIC_Initstruc.NVIC_IRQChannelSubPriority=0;
+  62              		.loc 1 76 0
+  63 002a 8DF80650 		strb	r5, [sp, #6]
+  77:../user/source/Time.c **** 	NVIC_Initstruc.NVIC_IRQChannelCmd=ENABLE;
+  64              		.loc 1 77 0
+  65 002e 8DF80740 		strb	r4, [sp, #7]
+  78:../user/source/Time.c **** 	NVIC_Init(&NVIC_Initstruc);
+  66              		.loc 1 78 0
+  67 0032 01A8     		add	r0, sp, #4
+  68 0034 FFF7FEFF 		bl	NVIC_Init
+  69              	.LVL1:
+  79:../user/source/Time.c **** }
+  70              		.loc 1 79 0
+  71 0038 03B0     		add	sp, sp, #12
+  72              	.LCFI2:
+  73              		.cfi_def_cfa_offset 12
+  74              		@ sp needed
+  75 003a 30BD     		pop	{r4, r5, pc}
+  76              		.cfi_endproc
+  77              	.LFE112:
+  79              		.section	.text.vTimer_Init,"ax",%progbits
+  80              		.align	2
+  81              		.global	vTimer_Init
+  82              		.thumb
+  83              		.thumb_func
+  85              	vTimer_Init:
+  86              	.LFB111:
+  18:../user/source/Time.c **** 	/*定时器2用作帧超时判断*/
+  87              		.loc 1 18 0
+  88              		.cfi_startproc
+  89              		@ args = 0, pretend = 0, frame = 32
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91 0000 70B5     		push	{r4, r5, r6, lr}
+  92              	.LCFI3:
+  93              		.cfi_def_cfa_offset 16
+  94              		.cfi_offset 4, -16
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s 			page 4
+
+
+  95              		.cfi_offset 5, -12
+  96              		.cfi_offset 6, -8
+  97              		.cfi_offset 14, -4
+  98 0002 88B0     		sub	sp, sp, #32
+  99              	.LCFI4:
+ 100              		.cfi_def_cfa_offset 48
+  22:../user/source/Time.c **** 
+ 101              		.loc 1 22 0
+ 102 0004 FFF7FEFF 		bl	vIRQ_TIME_Config
+ 103              	.LVL2:
+  24:../user/source/Time.c **** 	//TIM_TimeBaseInitStruc.TIM_Period = (1000 - 1); //计数1000时溢出，1ms
+ 104              		.loc 1 24 0
+ 105 0008 0121     		movs	r1, #1
+ 106 000a 0846     		mov	r0, r1
+ 107 000c FFF7FEFF 		bl	RCC_APB1PeriphClockCmd
+ 108              	.LVL3:
+  26:../user/source/Time.c **** 	//TIM_TimeBaseInitStruc.TIM_Prescaler=16;//系统频率16M，16分频，1Mhz计时频率；
+ 109              		.loc 1 26 0
+ 110 0010 4CF24F33 		movw	r3, #49999
+ 111 0014 0693     		str	r3, [sp, #24]
+  28:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_ClockDivision=0;//数字滤波器功能关闭
+ 112              		.loc 1 28 0
+ 113 0016 4023     		movs	r3, #64
+ 114 0018 ADF81430 		strh	r3, [sp, #20]	@ movhi
+  29:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_CounterMode=TIM_CounterMode_Up;//向上计数
+ 115              		.loc 1 29 0
+ 116 001c 0024     		movs	r4, #0
+ 117 001e ADF81C40 		strh	r4, [sp, #28]	@ movhi
+  30:../user/source/Time.c **** //	TIM_TimeBaseInitStruc.TIM_RepetitionCounter 向下自动填装，对TIM15, TIM16 and TIM17有效
+ 118              		.loc 1 30 0
+ 119 0022 ADF81640 		strh	r4, [sp, #22]	@ movhi
+  32:../user/source/Time.c **** 	TIM_Cmd(TIM2,ENABLE);
+ 120              		.loc 1 32 0
+ 121 0026 05A9     		add	r1, sp, #20
+ 122 0028 4FF08040 		mov	r0, #1073741824
+ 123 002c FFF7FEFF 		bl	TIM_TimeBaseInit
+ 124              	.LVL4:
+  33:../user/source/Time.c **** 	TIM_ITConfig(TIM2,TIM_IT_Update,ENABLE);
+ 125              		.loc 1 33 0
+ 126 0030 0121     		movs	r1, #1
+ 127 0032 4FF08040 		mov	r0, #1073741824
+ 128 0036 FFF7FEFF 		bl	TIM_Cmd
+ 129              	.LVL5:
+  34:../user/source/Time.c **** 
+ 130              		.loc 1 34 0
+ 131 003a 0122     		movs	r2, #1
+ 132 003c 1146     		mov	r1, r2
+ 133 003e 4FF08040 		mov	r0, #1073741824
+ 134 0042 FFF7FEFF 		bl	TIM_ITConfig
+ 135              	.LVL6:
+  37:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_Period = SystemCoreClock / 38400 - 1;
+ 136              		.loc 1 37 0
+ 137 0046 0121     		movs	r1, #1
+ 138 0048 0820     		movs	r0, #8
+ 139 004a FFF7FEFF 		bl	RCC_APB1PeriphClockCmd
+ 140              	.LVL7:
+  38:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_Prescaler=0;		//系统频率64M
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s 			page 5
+
+
+ 141              		.loc 1 38 0
+ 142 004e 184B     		ldr	r3, .L5
+ 143 0050 1B68     		ldr	r3, [r3]
+ 144 0052 184A     		ldr	r2, .L5+4
+ 145 0054 A2FB0323 		umull	r2, r3, r2, r3
+ 146 0058 1B0B     		lsrs	r3, r3, #12
+ 147 005a 013B     		subs	r3, r3, #1
+ 148 005c 0693     		str	r3, [sp, #24]
+  39:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_ClockDivision=0;//数字滤波器功能关闭
+ 149              		.loc 1 39 0
+ 150 005e ADF81440 		strh	r4, [sp, #20]	@ movhi
+  40:../user/source/Time.c **** 	TIM_TimeBaseInitStruc.TIM_CounterMode=TIM_CounterMode_Up;//向上计数
+ 151              		.loc 1 40 0
+ 152 0062 ADF81C40 		strh	r4, [sp, #28]	@ movhi
+  41:../user/source/Time.c **** 	TIM_TimeBaseInit(TIM5,&TIM_TimeBaseInitStruc);
+ 153              		.loc 1 41 0
+ 154 0066 ADF81640 		strh	r4, [sp, #22]	@ movhi
+  42:../user/source/Time.c **** 	TIM_OC2PreloadConfig(TIM5, TIM_OCPreload_Disable);
+ 155              		.loc 1 42 0
+ 156 006a 134D     		ldr	r5, .L5+8
+ 157 006c 05A9     		add	r1, sp, #20
+ 158 006e 2846     		mov	r0, r5
+ 159 0070 FFF7FEFF 		bl	TIM_TimeBaseInit
+ 160              	.LVL8:
+  43:../user/source/Time.c **** 	TIM_Cmd(TIM5, ENABLE);//使能定时器5
+ 161              		.loc 1 43 0
+ 162 0074 2146     		mov	r1, r4
+ 163 0076 2846     		mov	r0, r5
+ 164 0078 FFF7FEFF 		bl	TIM_OC2PreloadConfig
+ 165              	.LVL9:
+  44:../user/source/Time.c **** 	//PWM配置
+ 166              		.loc 1 44 0
+ 167 007c 0121     		movs	r1, #1
+ 168 007e 2846     		mov	r0, r5
+ 169 0080 FFF7FEFF 		bl	TIM_Cmd
+ 170              	.LVL10:
+  46:../user/source/Time.c **** 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+ 171              		.loc 1 46 0
+ 172 0084 6023     		movs	r3, #96
+ 173 0086 ADF80030 		strh	r3, [sp]	@ movhi
+  47:../user/source/Time.c **** 	TIM_OCInitStructure.TIM_Pulse = uwCCR2_Val;
+ 174              		.loc 1 47 0
+ 175 008a 0126     		movs	r6, #1
+ 176 008c ADF80260 		strh	r6, [sp, #2]	@ movhi
+  48:../user/source/Time.c **** 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+ 177              		.loc 1 48 0
+ 178 0090 40F24A33 		movw	r3, #842
+ 179 0094 0293     		str	r3, [sp, #8]
+  49:../user/source/Time.c **** 	TIM_OC2Init(TIM5, &TIM_OCInitStructure);
+ 180              		.loc 1 49 0
+ 181 0096 ADF80C40 		strh	r4, [sp, #12]	@ movhi
+  50:../user/source/Time.c **** 	//TIM_ITConfig(TIM5, TIM_IT_CC2, ENABLE);//使能定时器5通道2中断
+ 182              		.loc 1 50 0
+ 183 009a 6946     		mov	r1, sp
+ 184 009c 2846     		mov	r0, r5
+ 185 009e FFF7FEFF 		bl	TIM_OC2Init
+ 186              	.LVL11:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s 			page 6
+
+
+  52:../user/source/Time.c **** }
+ 187              		.loc 1 52 0
+ 188 00a2 3246     		mov	r2, r6
+ 189 00a4 0421     		movs	r1, #4
+ 190 00a6 2846     		mov	r0, r5
+ 191 00a8 FFF7FEFF 		bl	TIM_CCxCmd
+ 192              	.LVL12:
+  53:../user/source/Time.c **** 
+ 193              		.loc 1 53 0
+ 194 00ac 08B0     		add	sp, sp, #32
+ 195              	.LCFI5:
+ 196              		.cfi_def_cfa_offset 16
+ 197              		@ sp needed
+ 198 00ae 70BD     		pop	{r4, r5, r6, pc}
+ 199              	.L6:
+ 200              		.align	2
+ 201              	.L5:
+ 202 00b0 00000000 		.word	SystemCoreClock
+ 203 00b4 B5814E1B 		.word	458129845
+ 204 00b8 000C0040 		.word	1073744896
+ 205              		.cfi_endproc
+ 206              	.LFE111:
+ 208              		.section	.text.blTime2_Update,"ax",%progbits
+ 209              		.align	2
+ 210              		.global	blTime2_Update
+ 211              		.thumb
+ 212              		.thumb_func
+ 214              	blTime2_Update:
+ 215              	.LFB113:
+  80:../user/source/Time.c **** 
+  81:../user/source/Time.c **** 
+  82:../user/source/Time.c **** /********************************************************************
+  83:../user/source/Time.c **** * 功    能：计时器2是否超时
+  84:../user/source/Time.c **** * 输    入：None
+  85:../user/source/Time.c **** * 输    出：true/false
+  86:../user/source/Time.c **** *           
+  87:../user/source/Time.c **** * 编 写 人：
+  88:../user/source/Time.c **** * 编写日期：2016.8.7
+  89:../user/source/Time.c **** **********************************************************************/
+  90:../user/source/Time.c **** bool blTime2_Update(uint16_t counter,uint16_t ms)
+  91:../user/source/Time.c **** {
+ 216              		.loc 1 91 0
+ 217              		.cfi_startproc
+ 218              		@ args = 0, pretend = 0, frame = 0
+ 219              		@ frame_needed = 0, uses_anonymous_args = 0
+ 220              		@ link register save eliminated.
+ 221              	.LVL13:
+  92:../user/source/Time.c **** 	if(counter >= ms)  
+ 222              		.loc 1 92 0
+ 223 0000 8842     		cmp	r0, r1
+ 224 0002 01D3     		bcc	.L9
+  93:../user/source/Time.c **** 		return true;
+ 225              		.loc 1 93 0
+ 226 0004 0120     		movs	r0, #1
+ 227              	.LVL14:
+ 228 0006 7047     		bx	lr
+ 229              	.LVL15:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s 			page 7
+
+
+ 230              	.L9:
+  94:../user/source/Time.c **** 	else
+  95:../user/source/Time.c **** 		return false;
+ 231              		.loc 1 95 0
+ 232 0008 0020     		movs	r0, #0
+ 233              	.LVL16:
+  96:../user/source/Time.c **** }
+ 234              		.loc 1 96 0
+ 235 000a 7047     		bx	lr
+ 236              		.cfi_endproc
+ 237              	.LFE113:
+ 239              		.global	uwTime2FramesCounter
+ 240              		.global	uwTime2WordsCounter
+ 241              		.global	blFramesCounterStatus
+ 242              		.global	blWordsCounterStatus
+ 243              		.section	.bss.uwTime2FramesCounter,"aw",%nobits
+ 244              		.align	1
+ 247              	uwTime2FramesCounter:
+ 248 0000 0000     		.space	2
+ 249              		.section	.bss.blWordsCounterStatus,"aw",%nobits
+ 252              	blWordsCounterStatus:
+ 253 0000 00       		.space	1
+ 254              		.section	.bss.uwTime2WordsCounter,"aw",%nobits
+ 255              		.align	1
+ 258              	uwTime2WordsCounter:
+ 259 0000 0000     		.space	2
+ 260              		.section	.bss.blFramesCounterStatus,"aw",%nobits
+ 263              	blFramesCounterStatus:
+ 264 0000 00       		.space	1
+ 265              		.text
+ 266              	.Letext0:
+ 267              		.file 2 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\machine\\_defaul
+ 268              		.file 3 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 269              		.file 4 "../cmsis/include/stm32f37x.h"
+ 270              		.file 5 "../stdperiph/include/stm32f37x_tim.h"
+ 271              		.file 6 "../stdperiph/include/stm32f37x_misc.h"
+ 272              		.file 7 "../cmsis/include/core_cm4.h"
+ 273              		.file 8 "../cmsis/include/system_stm32f37x.h"
+ 274              		.file 9 "../stdperiph/include/stm32f37x_rcc.h"
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 Time.c
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:22     .text.vIRQ_TIME_Config:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:26     .text.vIRQ_TIME_Config:00000000 vIRQ_TIME_Config
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:80     .text.vTimer_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:85     .text.vTimer_Init:00000000 vTimer_Init
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:202    .text.vTimer_Init:000000b0 $d
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:209    .text.blTime2_Update:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:214    .text.blTime2_Update:00000000 blTime2_Update
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:247    .bss.uwTime2FramesCounter:00000000 uwTime2FramesCounter
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:258    .bss.uwTime2WordsCounter:00000000 uwTime2WordsCounter
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:263    .bss.blFramesCounterStatus:00000000 blFramesCounterStatus
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:252    .bss.blWordsCounterStatus:00000000 blWordsCounterStatus
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:244    .bss.uwTime2FramesCounter:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:253    .bss.blWordsCounterStatus:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:255    .bss.uwTime2WordsCounter:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccqBYaSY.s:264    .bss.blFramesCounterStatus:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+NVIC_Init
+RCC_APB1PeriphClockCmd
+TIM_TimeBaseInit
+TIM_Cmd
+TIM_ITConfig
+TIM_OC2PreloadConfig
+TIM_OC2Init
+TIM_CCxCmd
+SystemCoreClock
