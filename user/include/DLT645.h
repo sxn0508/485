@@ -74,10 +74,16 @@ typedef struct
 
 /*全局变量*/
 /*645帧缓存结构体和帧数据域长度*/
-extern uint8_t ucApp_Buf_DB2ZD[DATA_BUF_SIZE]; //应用层缓存
-extern uint8_t ucApp_Buf_ZD2DB[DATA_BUF_SIZE]; //应用层缓存
+extern uint8_t uc645DataDomainLength; //接收到的帧数据区长度
+extern UartDef *pUartZD;
+extern UartDef *pUartDB;
+extern UartDef *pUartIR;
+extern uint8_t ucApp_Buf_DB2ZD[DATA_BUF_SIZE]; //电表上行帧应用缓存
+extern uint8_t ucApp_Buf_ZD2DB[DATA_BUF_SIZE]; //终端下行帧应用缓存
 extern uint8_t ucApp_Buf_INFR[DATA_BUF_SIZE];  //红外口应用缓存
-extern uint8_t uc645DataDomainLength;          //接收到的帧数据区长度
+extern int A_Voltage;                          //最后一次修改后的A相电压值
+extern int B_Voltage;                          //最后一次修改后的B相电压值
+extern int C_Voltage;                          //最后一次修改后的C相电压值
 
 /*参数：电压限值*/
 extern FrameHandleStatus Voltage_Frame_Status;
@@ -114,7 +120,7 @@ static void vCurrentTriple_Modify_Method(CURRENT *current_max, CURRENT *current_
 /*对外函数接口*/
 extern void vDBDataID_Handle(uint8_t *pucBuffer);   //根据数据标识选择处理函数
 extern void vINFRDataID_Handle(uint8_t *pucBuffer); //根据数据标识选择处理函数
-extern bool blRecvFrame(UCDRV_BUF *ucDrv_Buf, uint8_t *ucdata_buf);
+extern bool blRecvFrame(struct ucbuf *ucDrv_Buf, uint8_t *ucdata_buf);
 extern void Voltage_Change_Init(void);             //使能电压修改功能，并从flash中读取电压上下限
 extern void vEnergy_Modify_Init(void);             //日冻结修改功能初始化
 extern void Set_Voltage_Limit(uint8_t *pucBuffer); //扩充帧：电压限值设置

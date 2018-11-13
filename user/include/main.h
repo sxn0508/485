@@ -2,6 +2,10 @@
 #define _MAIN_H
 
 #include "stm32f37x.h"
+#include "BaseDef.h"
+
+#define SysTick_1000Ms SystemCoreClock / 8
+#define SysTick_100Ms SystemCoreClock / 80
 
 /***************
  *默认功能：修改电压上限值，电压值不回时替代回帧
@@ -16,7 +20,7 @@
 //#define ENABLE_CURRENT_LIMIT				//电流最大值修改功能
 #define ENABLE_ENERGY_MODIFY //修改正向有功
 #define ENABLE_INFR          //红外设置参数功能
-
+#define ENABLE_698
 /*变压器容量，决定三相电流的最大值*/
 //#define TRANSFORMER_CAPACITY_50KVA
 //#define TRANSFORMER_CAPACITY_100KVA
@@ -25,7 +29,9 @@
 
 static void VoltageTimeOutHandle(void);
 static void RsvFrameHandle(uint8_t *pucBuffer);
-static void vNVIC_IRQ_Config(void);
+//static void vNVIC_IRQ_Config(void);
 //static void vVoltageHandle(uint8_t * pucBuffer);
 
+extern bool FLAG_UartZD_HasData;
+extern bool FLAG_UartDB_HasData;
 #endif

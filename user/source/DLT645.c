@@ -2,6 +2,20 @@
 #include "Time.h"
 #include "Flash.h"
 
+/*串口驱动缓存*/
+static struct ucbuf Uart1_Rsvbuf, Uart1_Sndbuf, Uart3_Rsvbuf, Uart3_Sndbuf, Uart2_Rsvbuf, Uart2_Sndbuf;
+/*应用层串口结构体*/
+static UartDef UartZD = {USART1, &Uart1_Rsvbuf, &Uart1_Sndbuf};
+static UartDef UartDB = {USART3, &Uart3_Rsvbuf, &Uart3_Sndbuf};
+static UartDef UartIR = {USART2, &Uart2_Rsvbuf, &Uart2_Sndbuf};
+/*应用层串口结构体指针*/
+UartDef *pUartZD = &UartZD;
+UartDef *pUartDB = &UartDB;
+UartDef *pUartIR = &UartIR;
+/*规约帧缓存*/
+uint8_t ucApp_Buf_DB2ZD[DATA_BUF_SIZE]; //电表上行帧应用缓存
+uint8_t ucApp_Buf_ZD2DB[DATA_BUF_SIZE]; //终端下行帧应用缓存
+uint8_t ucApp_Buf_INFR[DATA_BUF_SIZE];  //红外口应用缓存
 /*
 #define ENABLE_ESTATUS						//电表状态字修改功能 
 #define ENABLE_CURRENT_DEVIATION			//电流各相差值修改功能
@@ -104,9 +118,6 @@ const DefDataIDHandle DBDataID_Handle_List[] = {
 
 FrameHandleStatus Voltage_Frame_Status;
 uint8_t ucRcvStatus = 0;
-uint8_t ucApp_Buf_DB2ZD[DATA_BUF_SIZE];            //电表上行帧应用缓存
-uint8_t ucApp_Buf_ZD2DB[DATA_BUF_SIZE];            //终端下行帧应用缓存
-uint8_t ucApp_Buf_INFR[DATA_BUF_SIZE];             //红外口应用缓存
 uint8_t uc645DataDomainLength = 0;                 //645帧数据域长度
 uint8_t Voltage_Change_State = Voltage_NOChange;   //电压是否修改标志位，默认修改状态
 uint8_t Dayfrozen_Change_State = DAYFROZEN_CHANGE; //电量是否修改，默认修改
@@ -148,7 +159,7 @@ TransFormer_TypeDef TransFormer;
  * 编写日期：2016.6.23
  **********************************************************************/
 
-bool blRecvFrame(UCDRV_BUF *ucDrv_Buf, uint8_t *ucdata_buf)
+bool blRecvFrame(struct ucbuf *ucDrv_Buf, uint8_t *ucdata_buf)
 {
     /*收帧状态*/
     switch (ucRcvStatus)
@@ -398,15 +409,15 @@ void Get_VChange_State(uint8_t *pucBuffer)
     pucBuffer[11] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 0;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -451,15 +462,15 @@ void Set_Voltage_Limit(uint8_t *pucBuffer)
     pucBuffer[11] = 0x16; //结束符
     /*电表口回复*/
     uc645DataDomainLength = 0;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -495,15 +506,15 @@ void Query_Voltage_Limit(uint8_t *pucBuffer)
     pucBuffer[23] = 0x16; //结束符
     uc645DataDomainLength = 12;
     /*电表口回复*/
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 24);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 24);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -542,15 +553,15 @@ void Default_Reset(uint8_t *pucBuffer)
     pucBuffer[11] = 0x16; //结束符
     uc645DataDomainLength = 0;
     /*电表口回复*/
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口发送*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -1508,15 +1519,15 @@ void vCurrent_Limit_Set(uint8_t *pucBuffer)
     pucBuffer[11] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 0;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -1566,15 +1577,15 @@ void vCurrent_CTRatio_Set(uint8_t *pucBuffer)
     pucBuffer[11] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 0;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -1609,15 +1620,15 @@ void vCurrent_Limit_ReadSet(uint8_t *pucBuffer)
     pucBuffer[18] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 7;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 19);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 19);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 19);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 19);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -1651,15 +1662,15 @@ void vCurrent_CTRatio_ReadSet(uint8_t *pucBuffer)
     pucBuffer[17] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 6;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 18);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 18);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 18);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 18);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -1692,15 +1703,15 @@ void vCurrent_TransFormer_Capacity_ReadSet(uint8_t *pucBuffer)
     pucBuffer[17] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 0;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 18);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 18);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 18);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 18);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -2245,15 +2256,15 @@ void vEnergy_Modify_AbleSet(uint8_t *pucBuffer)
     pucBuffer[11] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 0;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -2305,15 +2316,15 @@ void vEnergy_Modify_RaitoSet(uint8_t *pucBuffer)
     pucBuffer[11] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 0;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -2370,15 +2381,15 @@ void vEnergy_Modify_Reset(uint8_t *pucBuffer)
     pucBuffer[11] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 0;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -2416,15 +2427,15 @@ void vEnergy_Modify_ReadSet(uint8_t *pucbuffer)
     pucbuffer[17] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 4;
-    ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart3_Snd, 18);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucbuffer, pUartDB->pSndbuf, 18);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 #ifdef ENABLE_INFR
     /*红外口回复*/
-    ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart2_Snd, 18);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucbuffer, pUartIR->pSndbuf, 18);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -2472,15 +2483,15 @@ void vEnergy_Modify_ReadValue(uint8_t *pucbuffer)
     pucbuffer[23] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 0;
-    ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart3_Snd, 24);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucbuffer, pUartDB->pSndbuf, 24);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart2_Snd, 24);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucbuffer, pUartIR->pSndbuf, 24);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -2527,8 +2538,8 @@ void vVoltage_SetMaxValue(uint8_t *pucBuffer)
     }
     pucBuffer[11] = 0x16; //结束符
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -2574,8 +2585,8 @@ void vVoltage_SetMinValue(uint8_t *pucBuffer)
     }
     pucBuffer[11] = 0x16;
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 12);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -2628,14 +2639,14 @@ void vEnergy_Modify_ReadSet(uint8_t *pucBuffer)
     pucBuffer[17] = 0x16;
     /*电表口回复*/
     uc645DataDomainLength = 0;
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart3_Snd, 18);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, 18);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
     /*红外口回复*/
-    ucDrv_Buf_PutBytes(pucBuffer, &ucDrv_Buf_Uart2_Snd, 18);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 18);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
@@ -2963,15 +2974,15 @@ void vRead_Version(uint8_t *pucbuffer)
     }
     pucbuffer[19] = 0x16;
     uc645DataDomainLength = 8;
-    ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart3_Snd, 20);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd))
+    ucDrv_Buf_PutBytes(pucbuffer, pUartDB->pSndbuf, 20);
+    if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
 /*红外口回复*/
 #ifdef ENABLE_INFR
-    ucDrv_Buf_PutBytes(pucbuffer, &ucDrv_Buf_Uart2_Snd, 20);
-    if (!blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd))
+    ucDrv_Buf_PutBytes(pucbuffer, pUartIR->pSndbuf, 20);
+    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);

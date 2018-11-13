@@ -9,7 +9,13 @@
         "dlt645.h": "c",
         "string.h": "c",
         "stm32f37x.h": "c",
-        "protocol.h": "c"
+        "protocol.h": "c",
+        "dlt698data.h": "c",
+        "flash.h": "c",
+        "dlt698.h": "c",
+        "basedef.h": "c",
+        "dlt698_45.h": "c",
+        "stm32f37x_conf.h": "c"
     },
-    "C_Cpp.intelliSenseEngineFallback": "Disabled"
+    "C_Cpp.intelliSenseEngineFallback": "Enabled"
 }
