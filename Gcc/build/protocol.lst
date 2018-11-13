@@ -1,0 +1,431 @@
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccB95q8B.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.eabi_attribute 28, 1
+   5              		.fpu fpv4-sp-d16
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.thumb
+  16              		.syntax unified
+  17              		.file	"protocol.c"
+  18              		.text
+  19              	.Ltext0:
+  20              		.cfi_sections	.debug_frame
+  21              		.section	.text.pGetpFrame,"ax",%progbits
+  22              		.align	2
+  23              		.global	pGetpFrame
+  24              		.thumb
+  25              		.thumb_func
+  27              	pGetpFrame:
+  28              	.LFB111:
+  29              		.file 1 "../user/source/protocol.c"
+   1:../user/source/protocol.c **** /*********************************************************************** 
+   2:../user/source/protocol.c **** * Copyright (c) 2012, All rights reserved.
+   3:../user/source/protocol.c **** *
+   4:../user/source/protocol.c **** * 文件名称： UART.c
+   5:../user/source/protocol.c **** * 描    述： 串口通信代码文件
+   6:../user/source/protocol.c **** * 
+   7:../user/source/protocol.c **** * 修改记录：
+   8:../user/source/protocol.c **** *
+   9:../user/source/protocol.c **** * V1.0，2016.06.19，
+  10:../user/source/protocol.c **** ***********************************************************************/
+  11:../user/source/protocol.c **** #include "protocol.h"
+  12:../user/source/protocol.c **** #include "DLT698.h"
+  13:../user/source/protocol.c **** 
+  14:../user/source/protocol.c **** #define TICKS_500MS 6
+  15:../user/source/protocol.c **** /********************************************************************
+  16:../user/source/protocol.c **** * 功    能：获取帧指针
+  17:../user/source/protocol.c **** * 输    入：应用层缓存指针，数据长度
+  18:../user/source/protocol.c **** * 输    出：帧指针
+  19:../user/source/protocol.c **** *           
+  20:../user/source/protocol.c **** * 编 写 人：
+  21:../user/source/protocol.c **** * 编写日期：2018-9-9 08:01:18
+  22:../user/source/protocol.c **** **********************************************************************/
+  23:../user/source/protocol.c **** void *pGetpFrame(uint8_t *framebuf, uint32_t len)
+  24:../user/source/protocol.c **** {
+  30              		.loc 1 24 0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              	.LVL0:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccB95q8B.s 			page 2
+
+
+  25:../user/source/protocol.c ****     uint8_t *p;
+  26:../user/source/protocol.c ****     if (len > DRV_BUF_SIZE)
+  35              		.loc 1 26 0
+  36 0000 B1F57A7F 		cmp	r1, #1000
+  37 0004 04D8     		bhi	.L3
+  24:../user/source/protocol.c ****     uint8_t *p;
+  38              		.loc 1 24 0
+  39 0006 08B5     		push	{r3, lr}
+  40              	.LCFI0:
+  41              		.cfi_def_cfa_offset 8
+  42              		.cfi_offset 3, -8
+  43              		.cfi_offset 14, -4
+  27:../user/source/protocol.c ****         return NULL;
+  28:../user/source/protocol.c ****     p = (uint8_t *)strchr((char *)framebuf, 0x68);
+  44              		.loc 1 28 0
+  45 0008 6821     		movs	r1, #104
+  46              	.LVL1:
+  47 000a FFF7FEFF 		bl	strchr
+  48              	.LVL2:
+  29:../user/source/protocol.c ****     //if (*(framebuf + len - 1) != 0x16)
+  30:../user/source/protocol.c ****     //{
+  31:../user/source/protocol.c ****     //p = NULL;
+  32:../user/source/protocol.c ****     //}
+  33:../user/source/protocol.c ****     return p;
+  49              		.loc 1 33 0
+  50 000e 08BD     		pop	{r3, pc}
+  51              	.LVL3:
+  52              	.L3:
+  53              	.LCFI1:
+  54              		.cfi_def_cfa_offset 0
+  55              		.cfi_restore 3
+  56              		.cfi_restore 14
+  27:../user/source/protocol.c ****         return NULL;
+  57              		.loc 1 27 0
+  58 0010 0020     		movs	r0, #0
+  59              	.LVL4:
+  60 0012 7047     		bx	lr
+  61              		.cfi_endproc
+  62              	.LFE111:
+  64              		.section	.text.dlt645_CalCS,"ax",%progbits
+  65              		.align	2
+  66              		.global	dlt645_CalCS
+  67              		.thumb
+  68              		.thumb_func
+  70              	dlt645_CalCS:
+  71              	.LFB113:
+  34:../user/source/protocol.c **** }
+  35:../user/source/protocol.c **** 
+  36:../user/source/protocol.c **** /********************************************************************
+  37:../user/source/protocol.c **** * 功    能：查询应用层缓存的帧格式
+  38:../user/source/protocol.c **** * 输    入：应用层缓存指针，数据长度
+  39:../user/source/protocol.c **** * 输    出：规约类型枚举值
+  40:../user/source/protocol.c **** *           
+  41:../user/source/protocol.c **** * 编 写 人：
+  42:../user/source/protocol.c **** * 编写日期：2018-9-9 08:01:18
+  43:../user/source/protocol.c **** **********************************************************************/
+  44:../user/source/protocol.c **** ProtocolDef GetProtocolType(uint8_t *pbuf, uint32_t len)
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccB95q8B.s 			page 3
+
+
+  45:../user/source/protocol.c **** {
+  46:../user/source/protocol.c ****     ProtocolDef ptype = none;
+  47:../user/source/protocol.c ****     uint8_t *pframe;
+  48:../user/source/protocol.c ****     pframe = (uint8_t *)strchr((char *)pbuf, 0x68);
+  49:../user/source/protocol.c ****     uint32_t dlt645_L = *(pframe + 9) + 12;
+  50:../user/source/protocol.c ****     //uint32_t dlt698_L = *(pframe + 1) | (*(pframe + 2) & 0x3F) << 8 + 2;
+  51:../user/source/protocol.c ****     uint32_t dlt698_L = MAKE_WORD(*(pframe + 2) & 0x3F, *(pframe + 1)) + 2;
+  52:../user/source/protocol.c **** 
+  53:../user/source/protocol.c ****     /*8th byte==68*/
+  54:../user/source/protocol.c ****     /*last byte== 16*/
+  55:../user/source/protocol.c ****     /* CS correct*/
+  56:../user/source/protocol.c ****     /*97-645 do not support autobaud*/
+  57:../user/source/protocol.c ****     if (*(pframe + 7) == 0x68 &&
+  58:../user/source/protocol.c ****         len >= dlt645_L &&
+  59:../user/source/protocol.c ****         *(pframe + dlt645_L - 2) == dlt645_CalCS(pframe, dlt645_L - 2) &&
+  60:../user/source/protocol.c ****         *(pframe + dlt645_L - 1) == 0x16)
+  61:../user/source/protocol.c ****         ptype = dlt645;
+  62:../user/source/protocol.c ****     /*last byte== 16*/
+  63:../user/source/protocol.c ****     else if (*(pframe + dlt698_L - 1) == 0x16 &&
+  64:../user/source/protocol.c ****              len >= dlt698_L)
+  65:../user/source/protocol.c ****         ptype = dlt698;
+  66:../user/source/protocol.c ****     return ptype;
+  67:../user/source/protocol.c **** }
+  68:../user/source/protocol.c **** /********************************************************************
+  69:../user/source/protocol.c **** * 功    能：dlt645_CS计算`
+  70:../user/source/protocol.c **** * 输    入：帧结构指针
+  71:../user/source/protocol.c **** * 输    出：CS值
+  72:../user/source/protocol.c **** *           
+  73:../user/source/protocol.c **** * 编 写 人：
+  74:../user/source/protocol.c **** * 编写日期：2018-9-9 08:01:18
+  75:../user/source/protocol.c **** **********************************************************************/
+  76:../user/source/protocol.c **** uint8_t dlt645_CalCS(uint8_t *pframe, uint32_t cspos)
+  77:../user/source/protocol.c **** {
+  72              		.loc 1 77 0
+  73              		.cfi_startproc
+  74              		@ args = 0, pretend = 0, frame = 0
+  75              		@ frame_needed = 0, uses_anonymous_args = 0
+  76              		@ link register save eliminated.
+  77              	.LVL5:
+  78 0000 10B4     		push	{r4}
+  79              	.LCFI2:
+  80              		.cfi_def_cfa_offset 4
+  81              		.cfi_offset 4, -4
+  82              	.LVL6:
+  78:../user/source/protocol.c ****     uint8_t *pbuf;
+  79:../user/source/protocol.c ****     uint8_t CS = 0;
+  80:../user/source/protocol.c ****     uint8_t i;
+  81:../user/source/protocol.c **** 
+  82:../user/source/protocol.c ****     pbuf = (uint8_t *)pframe;
+  83:../user/source/protocol.c ****     //求取校验和
+  84:../user/source/protocol.c ****     for (i = 0; i < cspos; i++)
+  83              		.loc 1 84 0
+  84 0002 0023     		movs	r3, #0
+  79:../user/source/protocol.c ****     uint8_t i;
+  85              		.loc 1 79 0
+  86 0004 1A46     		mov	r2, r3
+  87              		.loc 1 84 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccB95q8B.s 			page 4
+
+
+  88 0006 04E0     		b	.L7
+  89              	.LVL7:
+  90              	.L8:
+  85:../user/source/protocol.c ****     {
+  86:../user/source/protocol.c ****         CS += *(pbuf + i);
+  91              		.loc 1 86 0 discriminator 3
+  92 0008 C45C     		ldrb	r4, [r0, r3]	@ zero_extendqisi2
+  93 000a 2244     		add	r2, r2, r4
+  94              	.LVL8:
+  95 000c D2B2     		uxtb	r2, r2
+  96              	.LVL9:
+  84:../user/source/protocol.c ****     {
+  97              		.loc 1 84 0 discriminator 3
+  98 000e 0133     		adds	r3, r3, #1
+  99              	.LVL10:
+ 100 0010 DBB2     		uxtb	r3, r3
+ 101              	.LVL11:
+ 102              	.L7:
+  84:../user/source/protocol.c ****     {
+ 103              		.loc 1 84 0 is_stmt 0 discriminator 1
+ 104 0012 8B42     		cmp	r3, r1
+ 105 0014 F8D3     		bcc	.L8
+  87:../user/source/protocol.c ****     }
+  88:../user/source/protocol.c ****     return CS;
+  89:../user/source/protocol.c **** }
+ 106              		.loc 1 89 0 is_stmt 1
+ 107 0016 1046     		mov	r0, r2
+ 108              	.LVL12:
+ 109 0018 5DF8044B 		ldr	r4, [sp], #4
+ 110              	.LCFI3:
+ 111              		.cfi_restore 4
+ 112              		.cfi_def_cfa_offset 0
+ 113 001c 7047     		bx	lr
+ 114              		.cfi_endproc
+ 115              	.LFE113:
+ 117 001e 00BF     		.section	.text.GetProtocolType,"ax",%progbits
+ 118              		.align	2
+ 119              		.global	GetProtocolType
+ 120              		.thumb
+ 121              		.thumb_func
+ 123              	GetProtocolType:
+ 124              	.LFB112:
+  45:../user/source/protocol.c ****     ProtocolDef ptype = none;
+ 125              		.loc 1 45 0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129              	.LVL13:
+ 130 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 131              	.LCFI4:
+ 132              		.cfi_def_cfa_offset 24
+ 133              		.cfi_offset 4, -24
+ 134              		.cfi_offset 5, -20
+ 135              		.cfi_offset 6, -16
+ 136              		.cfi_offset 7, -12
+ 137              		.cfi_offset 8, -8
+ 138              		.cfi_offset 14, -4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccB95q8B.s 			page 5
+
+
+ 139 0004 0F46     		mov	r7, r1
+ 140              	.LVL14:
+  48:../user/source/protocol.c ****     uint32_t dlt645_L = *(pframe + 9) + 12;
+ 141              		.loc 1 48 0
+ 142 0006 6821     		movs	r1, #104
+ 143              	.LVL15:
+ 144 0008 FFF7FEFF 		bl	strchr
+ 145              	.LVL16:
+ 146 000c 0546     		mov	r5, r0
+ 147              	.LVL17:
+  49:../user/source/protocol.c ****     //uint32_t dlt698_L = *(pframe + 1) | (*(pframe + 2) & 0x3F) << 8 + 2;
+ 148              		.loc 1 49 0
+ 149 000e 467A     		ldrb	r6, [r0, #9]	@ zero_extendqisi2
+ 150              	.LVL18:
+  51:../user/source/protocol.c **** 
+ 151              		.loc 1 51 0
+ 152 0010 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 153 0012 8478     		ldrb	r4, [r0, #2]	@ zero_extendqisi2
+ 154 0014 2402     		lsls	r4, r4, #8
+ 155 0016 04F47C54 		and	r4, r4, #16128
+ 156 001a 1C43     		orrs	r4, r4, r3
+ 157 001c 0234     		adds	r4, r4, #2
+ 158              	.LVL19:
+  57:../user/source/protocol.c ****         len >= dlt645_L &&
+ 159              		.loc 1 57 0
+ 160 001e C379     		ldrb	r3, [r0, #7]	@ zero_extendqisi2
+ 161 0020 682B     		cmp	r3, #104
+ 162 0022 0DD1     		bne	.L11
+ 163 0024 0C36     		adds	r6, r6, #12
+ 164              	.LVL20:
+  57:../user/source/protocol.c ****         len >= dlt645_L &&
+ 165              		.loc 1 57 0 is_stmt 0 discriminator 1
+ 166 0026 BE42     		cmp	r6, r7
+ 167 0028 0AD8     		bhi	.L11
+  59:../user/source/protocol.c ****         *(pframe + dlt645_L - 1) == 0x16)
+ 168              		.loc 1 59 0 is_stmt 1
+ 169 002a B11E     		subs	r1, r6, #2
+ 170 002c 10F80180 		ldrb	r8, [r0, r1]	@ zero_extendqisi2
+ 171 0030 FFF7FEFF 		bl	dlt645_CalCS
+ 172              	.LVL21:
+  58:../user/source/protocol.c ****         *(pframe + dlt645_L - 2) == dlt645_CalCS(pframe, dlt645_L - 2) &&
+ 173              		.loc 1 58 0
+ 174 0034 8045     		cmp	r8, r0
+ 175 0036 03D1     		bne	.L11
+  60:../user/source/protocol.c ****         ptype = dlt645;
+ 176              		.loc 1 60 0
+ 177 0038 013E     		subs	r6, r6, #1
+ 178              	.LVL22:
+ 179 003a AB5D     		ldrb	r3, [r5, r6]	@ zero_extendqisi2
+  59:../user/source/protocol.c ****         *(pframe + dlt645_L - 1) == 0x16)
+ 180              		.loc 1 59 0
+ 181 003c 162B     		cmp	r3, #22
+ 182 003e 08D0     		beq	.L13
+ 183              	.LVL23:
+ 184              	.L11:
+  63:../user/source/protocol.c ****              len >= dlt698_L)
+ 185              		.loc 1 63 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccB95q8B.s 			page 6
+
+
+ 186 0040 631E     		subs	r3, r4, #1
+ 187 0042 EB5C     		ldrb	r3, [r5, r3]	@ zero_extendqisi2
+ 188 0044 162B     		cmp	r3, #22
+ 189 0046 07D1     		bne	.L14
+  63:../user/source/protocol.c ****              len >= dlt698_L)
+ 190              		.loc 1 63 0 is_stmt 0 discriminator 1
+ 191 0048 BC42     		cmp	r4, r7
+ 192 004a 08D9     		bls	.L15
+  46:../user/source/protocol.c ****     uint8_t *pframe;
+ 193              		.loc 1 46 0 is_stmt 1
+ 194 004c 0220     		movs	r0, #2
+ 195 004e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 196              	.LVL24:
+ 197              	.L13:
+  61:../user/source/protocol.c ****     /*last byte== 16*/
+ 198              		.loc 1 61 0
+ 199 0052 0020     		movs	r0, #0
+ 200 0054 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 201              	.LVL25:
+ 202              	.L14:
+  46:../user/source/protocol.c ****     uint8_t *pframe;
+ 203              		.loc 1 46 0
+ 204 0058 0220     		movs	r0, #2
+ 205 005a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 206              	.LVL26:
+ 207              	.L15:
+  65:../user/source/protocol.c ****     return ptype;
+ 208              		.loc 1 65 0
+ 209 005e 0120     		movs	r0, #1
+ 210              	.LVL27:
+  67:../user/source/protocol.c **** /********************************************************************
+ 211              		.loc 1 67 0
+ 212 0060 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 213              		.cfi_endproc
+ 214              	.LFE112:
+ 216              		.section	.text.dwUartCopy,"ax",%progbits
+ 217              		.align	2
+ 218              		.global	dwUartCopy
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	dwUartCopy:
+ 223              	.LFB114:
+  90:../user/source/protocol.c **** uint32_t dwUartCopy(UartDef *SrcUart, uint8_t *pdata, UartDef *DestUart)
+  91:../user/source/protocol.c **** {
+ 224              		.loc 1 91 0
+ 225              		.cfi_startproc
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228              	.LVL28:
+ 229 0000 70B5     		push	{r4, r5, r6, lr}
+ 230              	.LCFI5:
+ 231              		.cfi_def_cfa_offset 16
+ 232              		.cfi_offset 4, -16
+ 233              		.cfi_offset 5, -12
+ 234              		.cfi_offset 6, -8
+ 235              		.cfi_offset 14, -4
+ 236 0002 0E46     		mov	r6, r1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccB95q8B.s 			page 7
+
+
+ 237 0004 1546     		mov	r5, r2
+  92:../user/source/protocol.c ****     uint32_t dwLen;
+  93:../user/source/protocol.c ****     dwLen = Uart_Read(SrcUart, pdata, DRV_BUF_SIZE);
+ 238              		.loc 1 93 0
+ 239 0006 4FF47A72 		mov	r2, #1000
+ 240              	.LVL29:
+ 241 000a FFF7FEFF 		bl	Uart_Read
+ 242              	.LVL30:
+  94:../user/source/protocol.c ****     if (dwLen == 0)
+ 243              		.loc 1 94 0
+ 244 000e 40B1     		cbz	r0, .L19
+ 245 0010 0446     		mov	r4, r0
+  95:../user/source/protocol.c ****         return 0;
+  96:../user/source/protocol.c ****     /*向下透传*/
+  97:../user/source/protocol.c ****     //Uart_Write(DestUart, pdata, dwLen);
+  98:../user/source/protocol.c ****     Uart_OnceWrite(DestUart, pdata, dwLen, TICKS_500MS);
+ 246              		.loc 1 98 0
+ 247 0012 0623     		movs	r3, #6
+ 248 0014 0246     		mov	r2, r0
+ 249 0016 3146     		mov	r1, r6
+ 250 0018 2846     		mov	r0, r5
+ 251              	.LVL31:
+ 252 001a FFF7FEFF 		bl	Uart_OnceWrite
+ 253              	.LVL32:
+  99:../user/source/protocol.c ****     return dwLen;
+ 254              		.loc 1 99 0
+ 255 001e 2046     		mov	r0, r4
+ 256 0020 70BD     		pop	{r4, r5, r6, pc}
+ 257              	.LVL33:
+ 258              	.L19:
+  95:../user/source/protocol.c ****         return 0;
+ 259              		.loc 1 95 0
+ 260 0022 0020     		movs	r0, #0
+ 261              	.LVL34:
+ 100:../user/source/protocol.c **** }...
+ 262              		.loc 1 100 0
+ 263 0024 70BD     		pop	{r4, r5, r6, pc}
+ 264              		.cfi_endproc
+ 265              	.LFE114:
+ 267 0026 00BF     		.text
+ 268              	.Letext0:
+ 269              		.file 2 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\machine\\_defaul
+ 270              		.file 3 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 271              		.file 4 "../cmsis/include/stm32f37x.h"
+ 272              		.file 5 "../user/include/BaseDef.h"
+ 273              		.file 6 "../user/include/uart.h"
+ 274              		.file 7 "../user/include/protocol.h"
+ 275              		.file 8 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\string.h"
+ 276              		.file 9 "../cmsis/include/core_cm4.h"
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccB95q8B.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 protocol.c
+C:\Users\strag\AppData\Local\Temp\ccB95q8B.s:22     .text.pGetpFrame:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccB95q8B.s:27     .text.pGetpFrame:00000000 pGetpFrame
+C:\Users\strag\AppData\Local\Temp\ccB95q8B.s:65     .text.dlt645_CalCS:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccB95q8B.s:70     .text.dlt645_CalCS:00000000 dlt645_CalCS
+C:\Users\strag\AppData\Local\Temp\ccB95q8B.s:118    .text.GetProtocolType:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccB95q8B.s:123    .text.GetProtocolType:00000000 GetProtocolType
+C:\Users\strag\AppData\Local\Temp\ccB95q8B.s:217    .text.dwUartCopy:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccB95q8B.s:222    .text.dwUartCopy:00000000 dwUartCopy
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+strchr
+Uart_Read
+Uart_OnceWrite

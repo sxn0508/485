@@ -11,7 +11,7 @@ build/stm32f37x_it.d: ../user/source/stm32f37x_it.c \
  ../stdperiph/include/stm32f37x_tim.h \
  ../stdperiph/include/stm32f37x_usart.h \
  ../stdperiph/include/stm32f37x_misc.h ../user/include/main.h \
- ../user/include/Uart.h ../user/include/BaseDef.h ../user/include/Time.h
+ ../user/include/BaseDef.h ../user/include/Uart.h ../user/include/Time.h
 
 ../user/include/stm32f37x_it.h:
 
@@ -47,8 +47,8 @@ build/stm32f37x_it.d: ../user/source/stm32f37x_it.c \
 
 ../user/include/main.h:
 
-../user/include/Uart.h:
-
 ../user/include/BaseDef.h:
+
+../user/include/Uart.h:
 
 ../user/include/Time.h:

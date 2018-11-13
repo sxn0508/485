@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
   27:../user/source/stm32f37x_it.c ****   ******************************************************************************
   28:../user/source/stm32f37x_it.c ****   */
   29:../user/source/stm32f37x_it.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 2
 
 
   30:../user/source/stm32f37x_it.c **** /* Includes ------------------------------------------------------------------*/
@@ -68,30 +68,35 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
   34:../user/source/stm32f37x_it.c **** #include "Uart.h"
   35:../user/source/stm32f37x_it.c **** #include "Time.h"
   36:../user/source/stm32f37x_it.c **** 
-  37:../user/source/stm32f37x_it.c **** uint16_t capture = 0;
-  38:../user/source/stm32f37x_it.c **** /** @addtogroup Template_Project
-  39:../user/source/stm32f37x_it.c ****   * @{
-  40:../user/source/stm32f37x_it.c ****   */
-  41:../user/source/stm32f37x_it.c **** 
-  42:../user/source/stm32f37x_it.c **** /* Private typedef -----------------------------------------------------------*/
-  43:../user/source/stm32f37x_it.c **** /* Private define ------------------------------------------------------------*/
-  44:../user/source/stm32f37x_it.c **** /* Private macro -------------------------------------------------------------*/
-  45:../user/source/stm32f37x_it.c **** /* Private variables ---------------------------------------------------------*/
-  46:../user/source/stm32f37x_it.c **** /* Private function prototypes -----------------------------------------------*/
-  47:../user/source/stm32f37x_it.c **** /* Private functions ---------------------------------------------------------*/
-  48:../user/source/stm32f37x_it.c **** 
-  49:../user/source/stm32f37x_it.c **** /******************************************************************************/
-  50:../user/source/stm32f37x_it.c **** /*            Cortex-M4 Processor Exceptions Handlers                         */
-  51:../user/source/stm32f37x_it.c **** /******************************************************************************/
-  52:../user/source/stm32f37x_it.c **** 
-  53:../user/source/stm32f37x_it.c **** /**
-  54:../user/source/stm32f37x_it.c ****   * @brief  This function handles NMI exception.
-  55:../user/source/stm32f37x_it.c ****   * @param  None
-  56:../user/source/stm32f37x_it.c ****   * @retval None
-  57:../user/source/stm32f37x_it.c ****   */
-  58:../user/source/stm32f37x_it.c **** void NMI_Handler(void)
-  59:../user/source/stm32f37x_it.c **** {
-  30              		.loc 1 59 0
+  37:../user/source/stm32f37x_it.c **** extern UartDef *pUartZD;
+  38:../user/source/stm32f37x_it.c **** extern UartDef *pUartDB;
+  39:../user/source/stm32f37x_it.c **** extern UartDef *pUartIR;
+  40:../user/source/stm32f37x_it.c **** 
+  41:../user/source/stm32f37x_it.c **** static uint16_t TICKS;
+  42:../user/source/stm32f37x_it.c **** uint16_t capture = 0;
+  43:../user/source/stm32f37x_it.c **** /** @addtogroup Template_Project
+  44:../user/source/stm32f37x_it.c ****   * @{
+  45:../user/source/stm32f37x_it.c ****   */
+  46:../user/source/stm32f37x_it.c **** 
+  47:../user/source/stm32f37x_it.c **** /* Private typedef -----------------------------------------------------------*/
+  48:../user/source/stm32f37x_it.c **** /* Private define ------------------------------------------------------------*/
+  49:../user/source/stm32f37x_it.c **** /* Private macro -------------------------------------------------------------*/
+  50:../user/source/stm32f37x_it.c **** /* Private variables ---------------------------------------------------------*/
+  51:../user/source/stm32f37x_it.c **** /* Private function prototypes -----------------------------------------------*/
+  52:../user/source/stm32f37x_it.c **** /* Private functions ---------------------------------------------------------*/
+  53:../user/source/stm32f37x_it.c **** 
+  54:../user/source/stm32f37x_it.c **** /******************************************************************************/
+  55:../user/source/stm32f37x_it.c **** /*            Cortex-M4 Processor Exceptions Handlers                         */
+  56:../user/source/stm32f37x_it.c **** /******************************************************************************/
+  57:../user/source/stm32f37x_it.c **** 
+  58:../user/source/stm32f37x_it.c **** /**
+  59:../user/source/stm32f37x_it.c ****   * @brief  This function handles NMI exception.
+  60:../user/source/stm32f37x_it.c ****   * @param  None
+  61:../user/source/stm32f37x_it.c ****   * @retval None
+  62:../user/source/stm32f37x_it.c ****   */
+  63:../user/source/stm32f37x_it.c **** void NMI_Handler(void)
+  64:../user/source/stm32f37x_it.c **** {
+  30              		.loc 1 64 0
   31              		.cfi_startproc
   32              		@ args = 0, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -106,21 +111,21 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
   43              		.thumb_func
   45              	HardFault_Handler:
   46              	.LFB112:
-  60:../user/source/stm32f37x_it.c **** }
-  61:../user/source/stm32f37x_it.c **** 
-  62:../user/source/stm32f37x_it.c **** /**
-  63:../user/source/stm32f37x_it.c ****   * @brief  This function handles Hard Fault exception.
-  64:../user/source/stm32f37x_it.c ****   * @param  None
-  65:../user/source/stm32f37x_it.c ****   * @retval None
-  66:../user/source/stm32f37x_it.c ****   */
-  67:../user/source/stm32f37x_it.c **** void HardFault_Handler(void)
-  68:../user/source/stm32f37x_it.c **** {
-  47              		.loc 1 68 0
+  65:../user/source/stm32f37x_it.c **** }
+  66:../user/source/stm32f37x_it.c **** 
+  67:../user/source/stm32f37x_it.c **** /**
+  68:../user/source/stm32f37x_it.c ****   * @brief  This function handles Hard Fault exception.
+  69:../user/source/stm32f37x_it.c ****   * @param  None
+  70:../user/source/stm32f37x_it.c ****   * @retval None
+  71:../user/source/stm32f37x_it.c ****   */
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 3
+
+
+  72:../user/source/stm32f37x_it.c **** void HardFault_Handler(void)
+  73:../user/source/stm32f37x_it.c **** {
+  47              		.loc 1 73 0
   48              		.cfi_startproc
   49              		@ Volatile: function does not return.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 3
-
-
   50              		@ args = 0, pretend = 0, frame = 0
   51              		@ frame_needed = 0, uses_anonymous_args = 0
   52              		@ link register save eliminated.
@@ -135,24 +140,24 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
   62              		.thumb_func
   64              	MemManage_Handler:
   65              	.LFB113:
-  69:../user/source/stm32f37x_it.c ****     //	if (CoreDebug->DHCSR & 1) {  //check C_DEBUGEN == 1 -> Debugger Connected
-  70:../user/source/stm32f37x_it.c ****     //      __breakpoint(0);  // halt program execution here
-  71:../user/source/stm32f37x_it.c ****     //  }
-  72:../user/source/stm32f37x_it.c **** 
-  73:../user/source/stm32f37x_it.c ****     /* Go to infinite loop when Hard Fault exception occurs */
-  74:../user/source/stm32f37x_it.c ****     while (1)
-  75:../user/source/stm32f37x_it.c ****     {
-  76:../user/source/stm32f37x_it.c ****     }
-  77:../user/source/stm32f37x_it.c **** }
-  78:../user/source/stm32f37x_it.c **** 
-  79:../user/source/stm32f37x_it.c **** /**
-  80:../user/source/stm32f37x_it.c ****   * @brief  This function handles Memory Manage exception.
-  81:../user/source/stm32f37x_it.c ****   * @param  None
-  82:../user/source/stm32f37x_it.c ****   * @retval None
-  83:../user/source/stm32f37x_it.c ****   */
-  84:../user/source/stm32f37x_it.c **** void MemManage_Handler(void)
-  85:../user/source/stm32f37x_it.c **** {
-  66              		.loc 1 85 0
+  74:../user/source/stm32f37x_it.c ****     //	if (CoreDebug->DHCSR & 1) {  //check C_DEBUGEN == 1 -> Debugger Connected
+  75:../user/source/stm32f37x_it.c ****     //      __breakpoint(0);  // halt program execution here
+  76:../user/source/stm32f37x_it.c ****     //  }
+  77:../user/source/stm32f37x_it.c **** 
+  78:../user/source/stm32f37x_it.c ****     /* Go to infinite loop when Hard Fault exception occurs */
+  79:../user/source/stm32f37x_it.c ****     while (1)
+  80:../user/source/stm32f37x_it.c ****     {
+  81:../user/source/stm32f37x_it.c ****     }
+  82:../user/source/stm32f37x_it.c **** }
+  83:../user/source/stm32f37x_it.c **** 
+  84:../user/source/stm32f37x_it.c **** /**
+  85:../user/source/stm32f37x_it.c ****   * @brief  This function handles Memory Manage exception.
+  86:../user/source/stm32f37x_it.c ****   * @param  None
+  87:../user/source/stm32f37x_it.c ****   * @retval None
+  88:../user/source/stm32f37x_it.c ****   */
+  89:../user/source/stm32f37x_it.c **** void MemManage_Handler(void)
+  90:../user/source/stm32f37x_it.c **** {
+  66              		.loc 1 90 0
   67              		.cfi_startproc
   68              		@ Volatile: function does not return.
   69              		@ args = 0, pretend = 0, frame = 0
@@ -169,23 +174,23 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
   81              		.thumb_func
   83              	BusFault_Handler:
   84              	.LFB114:
-  86:../user/source/stm32f37x_it.c ****     /* Go to infinite loop when Memory Manage exception occurs */
-  87:../user/source/stm32f37x_it.c ****     while (1)
-  88:../user/source/stm32f37x_it.c ****     {
-  89:../user/source/stm32f37x_it.c ****     }
-  90:../user/source/stm32f37x_it.c **** }
-  91:../user/source/stm32f37x_it.c **** 
-  92:../user/source/stm32f37x_it.c **** /**
-  93:../user/source/stm32f37x_it.c ****   * @brief  This function handles Bus Fault exception.
-  94:../user/source/stm32f37x_it.c ****   * @param  None
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 4
+  91:../user/source/stm32f37x_it.c ****     /* Go to infinite loop when Memory Manage exception occurs */
+  92:../user/source/stm32f37x_it.c ****     while (1)
+  93:../user/source/stm32f37x_it.c ****     {
+  94:../user/source/stm32f37x_it.c ****     }
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 4
 
 
-  95:../user/source/stm32f37x_it.c ****   * @retval None
-  96:../user/source/stm32f37x_it.c ****   */
-  97:../user/source/stm32f37x_it.c **** void BusFault_Handler(void)
-  98:../user/source/stm32f37x_it.c **** {
-  85              		.loc 1 98 0
+  95:../user/source/stm32f37x_it.c **** }
+  96:../user/source/stm32f37x_it.c **** 
+  97:../user/source/stm32f37x_it.c **** /**
+  98:../user/source/stm32f37x_it.c ****   * @brief  This function handles Bus Fault exception.
+  99:../user/source/stm32f37x_it.c ****   * @param  None
+ 100:../user/source/stm32f37x_it.c ****   * @retval None
+ 101:../user/source/stm32f37x_it.c ****   */
+ 102:../user/source/stm32f37x_it.c **** void BusFault_Handler(void)
+ 103:../user/source/stm32f37x_it.c **** {
+  85              		.loc 1 103 0
   86              		.cfi_startproc
   87              		@ Volatile: function does not return.
   88              		@ args = 0, pretend = 0, frame = 0
@@ -202,20 +207,20 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
  100              		.thumb_func
  102              	UsageFault_Handler:
  103              	.LFB115:
-  99:../user/source/stm32f37x_it.c ****     /* Go to infinite loop when Bus Fault exception occurs */
- 100:../user/source/stm32f37x_it.c ****     while (1)
- 101:../user/source/stm32f37x_it.c ****     {
- 102:../user/source/stm32f37x_it.c ****     }
- 103:../user/source/stm32f37x_it.c **** }
- 104:../user/source/stm32f37x_it.c **** 
- 105:../user/source/stm32f37x_it.c **** /**
- 106:../user/source/stm32f37x_it.c ****   * @brief  This function handles Usage Fault exception.
- 107:../user/source/stm32f37x_it.c ****   * @param  None
- 108:../user/source/stm32f37x_it.c ****   * @retval None
- 109:../user/source/stm32f37x_it.c ****   */
- 110:../user/source/stm32f37x_it.c **** void UsageFault_Handler(void)
- 111:../user/source/stm32f37x_it.c **** {
- 104              		.loc 1 111 0
+ 104:../user/source/stm32f37x_it.c ****     /* Go to infinite loop when Bus Fault exception occurs */
+ 105:../user/source/stm32f37x_it.c ****     while (1)
+ 106:../user/source/stm32f37x_it.c ****     {
+ 107:../user/source/stm32f37x_it.c ****     }
+ 108:../user/source/stm32f37x_it.c **** }
+ 109:../user/source/stm32f37x_it.c **** 
+ 110:../user/source/stm32f37x_it.c **** /**
+ 111:../user/source/stm32f37x_it.c ****   * @brief  This function handles Usage Fault exception.
+ 112:../user/source/stm32f37x_it.c ****   * @param  None
+ 113:../user/source/stm32f37x_it.c ****   * @retval None
+ 114:../user/source/stm32f37x_it.c ****   */
+ 115:../user/source/stm32f37x_it.c **** void UsageFault_Handler(void)
+ 116:../user/source/stm32f37x_it.c **** {
+ 104              		.loc 1 116 0
  105              		.cfi_startproc
  106              		@ Volatile: function does not return.
  107              		@ args = 0, pretend = 0, frame = 0
@@ -232,23 +237,23 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
  119              		.thumb_func
  121              	SVC_Handler:
  122              	.LFB116:
- 112:../user/source/stm32f37x_it.c ****     /* Go to infinite loop when Usage Fault exception occurs */
- 113:../user/source/stm32f37x_it.c ****     while (1)
- 114:../user/source/stm32f37x_it.c ****     {
- 115:../user/source/stm32f37x_it.c ****     }
- 116:../user/source/stm32f37x_it.c **** }
- 117:../user/source/stm32f37x_it.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 5
+ 117:../user/source/stm32f37x_it.c ****     /* Go to infinite loop when Usage Fault exception occurs */
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 5
 
 
- 118:../user/source/stm32f37x_it.c **** /**
- 119:../user/source/stm32f37x_it.c ****   * @brief  This function handles SVCall exception.
- 120:../user/source/stm32f37x_it.c ****   * @param  None
- 121:../user/source/stm32f37x_it.c ****   * @retval None
- 122:../user/source/stm32f37x_it.c ****   */
- 123:../user/source/stm32f37x_it.c **** void SVC_Handler(void)
- 124:../user/source/stm32f37x_it.c **** {
- 123              		.loc 1 124 0
+ 118:../user/source/stm32f37x_it.c ****     while (1)
+ 119:../user/source/stm32f37x_it.c ****     {
+ 120:../user/source/stm32f37x_it.c ****     }
+ 121:../user/source/stm32f37x_it.c **** }
+ 122:../user/source/stm32f37x_it.c **** 
+ 123:../user/source/stm32f37x_it.c **** /**
+ 124:../user/source/stm32f37x_it.c ****   * @brief  This function handles SVCall exception.
+ 125:../user/source/stm32f37x_it.c ****   * @param  None
+ 126:../user/source/stm32f37x_it.c ****   * @retval None
+ 127:../user/source/stm32f37x_it.c ****   */
+ 128:../user/source/stm32f37x_it.c **** void SVC_Handler(void)
+ 129:../user/source/stm32f37x_it.c **** {
+ 123              		.loc 1 129 0
  124              		.cfi_startproc
  125              		@ args = 0, pretend = 0, frame = 0
  126              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -263,16 +268,16 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
  136              		.thumb_func
  138              	DebugMon_Handler:
  139              	.LFB117:
- 125:../user/source/stm32f37x_it.c **** }
- 126:../user/source/stm32f37x_it.c **** 
- 127:../user/source/stm32f37x_it.c **** /**
- 128:../user/source/stm32f37x_it.c ****   * @brief  This function handles Debug Monitor exception.
- 129:../user/source/stm32f37x_it.c ****   * @param  None
- 130:../user/source/stm32f37x_it.c ****   * @retval None
- 131:../user/source/stm32f37x_it.c ****   */
- 132:../user/source/stm32f37x_it.c **** void DebugMon_Handler(void)
- 133:../user/source/stm32f37x_it.c **** {
- 140              		.loc 1 133 0
+ 130:../user/source/stm32f37x_it.c **** }
+ 131:../user/source/stm32f37x_it.c **** 
+ 132:../user/source/stm32f37x_it.c **** /**
+ 133:../user/source/stm32f37x_it.c ****   * @brief  This function handles Debug Monitor exception.
+ 134:../user/source/stm32f37x_it.c ****   * @param  None
+ 135:../user/source/stm32f37x_it.c ****   * @retval None
+ 136:../user/source/stm32f37x_it.c ****   */
+ 137:../user/source/stm32f37x_it.c **** void DebugMon_Handler(void)
+ 138:../user/source/stm32f37x_it.c **** {
+ 140              		.loc 1 138 0
  141              		.cfi_startproc
  142              		@ args = 0, pretend = 0, frame = 0
  143              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -287,20 +292,20 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
  153              		.thumb_func
  155              	PendSV_Handler:
  156              	.LFB118:
- 134:../user/source/stm32f37x_it.c **** }
- 135:../user/source/stm32f37x_it.c **** 
- 136:../user/source/stm32f37x_it.c **** /**
- 137:../user/source/stm32f37x_it.c ****   * @brief  This function handles PendSVC exception.
- 138:../user/source/stm32f37x_it.c ****   * @param  None
- 139:../user/source/stm32f37x_it.c ****   * @retval None
- 140:../user/source/stm32f37x_it.c ****   */
- 141:../user/source/stm32f37x_it.c **** void PendSV_Handler(void)
- 142:../user/source/stm32f37x_it.c **** {
- 157              		.loc 1 142 0
+ 139:../user/source/stm32f37x_it.c **** }
+ 140:../user/source/stm32f37x_it.c **** 
+ 141:../user/source/stm32f37x_it.c **** /**
+ 142:../user/source/stm32f37x_it.c ****   * @brief  This function handles PendSVC exception.
+ 143:../user/source/stm32f37x_it.c ****   * @param  None
+ 144:../user/source/stm32f37x_it.c ****   * @retval None
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 6
+
+
+ 145:../user/source/stm32f37x_it.c ****   */
+ 146:../user/source/stm32f37x_it.c **** void PendSV_Handler(void)
+ 147:../user/source/stm32f37x_it.c **** {
+ 157              		.loc 1 147 0
  158              		.cfi_startproc
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 6
-
-
  159              		@ args = 0, pretend = 0, frame = 0
  160              		@ frame_needed = 0, uses_anonymous_args = 0
  161              		@ link register save eliminated.
@@ -314,743 +319,861 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 1
  170              		.thumb_func
  172              	SysTick_Handler:
  173              	.LFB119:
- 143:../user/source/stm32f37x_it.c **** }
- 144:../user/source/stm32f37x_it.c **** 
- 145:../user/source/stm32f37x_it.c **** /**
- 146:../user/source/stm32f37x_it.c ****   * @brief  This function handles SysTick Handler.
- 147:../user/source/stm32f37x_it.c ****   * @param  None
- 148:../user/source/stm32f37x_it.c ****   * @retval None
- 149:../user/source/stm32f37x_it.c ****   */
- 150:../user/source/stm32f37x_it.c **** void SysTick_Handler(void)
- 151:../user/source/stm32f37x_it.c **** {
- 174              		.loc 1 151 0
+ 148:../user/source/stm32f37x_it.c **** }
+ 149:../user/source/stm32f37x_it.c **** 
+ 150:../user/source/stm32f37x_it.c **** /**
+ 151:../user/source/stm32f37x_it.c ****   * @brief  This function handles SysTick Handler.
+ 152:../user/source/stm32f37x_it.c ****   * @param  None
+ 153:../user/source/stm32f37x_it.c ****   * @retval None
+ 154:../user/source/stm32f37x_it.c ****   */
+ 155:../user/source/stm32f37x_it.c **** void SysTick_Handler(void)
+ 156:../user/source/stm32f37x_it.c **** {
+ 174              		.loc 1 156 0
  175              		.cfi_startproc
  176              		@ args = 0, pretend = 0, frame = 0
  177              		@ frame_needed = 0, uses_anonymous_args = 0
- 178              		.loc 1 151 0
- 179 0000 08B5     		push	{r3, lr}
- 180              	.LCFI0:
- 181              		.cfi_def_cfa_offset 8
- 182              		.cfi_offset 3, -8
- 183              		.cfi_offset 14, -4
- 152:../user/source/stm32f37x_it.c ****     if (Bit_SET == GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13))
- 184              		.loc 1 152 0
- 185 0002 4FF40051 		mov	r1, #8192
- 186 0006 0948     		ldr	r0, .L17
- 187 0008 FFF7FEFF 		bl	GPIO_ReadOutputDataBit
- 188              	.LVL0:
- 189 000c 0128     		cmp	r0, #1
- 190 000e 06D1     		bne	.L14
- 153:../user/source/stm32f37x_it.c ****     {
- 154:../user/source/stm32f37x_it.c ****         GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET); //拉低PC13
- 191              		.loc 1 154 0
- 192 0010 0022     		movs	r2, #0
- 193 0012 4FF40051 		mov	r1, #8192
- 194 0016 0548     		ldr	r0, .L17
- 195 0018 FFF7FEFF 		bl	GPIO_WriteBit
- 196              	.LVL1:
- 197 001c 08BD     		pop	{r3, pc}
- 198              	.L14:
- 155:../user/source/stm32f37x_it.c ****     }
- 156:../user/source/stm32f37x_it.c ****     else
- 157:../user/source/stm32f37x_it.c ****     {
- 158:../user/source/stm32f37x_it.c ****         GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);
- 199              		.loc 1 158 0
- 200 001e 0122     		movs	r2, #1
- 201 0020 4FF40051 		mov	r1, #8192
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 7
+ 178              		@ link register save eliminated.
+ 157:../user/source/stm32f37x_it.c ****     if (TICKS++ & 0x07 == 0)
+ 179              		.loc 1 157 0
+ 180 0000 024A     		ldr	r2, .L14
+ 181 0002 1388     		ldrh	r3, [r2]
+ 182 0004 0133     		adds	r3, r3, #1
+ 183 0006 1380     		strh	r3, [r2]	@ movhi
+ 184 0008 7047     		bx	lr
+ 185              	.L15:
+ 186 000a 00BF     		.align	2
+ 187              	.L14:
+ 188 000c 00000000 		.word	.LANCHOR0
+ 189              		.cfi_endproc
+ 190              	.LFE119:
+ 192              		.section	.text.USART1_IRQHandler,"ax",%progbits
+ 193              		.align	2
+ 194              		.global	USART1_IRQHandler
+ 195              		.thumb
+ 196              		.thumb_func
+ 198              	USART1_IRQHandler:
+ 199              	.LFB120:
+ 158:../user/source/stm32f37x_it.c ****     {
+ 159:../user/source/stm32f37x_it.c ****         if (Bit_SET == GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13))
+ 160:../user/source/stm32f37x_it.c ****         {
+ 161:../user/source/stm32f37x_it.c ****             GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET); //拉低PC13
+ 162:../user/source/stm32f37x_it.c ****         }
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 7
 
 
- 202 0024 0148     		ldr	r0, .L17
- 203 0026 FFF7FEFF 		bl	GPIO_WriteBit
- 204              	.LVL2:
- 205 002a 08BD     		pop	{r3, pc}
- 206              	.L18:
- 207              		.align	2
- 208              	.L17:
- 209 002c 00080048 		.word	1207961600
- 210              		.cfi_endproc
- 211              	.LFE119:
- 213              		.section	.text.USART1_IRQHandler,"ax",%progbits
- 214              		.align	2
- 215              		.global	USART1_IRQHandler
- 216              		.thumb
- 217              		.thumb_func
- 219              	USART1_IRQHandler:
- 220              	.LFB120:
- 159:../user/source/stm32f37x_it.c ****     }
- 160:../user/source/stm32f37x_it.c **** }
- 161:../user/source/stm32f37x_it.c **** 
- 162:../user/source/stm32f37x_it.c **** /******************************************************************************/
- 163:../user/source/stm32f37x_it.c **** /*                 STM32F37x Peripherals Interrupt Handlers                   */
- 164:../user/source/stm32f37x_it.c **** /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
- 165:../user/source/stm32f37x_it.c **** /*  available peripheral interrupt handler's name please refer to the startup */
- 166:../user/source/stm32f37x_it.c **** /*  file (startup_stm32f37x.s).                                            */
- 167:../user/source/stm32f37x_it.c **** /******************************************************************************/
- 168:../user/source/stm32f37x_it.c **** 
- 169:../user/source/stm32f37x_it.c **** /**
- 170:../user/source/stm32f37x_it.c ****   * @brief  This function handles PPP interrupt request.
- 171:../user/source/stm32f37x_it.c ****   * @param  None
- 172:../user/source/stm32f37x_it.c ****   * @retval None
- 173:../user/source/stm32f37x_it.c ****   */
- 174:../user/source/stm32f37x_it.c **** /*void PPP_IRQHandler(void)
- 175:../user/source/stm32f37x_it.c **** {
- 176:../user/source/stm32f37x_it.c **** }*/
- 177:../user/source/stm32f37x_it.c **** 
- 178:../user/source/stm32f37x_it.c **** /********************************************************************
- 179:../user/source/stm32f37x_it.c **** * 功    能：USART1_IRQHandler中断函数
- 180:../user/source/stm32f37x_it.c ****             将串口数据写到Uart1缓存结构体中的数组
- 181:../user/source/stm32f37x_it.c **** * 输    入：None
- 182:../user/source/stm32f37x_it.c **** * 输    出：None
- 183:../user/source/stm32f37x_it.c **** *           
- 184:../user/source/stm32f37x_it.c **** * 编 写 人：王君龙
- 185:../user/source/stm32f37x_it.c **** * 编写日期：2016.6.23
- 186:../user/source/stm32f37x_it.c **** **********************************************************************/
- 187:../user/source/stm32f37x_it.c **** void USART1_IRQHandler(void)
- 188:../user/source/stm32f37x_it.c **** {
- 221              		.loc 1 188 0
- 222              		.cfi_startproc
- 223              		@ args = 0, pretend = 0, frame = 0
- 224              		@ frame_needed = 0, uses_anonymous_args = 0
- 225 0000 38B5     		push	{r3, r4, r5, lr}
- 226              	.LCFI1:
- 227              		.cfi_def_cfa_offset 16
- 228              		.cfi_offset 3, -16
- 229              		.cfi_offset 4, -12
- 230              		.cfi_offset 5, -8
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 8
+ 163:../user/source/stm32f37x_it.c ****         else
+ 164:../user/source/stm32f37x_it.c ****         {
+ 165:../user/source/stm32f37x_it.c ****             GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);
+ 166:../user/source/stm32f37x_it.c ****         }
+ 167:../user/source/stm32f37x_it.c ****     }
+ 168:../user/source/stm32f37x_it.c **** }
+ 169:../user/source/stm32f37x_it.c **** 
+ 170:../user/source/stm32f37x_it.c **** /******************************************************************************/
+ 171:../user/source/stm32f37x_it.c **** /*                 STM32F37x Peripherals Interrupt Handlers                   */
+ 172:../user/source/stm32f37x_it.c **** /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
+ 173:../user/source/stm32f37x_it.c **** /*  available peripheral interrupt handler's name please refer to the startup */
+ 174:../user/source/stm32f37x_it.c **** /*  file (startup_stm32f37x.s).                                            */
+ 175:../user/source/stm32f37x_it.c **** /******************************************************************************/
+ 176:../user/source/stm32f37x_it.c **** 
+ 177:../user/source/stm32f37x_it.c **** /**
+ 178:../user/source/stm32f37x_it.c ****   * @brief  This function handles PPP interrupt request.
+ 179:../user/source/stm32f37x_it.c ****   * @param  None
+ 180:../user/source/stm32f37x_it.c ****   * @retval None
+ 181:../user/source/stm32f37x_it.c ****   */
+ 182:../user/source/stm32f37x_it.c **** /*void PPP_IRQHandler(void)
+ 183:../user/source/stm32f37x_it.c **** {
+ 184:../user/source/stm32f37x_it.c **** }*/
+ 185:../user/source/stm32f37x_it.c **** 
+ 186:../user/source/stm32f37x_it.c **** /********************************************************************
+ 187:../user/source/stm32f37x_it.c **** * 功    能：USART1_IRQHandler中断函数
+ 188:../user/source/stm32f37x_it.c ****             将串口数据写到Uart1缓存结构体中的数组
+ 189:../user/source/stm32f37x_it.c **** * 输    入：None
+ 190:../user/source/stm32f37x_it.c **** * 输    出：None
+ 191:../user/source/stm32f37x_it.c **** *           
+ 192:../user/source/stm32f37x_it.c **** * 编 写 人：王君龙
+ 193:../user/source/stm32f37x_it.c **** * 编写日期：2016.6.23
+ 194:../user/source/stm32f37x_it.c **** **********************************************************************/
+ 195:../user/source/stm32f37x_it.c **** void USART1_IRQHandler(void)
+ 196:../user/source/stm32f37x_it.c **** {
+ 200              		.loc 1 196 0
+ 201              		.cfi_startproc
+ 202              		@ args = 0, pretend = 0, frame = 0
+ 203              		@ frame_needed = 0, uses_anonymous_args = 0
+ 204 0000 70B5     		push	{r4, r5, r6, lr}
+ 205              	.LCFI0:
+ 206              		.cfi_def_cfa_offset 16
+ 207              		.cfi_offset 4, -16
+ 208              		.cfi_offset 5, -12
+ 209              		.cfi_offset 6, -8
+ 210              		.cfi_offset 14, -4
+ 197:../user/source/stm32f37x_it.c ****     if (USART_GetFlagStatus(pUartZD->handler, USART_FLAG_ORE))
+ 211              		.loc 1 197 0
+ 212 0002 394B     		ldr	r3, .L22
+ 213 0004 1B68     		ldr	r3, [r3]
+ 214 0006 0821     		movs	r1, #8
+ 215 0008 1868     		ldr	r0, [r3]
+ 216 000a FFF7FEFF 		bl	USART_GetFlagStatus
+ 217              	.LVL0:
+ 218 000e 28B1     		cbz	r0, .L17
+ 198:../user/source/stm32f37x_it.c ****     {
+ 199:../user/source/stm32f37x_it.c ****         USART_ClearFlag(pUartZD->handler, USART_FLAG_ORE);
+ 219              		.loc 1 199 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 8
 
 
- 231              		.cfi_offset 14, -4
- 189:../user/source/stm32f37x_it.c ****     if (USART_GetFlagStatus(USART1, USART_FLAG_ORE))
- 232              		.loc 1 189 0
- 233 0002 0821     		movs	r1, #8
- 234 0004 2848     		ldr	r0, .L24
- 235 0006 FFF7FEFF 		bl	USART_GetFlagStatus
- 236              	.LVL3:
- 237 000a 18B1     		cbz	r0, .L20
- 190:../user/source/stm32f37x_it.c ****     {
- 191:../user/source/stm32f37x_it.c ****         USART_ClearFlag(USART1, USART_FLAG_ORE);
- 238              		.loc 1 191 0
- 239 000c 0821     		movs	r1, #8
- 240 000e 2648     		ldr	r0, .L24
- 241 0010 FFF7FEFF 		bl	USART_ClearFlag
- 242              	.LVL4:
- 243              	.L20:
- 192:../user/source/stm32f37x_it.c ****     }
- 193:../user/source/stm32f37x_it.c **** 
- 194:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
- 244              		.loc 1 194 0
- 245 0014 2549     		ldr	r1, .L24+4
- 246 0016 2448     		ldr	r0, .L24
- 247 0018 FFF7FEFF 		bl	USART_GetITStatus
- 248              	.LVL5:
- 249 001c C8B1     		cbz	r0, .L21
- 195:../user/source/stm32f37x_it.c ****     {
- 196:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsFull(&ucDrv_Buf_Uart1_Rcv) != true) //if串口1接收缓存区不满
- 250              		.loc 1 196 0
- 251 001e 2448     		ldr	r0, .L24+8
- 252 0020 FFF7FEFF 		bl	blDrv_Buf_IsFull
- 253              	.LVL6:
- 254 0024 A8B9     		cbnz	r0, .L21
- 197:../user/source/stm32f37x_it.c ****         {
- 198:../user/source/stm32f37x_it.c ****             ucDrv_Buf_Uart1_Rcv.ucBuf[ucDrv_Buf_Uart1_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(US
- 255              		.loc 1 198 0
- 256 0026 224C     		ldr	r4, .L24+8
- 257 0028 B4F82C51 		ldrh	r5, [r4, #300]
- 258 002c 1E48     		ldr	r0, .L24
- 259 002e FFF7FEFF 		bl	USART_ReceiveData
- 260              	.LVL7:
- 261 0032 6055     		strb	r0, [r4, r5]
- 199:../user/source/stm32f37x_it.c ****             ucDrv_Buf_Uart1_Rcv.WR_Index = (ucDrv_Buf_Uart1_Rcv.WR_Index + 1) % DRV_BUF_SIZE;
- 262              		.loc 1 199 0
- 263 0034 B4F82C21 		ldrh	r2, [r4, #300]
- 264 0038 0132     		adds	r2, r2, #1
- 265 003a 1E4B     		ldr	r3, .L24+12
- 266 003c 83FB0231 		smull	r3, r1, r3, r2
- 267 0040 D317     		asrs	r3, r2, #31
- 268 0042 C3EB6113 		rsb	r3, r3, r1, asr #5
- 269 0046 4FF49671 		mov	r1, #300
- 270 004a 01FB1323 		mls	r3, r1, r3, r2
- 271 004e A4F82C31 		strh	r3, [r4, #300]	@ movhi
- 272              	.L21:
- 200:../user/source/stm32f37x_it.c ****         }
- 201:../user/source/stm32f37x_it.c ****     };
- 202:../user/source/stm32f37x_it.c **** 
- 203:../user/source/stm32f37x_it.c ****     //从串口1的发送缓存向外发一个字节
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 9
+ 220 0010 354B     		ldr	r3, .L22
+ 221 0012 1B68     		ldr	r3, [r3]
+ 222 0014 0821     		movs	r1, #8
+ 223 0016 1868     		ldr	r0, [r3]
+ 224 0018 FFF7FEFF 		bl	USART_ClearFlag
+ 225              	.LVL1:
+ 226              	.L17:
+ 200:../user/source/stm32f37x_it.c ****     }
+ 201:../user/source/stm32f37x_it.c **** 
+ 202:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(pUartZD->handler, USART_IT_RXNE) != RESET)
+ 227              		.loc 1 202 0
+ 228 001c 324B     		ldr	r3, .L22
+ 229 001e 1B68     		ldr	r3, [r3]
+ 230 0020 3249     		ldr	r1, .L22+4
+ 231 0022 1868     		ldr	r0, [r3]
+ 232 0024 FFF7FEFF 		bl	USART_GetITStatus
+ 233              	.LVL2:
+ 234 0028 E8B1     		cbz	r0, .L18
+ 203:../user/source/stm32f37x_it.c ****     {
+ 204:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsFull(pUartZD->pRsvbuf) != true) //if串口1接收缓存区不满
+ 235              		.loc 1 204 0
+ 236 002a 2F4B     		ldr	r3, .L22
+ 237 002c 1B68     		ldr	r3, [r3]
+ 238 002e 5868     		ldr	r0, [r3, #4]
+ 239 0030 FFF7FEFF 		bl	blDrv_Buf_IsFull
+ 240              	.LVL3:
+ 241 0034 B8B9     		cbnz	r0, .L18
+ 205:../user/source/stm32f37x_it.c ****         {
+ 206:../user/source/stm32f37x_it.c ****             pUartZD->pRsvbuf->data[pUartZD->pRsvbuf->wr] = (uint8_t)USART_ReceiveData(pUartZD->hand
+ 242              		.loc 1 206 0
+ 243 0036 2C4C     		ldr	r4, .L22
+ 244 0038 2368     		ldr	r3, [r4]
+ 245 003a 5D68     		ldr	r5, [r3, #4]
+ 246 003c D5F8EC63 		ldr	r6, [r5, #1004]
+ 247 0040 1868     		ldr	r0, [r3]
+ 248 0042 FFF7FEFF 		bl	USART_ReceiveData
+ 249              	.LVL4:
+ 250 0046 A855     		strb	r0, [r5, r6]
+ 207:../user/source/stm32f37x_it.c ****             //ucDrv_Buf_Uart1_Rcv.ucBuf[ucDrv_Buf_Uart1_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(
+ 208:../user/source/stm32f37x_it.c ****             //ucDrv_Buf_Uart1_Rcv.WR_Index = (ucDrv_Buf_Uart1_Rcv.WR_Index + 1) % DRV_BUF_SIZE;
+ 209:../user/source/stm32f37x_it.c ****             pUartZD->pRsvbuf->wr = (pUartZD->pRsvbuf->wr + 1) % DRV_BUF_SIZE;
+ 251              		.loc 1 209 0
+ 252 0048 2368     		ldr	r3, [r4]
+ 253 004a 5968     		ldr	r1, [r3, #4]
+ 254 004c D1F8EC23 		ldr	r2, [r1, #1004]
+ 255 0050 0132     		adds	r2, r2, #1
+ 256 0052 274B     		ldr	r3, .L22+8
+ 257 0054 A3FB0203 		umull	r0, r3, r3, r2
+ 258 0058 9B09     		lsrs	r3, r3, #6
+ 259 005a 4FF47A70 		mov	r0, #1000
+ 260 005e 00FB1323 		mls	r3, r0, r3, r2
+ 261 0062 C1F8EC33 		str	r3, [r1, #1004]
+ 262              	.L18:
+ 210:../user/source/stm32f37x_it.c ****         }
+ 211:../user/source/stm32f37x_it.c ****     };
+ 212:../user/source/stm32f37x_it.c **** 
+ 213:../user/source/stm32f37x_it.c ****     //从串口1的发送缓存向外发一个字节
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 9
 
 
- 204:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
- 273              		.loc 1 204 0
- 274 0052 1949     		ldr	r1, .L24+16
- 275 0054 1448     		ldr	r0, .L24
- 276 0056 FFF7FEFF 		bl	USART_GetITStatus
- 277              	.LVL8:
- 278 005a 18B3     		cbz	r0, .L19
- 205:../user/source/stm32f37x_it.c ****     {
- 206:../user/source/stm32f37x_it.c ****         USART_ClearITPendingBit(USART1, USART_IT_TXE);
- 279              		.loc 1 206 0
- 280 005c 124D     		ldr	r5, .L24
- 281 005e 1649     		ldr	r1, .L24+16
- 282 0060 2846     		mov	r0, r5
- 283 0062 FFF7FEFF 		bl	USART_ClearITPendingBit
- 284              	.LVL9:
- 207:../user/source/stm32f37x_it.c ****         USART_SendData(USART1, (uint16_t)ucDrv_Buf_Uart1_Snd.ucBuf[ucDrv_Buf_Uart1_Snd.RD_Index]);
- 285              		.loc 1 207 0
- 286 0066 154C     		ldr	r4, .L24+20
- 287 0068 B4F82E31 		ldrh	r3, [r4, #302]
- 288 006c E15C     		ldrb	r1, [r4, r3]	@ zero_extendqisi2
- 289 006e 2846     		mov	r0, r5
- 290 0070 FFF7FEFF 		bl	USART_SendData
- 291              	.LVL10:
- 208:../user/source/stm32f37x_it.c ****         ucDrv_Buf_Uart1_Snd.RD_Index = (ucDrv_Buf_Uart1_Snd.RD_Index + 1) % DRV_BUF_SIZE;
- 292              		.loc 1 208 0
- 293 0074 B4F82E21 		ldrh	r2, [r4, #302]
- 294 0078 0132     		adds	r2, r2, #1
- 295 007a 0E4B     		ldr	r3, .L24+12
- 296 007c 83FB0231 		smull	r3, r1, r3, r2
- 297 0080 D317     		asrs	r3, r2, #31
- 298 0082 C3EB6113 		rsb	r3, r3, r1, asr #5
- 299 0086 4FF49671 		mov	r1, #300
- 300 008a 01FB1323 		mls	r3, r1, r3, r2
- 301 008e A4F82E31 		strh	r3, [r4, #302]	@ movhi
- 209:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart1_Snd) == true)
- 302              		.loc 1 209 0
- 303 0092 2046     		mov	r0, r4
- 304 0094 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 305              	.LVL11:
- 306 0098 20B1     		cbz	r0, .L19
- 210:../user/source/stm32f37x_it.c ****         {
- 211:../user/source/stm32f37x_it.c ****             USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
- 307              		.loc 1 211 0
- 308 009a 0022     		movs	r2, #0
- 309 009c 0649     		ldr	r1, .L24+16
- 310 009e 2846     		mov	r0, r5
- 311 00a0 FFF7FEFF 		bl	USART_ITConfig
- 312              	.LVL12:
- 313              	.L19:
- 314 00a4 38BD     		pop	{r3, r4, r5, pc}
- 315              	.L25:
- 316 00a6 00BF     		.align	2
- 317              	.L24:
- 318 00a8 00380140 		.word	1073821696
- 319 00ac 05010500 		.word	327941
- 320 00b0 00000000 		.word	ucDrv_Buf_Uart1_Rcv
- 321 00b4 B5814E1B 		.word	458129845
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 10
+ 214:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(pUartZD->handler, USART_IT_TXE) != RESET)
+ 263              		.loc 1 214 0
+ 264 0066 204B     		ldr	r3, .L22
+ 265 0068 1B68     		ldr	r3, [r3]
+ 266 006a 2249     		ldr	r1, .L22+12
+ 267 006c 1868     		ldr	r0, [r3]
+ 268 006e FFF7FEFF 		bl	USART_GetITStatus
+ 269              	.LVL5:
+ 270 0072 38B3     		cbz	r0, .L19
+ 215:../user/source/stm32f37x_it.c ****     {
+ 216:../user/source/stm32f37x_it.c ****         USART_ClearITPendingBit(pUartZD->handler, USART_IT_TXE);
+ 271              		.loc 1 216 0
+ 272 0074 1C4C     		ldr	r4, .L22
+ 273 0076 2368     		ldr	r3, [r4]
+ 274 0078 1E49     		ldr	r1, .L22+12
+ 275 007a 1868     		ldr	r0, [r3]
+ 276 007c FFF7FEFF 		bl	USART_ClearITPendingBit
+ 277              	.LVL6:
+ 217:../user/source/stm32f37x_it.c ****         //USART_SendData(pUartZD->handler, (uint16_t)ucDrv_Buf_Uart1_Snd.ucBuf[ucDrv_Buf_Uart1_Snd.
+ 218:../user/source/stm32f37x_it.c ****         USART_SendData(pUartZD->handler, (uint16_t)pUartZD->pSndbuf->data[pUartZD->pSndbuf->rd]);
+ 278              		.loc 1 218 0
+ 279 0080 2368     		ldr	r3, [r4]
+ 280 0082 9A68     		ldr	r2, [r3, #8]
+ 281 0084 D2F8E813 		ldr	r1, [r2, #1000]
+ 282 0088 515C     		ldrb	r1, [r2, r1]	@ zero_extendqisi2
+ 283 008a 1868     		ldr	r0, [r3]
+ 284 008c FFF7FEFF 		bl	USART_SendData
+ 285              	.LVL7:
+ 219:../user/source/stm32f37x_it.c ****         //ucDrv_Buf_Uart1_Snd.RD_Index = (ucDrv_Buf_Uart1_Snd.RD_Index + 1) % DRV_BUF_SIZE;
+ 220:../user/source/stm32f37x_it.c ****         pUartZD->pSndbuf->rd = (pUartZD->pSndbuf->rd + 1) % DRV_BUF_SIZE;
+ 286              		.loc 1 220 0
+ 287 0090 2168     		ldr	r1, [r4]
+ 288 0092 8868     		ldr	r0, [r1, #8]
+ 289 0094 D0F8E823 		ldr	r2, [r0, #1000]
+ 290 0098 0132     		adds	r2, r2, #1
+ 291 009a 154B     		ldr	r3, .L22+8
+ 292 009c A3FB0243 		umull	r4, r3, r3, r2
+ 293 00a0 9B09     		lsrs	r3, r3, #6
+ 294 00a2 4FF47A74 		mov	r4, #1000
+ 295 00a6 04FB1323 		mls	r3, r4, r3, r2
+ 296 00aa C0F8E833 		str	r3, [r0, #1000]
+ 221:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsEmpty(pUartZD->pSndbuf) == true)
+ 297              		.loc 1 221 0
+ 298 00ae 8868     		ldr	r0, [r1, #8]
+ 299 00b0 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 300              	.LVL8:
+ 301 00b4 30B1     		cbz	r0, .L19
+ 222:../user/source/stm32f37x_it.c ****         {
+ 223:../user/source/stm32f37x_it.c ****             USART_ITConfig(pUartZD->handler, USART_IT_TXE, DISABLE);
+ 302              		.loc 1 223 0
+ 303 00b6 0C4B     		ldr	r3, .L22
+ 304 00b8 1B68     		ldr	r3, [r3]
+ 305 00ba 0022     		movs	r2, #0
+ 306 00bc 0D49     		ldr	r1, .L22+12
+ 307 00be 1868     		ldr	r0, [r3]
+ 308 00c0 FFF7FEFF 		bl	USART_ITConfig
+ 309              	.LVL9:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 10
 
 
- 322 00b8 07010700 		.word	459015
- 323 00bc 00000000 		.word	ucDrv_Buf_Uart1_Snd
- 324              		.cfi_endproc
- 325              	.LFE120:
- 327              		.section	.text.USART2_IRQHandler,"ax",%progbits
- 328              		.align	2
- 329              		.global	USART2_IRQHandler
- 330              		.thumb
- 331              		.thumb_func
- 333              	USART2_IRQHandler:
- 334              	.LFB121:
- 212:../user/source/stm32f37x_it.c ****         }
- 213:../user/source/stm32f37x_it.c ****     }
- 214:../user/source/stm32f37x_it.c **** }
- 215:../user/source/stm32f37x_it.c **** 
- 216:../user/source/stm32f37x_it.c **** /********************************************************************
- 217:../user/source/stm32f37x_it.c **** * 功    能：USART2_IRQHandler中断函数
- 218:../user/source/stm32f37x_it.c ****             将串口数据读取到Uart2缓存结构体中的数组
- 219:../user/source/stm32f37x_it.c **** * 输    入：None
- 220:../user/source/stm32f37x_it.c **** * 输    出：None
- 221:../user/source/stm32f37x_it.c **** *           
- 222:../user/source/stm32f37x_it.c **** * 编 写 人：王君龙
- 223:../user/source/stm32f37x_it.c **** * 编写日期：2018.4.17
- 224:../user/source/stm32f37x_it.c **** **********************************************************************/
- 225:../user/source/stm32f37x_it.c **** void USART2_IRQHandler(void)
- 226:../user/source/stm32f37x_it.c **** {
- 335              		.loc 1 226 0
- 336              		.cfi_startproc
- 337              		@ args = 0, pretend = 0, frame = 0
- 338              		@ frame_needed = 0, uses_anonymous_args = 0
- 339 0000 38B5     		push	{r3, r4, r5, lr}
- 340              	.LCFI2:
- 341              		.cfi_def_cfa_offset 16
- 342              		.cfi_offset 3, -16
- 343              		.cfi_offset 4, -12
- 344              		.cfi_offset 5, -8
- 345              		.cfi_offset 14, -4
- 227:../user/source/stm32f37x_it.c **** #ifdef ENABLE_INFR
- 228:../user/source/stm32f37x_it.c ****     if (USART_GetFlagStatus(USART2, USART_FLAG_ORE) == SET)
- 346              		.loc 1 228 0
- 347 0002 0821     		movs	r1, #8
- 348 0004 3048     		ldr	r0, .L32
- 349 0006 FFF7FEFF 		bl	USART_GetFlagStatus
- 350              	.LVL13:
- 351 000a 0128     		cmp	r0, #1
- 352 000c 03D1     		bne	.L27
- 229:../user/source/stm32f37x_it.c ****         USART_ClearFlag(USART2, USART_FLAG_ORE);
- 353              		.loc 1 229 0
- 354 000e 0821     		movs	r1, #8
- 355 0010 2D48     		ldr	r0, .L32
- 356 0012 FFF7FEFF 		bl	USART_ClearFlag
- 357              	.LVL14:
- 358              	.L27:
- 230:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
- 359              		.loc 1 230 0
- 360 0016 2D49     		ldr	r1, .L32+4
- 361 0018 2B48     		ldr	r0, .L32
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 11
+ 310              	.L19:
+ 224:../user/source/stm32f37x_it.c ****         }
+ 225:../user/source/stm32f37x_it.c ****     }
+ 226:../user/source/stm32f37x_it.c ****     /*接收超时一个字节时间内未收到数据，大约1ms*/
+ 227:../user/source/stm32f37x_it.c ****     /*隐患：DLT645规约规定字节超时时间为500ms*/
+ 228:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(pUartZD->handler, USART_IT_IDLE) != RESET)
+ 311              		.loc 1 228 0
+ 312 00c4 084B     		ldr	r3, .L22
+ 313 00c6 1B68     		ldr	r3, [r3]
+ 314 00c8 0B49     		ldr	r1, .L22+16
+ 315 00ca 1868     		ldr	r0, [r3]
+ 316 00cc FFF7FEFF 		bl	USART_GetITStatus
+ 317              	.LVL10:
+ 318 00d0 40B1     		cbz	r0, .L16
+ 229:../user/source/stm32f37x_it.c ****     {
+ 230:../user/source/stm32f37x_it.c ****         USART_ClearITPendingBit(pUartZD->handler, USART_IT_IDLE);
+ 319              		.loc 1 230 0
+ 320 00d2 054B     		ldr	r3, .L22
+ 321 00d4 1B68     		ldr	r3, [r3]
+ 322 00d6 0849     		ldr	r1, .L22+16
+ 323 00d8 1868     		ldr	r0, [r3]
+ 324 00da FFF7FEFF 		bl	USART_ClearITPendingBit
+ 325              	.LVL11:
+ 231:../user/source/stm32f37x_it.c ****         FLAG_UartZD_HasData = true;
+ 326              		.loc 1 231 0
+ 327 00de 0122     		movs	r2, #1
+ 328 00e0 064B     		ldr	r3, .L22+20
+ 329 00e2 1A70     		strb	r2, [r3]
+ 330              	.L16:
+ 331 00e4 70BD     		pop	{r4, r5, r6, pc}
+ 332              	.L23:
+ 333 00e6 00BF     		.align	2
+ 334              	.L22:
+ 335 00e8 00000000 		.word	pUartZD
+ 336 00ec 05010500 		.word	327941
+ 337 00f0 D34D6210 		.word	274877907
+ 338 00f4 07010700 		.word	459015
+ 339 00f8 04010400 		.word	262404
+ 340 00fc 00000000 		.word	FLAG_UartZD_HasData
+ 341              		.cfi_endproc
+ 342              	.LFE120:
+ 344              		.section	.text.USART2_IRQHandler,"ax",%progbits
+ 345              		.align	2
+ 346              		.global	USART2_IRQHandler
+ 347              		.thumb
+ 348              		.thumb_func
+ 350              	USART2_IRQHandler:
+ 351              	.LFB121:
+ 232:../user/source/stm32f37x_it.c ****     }
+ 233:../user/source/stm32f37x_it.c **** }
+ 234:../user/source/stm32f37x_it.c **** 
+ 235:../user/source/stm32f37x_it.c **** /********************************************************************
+ 236:../user/source/stm32f37x_it.c **** * 功    能：USART2_IRQHandler中断函数
+ 237:../user/source/stm32f37x_it.c ****             将串口数据读取到Uart2缓存结构体中的数组
+ 238:../user/source/stm32f37x_it.c **** * 输    入：None
+ 239:../user/source/stm32f37x_it.c **** * 输    出：None
+ 240:../user/source/stm32f37x_it.c **** *           
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 11
 
 
- 362 001a FFF7FEFF 		bl	USART_GetITStatus
- 363              	.LVL15:
- 364 001e E8B1     		cbz	r0, .L28
- 231:../user/source/stm32f37x_it.c ****     {
- 232:../user/source/stm32f37x_it.c ****         USART_ClearITPendingBit(USART2, USART_IT_RXNE);
- 365              		.loc 1 232 0
- 366 0020 2A49     		ldr	r1, .L32+4
- 367 0022 2948     		ldr	r0, .L32
- 368 0024 FFF7FEFF 		bl	USART_ClearITPendingBit
- 369              	.LVL16:
- 233:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsFull(&ucDrv_Buf_Uart2_Rcv) != true) //if串口2接收缓存区不满
- 370              		.loc 1 233 0
- 371 0028 2948     		ldr	r0, .L32+8
- 372 002a FFF7FEFF 		bl	blDrv_Buf_IsFull
- 373              	.LVL17:
- 374 002e A8B9     		cbnz	r0, .L28
- 234:../user/source/stm32f37x_it.c ****         {
- 235:../user/source/stm32f37x_it.c ****             ucDrv_Buf_Uart2_Rcv.ucBuf[ucDrv_Buf_Uart2_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(US
- 375              		.loc 1 235 0
- 376 0030 274C     		ldr	r4, .L32+8
- 377 0032 B4F82C51 		ldrh	r5, [r4, #300]
- 378 0036 2448     		ldr	r0, .L32
- 379 0038 FFF7FEFF 		bl	USART_ReceiveData
- 380              	.LVL18:
- 381 003c 6055     		strb	r0, [r4, r5]
- 236:../user/source/stm32f37x_it.c ****             ucDrv_Buf_Uart2_Rcv.WR_Index = (ucDrv_Buf_Uart2_Rcv.WR_Index + 1) % DRV_BUF_SIZE;
- 382              		.loc 1 236 0
- 383 003e B4F82C21 		ldrh	r2, [r4, #300]
- 384 0042 0132     		adds	r2, r2, #1
- 385 0044 234B     		ldr	r3, .L32+12
- 386 0046 83FB0231 		smull	r3, r1, r3, r2
- 387 004a D317     		asrs	r3, r2, #31
- 388 004c C3EB6113 		rsb	r3, r3, r1, asr #5
- 389 0050 4FF49671 		mov	r1, #300
- 390 0054 01FB1323 		mls	r3, r1, r3, r2
- 391 0058 A4F82C31 		strh	r3, [r4, #300]	@ movhi
- 392              	.L28:
- 237:../user/source/stm32f37x_it.c ****         }
- 238:../user/source/stm32f37x_it.c ****     };
- 239:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(USART2, USART_IT_TXE) != RESET)
- 393              		.loc 1 239 0
- 394 005c 1E49     		ldr	r1, .L32+16
- 395 005e 1A48     		ldr	r0, .L32
- 396 0060 FFF7FEFF 		bl	USART_GetITStatus
- 397              	.LVL19:
- 398 0064 70B3     		cbz	r0, .L26
- 240:../user/source/stm32f37x_it.c ****     {
- 241:../user/source/stm32f37x_it.c ****         USART_ClearITPendingBit(USART2, USART_IT_TXE);
- 399              		.loc 1 241 0
- 400 0066 184D     		ldr	r5, .L32
- 401 0068 1B49     		ldr	r1, .L32+16
- 402 006a 2846     		mov	r0, r5
- 403 006c FFF7FEFF 		bl	USART_ClearITPendingBit
- 404              	.LVL20:
- 242:../user/source/stm32f37x_it.c ****         USART_SendData(USART2, (uint16_t)ucDrv_Buf_Uart2_Snd.ucBuf[ucDrv_Buf_Uart2_Snd.RD_Index]);
- 405              		.loc 1 242 0
- 406 0070 1A4C     		ldr	r4, .L32+20
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 12
+ 241:../user/source/stm32f37x_it.c **** * 编 写 人：王君龙
+ 242:../user/source/stm32f37x_it.c **** * 编写日期：2018.4.17
+ 243:../user/source/stm32f37x_it.c **** **********************************************************************/
+ 244:../user/source/stm32f37x_it.c **** void USART2_IRQHandler(void)
+ 245:../user/source/stm32f37x_it.c **** {
+ 352              		.loc 1 245 0
+ 353              		.cfi_startproc
+ 354              		@ args = 0, pretend = 0, frame = 0
+ 355              		@ frame_needed = 0, uses_anonymous_args = 0
+ 356 0000 70B5     		push	{r4, r5, r6, lr}
+ 357              	.LCFI1:
+ 358              		.cfi_def_cfa_offset 16
+ 359              		.cfi_offset 4, -16
+ 360              		.cfi_offset 5, -12
+ 361              		.cfi_offset 6, -8
+ 362              		.cfi_offset 14, -4
+ 246:../user/source/stm32f37x_it.c **** #ifdef ENABLE_INFR
+ 247:../user/source/stm32f37x_it.c ****     if (USART_GetFlagStatus(pUartIR->handler, USART_FLAG_ORE) == SET)
+ 363              		.loc 1 247 0
+ 364 0002 3B4B     		ldr	r3, .L30
+ 365 0004 1B68     		ldr	r3, [r3]
+ 366 0006 0821     		movs	r1, #8
+ 367 0008 1868     		ldr	r0, [r3]
+ 368 000a FFF7FEFF 		bl	USART_GetFlagStatus
+ 369              	.LVL12:
+ 370 000e 0128     		cmp	r0, #1
+ 371 0010 05D1     		bne	.L25
+ 248:../user/source/stm32f37x_it.c ****         USART_ClearFlag(pUartIR->handler, USART_FLAG_ORE);
+ 372              		.loc 1 248 0
+ 373 0012 374B     		ldr	r3, .L30
+ 374 0014 1B68     		ldr	r3, [r3]
+ 375 0016 0821     		movs	r1, #8
+ 376 0018 1868     		ldr	r0, [r3]
+ 377 001a FFF7FEFF 		bl	USART_ClearFlag
+ 378              	.LVL13:
+ 379              	.L25:
+ 249:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(pUartIR->handler, USART_IT_RXNE) != RESET)
+ 380              		.loc 1 249 0
+ 381 001e 344B     		ldr	r3, .L30
+ 382 0020 1B68     		ldr	r3, [r3]
+ 383 0022 3449     		ldr	r1, .L30+4
+ 384 0024 1868     		ldr	r0, [r3]
+ 385 0026 FFF7FEFF 		bl	USART_GetITStatus
+ 386              	.LVL14:
+ 387 002a 08B3     		cbz	r0, .L26
+ 250:../user/source/stm32f37x_it.c ****     {
+ 251:../user/source/stm32f37x_it.c ****         USART_ClearITPendingBit(pUartIR->handler, USART_IT_RXNE);
+ 388              		.loc 1 251 0
+ 389 002c 304C     		ldr	r4, .L30
+ 390 002e 2368     		ldr	r3, [r4]
+ 391 0030 3049     		ldr	r1, .L30+4
+ 392 0032 1868     		ldr	r0, [r3]
+ 393 0034 FFF7FEFF 		bl	USART_ClearITPendingBit
+ 394              	.LVL15:
+ 252:../user/source/stm32f37x_it.c ****         //if (blDrv_Buf_IsFull(&ucDrv_Buf_Uart2_Rcv) != true) //if串口2接收缓存区不满
+ 253:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsFull(pUartIR->pRsvbuf) != true) //if串口2接收缓存区不满
+ 395              		.loc 1 253 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 12
 
 
- 407 0072 B4F82E31 		ldrh	r3, [r4, #302]
- 408 0076 E15C     		ldrb	r1, [r4, r3]	@ zero_extendqisi2
- 409 0078 2846     		mov	r0, r5
- 410 007a FFF7FEFF 		bl	USART_SendData
- 411              	.LVL21:
- 243:../user/source/stm32f37x_it.c ****         ucDrv_Buf_Uart2_Snd.RD_Index = (ucDrv_Buf_Uart2_Snd.RD_Index + 1) % DRV_BUF_SIZE;
- 412              		.loc 1 243 0
- 413 007e B4F82E21 		ldrh	r2, [r4, #302]
- 414 0082 0132     		adds	r2, r2, #1
- 415 0084 134B     		ldr	r3, .L32+12
- 416 0086 83FB0231 		smull	r3, r1, r3, r2
- 417 008a D317     		asrs	r3, r2, #31
- 418 008c C3EB6113 		rsb	r3, r3, r1, asr #5
- 419 0090 4FF49671 		mov	r1, #300
- 420 0094 01FB1323 		mls	r3, r1, r3, r2
- 421 0098 A4F82E31 		strh	r3, [r4, #302]	@ movhi
- 244:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart2_Snd) == true)
- 422              		.loc 1 244 0
- 423 009c 2046     		mov	r0, r4
- 424 009e FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 425              	.LVL22:
- 426 00a2 78B1     		cbz	r0, .L26
- 245:../user/source/stm32f37x_it.c ****         {
- 246:../user/source/stm32f37x_it.c ****             USART_ITConfig(USART2, USART_IT_TXE, DISABLE);
- 427              		.loc 1 246 0
- 428 00a4 0022     		movs	r2, #0
- 429 00a6 0C49     		ldr	r1, .L32+16
- 430 00a8 2846     		mov	r0, r5
- 431 00aa FFF7FEFF 		bl	USART_ITConfig
- 432              	.LVL23:
- 433              	.L30:
- 247:../user/source/stm32f37x_it.c ****             //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Disable);
- 248:../user/source/stm32f37x_it.c ****             while (RESET == USART_GetFlagStatus(USART2, USART_FLAG_TC))
- 434              		.loc 1 248 0 discriminator 1
- 435 00ae 4021     		movs	r1, #64
- 436 00b0 0548     		ldr	r0, .L32
- 437 00b2 FFF7FEFF 		bl	USART_GetFlagStatus
- 438              	.LVL24:
- 439 00b6 0028     		cmp	r0, #0
- 440 00b8 F9D0     		beq	.L30
- 249:../user/source/stm32f37x_it.c ****             {
- 250:../user/source/stm32f37x_it.c ****             }
- 251:../user/source/stm32f37x_it.c ****             USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
- 441              		.loc 1 251 0
- 442 00ba 0122     		movs	r2, #1
- 443 00bc 0349     		ldr	r1, .L32+4
- 444 00be 0248     		ldr	r0, .L32
- 445 00c0 FFF7FEFF 		bl	USART_ITConfig
- 446              	.LVL25:
- 447              	.L26:
- 448 00c4 38BD     		pop	{r3, r4, r5, pc}
- 449              	.L33:
- 450 00c6 00BF     		.align	2
- 451              	.L32:
- 452 00c8 00440040 		.word	1073759232
- 453 00cc 05010500 		.word	327941
- 454 00d0 00000000 		.word	ucDrv_Buf_Uart2_Rcv
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 13
+ 396 0038 2368     		ldr	r3, [r4]
+ 397 003a 5868     		ldr	r0, [r3, #4]
+ 398 003c FFF7FEFF 		bl	blDrv_Buf_IsFull
+ 399              	.LVL16:
+ 400 0040 B0B9     		cbnz	r0, .L26
+ 254:../user/source/stm32f37x_it.c ****         {
+ 255:../user/source/stm32f37x_it.c ****             //ucDrv_Buf_Uart2_Rcv.ucBuf[ucDrv_Buf_Uart2_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(
+ 256:../user/source/stm32f37x_it.c ****             pUartIR->pRsvbuf->data[pUartIR->pRsvbuf->wr] = (uint8_t)USART_ReceiveData(pUartIR->hand
+ 401              		.loc 1 256 0
+ 402 0042 2368     		ldr	r3, [r4]
+ 403 0044 5D68     		ldr	r5, [r3, #4]
+ 404 0046 D5F8EC63 		ldr	r6, [r5, #1004]
+ 405 004a 1868     		ldr	r0, [r3]
+ 406 004c FFF7FEFF 		bl	USART_ReceiveData
+ 407              	.LVL17:
+ 408 0050 A855     		strb	r0, [r5, r6]
+ 257:../user/source/stm32f37x_it.c ****             //ucDrv_Buf_Uart2_Rcv.WR_Index = (ucDrv_Buf_Uart2_Rcv.WR_Index + 1) % DRV_BUF_SIZE;
+ 258:../user/source/stm32f37x_it.c ****             pUartIR->pRsvbuf->wr = (pUartIR->pRsvbuf->wr + 1) % DRV_BUF_SIZE;
+ 409              		.loc 1 258 0
+ 410 0052 2368     		ldr	r3, [r4]
+ 411 0054 5968     		ldr	r1, [r3, #4]
+ 412 0056 D1F8EC23 		ldr	r2, [r1, #1004]
+ 413 005a 0132     		adds	r2, r2, #1
+ 414 005c 264B     		ldr	r3, .L30+8
+ 415 005e A3FB0203 		umull	r0, r3, r3, r2
+ 416 0062 9B09     		lsrs	r3, r3, #6
+ 417 0064 4FF47A70 		mov	r0, #1000
+ 418 0068 00FB1323 		mls	r3, r0, r3, r2
+ 419 006c C1F8EC33 		str	r3, [r1, #1004]
+ 420              	.L26:
+ 259:../user/source/stm32f37x_it.c ****         }
+ 260:../user/source/stm32f37x_it.c ****     };
+ 261:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(pUartIR->handler, USART_IT_TXE) != RESET)
+ 421              		.loc 1 261 0
+ 422 0070 1F4B     		ldr	r3, .L30
+ 423 0072 1B68     		ldr	r3, [r3]
+ 424 0074 2149     		ldr	r1, .L30+12
+ 425 0076 1868     		ldr	r0, [r3]
+ 426 0078 FFF7FEFF 		bl	USART_GetITStatus
+ 427              	.LVL18:
+ 428 007c 0028     		cmp	r0, #0
+ 429 007e 36D0     		beq	.L24
+ 262:../user/source/stm32f37x_it.c ****     {
+ 263:../user/source/stm32f37x_it.c ****         USART_ClearITPendingBit(pUartIR->handler, USART_IT_TXE);
+ 430              		.loc 1 263 0
+ 431 0080 1B4C     		ldr	r4, .L30
+ 432 0082 2368     		ldr	r3, [r4]
+ 433 0084 1D49     		ldr	r1, .L30+12
+ 434 0086 1868     		ldr	r0, [r3]
+ 435 0088 FFF7FEFF 		bl	USART_ClearITPendingBit
+ 436              	.LVL19:
+ 264:../user/source/stm32f37x_it.c ****         //USART_SendData(pUartIR->handler, (uint16_t)ucDrv_Buf_Uart2_Snd.ucBuf[ucDrv_Buf_Uart2_Snd.
+ 265:../user/source/stm32f37x_it.c ****         USART_SendData(pUartIR->handler, (uint16_t)pUartIR->pSndbuf->data[pUartIR->pSndbuf->rd]);
+ 437              		.loc 1 265 0
+ 438 008c 2368     		ldr	r3, [r4]
+ 439 008e 9A68     		ldr	r2, [r3, #8]
+ 440 0090 D2F8E813 		ldr	r1, [r2, #1000]
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 13
 
 
- 455 00d4 B5814E1B 		.word	458129845
- 456 00d8 07010700 		.word	459015
- 457 00dc 00000000 		.word	ucDrv_Buf_Uart2_Snd
- 458              		.cfi_endproc
- 459              	.LFE121:
- 461              		.section	.text.USART3_IRQHandler,"ax",%progbits
- 462              		.align	2
- 463              		.global	USART3_IRQHandler
- 464              		.thumb
- 465              		.thumb_func
- 467              	USART3_IRQHandler:
- 468              	.LFB122:
- 252:../user/source/stm32f37x_it.c ****         }
- 253:../user/source/stm32f37x_it.c ****     }
- 254:../user/source/stm32f37x_it.c **** #endif
- 255:../user/source/stm32f37x_it.c **** }
- 256:../user/source/stm32f37x_it.c **** 
- 257:../user/source/stm32f37x_it.c **** /********************************************************************
- 258:../user/source/stm32f37x_it.c **** * 功    能：USART3_IRQHandler中断函数
- 259:../user/source/stm32f37x_it.c ****             将串口数据读取到Uart3缓存结构体中的数组
- 260:../user/source/stm32f37x_it.c **** * 输    入：None
- 261:../user/source/stm32f37x_it.c **** * 输    出：None
- 262:../user/source/stm32f37x_it.c **** *           
- 263:../user/source/stm32f37x_it.c **** * 编 写 人：王君龙
- 264:../user/source/stm32f37x_it.c **** * 编写日期：2016.6.23
- 265:../user/source/stm32f37x_it.c **** **********************************************************************/
- 266:../user/source/stm32f37x_it.c **** void USART3_IRQHandler(void)
- 267:../user/source/stm32f37x_it.c **** {
- 469              		.loc 1 267 0
- 470              		.cfi_startproc
- 471              		@ args = 0, pretend = 0, frame = 0
- 472              		@ frame_needed = 0, uses_anonymous_args = 0
- 473 0000 38B5     		push	{r3, r4, r5, lr}
- 474              	.LCFI3:
- 475              		.cfi_def_cfa_offset 16
- 476              		.cfi_offset 3, -16
- 477              		.cfi_offset 4, -12
- 478              		.cfi_offset 5, -8
- 479              		.cfi_offset 14, -4
- 268:../user/source/stm32f37x_it.c ****     if (USART_GetFlagStatus(USART3, USART_FLAG_ORE))
- 480              		.loc 1 268 0
- 481 0002 0821     		movs	r1, #8
- 482 0004 2548     		ldr	r0, .L39
- 483 0006 FFF7FEFF 		bl	USART_GetFlagStatus
- 484              	.LVL26:
- 485 000a 18B1     		cbz	r0, .L35
- 269:../user/source/stm32f37x_it.c ****     {
- 270:../user/source/stm32f37x_it.c ****         USART_ClearFlag(USART3, USART_FLAG_ORE);
- 486              		.loc 1 270 0
- 487 000c 0821     		movs	r1, #8
- 488 000e 2348     		ldr	r0, .L39
- 489 0010 FFF7FEFF 		bl	USART_ClearFlag
- 490              	.LVL27:
- 491              	.L35:
- 271:../user/source/stm32f37x_it.c ****     }
- 272:../user/source/stm32f37x_it.c ****     if (RESET != USART_GetITStatus(USART3, USART_IT_RXNE)) //读一个字节入串口3接收缓存
- 492              		.loc 1 272 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 14
+ 441 0094 515C     		ldrb	r1, [r2, r1]	@ zero_extendqisi2
+ 442 0096 1868     		ldr	r0, [r3]
+ 443 0098 FFF7FEFF 		bl	USART_SendData
+ 444              	.LVL20:
+ 266:../user/source/stm32f37x_it.c ****         //ucDrv_Buf_Uart2_Snd.RD_Index = (ucDrv_Buf_Uart2_Snd.RD_Index + 1) % DRV_BUF_SIZE;
+ 267:../user/source/stm32f37x_it.c ****         pUartIR->pSndbuf->rd = (pUartIR->pSndbuf->rd + 1) % DRV_BUF_SIZE;
+ 445              		.loc 1 267 0
+ 446 009c 2168     		ldr	r1, [r4]
+ 447 009e 8868     		ldr	r0, [r1, #8]
+ 448 00a0 D0F8E823 		ldr	r2, [r0, #1000]
+ 449 00a4 0132     		adds	r2, r2, #1
+ 450 00a6 144B     		ldr	r3, .L30+8
+ 451 00a8 A3FB0243 		umull	r4, r3, r3, r2
+ 452 00ac 9B09     		lsrs	r3, r3, #6
+ 453 00ae 4FF47A74 		mov	r4, #1000
+ 454 00b2 04FB1323 		mls	r3, r4, r3, r2
+ 455 00b6 C0F8E833 		str	r3, [r0, #1000]
+ 268:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsEmpty(pUartIR->pSndbuf) == true)
+ 456              		.loc 1 268 0
+ 457 00ba 8868     		ldr	r0, [r1, #8]
+ 458 00bc FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 459              	.LVL21:
+ 460 00c0 A8B1     		cbz	r0, .L24
+ 269:../user/source/stm32f37x_it.c ****         {
+ 270:../user/source/stm32f37x_it.c ****             USART_ITConfig(pUartIR->handler, USART_IT_TXE, DISABLE);
+ 461              		.loc 1 270 0
+ 462 00c2 0B4B     		ldr	r3, .L30
+ 463 00c4 1B68     		ldr	r3, [r3]
+ 464 00c6 0022     		movs	r2, #0
+ 465 00c8 0C49     		ldr	r1, .L30+12
+ 466 00ca 1868     		ldr	r0, [r3]
+ 467 00cc FFF7FEFF 		bl	USART_ITConfig
+ 468              	.LVL22:
+ 469              	.L28:
+ 271:../user/source/stm32f37x_it.c ****             //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Disable);
+ 272:../user/source/stm32f37x_it.c ****             while (RESET == USART_GetFlagStatus(pUartIR->handler, USART_FLAG_TC))
+ 470              		.loc 1 272 0 discriminator 1
+ 471 00d0 074B     		ldr	r3, .L30
+ 472 00d2 1B68     		ldr	r3, [r3]
+ 473 00d4 4021     		movs	r1, #64
+ 474 00d6 1868     		ldr	r0, [r3]
+ 475 00d8 FFF7FEFF 		bl	USART_GetFlagStatus
+ 476              	.LVL23:
+ 477 00dc 0028     		cmp	r0, #0
+ 478 00de F7D0     		beq	.L28
+ 273:../user/source/stm32f37x_it.c ****             {
+ 274:../user/source/stm32f37x_it.c ****             }
+ 275:../user/source/stm32f37x_it.c ****             USART_ITConfig(pUartIR->handler, USART_IT_RXNE, ENABLE);
+ 479              		.loc 1 275 0
+ 480 00e0 034B     		ldr	r3, .L30
+ 481 00e2 1B68     		ldr	r3, [r3]
+ 482 00e4 0122     		movs	r2, #1
+ 483 00e6 0349     		ldr	r1, .L30+4
+ 484 00e8 1868     		ldr	r0, [r3]
+ 485 00ea FFF7FEFF 		bl	USART_ITConfig
+ 486              	.LVL24:
+ 487              	.L24:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 14
 
 
- 493 0014 2249     		ldr	r1, .L39+4
- 494 0016 2148     		ldr	r0, .L39
- 495 0018 FFF7FEFF 		bl	USART_GetITStatus
- 496              	.LVL28:
- 497 001c C8B1     		cbz	r0, .L36
- 273:../user/source/stm32f37x_it.c ****     {
- 274:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsFull(&ucDrv_Buf_Uart3_Rcv) != true) //if串口3接收缓存区不满
- 498              		.loc 1 274 0
- 499 001e 2148     		ldr	r0, .L39+8
- 500 0020 FFF7FEFF 		bl	blDrv_Buf_IsFull
- 501              	.LVL29:
- 502 0024 A8B9     		cbnz	r0, .L36
- 275:../user/source/stm32f37x_it.c ****         {
- 276:../user/source/stm32f37x_it.c ****             ucDrv_Buf_Uart3_Rcv.ucBuf[ucDrv_Buf_Uart3_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(US
- 503              		.loc 1 276 0
- 504 0026 1F4C     		ldr	r4, .L39+8
- 505 0028 B4F82C51 		ldrh	r5, [r4, #300]
- 506 002c 1B48     		ldr	r0, .L39
- 507 002e FFF7FEFF 		bl	USART_ReceiveData
- 508              	.LVL30:
- 509 0032 6055     		strb	r0, [r4, r5]
- 277:../user/source/stm32f37x_it.c ****             ucDrv_Buf_Uart3_Rcv.WR_Index = (ucDrv_Buf_Uart3_Rcv.WR_Index + 1) % DRV_BUF_SIZE;
- 510              		.loc 1 277 0
- 511 0034 B4F82C21 		ldrh	r2, [r4, #300]
- 512 0038 0132     		adds	r2, r2, #1
- 513 003a 1B4B     		ldr	r3, .L39+12
- 514 003c 83FB0231 		smull	r3, r1, r3, r2
- 515 0040 D317     		asrs	r3, r2, #31
- 516 0042 C3EB6113 		rsb	r3, r3, r1, asr #5
- 517 0046 4FF49671 		mov	r1, #300
- 518 004a 01FB1323 		mls	r3, r1, r3, r2
- 519 004e A4F82C31 		strh	r3, [r4, #300]	@ movhi
- 520              	.L36:
- 278:../user/source/stm32f37x_it.c ****         }
- 279:../user/source/stm32f37x_it.c ****     }
- 280:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(USART3, USART_IT_TXE) != RESET)
- 521              		.loc 1 280 0
- 522 0052 1649     		ldr	r1, .L39+16
- 523 0054 1148     		ldr	r0, .L39
- 524 0056 FFF7FEFF 		bl	USART_GetITStatus
- 525              	.LVL31:
- 526 005a F0B1     		cbz	r0, .L34
- 281:../user/source/stm32f37x_it.c ****     {
- 282:../user/source/stm32f37x_it.c ****         //USART_ClearITPendingBit(USART3,USART_IT_TXE);
- 283:../user/source/stm32f37x_it.c ****         USART_SendData(USART3, (uint16_t)ucDrv_Buf_Uart3_Snd.ucBuf[ucDrv_Buf_Uart3_Snd.RD_Index]);
- 527              		.loc 1 283 0
- 528 005c 144C     		ldr	r4, .L39+20
- 529 005e B4F82E31 		ldrh	r3, [r4, #302]
- 530 0062 E15C     		ldrb	r1, [r4, r3]	@ zero_extendqisi2
- 531 0064 0D48     		ldr	r0, .L39
- 532 0066 FFF7FEFF 		bl	USART_SendData
- 533              	.LVL32:
- 284:../user/source/stm32f37x_it.c ****         ucDrv_Buf_Uart3_Snd.RD_Index = (ucDrv_Buf_Uart3_Snd.RD_Index + 1) % DRV_BUF_SIZE;
- 534              		.loc 1 284 0
- 535 006a B4F82E21 		ldrh	r2, [r4, #302]
- 536 006e 0132     		adds	r2, r2, #1
- 537 0070 0D4B     		ldr	r3, .L39+12
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 15
+ 488 00ee 70BD     		pop	{r4, r5, r6, pc}
+ 489              	.L31:
+ 490              		.align	2
+ 491              	.L30:
+ 492 00f0 00000000 		.word	pUartIR
+ 493 00f4 05010500 		.word	327941
+ 494 00f8 D34D6210 		.word	274877907
+ 495 00fc 07010700 		.word	459015
+ 496              		.cfi_endproc
+ 497              	.LFE121:
+ 499              		.section	.text.USART3_IRQHandler,"ax",%progbits
+ 500              		.align	2
+ 501              		.global	USART3_IRQHandler
+ 502              		.thumb
+ 503              		.thumb_func
+ 505              	USART3_IRQHandler:
+ 506              	.LFB122:
+ 276:../user/source/stm32f37x_it.c ****         }
+ 277:../user/source/stm32f37x_it.c ****     }
+ 278:../user/source/stm32f37x_it.c **** #endif
+ 279:../user/source/stm32f37x_it.c **** }
+ 280:../user/source/stm32f37x_it.c **** 
+ 281:../user/source/stm32f37x_it.c **** /********************************************************************
+ 282:../user/source/stm32f37x_it.c **** * 功    能：USART3_IRQHandler中断函数
+ 283:../user/source/stm32f37x_it.c ****             将串口数据读取到Uart3缓存结构体中的数组
+ 284:../user/source/stm32f37x_it.c **** * 输    入：None
+ 285:../user/source/stm32f37x_it.c **** * 输    出：None
+ 286:../user/source/stm32f37x_it.c **** *           
+ 287:../user/source/stm32f37x_it.c **** * 编 写 人：王君龙
+ 288:../user/source/stm32f37x_it.c **** * 编写日期：2016.6.23
+ 289:../user/source/stm32f37x_it.c **** **********************************************************************/
+ 290:../user/source/stm32f37x_it.c **** void USART3_IRQHandler(void)
+ 291:../user/source/stm32f37x_it.c **** {
+ 507              		.loc 1 291 0
+ 508              		.cfi_startproc
+ 509              		@ args = 0, pretend = 0, frame = 0
+ 510              		@ frame_needed = 0, uses_anonymous_args = 0
+ 511 0000 70B5     		push	{r4, r5, r6, lr}
+ 512              	.LCFI2:
+ 513              		.cfi_def_cfa_offset 16
+ 514              		.cfi_offset 4, -16
+ 515              		.cfi_offset 5, -12
+ 516              		.cfi_offset 6, -8
+ 517              		.cfi_offset 14, -4
+ 292:../user/source/stm32f37x_it.c ****     if (USART_GetFlagStatus(pUartDB->handler, USART_FLAG_ORE))
+ 518              		.loc 1 292 0
+ 519 0002 364B     		ldr	r3, .L38
+ 520 0004 1B68     		ldr	r3, [r3]
+ 521 0006 0821     		movs	r1, #8
+ 522 0008 1868     		ldr	r0, [r3]
+ 523 000a FFF7FEFF 		bl	USART_GetFlagStatus
+ 524              	.LVL25:
+ 525 000e 28B1     		cbz	r0, .L33
+ 293:../user/source/stm32f37x_it.c ****     {
+ 294:../user/source/stm32f37x_it.c ****         USART_ClearFlag(pUartDB->handler, USART_FLAG_ORE);
+ 526              		.loc 1 294 0
+ 527 0010 324B     		ldr	r3, .L38
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 15
 
 
- 538 0072 83FB0231 		smull	r3, r1, r3, r2
- 539 0076 D317     		asrs	r3, r2, #31
- 540 0078 C3EB6113 		rsb	r3, r3, r1, asr #5
- 541 007c 4FF49671 		mov	r1, #300
- 542 0080 01FB1323 		mls	r3, r1, r3, r2
- 543 0084 A4F82E31 		strh	r3, [r4, #302]	@ movhi
- 285:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsEmpty(&ucDrv_Buf_Uart3_Snd) == true)
- 544              		.loc 1 285 0
- 545 0088 2046     		mov	r0, r4
- 546 008a FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 547              	.LVL33:
- 548 008e 20B1     		cbz	r0, .L34
- 286:../user/source/stm32f37x_it.c ****             USART_ITConfig(USART3, USART_IT_TXE, DISABLE);
- 549              		.loc 1 286 0
- 550 0090 0022     		movs	r2, #0
- 551 0092 0649     		ldr	r1, .L39+16
- 552 0094 0148     		ldr	r0, .L39
- 553 0096 FFF7FEFF 		bl	USART_ITConfig
- 554              	.LVL34:
- 555              	.L34:
- 556 009a 38BD     		pop	{r3, r4, r5, pc}
- 557              	.L40:
- 558              		.align	2
- 559              	.L39:
- 560 009c 00480040 		.word	1073760256
- 561 00a0 05010500 		.word	327941
- 562 00a4 00000000 		.word	ucDrv_Buf_Uart3_Rcv
- 563 00a8 B5814E1B 		.word	458129845
- 564 00ac 07010700 		.word	459015
- 565 00b0 00000000 		.word	ucDrv_Buf_Uart3_Snd
- 566              		.cfi_endproc
- 567              	.LFE122:
- 569              		.section	.text.TIM2_IRQHandler,"ax",%progbits
- 570              		.align	2
- 571              		.global	TIM2_IRQHandler
- 572              		.thumb
- 573              		.thumb_func
- 575              	TIM2_IRQHandler:
- 576              	.LFB123:
- 287:../user/source/stm32f37x_it.c ****     }
- 288:../user/source/stm32f37x_it.c **** }
- 289:../user/source/stm32f37x_it.c **** 
- 290:../user/source/stm32f37x_it.c **** /********************************************************************
- 291:../user/source/stm32f37x_it.c **** * 功    能：TIM2_IRQHandler断函数
- 292:../user/source/stm32f37x_it.c ****             计时累加
- 293:../user/source/stm32f37x_it.c **** * 输    入：None
- 294:../user/source/stm32f37x_it.c **** * 输    出：None
- 295:../user/source/stm32f37x_it.c **** *           
- 296:../user/source/stm32f37x_it.c **** * 编 写 人：王君龙
- 297:../user/source/stm32f37x_it.c **** * 编写日期：2016.6.23
- 298:../user/source/stm32f37x_it.c **** **********************************************************************/
- 299:../user/source/stm32f37x_it.c **** void TIM2_IRQHandler(void)
- 300:../user/source/stm32f37x_it.c **** {
- 577              		.loc 1 300 0
- 578              		.cfi_startproc
- 579              		@ args = 0, pretend = 0, frame = 0
- 580              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 16
+ 528 0012 1B68     		ldr	r3, [r3]
+ 529 0014 0821     		movs	r1, #8
+ 530 0016 1868     		ldr	r0, [r3]
+ 531 0018 FFF7FEFF 		bl	USART_ClearFlag
+ 532              	.LVL26:
+ 533              	.L33:
+ 295:../user/source/stm32f37x_it.c ****     }
+ 296:../user/source/stm32f37x_it.c ****     if (RESET != USART_GetITStatus(pUartDB->handler, USART_IT_RXNE)) //读一个字节入串口3接收缓存
+ 534              		.loc 1 296 0
+ 535 001c 2F4B     		ldr	r3, .L38
+ 536 001e 1B68     		ldr	r3, [r3]
+ 537 0020 2F49     		ldr	r1, .L38+4
+ 538 0022 1868     		ldr	r0, [r3]
+ 539 0024 FFF7FEFF 		bl	USART_GetITStatus
+ 540              	.LVL27:
+ 541 0028 E8B1     		cbz	r0, .L34
+ 297:../user/source/stm32f37x_it.c ****     {
+ 298:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsFull(pUartDB->pRsvbuf) != true) //if串口3接收缓存区不满
+ 542              		.loc 1 298 0
+ 543 002a 2C4B     		ldr	r3, .L38
+ 544 002c 1B68     		ldr	r3, [r3]
+ 545 002e 5868     		ldr	r0, [r3, #4]
+ 546 0030 FFF7FEFF 		bl	blDrv_Buf_IsFull
+ 547              	.LVL28:
+ 548 0034 B8B9     		cbnz	r0, .L34
+ 299:../user/source/stm32f37x_it.c ****         {
+ 300:../user/source/stm32f37x_it.c ****             //ucDrv_Buf_Uart3_Rcv.ucBuf[ucDrv_Buf_Uart3_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(
+ 301:../user/source/stm32f37x_it.c ****             pUartDB->pRsvbuf->data[pUartDB->pRsvbuf->wr] = (uint8_t)USART_ReceiveData(pUartDB->hand
+ 549              		.loc 1 301 0
+ 550 0036 294C     		ldr	r4, .L38
+ 551 0038 2368     		ldr	r3, [r4]
+ 552 003a 5D68     		ldr	r5, [r3, #4]
+ 553 003c D5F8EC63 		ldr	r6, [r5, #1004]
+ 554 0040 1868     		ldr	r0, [r3]
+ 555 0042 FFF7FEFF 		bl	USART_ReceiveData
+ 556              	.LVL29:
+ 557 0046 A855     		strb	r0, [r5, r6]
+ 302:../user/source/stm32f37x_it.c ****             //ucDrv_Buf_Uart3_Rcv.WR_Index = (ucDrv_Buf_Uart3_Rcv.WR_Index + 1) % DRV_BUF_SIZE;
+ 303:../user/source/stm32f37x_it.c ****             pUartDB->pRsvbuf->wr = (pUartDB->pRsvbuf->wr + 1) % DRV_BUF_SIZE;
+ 558              		.loc 1 303 0
+ 559 0048 2368     		ldr	r3, [r4]
+ 560 004a 5968     		ldr	r1, [r3, #4]
+ 561 004c D1F8EC23 		ldr	r2, [r1, #1004]
+ 562 0050 0132     		adds	r2, r2, #1
+ 563 0052 244B     		ldr	r3, .L38+8
+ 564 0054 A3FB0203 		umull	r0, r3, r3, r2
+ 565 0058 9B09     		lsrs	r3, r3, #6
+ 566 005a 4FF47A70 		mov	r0, #1000
+ 567 005e 00FB1323 		mls	r3, r0, r3, r2
+ 568 0062 C1F8EC33 		str	r3, [r1, #1004]
+ 569              	.L34:
+ 304:../user/source/stm32f37x_it.c ****         }
+ 305:../user/source/stm32f37x_it.c ****     }
+ 306:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(pUartDB->handler, USART_IT_TXE) != RESET)
+ 570              		.loc 1 306 0
+ 571 0066 1D4B     		ldr	r3, .L38
+ 572 0068 1B68     		ldr	r3, [r3]
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 16
 
 
- 581 0000 08B5     		push	{r3, lr}
- 582              	.LCFI4:
- 583              		.cfi_def_cfa_offset 8
- 584              		.cfi_offset 3, -8
- 585              		.cfi_offset 14, -4
- 301:../user/source/stm32f37x_it.c ****     if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
- 586              		.loc 1 301 0
- 587 0002 0121     		movs	r1, #1
- 588 0004 4FF08040 		mov	r0, #1073741824
- 589 0008 FFF7FEFF 		bl	TIM_GetITStatus
- 590              	.LVL35:
- 591 000c 90B1     		cbz	r0, .L41
- 302:../user/source/stm32f37x_it.c ****     {
- 303:../user/source/stm32f37x_it.c ****         TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
- 592              		.loc 1 303 0
- 593 000e 0121     		movs	r1, #1
- 594 0010 4FF08040 		mov	r0, #1073741824
- 595 0014 FFF7FEFF 		bl	TIM_ClearITPendingBit
- 596              	.LVL36:
- 304:../user/source/stm32f37x_it.c ****         if (blWordsCounterStatus == true)
- 597              		.loc 1 304 0
- 598 0018 074B     		ldr	r3, .L45
- 599 001a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 600 001c 1BB1     		cbz	r3, .L43
- 305:../user/source/stm32f37x_it.c ****         {
- 306:../user/source/stm32f37x_it.c ****             uwTime2WordsCounter++;
- 601              		.loc 1 306 0
- 602 001e 074A     		ldr	r2, .L45+4
- 603 0020 1388     		ldrh	r3, [r2]
- 604 0022 0133     		adds	r3, r3, #1
- 605 0024 1380     		strh	r3, [r2]	@ movhi
- 606              	.L43:
- 307:../user/source/stm32f37x_it.c ****         }
- 308:../user/source/stm32f37x_it.c ****         if (blFramesCounterStatus == true)
- 607              		.loc 1 308 0
- 608 0026 064B     		ldr	r3, .L45+8
- 609 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 610 002a 1BB1     		cbz	r3, .L41
- 309:../user/source/stm32f37x_it.c ****         {
- 310:../user/source/stm32f37x_it.c ****             uwTime2FramesCounter++;
- 611              		.loc 1 310 0
- 612 002c 054A     		ldr	r2, .L45+12
- 613 002e 1388     		ldrh	r3, [r2]
- 614 0030 0133     		adds	r3, r3, #1
- 615 0032 1380     		strh	r3, [r2]	@ movhi
- 616              	.L41:
- 617 0034 08BD     		pop	{r3, pc}
- 618              	.L46:
- 619 0036 00BF     		.align	2
- 620              	.L45:
- 621 0038 00000000 		.word	blWordsCounterStatus
- 622 003c 00000000 		.word	uwTime2WordsCounter
- 623 0040 00000000 		.word	blFramesCounterStatus
- 624 0044 00000000 		.word	uwTime2FramesCounter
- 625              		.cfi_endproc
- 626              	.LFE123:
- 628              		.section	.text.TIM5_IRQHandler,"ax",%progbits
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 17
+ 573 006a 1F49     		ldr	r1, .L38+12
+ 574 006c 1868     		ldr	r0, [r3]
+ 575 006e FFF7FEFF 		bl	USART_GetITStatus
+ 576              	.LVL30:
+ 577 0072 10B3     		cbz	r0, .L35
+ 307:../user/source/stm32f37x_it.c ****     {
+ 308:../user/source/stm32f37x_it.c ****         //USART_ClearITPendingBit(pUartDB->handler,USART_IT_TXE);
+ 309:../user/source/stm32f37x_it.c ****         //USART_SendData(pUartDB->handler, (uint16_t)ucDrv_Buf_Uart3_Snd.ucBuf[ucDrv_Buf_Uart3_Snd.
+ 310:../user/source/stm32f37x_it.c ****         USART_SendData(pUartDB->handler, (uint16_t)pUartDB->pSndbuf->data[pUartDB->pSndbuf->rd]);
+ 578              		.loc 1 310 0
+ 579 0074 194C     		ldr	r4, .L38
+ 580 0076 2368     		ldr	r3, [r4]
+ 581 0078 9A68     		ldr	r2, [r3, #8]
+ 582 007a D2F8E813 		ldr	r1, [r2, #1000]
+ 583 007e 515C     		ldrb	r1, [r2, r1]	@ zero_extendqisi2
+ 584 0080 1868     		ldr	r0, [r3]
+ 585 0082 FFF7FEFF 		bl	USART_SendData
+ 586              	.LVL31:
+ 311:../user/source/stm32f37x_it.c ****         //ucDrv_Buf_Uart3_Snd.RD_Index = (ucDrv_Buf_Uart3_Snd.RD_Index + 1) % DRV_BUF_SIZE;
+ 312:../user/source/stm32f37x_it.c ****         pUartDB->pSndbuf->rd = (pUartDB->pSndbuf->rd + 1) % DRV_BUF_SIZE;
+ 587              		.loc 1 312 0
+ 588 0086 2168     		ldr	r1, [r4]
+ 589 0088 8868     		ldr	r0, [r1, #8]
+ 590 008a D0F8E823 		ldr	r2, [r0, #1000]
+ 591 008e 0132     		adds	r2, r2, #1
+ 592 0090 144B     		ldr	r3, .L38+8
+ 593 0092 A3FB0243 		umull	r4, r3, r3, r2
+ 594 0096 9B09     		lsrs	r3, r3, #6
+ 595 0098 4FF47A74 		mov	r4, #1000
+ 596 009c 04FB1323 		mls	r3, r4, r3, r2
+ 597 00a0 C0F8E833 		str	r3, [r0, #1000]
+ 313:../user/source/stm32f37x_it.c ****         if (blDrv_Buf_IsEmpty(pUartDB->pSndbuf) == true)
+ 598              		.loc 1 313 0
+ 599 00a4 8868     		ldr	r0, [r1, #8]
+ 600 00a6 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 601              	.LVL32:
+ 602 00aa 30B1     		cbz	r0, .L35
+ 314:../user/source/stm32f37x_it.c ****             USART_ITConfig(pUartDB->handler, USART_IT_TXE, DISABLE);
+ 603              		.loc 1 314 0
+ 604 00ac 0B4B     		ldr	r3, .L38
+ 605 00ae 1B68     		ldr	r3, [r3]
+ 606 00b0 0022     		movs	r2, #0
+ 607 00b2 0D49     		ldr	r1, .L38+12
+ 608 00b4 1868     		ldr	r0, [r3]
+ 609 00b6 FFF7FEFF 		bl	USART_ITConfig
+ 610              	.LVL33:
+ 611              	.L35:
+ 315:../user/source/stm32f37x_it.c ****     }
+ 316:../user/source/stm32f37x_it.c ****     /*接收超时一个字节时间内未收到数据，大约1ms*/
+ 317:../user/source/stm32f37x_it.c ****     /*隐患：DLT645规约规定字节超时时间为500ms*/
+ 318:../user/source/stm32f37x_it.c ****     if (USART_GetITStatus(pUartDB->handler, USART_IT_IDLE) != RESET)
+ 612              		.loc 1 318 0
+ 613 00ba 084B     		ldr	r3, .L38
+ 614 00bc 1B68     		ldr	r3, [r3]
+ 615 00be 0B49     		ldr	r1, .L38+16
+ 616 00c0 1868     		ldr	r0, [r3]
+ 617 00c2 FFF7FEFF 		bl	USART_GetITStatus
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 17
 
 
- 629              		.align	2
- 630              		.global	TIM5_IRQHandler
- 631              		.thumb
- 632              		.thumb_func
- 634              	TIM5_IRQHandler:
- 635              	.LFB124:
- 311:../user/source/stm32f37x_it.c ****         }
- 312:../user/source/stm32f37x_it.c ****     }
- 313:../user/source/stm32f37x_it.c **** }
- 314:../user/source/stm32f37x_it.c **** 
- 315:../user/source/stm32f37x_it.c **** /********************************************************************
- 316:../user/source/stm32f37x_it.c **** * 功    能：TIM5_IRQHandler断函数
- 317:../user/source/stm32f37x_it.c **** 				PWM输出
- 318:../user/source/stm32f37x_it.c **** * 输    入：None
- 319:../user/source/stm32f37x_it.c **** * 输    出：None
- 320:../user/source/stm32f37x_it.c **** *
- 321:../user/source/stm32f37x_it.c **** * 编 写 人：王君龙
- 322:../user/source/stm32f37x_it.c **** * 编写日期：2017.9.11
- 323:../user/source/stm32f37x_it.c **** **********************************************************************/
- 324:../user/source/stm32f37x_it.c **** void TIM5_IRQHandler(void)
- 325:../user/source/stm32f37x_it.c **** {
- 636              		.loc 1 325 0
- 637              		.cfi_startproc
- 638              		@ args = 0, pretend = 0, frame = 0
- 639              		@ frame_needed = 0, uses_anonymous_args = 0
- 640              		@ link register save eliminated.
- 641 0000 7047     		bx	lr
+ 618              	.LVL34:
+ 619 00c6 40B1     		cbz	r0, .L32
+ 319:../user/source/stm32f37x_it.c ****     {
+ 320:../user/source/stm32f37x_it.c ****         USART_ClearITPendingBit(pUartDB->handler, USART_IT_IDLE);
+ 620              		.loc 1 320 0
+ 621 00c8 044B     		ldr	r3, .L38
+ 622 00ca 1B68     		ldr	r3, [r3]
+ 623 00cc 0749     		ldr	r1, .L38+16
+ 624 00ce 1868     		ldr	r0, [r3]
+ 625 00d0 FFF7FEFF 		bl	USART_ClearITPendingBit
+ 626              	.LVL35:
+ 321:../user/source/stm32f37x_it.c ****         FLAG_UartDB_HasData = true;
+ 627              		.loc 1 321 0
+ 628 00d4 0122     		movs	r2, #1
+ 629 00d6 064B     		ldr	r3, .L38+20
+ 630 00d8 1A70     		strb	r2, [r3]
+ 631              	.L32:
+ 632 00da 70BD     		pop	{r4, r5, r6, pc}
+ 633              	.L39:
+ 634              		.align	2
+ 635              	.L38:
+ 636 00dc 00000000 		.word	pUartDB
+ 637 00e0 05010500 		.word	327941
+ 638 00e4 D34D6210 		.word	274877907
+ 639 00e8 07010700 		.word	459015
+ 640 00ec 04010400 		.word	262404
+ 641 00f0 00000000 		.word	FLAG_UartDB_HasData
  642              		.cfi_endproc
- 643              	.LFE124:
- 645              		.global	capture
- 646 0002 00BF     		.section	.bss.capture,"aw",%nobits
- 647              		.align	1
- 650              	capture:
- 651 0000 0000     		.space	2
- 652              		.text
- 653              	.Letext0:
- 654              		.file 2 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\machine\\_defaul
- 655              		.file 3 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
- 656              		.file 4 "../cmsis/include/stm32f37x.h"
- 657              		.file 5 "../stdperiph/include/stm32f37x_gpio.h"
- 658              		.file 6 "../user/include/Uart.h"
- 659              		.file 7 "../cmsis/include/core_cm4.h"
- 660              		.file 8 "../user/include/Time.h"
- 661              		.file 9 "../stdperiph/include/stm32f37x_usart.h"
- 662              		.file 10 "../stdperiph/include/stm32f37x_tim.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 18
+ 643              	.LFE122:
+ 645              		.section	.text.TIM2_IRQHandler,"ax",%progbits
+ 646              		.align	2
+ 647              		.global	TIM2_IRQHandler
+ 648              		.thumb
+ 649              		.thumb_func
+ 651              	TIM2_IRQHandler:
+ 652              	.LFB123:
+ 322:../user/source/stm32f37x_it.c ****     }
+ 323:../user/source/stm32f37x_it.c **** }
+ 324:../user/source/stm32f37x_it.c **** 
+ 325:../user/source/stm32f37x_it.c **** /********************************************************************
+ 326:../user/source/stm32f37x_it.c **** * 功    能：TIM2_IRQHandler断函数
+ 327:../user/source/stm32f37x_it.c ****             计时累加
+ 328:../user/source/stm32f37x_it.c **** * 输    入：None
+ 329:../user/source/stm32f37x_it.c **** * 输    出：None
+ 330:../user/source/stm32f37x_it.c **** *           
+ 331:../user/source/stm32f37x_it.c **** * 编 写 人：王君龙
+ 332:../user/source/stm32f37x_it.c **** * 编写日期：2016.6.23
+ 333:../user/source/stm32f37x_it.c **** **********************************************************************/
+ 334:../user/source/stm32f37x_it.c **** void TIM2_IRQHandler(void)
+ 335:../user/source/stm32f37x_it.c **** {
+ 653              		.loc 1 335 0
+ 654              		.cfi_startproc
+ 655              		@ args = 0, pretend = 0, frame = 0
+ 656              		@ frame_needed = 0, uses_anonymous_args = 0
+ 657 0000 08B5     		push	{r3, lr}
+ 658              	.LCFI3:
+ 659              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 18
+
+
+ 660              		.cfi_offset 3, -8
+ 661              		.cfi_offset 14, -4
+ 336:../user/source/stm32f37x_it.c ****     if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+ 662              		.loc 1 336 0
+ 663 0002 0121     		movs	r1, #1
+ 664 0004 4FF08040 		mov	r0, #1073741824
+ 665 0008 FFF7FEFF 		bl	TIM_GetITStatus
+ 666              	.LVL36:
+ 667 000c 90B1     		cbz	r0, .L40
+ 337:../user/source/stm32f37x_it.c ****     {
+ 338:../user/source/stm32f37x_it.c ****         TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+ 668              		.loc 1 338 0
+ 669 000e 0121     		movs	r1, #1
+ 670 0010 4FF08040 		mov	r0, #1073741824
+ 671 0014 FFF7FEFF 		bl	TIM_ClearITPendingBit
+ 672              	.LVL37:
+ 339:../user/source/stm32f37x_it.c ****         if (blWordsCounterStatus == true)
+ 673              		.loc 1 339 0
+ 674 0018 074B     		ldr	r3, .L44
+ 675 001a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 676 001c 1BB1     		cbz	r3, .L42
+ 340:../user/source/stm32f37x_it.c ****         {
+ 341:../user/source/stm32f37x_it.c ****             uwTime2WordsCounter++;
+ 677              		.loc 1 341 0
+ 678 001e 074A     		ldr	r2, .L44+4
+ 679 0020 1388     		ldrh	r3, [r2]
+ 680 0022 0133     		adds	r3, r3, #1
+ 681 0024 1380     		strh	r3, [r2]	@ movhi
+ 682              	.L42:
+ 342:../user/source/stm32f37x_it.c ****         }
+ 343:../user/source/stm32f37x_it.c ****         if (blFramesCounterStatus == true)
+ 683              		.loc 1 343 0
+ 684 0026 064B     		ldr	r3, .L44+8
+ 685 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 686 002a 1BB1     		cbz	r3, .L40
+ 344:../user/source/stm32f37x_it.c ****         {
+ 345:../user/source/stm32f37x_it.c ****             uwTime2FramesCounter++;
+ 687              		.loc 1 345 0
+ 688 002c 054A     		ldr	r2, .L44+12
+ 689 002e 1388     		ldrh	r3, [r2]
+ 690 0030 0133     		adds	r3, r3, #1
+ 691 0032 1380     		strh	r3, [r2]	@ movhi
+ 692              	.L40:
+ 693 0034 08BD     		pop	{r3, pc}
+ 694              	.L45:
+ 695 0036 00BF     		.align	2
+ 696              	.L44:
+ 697 0038 00000000 		.word	blWordsCounterStatus
+ 698 003c 00000000 		.word	uwTime2WordsCounter
+ 699 0040 00000000 		.word	blFramesCounterStatus
+ 700 0044 00000000 		.word	uwTime2FramesCounter
+ 701              		.cfi_endproc
+ 702              	.LFE123:
+ 704              		.section	.text.TIM5_IRQHandler,"ax",%progbits
+ 705              		.align	2
+ 706              		.global	TIM5_IRQHandler
+ 707              		.thumb
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 19
+
+
+ 708              		.thumb_func
+ 710              	TIM5_IRQHandler:
+ 711              	.LFB124:
+ 346:../user/source/stm32f37x_it.c ****         }
+ 347:../user/source/stm32f37x_it.c ****     }
+ 348:../user/source/stm32f37x_it.c **** }
+ 349:../user/source/stm32f37x_it.c **** 
+ 350:../user/source/stm32f37x_it.c **** /********************************************************************
+ 351:../user/source/stm32f37x_it.c **** * 功    能：TIM5_IRQHandler断函数
+ 352:../user/source/stm32f37x_it.c **** 				PWM输出
+ 353:../user/source/stm32f37x_it.c **** * 输    入：None
+ 354:../user/source/stm32f37x_it.c **** * 输    出：None
+ 355:../user/source/stm32f37x_it.c **** *
+ 356:../user/source/stm32f37x_it.c **** * 编 写 人：王君龙
+ 357:../user/source/stm32f37x_it.c **** * 编写日期：2017.9.11
+ 358:../user/source/stm32f37x_it.c **** **********************************************************************/
+ 359:../user/source/stm32f37x_it.c **** void TIM5_IRQHandler(void)
+ 360:../user/source/stm32f37x_it.c **** {
+ 712              		.loc 1 360 0
+ 713              		.cfi_startproc
+ 714              		@ args = 0, pretend = 0, frame = 0
+ 715              		@ frame_needed = 0, uses_anonymous_args = 0
+ 716              		@ link register save eliminated.
+ 717 0000 7047     		bx	lr
+ 718              		.cfi_endproc
+ 719              	.LFE124:
+ 721              		.global	capture
+ 722 0002 00BF     		.section	.bss.capture,"aw",%nobits
+ 723              		.align	1
+ 726              	capture:
+ 727 0000 0000     		.space	2
+ 728              		.section	.bss.TICKS,"aw",%nobits
+ 729              		.align	1
+ 730              		.set	.LANCHOR0,. + 0
+ 733              	TICKS:
+ 734 0000 0000     		.space	2
+ 735              		.text
+ 736              	.Letext0:
+ 737              		.file 2 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\machine\\_defaul
+ 738              		.file 3 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 739              		.file 4 "../cmsis/include/stm32f37x.h"
+ 740              		.file 5 "../stdperiph/include/stm32f37x_gpio.h"
+ 741              		.file 6 "../user/include/Uart.h"
+ 742              		.file 7 "../cmsis/include/core_cm4.h"
+ 743              		.file 8 "../user/include/main.h"
+ 744              		.file 9 "../user/include/Time.h"
+ 745              		.file 10 "../stdperiph/include/stm32f37x_usart.h"
+ 746              		.file 11 "../stdperiph/include/stm32f37x_tim.h"
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f37x_it.c
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:22     .text.NMI_Handler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:27     .text.NMI_Handler:00000000 NMI_Handler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:40     .text.HardFault_Handler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:45     .text.HardFault_Handler:00000000 HardFault_Handler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:59     .text.MemManage_Handler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:64     .text.MemManage_Handler:00000000 MemManage_Handler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:78     .text.BusFault_Handler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:83     .text.BusFault_Handler:00000000 BusFault_Handler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:97     .text.UsageFault_Handler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:102    .text.UsageFault_Handler:00000000 UsageFault_Handler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:116    .text.SVC_Handler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:121    .text.SVC_Handler:00000000 SVC_Handler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:133    .text.DebugMon_Handler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:138    .text.DebugMon_Handler:00000000 DebugMon_Handler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:150    .text.PendSV_Handler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:155    .text.PendSV_Handler:00000000 PendSV_Handler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:167    .text.SysTick_Handler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:172    .text.SysTick_Handler:00000000 SysTick_Handler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:209    .text.SysTick_Handler:0000002c $d
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:214    .text.USART1_IRQHandler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:219    .text.USART1_IRQHandler:00000000 USART1_IRQHandler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:318    .text.USART1_IRQHandler:000000a8 $d
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:328    .text.USART2_IRQHandler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:333    .text.USART2_IRQHandler:00000000 USART2_IRQHandler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:452    .text.USART2_IRQHandler:000000c8 $d
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:462    .text.USART3_IRQHandler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:467    .text.USART3_IRQHandler:00000000 USART3_IRQHandler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:560    .text.USART3_IRQHandler:0000009c $d
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:570    .text.TIM2_IRQHandler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:575    .text.TIM2_IRQHandler:00000000 TIM2_IRQHandler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:621    .text.TIM2_IRQHandler:00000038 $d
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:629    .text.TIM5_IRQHandler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:634    .text.TIM5_IRQHandler:00000000 TIM5_IRQHandler
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:650    .bss.capture:00000000 capture
-C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s:647    .bss.capture:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:22     .text.NMI_Handler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:27     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:40     .text.HardFault_Handler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:45     .text.HardFault_Handler:00000000 HardFault_Handler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:59     .text.MemManage_Handler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:64     .text.MemManage_Handler:00000000 MemManage_Handler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:78     .text.BusFault_Handler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:83     .text.BusFault_Handler:00000000 BusFault_Handler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:97     .text.UsageFault_Handler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:102    .text.UsageFault_Handler:00000000 UsageFault_Handler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:116    .text.SVC_Handler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:121    .text.SVC_Handler:00000000 SVC_Handler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:133    .text.DebugMon_Handler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:138    .text.DebugMon_Handler:00000000 DebugMon_Handler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:150    .text.PendSV_Handler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:155    .text.PendSV_Handler:00000000 PendSV_Handler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:167    .text.SysTick_Handler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:172    .text.SysTick_Handler:00000000 SysTick_Handler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:188    .text.SysTick_Handler:0000000c $d
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:193    .text.USART1_IRQHandler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:198    .text.USART1_IRQHandler:00000000 USART1_IRQHandler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:335    .text.USART1_IRQHandler:000000e8 $d
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:345    .text.USART2_IRQHandler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:350    .text.USART2_IRQHandler:00000000 USART2_IRQHandler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:492    .text.USART2_IRQHandler:000000f0 $d
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:500    .text.USART3_IRQHandler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:505    .text.USART3_IRQHandler:00000000 USART3_IRQHandler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:636    .text.USART3_IRQHandler:000000dc $d
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:646    .text.TIM2_IRQHandler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:651    .text.TIM2_IRQHandler:00000000 TIM2_IRQHandler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:697    .text.TIM2_IRQHandler:00000038 $d
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:705    .text.TIM5_IRQHandler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:710    .text.TIM5_IRQHandler:00000000 TIM5_IRQHandler
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:726    .bss.capture:00000000 capture
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:723    .bss.capture:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:729    .bss.TICKS:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccd7EolP.s:733    .bss.TICKS:00000000 TICKS
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
-GPIO_ReadOutputDataBit
-GPIO_WriteBit
 USART_GetFlagStatus
 USART_ClearFlag
 USART_GetITStatus
@@ -1060,16 +1183,15 @@ USART_ClearITPendingBit
 USART_SendData
 blDrv_Buf_IsEmpty
 USART_ITConfig
-ucDrv_Buf_Uart1_Rcv
-ucDrv_Buf_Uart1_Snd
-ucDrv_Buf_Uart2_Rcv
-ucDrv_Buf_Uart2_Snd
-ucDrv_Buf_Uart3_Rcv
-ucDrv_Buf_Uart3_Snd
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccVrkJWK.s 			page 19
-
-
+pUartZD
+FLAG_UartZD_HasData
+pUartIR
+pUartDB
+FLAG_UartDB_HasData
 TIM_GetITStatus
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccd7EolP.s 			page 21
+
+
 TIM_ClearITPendingBit
 blWordsCounterStatus
 uwTime2WordsCounter
