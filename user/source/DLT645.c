@@ -281,7 +281,8 @@ STATUS dwCheckFrame(uint8_t *pucBuffer)
         ucCheckData += pucBuffer[i];
     }
     //判断校验和和结束符
-    if ((ucCheckData == pucBuffer[uc645DataDomainLength + 10]) && (pucBuffer[uc645DataDomainLength + 11] == 0x16))
+    if ((ucCheckData == pucBuffer[uc645DataDomainLength + 10]) &&
+        (pucBuffer[uc645DataDomainLength + 11] == 0x16))
     {
         return OK_1;
     }
@@ -603,7 +604,10 @@ void Voltage_Modifier(uint8_t *pucBuffer)
     //IWDG_ReloadCounter();
     if (Voltage_Change_State == Voltage_NOChange)
         return;
-    if ((pucBuffer[8] == 0X91) && (pucBuffer[10] == 0x33) && (pucBuffer[12] == 0x34) && (pucBuffer[13] == 0x35))
+    if ((pucBuffer[8] == 0X91) &&
+        (pucBuffer[10] == 0x33) &&
+        (pucBuffer[12] == 0x34) &&
+        (pucBuffer[13] == 0x35))
     {
         if (pucBuffer[11] == 0x32) //三相电压数据块
         {
@@ -704,13 +708,19 @@ bool blVoltage_Create(uint8_t *pucBuffer)
         pucBuffer[8] = 0x91;
         pucBuffer[9] = 0x0A;
         //使用上次修改的合法电压值或1000 2017-10-25:
-        A_Voltage = ((A_Voltage <= Voltage_MAX) && (A_Voltage >= Voltage_MIN) ? A_Voltage : WORK_VOLTAGE);
+        A_Voltage = ((A_Voltage <= Voltage_MAX) && (A_Voltage >= Voltage_MIN)
+                         ? A_Voltage
+                         : WORK_VOLTAGE);
         pucBuffer[14] = GetLowByte(A_Voltage);
         pucBuffer[15] = GetHighByte(A_Voltage);
-        B_Voltage = ((B_Voltage <= Voltage_MAX) && (B_Voltage >= Voltage_MIN) ? B_Voltage : WORK_VOLTAGE);
+        B_Voltage = ((B_Voltage <= Voltage_MAX) && (B_Voltage >= Voltage_MIN)
+                         ? B_Voltage
+                         : WORK_VOLTAGE);
         pucBuffer[16] = GetLowByte(B_Voltage);
         pucBuffer[17] = GetHighByte(B_Voltage);
-        C_Voltage = ((C_Voltage <= Voltage_MAX) && (C_Voltage >= Voltage_MIN) ? C_Voltage : WORK_VOLTAGE);
+        C_Voltage = ((C_Voltage <= Voltage_MAX) && (C_Voltage >= Voltage_MIN)
+                         ? C_Voltage
+                         : WORK_VOLTAGE);
         pucBuffer[18] = GetLowByte(C_Voltage);
         pucBuffer[19] = GetHighByte(C_Voltage);
         for (i = 0; i < 20; i++) //固定帧长22
@@ -723,7 +733,9 @@ bool blVoltage_Create(uint8_t *pucBuffer)
     }
     case 0x34: //A相电压数据
     {
-        A_Voltage = ((A_Voltage <= Voltage_MAX) && (A_Voltage >= Voltage_MIN) ? A_Voltage : WORK_VOLTAGE);
+        A_Voltage = ((A_Voltage <= Voltage_MAX) && (A_Voltage >= Voltage_MIN)
+                         ? A_Voltage
+                         : WORK_VOLTAGE);
         pucBuffer[8] = 0x91;
         pucBuffer[9] = 0x06;
         pucBuffer[14] = GetLowByte(A_Voltage);
@@ -738,7 +750,9 @@ bool blVoltage_Create(uint8_t *pucBuffer)
     }
     case 0x35: //B相电压数据
     {
-        B_Voltage = ((B_Voltage <= Voltage_MAX) && (B_Voltage >= Voltage_MIN) ? B_Voltage : WORK_VOLTAGE);
+        B_Voltage = ((B_Voltage <= Voltage_MAX) && (B_Voltage >= Voltage_MIN)
+                         ? B_Voltage
+                         : WORK_VOLTAGE);
         pucBuffer[8] = 0x91;
         pucBuffer[9] = 0x06;
         pucBuffer[14] = GetLowByte(B_Voltage);
@@ -753,7 +767,9 @@ bool blVoltage_Create(uint8_t *pucBuffer)
     }
     case 0x36: //C相电压数据
     {
-        C_Voltage = ((C_Voltage <= Voltage_MAX) && (C_Voltage >= Voltage_MIN) ? C_Voltage : WORK_VOLTAGE); //固定帧长18
+        C_Voltage = ((C_Voltage <= Voltage_MAX) && (C_Voltage >= Voltage_MIN)
+                         ? C_Voltage
+                         : WORK_VOLTAGE); //固定帧长18
         pucBuffer[8] = 0x91;
         pucBuffer[9] = 0x06;
         pucBuffer[14] = GetLowByte(C_Voltage);
@@ -788,7 +804,14 @@ bool BCD_Verity(uint8_t LowByte, uint8_t HighByte)
     tens = HighByte & 0x0F;
     ones = (LowByte & 0xF0) >> 4;
     decimals = LowByte & 0x0F;
-    if ((hundreds >= 0x03) && (hundreds <= 0x0C) && (tens >= 0x03) && (tens <= 0x0C) && (ones >= 0x03) && (ones <= 0x0C) && (decimals >= 0x03) && (decimals <= 0x0C))
+    if ((hundreds >= 0x03) &&
+        (hundreds <= 0x0C) &&
+        (tens >= 0x03) &&
+        (tens <= 0x0C) &&
+        (ones >= 0x03) &&
+        (ones <= 0x0C) &&
+        (decimals >= 0x03) &&
+        (decimals <= 0x0C))
     {
         return true;
     }
@@ -843,7 +866,11 @@ void vGet_Current(uint8_t LowByte, uint8_t MidByte, uint8_t HighByte, CURRENT *p
     hundreds = (MidByte - 0x33) & 0x0F;
     tens = ((LowByte - 0x33) & 0xF0) >> 4;
     ones = (LowByte - 0x33) & 0x0F;
-    pcurrent->value = million * 100000 + tenkillo * 10000 + killo * 1000 + hundreds * 100 + tens * 10 + ones;
+    pcurrent->value = million * 100000 +
+                      tenkillo * 10000 +
+                      killo * 1000 +
+                      hundreds * 100 +
+                      tens * 10 + ones;
     pcurrent->count++;
     pcurrent->isminus = ((((HighByte - 0x33) & 0x80) != 0) ? true : false);
 }
@@ -857,9 +884,12 @@ void vGet_Current(uint8_t LowByte, uint8_t MidByte, uint8_t HighByte, CURRENT *p
  **********************************************************************/
 void vPut_Current(CURRENT pcurrent, uint8_t *pLowByte, uint8_t *pMidByte, uint8_t *pHighByte)
 {
-    *pLowByte = 0x33 + ((uint8_t)(((pcurrent.value / 10) % 10) << 4) | (uint8_t)(pcurrent.value % 10));
-    *pMidByte = 0x33 + ((uint8_t)(((pcurrent.value / 1000) % 10) << 4) | (uint8_t)((pcurrent.value / 100) % 10));
-    *pHighByte = 0x33 + ((uint8_t)((pcurrent.value / 100000) << 4) | (uint8_t)((pcurrent.value / 10000) % 10));
+    *pLowByte = 0x33 + ((uint8_t)(((pcurrent.value / 10) % 10) << 4) |
+                        (uint8_t)(pcurrent.value % 10));
+    *pMidByte = 0x33 + ((uint8_t)(((pcurrent.value / 1000) % 10) << 4) |
+                        (uint8_t)((pcurrent.value / 100) % 10));
+    *pHighByte = 0x33 + ((uint8_t)((pcurrent.value / 100000) << 4) |
+                         (uint8_t)((pcurrent.value / 10000) % 10));
     if (pcurrent.isminus == true)
     {
         *pHighByte = *pHighByte | 0x80;
@@ -887,7 +917,10 @@ void Voltage_Change_Init(void)
     Vmin1 = EEProm_Read(FLASH_VMIN1_Addr);
     Vmin2 = EEProm_Read(FLASH_VMIN2_Addr);
 
-    if ((Vmax1 == 0xff) && (Vmax2 == 0xff) && (Vmin1 == 0xff) && (Vmin2 == 0xff))
+    if ((Vmax1 == 0xff) &&
+        (Vmax2 == 0xff) &&
+        (Vmin1 == 0xff) &&
+        (Vmin2 == 0xff))
     {
         Voltage_MAX = Voltage_MAX_Default; //设置电压合格上下限默认值
         Voltage_MIN = Voltage_MIN_Default;
@@ -1050,7 +1083,10 @@ bool blCurrentSingle_Modify_Method(CURRENT *ref1, CURRENT *ref2, CURRENT *result
     else if ((result->count == ref1->count) &&
              (result->count > ref2->count)) //先ref1相，后result相,根据ref1修改result
     {
-        if (ref1->value == 0 || result->value == 0 || ref1->isminus || result->isminus)
+        if (ref1->value == 0 ||
+            result->value == 0 ||
+            ref1->isminus ||
+            result->isminus)
             return false; //已经收到的两相电流中，有0值，或者有负值，不做修改
         if (result->value < ref1->value)
         {
@@ -1068,9 +1104,13 @@ bool blCurrentSingle_Modify_Method(CURRENT *ref1, CURRENT *ref2, CURRENT *result
         }
         return true;
     }
-    else if ((result->count == ref2->count) && (result->count > ref1->count)) //先ref2相，后result相，根据ref2修改result
+    else if ((result->count == ref2->count) &&
+             (result->count > ref1->count)) //先ref2相，后result相，根据ref2修改result
     {
-        if (ref2->value == 0 || result->value == 0 || ref2->isminus || result->isminus)
+        if (ref2->value == 0 ||
+            result->value == 0 ||
+            ref2->isminus ||
+            result->isminus)
             return false;
         if (result->value < ref2->value)
         {
@@ -1086,9 +1126,15 @@ bool blCurrentSingle_Modify_Method(CURRENT *ref1, CURRENT *ref2, CURRENT *result
         }
         return true;
     }
-    else if ((result->count == ref1->count) && (result->count == ref2->count)) //前两相是ref1和ref2，最后是result相
+    else if ((result->count == ref1->count) &&
+             (result->count == ref2->count)) //前两相是ref1和ref2，最后是result相
     {
-        if ((ref1->value == 0) || (ref2->value == 0) || (result->value == 0) || ref1->isminus || ref2->isminus || result->isminus)
+        if ((ref1->value == 0) ||
+            (ref2->value == 0) ||
+            (result->value == 0) ||
+            ref1->isminus ||
+            ref2->isminus ||
+            result->isminus)
             return false;
         if (result->value > MAX(ref1->value, ref2->value)) //result比前两相都大，result修改为较小值的固定比例
         {
@@ -1160,17 +1206,28 @@ void vCurrent_Modify(uint8_t *pucBuffer)
             return;
         else //需要修改，最大值减小，最小值增大，剩下的是中间值
         {
-            if ((Acurrent.value >= Bcurrent.value) && (Bcurrent.value >= Ccurrent.value))
+            if ((Acurrent.value >= Bcurrent.value) &&
+                (Bcurrent.value >= Ccurrent.value))
                 vCurrentTriple_Modify_Method(&Acurrent, &Bcurrent, &Ccurrent);
-            else if ((Acurrent.value >= Ccurrent.value) && (Ccurrent.value >= Bcurrent.value))
+
+            else if ((Acurrent.value >= Ccurrent.value) &&
+                     (Ccurrent.value >= Bcurrent.value))
                 vCurrentTriple_Modify_Method(&Acurrent, &Ccurrent, &Bcurrent);
-            else if ((Bcurrent.value >= Acurrent.value) && (Acurrent.value >= Ccurrent.value))
+
+            else if ((Bcurrent.value >= Acurrent.value) &&
+                     (Acurrent.value >= Ccurrent.value))
                 vCurrentTriple_Modify_Method(&Bcurrent, &Acurrent, &Ccurrent);
-            else if ((Bcurrent.value >= Ccurrent.value) && (Ccurrent.value >= Acurrent.value))
+
+            else if ((Bcurrent.value >= Ccurrent.value) &&
+                     (Ccurrent.value >= Acurrent.value))
                 vCurrentTriple_Modify_Method(&Bcurrent, &Ccurrent, &Acurrent);
-            else if ((Ccurrent.value >= Acurrent.value) && (Acurrent.value >= Bcurrent.value))
+
+            else if ((Ccurrent.value >= Acurrent.value) &&
+                     (Acurrent.value >= Bcurrent.value))
                 vCurrentTriple_Modify_Method(&Ccurrent, &Acurrent, &Bcurrent);
-            else if ((Ccurrent.value >= Bcurrent.value) && (Bcurrent.value >= Acurrent.value))
+
+            else if ((Ccurrent.value >= Bcurrent.value) &&
+                     (Bcurrent.value >= Acurrent.value))
                 vCurrentTriple_Modify_Method(&Ccurrent, &Bcurrent, &Acurrent);
             //A相电流,十进制数转BCD码
             vPut_Current(Acurrent, &pucBuffer[14], &pucBuffer[15], &pucBuffer[16]);
@@ -1349,9 +1406,15 @@ void vCurrent_Limit_Modify(uint8_t *pucBuffer)
             Bcurrent.value = TransFormer.CT2_CurrentLimit * Bcurrent.value / ABCcurrent;
             Ccurrent.value = TransFormer.CT2_CurrentLimit * Ccurrent.value / ABCcurrent;
         }
-        Acurrent.value = (Acurrent.value > (TransFormer.CT2_CurrentLimit / 3) ? (TransFormer.CT2_CurrentLimit / 3) : Acurrent.value);
-        Bcurrent.value = (Bcurrent.value > (TransFormer.CT2_CurrentLimit / 3) ? (TransFormer.CT2_CurrentLimit / 3) : Bcurrent.value);
-        Ccurrent.value = (Ccurrent.value > (TransFormer.CT2_CurrentLimit / 3) ? (TransFormer.CT2_CurrentLimit / 3) : Ccurrent.value);
+        Acurrent.value = (Acurrent.value > (TransFormer.CT2_CurrentLimit / 3)
+                              ? (TransFormer.CT2_CurrentLimit / 3)
+                              : Acurrent.value);
+        Bcurrent.value = (Bcurrent.value > (TransFormer.CT2_CurrentLimit / 3)
+                              ? (TransFormer.CT2_CurrentLimit / 3)
+                              : Bcurrent.value);
+        Ccurrent.value = (Ccurrent.value > (TransFormer.CT2_CurrentLimit / 3)
+                              ? (TransFormer.CT2_CurrentLimit / 3)
+                              : Ccurrent.value);
         //A相电流,十进制数转BCD码
         vPut_Current(Acurrent, &pucBuffer[14], &pucBuffer[15], &pucBuffer[16]);
         //B相电流
@@ -1369,7 +1432,9 @@ void vCurrent_Limit_Modify(uint8_t *pucBuffer)
     case 0x34: //A相电流
     {
         vGet_Current(pucBuffer[14], pucBuffer[15], pucBuffer[16], &Acurrent);
-        Acurrent.value = (Acurrent.value > (TransFormer.CT2_CurrentLimit / 3) ? (TransFormer.CT2_CurrentLimit / 3) : Acurrent.value);
+        Acurrent.value = (Acurrent.value > (TransFormer.CT2_CurrentLimit / 3)
+                              ? (TransFormer.CT2_CurrentLimit / 3)
+                              : Acurrent.value);
         vPut_Current(Acurrent, &pucBuffer[14], &pucBuffer[15], &pucBuffer[16]);
         for (i = 0; i < 17; i++) //数据域长度17
         {
@@ -1396,7 +1461,9 @@ void vCurrent_Limit_Modify(uint8_t *pucBuffer)
     case 0x36: //C相电流
     {
         vGet_Current(pucBuffer[14], pucBuffer[15], pucBuffer[16], &Ccurrent);
-        Ccurrent.value = (Ccurrent.value > (TransFormer.CT2_CurrentLimit / 3) ? (TransFormer.CT2_CurrentLimit / 3) : Ccurrent.value);
+        Ccurrent.value = (Ccurrent.value > (TransFormer.CT2_CurrentLimit / 3)
+                              ? (TransFormer.CT2_CurrentLimit / 3)
+                              : Ccurrent.value);
         vPut_Current(Bcurrent, &pucBuffer[14], &pucBuffer[15], &pucBuffer[16]);
         for (i = 0; i < 17; i++) //数据域长度17
         {
@@ -1759,7 +1826,8 @@ uint16_t Get_Estatus(uint8_t LowByte, uint8_t HighByte)
 uint8_t GetLowByte(int Voltage)
 {
     uint8_t LowByte = 0x00;
-    LowByte = (((((Voltage % 1000) % 100) / 10) << 4) & 0xF0) + ((((Voltage % 1000) % 100) % 10) & 0x0F) + 0x33;
+    LowByte = (((((Voltage % 1000) % 100) / 10) << 4) & 0xF0) +
+              ((((Voltage % 1000) % 100) % 10) & 0x0F) + 0x33;
     return LowByte;
 }
 
@@ -1774,7 +1842,8 @@ uint8_t GetLowByte(int Voltage)
 uint8_t GetHighByte(int Voltage)
 {
     uint8_t HighByte = 0x00;
-    HighByte = (((uint8_t)(Voltage / 1000) << 4) & 0xF0) + ((uint8_t)((Voltage % 1000) / 100) & 0x0F) + 0x33;
+    HighByte = (((uint8_t)(Voltage / 1000) << 4) & 0xF0) +
+               ((uint8_t)((Voltage % 1000) / 100) & 0x0F) + 0x33;
     return HighByte;
 }
 
@@ -1880,7 +1949,9 @@ uint32_t vNow_Frozen_Modify_Mothod(uint32_t nowenergy, uint32_t RealValueAddr, u
         }
         Modified_Value += (uint32_t)i;
         /*累计值溢出后归零*/
-        Modified_Value = (Modified_Value > 99999999 ? Modified_Value - 99999999 : Modified_Value);
+        Modified_Value = (Modified_Value > 99999999
+                              ? Modified_Value - 99999999
+                              : Modified_Value);
         /*将上送值存储为真实值*/
         Flash_Write_Word(RealValueAddr, nowenergy);
         /*新的修改值覆盖旧值存储*/
@@ -1995,9 +2066,11 @@ void vNowEnergy_Modifier(uint8_t *pucBuffer)
         energy_F1 = Get_Energy(pucBuffer[18], pucBuffer[19], pucBuffer[20], pucBuffer[21]);
         energy_F1 = vNow_Frozen_Modify_Mothod(energy_F1, FLASH_REAL_F1_NOWENERGY_ADDR,
                                               FLASH_MODIFIED_F1_NOWENERGY_ADDR);
+
         energy_F2 = Get_Energy(pucBuffer[22], pucBuffer[23], pucBuffer[24], pucBuffer[25]);
         energy_F2 = vNow_Frozen_Modify_Mothod(energy_F2, FLASH_REAL_F2_NOWENERGY_ADDR,
                                               FLASH_MODIFIED_F2_NOWENERGY_ADDR);
+
         energy_F3 = Get_Energy(pucBuffer[26], pucBuffer[27], pucBuffer[28], pucBuffer[29]);
         energy_F3 = vNow_Frozen_Modify_Mothod(energy_F3, FLASH_REAL_F3_NOWENERGY_ADDR,
                                               FLASH_MODIFIED_F3_NOWENERGY_ADDR);
@@ -2096,20 +2169,28 @@ void vDayfrozen_Modifier(uint8_t *pucBuffer) //修改日冻结数据函数
 
     /*正向有功尖费率电量*/
     energy_F1 = Get_Energy(pucBuffer[18], pucBuffer[19], pucBuffer[20], pucBuffer[21]);
-    energy_F1 = vNow_Frozen_Modify_Mothod(energy_F1, FLASH_REAL_1DAYFROZEN_ADDR + 4, FLASH_MODIFIED_1DAYFROZEN_ADDR + 4);
+    energy_F1 = vNow_Frozen_Modify_Mothod(energy_F1, FLASH_REAL_1DAYFROZEN_ADDR + 4,
+                                          FLASH_MODIFIED_1DAYFROZEN_ADDR + 4);
     Fill_Energy(energy_F1, &pucBuffer[18], &pucBuffer[19], &pucBuffer[20], &pucBuffer[21]);
+
     /*正向有功峰费率电量*/
     energy_F2 = Get_Energy(pucBuffer[22], pucBuffer[23], pucBuffer[24], pucBuffer[25]);
-    energy_F2 = vNow_Frozen_Modify_Mothod(energy_F2, FLASH_REAL_1DAYFROZEN_ADDR + 8, FLASH_MODIFIED_1DAYFROZEN_ADDR + 8);
+    energy_F2 = vNow_Frozen_Modify_Mothod(energy_F2, FLASH_REAL_1DAYFROZEN_ADDR + 8,
+                                          FLASH_MODIFIED_1DAYFROZEN_ADDR + 8);
     Fill_Energy(energy_F2, &pucBuffer[22], &pucBuffer[23], &pucBuffer[24], &pucBuffer[25]);
+
     /*正向有功平费率电量*/
     energy_F3 = Get_Energy(pucBuffer[26], pucBuffer[27], pucBuffer[28], pucBuffer[29]);
-    energy_F3 = vNow_Frozen_Modify_Mothod(energy_F3, FLASH_REAL_1DAYFROZEN_ADDR + 12, FLASH_MODIFIED_1DAYFROZEN_ADDR + 12);
+    energy_F3 = vNow_Frozen_Modify_Mothod(energy_F3, FLASH_REAL_1DAYFROZEN_ADDR + 12,
+                                          FLASH_MODIFIED_1DAYFROZEN_ADDR + 12);
     Fill_Energy(energy_F3, &pucBuffer[26], &pucBuffer[27], &pucBuffer[28], &pucBuffer[29]);
+
     /*正向有功谷费率电量*/
     energy_F4 = Get_Energy(pucBuffer[30], pucBuffer[31], pucBuffer[32], pucBuffer[33]);
-    energy_F4 = vNow_Frozen_Modify_Mothod(energy_F4, FLASH_REAL_1DAYFROZEN_ADDR + 16, FLASH_MODIFIED_1DAYFROZEN_ADDR + 16);
+    energy_F4 = vNow_Frozen_Modify_Mothod(energy_F4, FLASH_REAL_1DAYFROZEN_ADDR + 16,
+                                          FLASH_MODIFIED_1DAYFROZEN_ADDR + 16);
     Fill_Energy(energy_F4, &pucBuffer[30], &pucBuffer[31], &pucBuffer[32], &pucBuffer[33]);
+
     /*正向有功总电量*/
     /*获取上一日真实值*/
     energy = Get_Energy(pucBuffer[14], pucBuffer[15], pucBuffer[16], pucBuffer[17]);
@@ -2174,18 +2255,22 @@ void vAccountEnergy_Modify(uint8_t *pucBuffer)
         energy = Get_Energy(pucBuffer[14], pucBuffer[15], pucBuffer[16], pucBuffer[17]);
         energy = vAccountEnergy_Modify_Mothod(energy);
         Fill_Energy(energy, &pucBuffer[14], &pucBuffer[15], &pucBuffer[16], &pucBuffer[17]);
+
         /*正向有功尖费率电量*/
         energy = Get_Energy(pucBuffer[18], pucBuffer[19], pucBuffer[20], pucBuffer[21]);
         energy = vAccountEnergy_Modify_Mothod(energy);
         Fill_Energy(energy, &pucBuffer[18], &pucBuffer[19], &pucBuffer[20], &pucBuffer[21]);
+
         /*正向有功峰费率电量*/
         energy = Get_Energy(pucBuffer[22], pucBuffer[23], pucBuffer[24], pucBuffer[25]);
         energy = vAccountEnergy_Modify_Mothod(energy);
         Fill_Energy(energy, &pucBuffer[22], &pucBuffer[23], &pucBuffer[24], &pucBuffer[25]);
+
         /*正向有功平费率电量*/
         energy = Get_Energy(pucBuffer[26], pucBuffer[27], pucBuffer[28], pucBuffer[29]);
         energy = vAccountEnergy_Modify_Mothod(energy);
         Fill_Energy(energy, &pucBuffer[26], &pucBuffer[27], &pucBuffer[28], &pucBuffer[29]);
+
         /*正向有功谷费率电量*/
         energy = Get_Energy(pucBuffer[30], pucBuffer[31], pucBuffer[32], pucBuffer[33]);
         energy = vAccountEnergy_Modify_Mothod(energy);
@@ -2849,17 +2934,28 @@ void vLoadProfile_Current_Modify(uint8_t *pucbuffer)
                 continue;
             else //需要修改，最大值减小，最小值增大，剩下的是中间值
             {
-                if ((Acurrent.value >= Bcurrent.value) && (Bcurrent.value >= Ccurrent.value))
+                if ((Acurrent.value >= Bcurrent.value) &&
+                    (Bcurrent.value >= Ccurrent.value))
                     vCurrentTriple_Modify_Method(&Acurrent, &Bcurrent, &Ccurrent);
-                else if ((Acurrent.value >= Ccurrent.value) && (Ccurrent.value >= Bcurrent.value))
+
+                else if ((Acurrent.value >= Ccurrent.value) &&
+                         (Ccurrent.value >= Bcurrent.value))
                     vCurrentTriple_Modify_Method(&Acurrent, &Ccurrent, &Bcurrent);
-                else if ((Bcurrent.value >= Acurrent.value) && (Acurrent.value >= Ccurrent.value))
+
+                else if ((Bcurrent.value >= Acurrent.value) &&
+                         (Acurrent.value >= Ccurrent.value))
                     vCurrentTriple_Modify_Method(&Bcurrent, &Acurrent, &Ccurrent);
-                else if ((Bcurrent.value >= Ccurrent.value) && (Ccurrent.value >= Acurrent.value))
+
+                else if ((Bcurrent.value >= Ccurrent.value) &&
+                         (Ccurrent.value >= Acurrent.value))
                     vCurrentTriple_Modify_Method(&Bcurrent, &Ccurrent, &Acurrent);
-                else if ((Ccurrent.value >= Acurrent.value) && (Acurrent.value >= Bcurrent.value))
+
+                else if ((Ccurrent.value >= Acurrent.value) &&
+                         (Acurrent.value >= Bcurrent.value))
                     vCurrentTriple_Modify_Method(&Ccurrent, &Acurrent, &Bcurrent);
-                else if ((Ccurrent.value >= Bcurrent.value) && (Bcurrent.value >= Acurrent.value))
+
+                else if ((Ccurrent.value >= Bcurrent.value) &&
+                         (Bcurrent.value >= Acurrent.value))
                     vCurrentTriple_Modify_Method(&Ccurrent, &Bcurrent, &Acurrent);
                 /*回写电流*/
                 vPut_Current(Acurrent,
@@ -2923,9 +3019,15 @@ void vLoadProfile_Current_Modify(uint8_t *pucbuffer)
                 Ccurrent.value = TransFormer.CT2_CurrentLimit * Ccurrent.value / ABCcurrent;
             }
             /*保证每单相电流不重载*/
-            Acurrent.value = (Acurrent.value > (TransFormer.CT2_CurrentLimit / 3) ? (TransFormer.CT2_CurrentLimit / 3) : Acurrent.value);
-            Bcurrent.value = (Bcurrent.value > (TransFormer.CT2_CurrentLimit / 3) ? (TransFormer.CT2_CurrentLimit / 3) : Bcurrent.value);
-            Ccurrent.value = (Ccurrent.value > (TransFormer.CT2_CurrentLimit / 3) ? (TransFormer.CT2_CurrentLimit / 3) : Ccurrent.value);
+            Acurrent.value = (Acurrent.value > (TransFormer.CT2_CurrentLimit / 3)
+                                  ? (TransFormer.CT2_CurrentLimit / 3)
+                                  : Acurrent.value);
+            Bcurrent.value = (Bcurrent.value > (TransFormer.CT2_CurrentLimit / 3)
+                                  ? (TransFormer.CT2_CurrentLimit / 3)
+                                  : Bcurrent.value);
+            Ccurrent.value = (Ccurrent.value > (TransFormer.CT2_CurrentLimit / 3)
+                                  ? (TransFormer.CT2_CurrentLimit / 3)
+                                  : Ccurrent.value);
             /*回写电流*/
             vPut_Current(Acurrent,
                          &pucbuffer[10 + ID_length + 9 * n],

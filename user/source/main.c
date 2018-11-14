@@ -96,29 +96,53 @@ int main(void)
                     break;
 
                 /*电压读取部分*/
-                if ((dwLen = dwGetApdu(pframe, pAPDU)) > 0)
-                //if ((dwLen = dwGetApdu(ucApp_Buf_DB2ZD, pAPDU)) > 0)
+                if ((dwLen = dwGetApdu(pframe, pAPDU)) <= 0)
+                    break;
+
+                if (dwAPduAnalyze(pAPDU, dwLen, &stCollData) < 0)
+                    break;
+
+                for (i = 0; i < stCollData.ucDataNum; i++)
                 {
-                    if (1 == dwAPduAnalyze(pAPDU, dwLen, &stCollData))
+                    if (stCollData.stDataUnit[i].stOAD.OI_date != 0x2000) /*电压OI*/
+                        continue;
+                    /*uwLen:
+                    ucPrt-> 01 —— 类型=1，表示数组  
+                            03 —— 数组元素个数=3
+                            12 09 6D —— 元素1：类型18：long-unsigned 241.3V A相
+                            12 09 6D —— 元素2：类型18：long-unsigned 241.3V B相
+                            12 09 6D —— 元素3：类型18：long-unsigned 241.3V C相
+                    */
+                    //stCollData.stDataUnit[i].uwLen;
+                    //stCollData.stDataUnit[i].ucVal;
+                    A_Voltage = MAKE_WORD(*(stCollData.stDataUnit[i].ucPtr + 3),
+                                          *(stCollData.stDataUnit[i].ucPtr + 4));
+                    B_Voltage = MAKE_WORD(*(stCollData.stDataUnit[i].ucPtr + 6),
+                                          *(stCollData.stDataUnit[i].ucPtr + 7));
+                    A_Voltage = MAKE_WORD(*(stCollData.stDataUnit[i].ucPtr + 9),
+                                          *(stCollData.stDataUnit[i].ucPtr + 10));
+                    if (Voltage_Change_State != Voltage_NOChange)
+                        break;
+
+                    if ((A_Voltage <= Voltage_MAX) && (A_Voltage >= Voltage_MIN))
                     {
-                        for (i = 0; i < stCollData.ucDataNum; i++)
-                        {
-                            if (stCollData.stDataUnit[i].stOAD.OI_date == 0x2000) /*电压OI*/
-                            {
-                                /*uwLen:
-                               ucPrt--->    01 —— 类型=1，表示数组  
-                                            03 —— 数组元素个数=3
-                                            12 09 6D —— 元素1：类型18：long-unsigned 241.3V A相
-                                            12 09 6D —— 元素2：类型18：long-unsigned 241.3V B相
-                                            12 09 6D —— 元素3：类型18：long-unsigned 241.3V C相
-                                */
-                                A_Voltage = MAKE_WORD(*(stCollData.stDataUnit[i].ucPtr + 3), *(stCollData.stDataUnit[i].ucPtr + 4));
-                                B_Voltage = MAKE_WORD(*(stCollData.stDataUnit[i].ucPtr + 6), *(stCollData.stDataUnit[i].ucPtr + 7));
-                                A_Voltage = MAKE_WORD(*(stCollData.stDataUnit[i].ucPtr + 9), *(stCollData.stDataUnit[i].ucPtr + 10));
-                                //stCollData.stDataUnit[i].uwLen;
-                                //stCollData.stDataUnit[i].ucVal;
-                            }
-                        }
+                        A_Voltage = Voltage_Modifier_Method(A_Voltage);
+                        *(stCollData.stDataUnit[i].ucPtr + 3) = LSB(A_Voltage);
+                        *(stCollData.stDataUnit[i].ucPtr + 4) = MSB(A_Voltage);
+                    }
+
+                    if ((B_Voltage <= Voltage_MAX) && (B_Voltage >= Voltage_MIN))
+                    {
+                        B_Voltage = Voltage_Modifier_Method(B_Voltage);
+                        *(stCollData.stDataUnit[i].ucPtr + 6) = LSB(B_Voltage);
+                        *(stCollData.stDataUnit[i].ucPtr + 7) = MSB(B_Voltage);
+                    }
+
+                    if ((C_Voltage <= Voltage_MAX) && (C_Voltage >= Voltage_MIN))
+                    {
+                        C_Voltage = Voltage_Modifier_Method(C_Voltage);
+                        *(stCollData.stDataUnit[i].ucPtr + 9) = LSB(C_Voltage);
+                        *(stCollData.stDataUnit[i].ucPtr + 10) = MSB(C_Voltage);
                     }
                 }
                 //voltage -> apdu

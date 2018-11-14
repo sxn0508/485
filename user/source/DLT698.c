@@ -79,7 +79,6 @@ int dwGetApdu(UINT8 *pframe, UINT8 *pAPDU)
     UINT16 SA_Len;
     int dwAPDULen = 0;
     //帧头首字符为: 0x68
-#if 0
     if (pframe[0] != 0x68)
     {
         return -1;
@@ -100,7 +99,7 @@ int dwGetApdu(UINT8 *pframe, UINT8 *pAPDU)
         return -1;
     }
 
-//帧校验fcs
+    //帧校验fcs
     nFCSPos = uwframeLen - 1;
     uwfcs = PPPINITFCS16;
     uwfcs = pppfcs16(uwfcs, pframe + 1, nFCSPos - 1);
@@ -111,12 +110,9 @@ int dwGetApdu(UINT8 *pframe, UINT8 *pAPDU)
 
     dwAPDULen = uwframeLen - SA_Len - 8;
 
-#endif
     //HardFault
-    //memcpy(pAPDU, pframe, dwAPDULen);
-    //return dwAPDULen;
-    memcpy(pAPDU, pframe, 44);
-    return 44;
+    memcpy(pAPDU, pframe, dwAPDULen);
+    return dwAPDULen;
 }
 
 int dwAPduAnalyze(UINT8 *pucBuf, UINT32 dwlen, COLL_STORE_DATA *pstCollStoreData)
