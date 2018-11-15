@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
   27:../stdperiph/source/stm32f37x_sdadc.c ****         RCC_APB1PeriphClockCmd(RCC_APB1Periph_SDADC1, ENABLE);
   28:../stdperiph/source/stm32f37x_sdadc.c ****     (#) The SDADCs are clocked by APB1.
   29:../stdperiph/source/stm32f37x_sdadc.c ****         In order to get the SDADC running at the typical frequency (6 MHz
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 2
 
 
   30:../stdperiph/source/stm32f37x_sdadc.c ****         in fast mode), use SDADC prescaler by calling RCC_SDADCCLKConfig() function
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
   84:../stdperiph/source/stm32f37x_sdadc.c ****   */ 
   85:../stdperiph/source/stm32f37x_sdadc.c **** 
   86:../stdperiph/source/stm32f37x_sdadc.c **** /* Includes ------------------------------------------------------------------*/
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 3
 
 
   87:../stdperiph/source/stm32f37x_sdadc.c **** #include "stm32f37x_sdadc.h"
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
   31              		.cfi_startproc
   32              		@ args = 0, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 4
 
 
   34              	.LVL0:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
   72              	.LVL7:
   73 0038 08BD     		pop	{r3, pc}
   74              	.LVL8:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 5
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 5
 
 
   75              	.L4:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  106              		@ args = 0, pretend = 0, frame = 0
  107              		@ frame_needed = 0, uses_anonymous_args = 0
  108              		@ link register save eliminated.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 6
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 6
 
 
  109              	.LVL12:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  136              		.loc 1 205 0
  137 0020 4360     		str	r3, [r0, #4]
  206:../stdperiph/source/stm32f37x_sdadc.c **** }
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 7
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 7
 
 
  138              		.loc 1 206 0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  176              		.thumb
  177              		.thumb_func
  179              	SDADC_AINInit:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 8
 
 
  180              	.LFB114:
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  258:../stdperiph/source/stm32f37x_sdadc.c ****                                          SDADC_AINStruct->SDADC_CommonMode |
  201              		.loc 1 258 0
  202 000a 9368     		ldr	r3, [r2, #8]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 9
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 9
 
 
  257:../stdperiph/source/stm32f37x_sdadc.c ****                                          SDADC_AINStruct->SDADC_Gain |
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  238 0004 4360     		str	r3, [r0, #4]
  277:../stdperiph/source/stm32f37x_sdadc.c **** 
  278:../stdperiph/source/stm32f37x_sdadc.c ****   /* Initialize the SDADC_CommonMode member */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 10
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 10
 
 
  279:../stdperiph/source/stm32f37x_sdadc.c ****   SDADC_AINStruct->SDADC_CommonMode = SDADC_CommonMode_VSSA;
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  313:../stdperiph/source/stm32f37x_sdadc.c **** 
  314:../stdperiph/source/stm32f37x_sdadc.c ****   /* Check the parameters */
  315:../stdperiph/source/stm32f37x_sdadc.c ****   assert_param(IS_SDADC_ALL_PERIPH(SDADCx));
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 11
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 11
 
 
  316:../stdperiph/source/stm32f37x_sdadc.c ****   assert_param(IS_SDADC_INJECTED_CHANNEL(SDADC_Channel));
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  337:../stdperiph/source/stm32f37x_sdadc.c ****   * @param  SDADCx: where x can be 1, 2 or 3 to select the SDADC peripheral.
  338:../stdperiph/source/stm32f37x_sdadc.c ****   * @param  NewState: new state of the SDADCx peripheral.
  339:../stdperiph/source/stm32f37x_sdadc.c ****   *          This parameter can be: ENABLE or DISABLE.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 12
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 12
 
 
  340:../stdperiph/source/stm32f37x_sdadc.c ****   * @retval None
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  366:../stdperiph/source/stm32f37x_sdadc.c ****   *          This parameter can be: ENABLE or DISABLE.
  367:../stdperiph/source/stm32f37x_sdadc.c ****   *         When enabled, the SDADCx is in initialization mode and the SDADCx can
  368:../stdperiph/source/stm32f37x_sdadc.c ****   *         be configured (except: power down mode, standby mode, slow clock and VREF selection).
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 13
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 13
 
 
  369:../stdperiph/source/stm32f37x_sdadc.c ****   *         When disabled, the SDADCx isn't in initialization mode and limited
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  395:../stdperiph/source/stm32f37x_sdadc.c ****   *         3 times faster (taking 120 SDADC cycles rather than 360).
  396:../stdperiph/source/stm32f37x_sdadc.c ****   *         Fast conversion mode has no meaning for conversions which are not continuous.
  397:../stdperiph/source/stm32f37x_sdadc.c ****   * @note   fast conversion mode can be modified only if the SDADC is disabled
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 14
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 14
 
 
  398:../stdperiph/source/stm32f37x_sdadc.c ****   *         or the INITRDY flag is set. Otherwise the configuration can't be modified.    
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  424:../stdperiph/source/stm32f37x_sdadc.c ****   * @note   The reference voltage is common to the all SDADCs (SDADC1, SDADC2 and SDADC3).
  425:../stdperiph/source/stm32f37x_sdadc.c ****   *         The reference voltage selection is available only in SDADC1 and therefore
  426:../stdperiph/source/stm32f37x_sdadc.c ****   *         to select the VREF for SDADC2/SDADC3, SDADC1 clock must be already enabled.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 15
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 15
 
 
  427:../stdperiph/source/stm32f37x_sdadc.c ****   * @note   The reference voltage selection can be performed only when the SDADC
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  414              		.global	SDADC_CalibrationSequenceConfig
  415              		.thumb
  416              		.thumb_func
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 16
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 16
 
 
  418              	SDADC_CalibrationSequenceConfig:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  435              		.loc 1 490 0
  436 0008 4160     		str	r1, [r0, #4]
  437 000a 7047     		bx	lr
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 17
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 17
 
 
  438              		.cfi_endproc
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  516:../stdperiph/source/stm32f37x_sdadc.c ****  *
  517:../stdperiph/source/stm32f37x_sdadc.c **** @verbatim   
  518:../stdperiph/source/stm32f37x_sdadc.c ****  ===============================================================================
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 18
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 18
 
 
  519:../stdperiph/source/stm32f37x_sdadc.c ****           ##### Regular Channels Configuration functions ##### 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  567:../stdperiph/source/stm32f37x_sdadc.c ****   assert_param(IS_SDADC_REGULAR_CHANNEL(SDADC_Channel));
  568:../stdperiph/source/stm32f37x_sdadc.c **** 
  569:../stdperiph/source/stm32f37x_sdadc.c ****   /* Get SDADC_CR2 register value */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 19
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 19
 
 
  570:../stdperiph/source/stm32f37x_sdadc.c ****   tmpcr2 = SDADCx->CR2;
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  594:../stdperiph/source/stm32f37x_sdadc.c ****   /* Check the parameters */
  595:../stdperiph/source/stm32f37x_sdadc.c ****   assert_param(IS_SDADC_ALL_PERIPH(SDADCx));
  596:../stdperiph/source/stm32f37x_sdadc.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 20
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 20
 
 
  597:../stdperiph/source/stm32f37x_sdadc.c **** 
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  623:../stdperiph/source/stm32f37x_sdadc.c ****   SDADCx->CR2 |= (uint32_t)SDADC_CR2_RSWSTART;
  539              		.loc 1 623 0
  540 0000 4368     		ldr	r3, [r0, #4]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 21
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 21
 
 
  541 0002 43F40003 		orr	r3, r3, #8388608
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  645:../stdperiph/source/stm32f37x_sdadc.c ****   *         that a regular conversion is launched in SDADC1.
  646:../stdperiph/source/stm32f37x_sdadc.c ****   *         When disabled, do not launch a regular conversion synchronously with SDADC1.
  647:../stdperiph/source/stm32f37x_sdadc.c ****   * @retval None
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 22
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 22
 
 
  648:../stdperiph/source/stm32f37x_sdadc.c ****   */
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  674:../stdperiph/source/stm32f37x_sdadc.c ****   *         In 16-bit LSB: the regular conversion data for SDADC1.
  675:../stdperiph/source/stm32f37x_sdadc.c ****   *          This data is valid only when the flag SDADC_FLAG_REOC of SDADC1 is set.    
  676:../stdperiph/source/stm32f37x_sdadc.c ****   */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 23
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 23
 
 
  677:../stdperiph/source/stm32f37x_sdadc.c **** uint32_t SDADC_GetConversionSDADC12Value(void)
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  643              	.L47:
  644 0006 00BF     		.align	2
  645              	.L46:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 24
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 24
 
 
  646 0008 00600140 		.word	1073831936
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  663              	.LVL48:
  737:../stdperiph/source/stm32f37x_sdadc.c ****   /* Check the parameters */
  738:../stdperiph/source/stm32f37x_sdadc.c ****   assert_param(IS_SDADC_ALL_PERIPH(SDADCx));
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 25
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 25
 
 
  739:../stdperiph/source/stm32f37x_sdadc.c **** 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  689 0002 4161     		str	r1, [r0, #20]
  690 0004 7047     		bx	lr
  691              		.cfi_endproc
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 26
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 26
 
 
  692              	.LFE131:
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  720 0014 7047     		bx	lr
  721              		.cfi_endproc
  722              	.LFE132:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 27
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 27
 
 
  724 0016 00BF     		.section	.text.SDADC_InjectedContinuousModeCmd,"ax",%progbits
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  754 0016 00BF     		.section	.text.SDADC_ExternalTrigInjectedConvConfig,"ax",%progbits
  755              		.align	2
  756              		.global	SDADC_ExternalTrigInjectedConvConfig
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 28
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 28
 
 
  757              		.thumb
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  865:../stdperiph/source/stm32f37x_sdadc.c **** 
  866:../stdperiph/source/stm32f37x_sdadc.c ****   /* Clear the old external trigger selection for injected group */
  867:../stdperiph/source/stm32f37x_sdadc.c ****   tmpreg &= (uint32_t) (~SDADC_CR2_JEXTSEL);
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 29
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 29
 
 
  771              		.loc 1 867 0
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  898:../stdperiph/source/stm32f37x_sdadc.c **** 
  899:../stdperiph/source/stm32f37x_sdadc.c ****   /* Get the old register value */
  900:../stdperiph/source/stm32f37x_sdadc.c ****   tmpreg = SDADCx->CR2;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 30
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 30
 
 
  797              		.loc 1 900 0
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  825              	.LVL61:
  929:../stdperiph/source/stm32f37x_sdadc.c ****   uint32_t temp = 0;
  930:../stdperiph/source/stm32f37x_sdadc.c ****   
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 31
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 31
 
 
  931:../stdperiph/source/stm32f37x_sdadc.c ****   /* Check the parameters */
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  853              		@ frame_needed = 0, uses_anonymous_args = 0
  854              		@ link register save eliminated.
  855              	.LVL66:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 32
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 32
 
 
  960:../stdperiph/source/stm32f37x_sdadc.c ****   uint32_t tmp = 0;
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  884              		@ link register save eliminated.
  885              	.LVL69:
  988:../stdperiph/source/stm32f37x_sdadc.c ****   /* Check the parameters */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 33
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 33
 
 
  989:../stdperiph/source/stm32f37x_sdadc.c ****   assert_param(IS_SDADC_SLAVE_PERIPH(SDADCx));
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
 1016:../stdperiph/source/stm32f37x_sdadc.c ****   /* Return the selected conversion value for injected channel of SDADC1 and SDADC2*/
 1017:../stdperiph/source/stm32f37x_sdadc.c ****   return (uint32_t) SDADC1->JDATA12R;
  915              		.loc 1 1017 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 34
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 34
 
 
  916 0000 014B     		ldr	r3, .L64
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  956              		.thumb_func
  958              	SDADC_PowerDownCmd:
  959              	.LFB141:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 35
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 35
 
 
 1035:../stdperiph/source/stm32f37x_sdadc.c **** 
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  972 000a 7047     		bx	lr
  973              	.L70:
 1077:../stdperiph/source/stm32f37x_sdadc.c ****   }
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 36
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 36
 
 
 1078:../stdperiph/source/stm32f37x_sdadc.c ****   else
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  1002 000a 7047     		bx	lr
  1003              	.L73:
 1106:../stdperiph/source/stm32f37x_sdadc.c ****   }
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 37
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 37
 
 
 1107:../stdperiph/source/stm32f37x_sdadc.c ****   else
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  1033              	.L76:
 1134:../stdperiph/source/stm32f37x_sdadc.c ****   }
 1135:../stdperiph/source/stm32f37x_sdadc.c ****   else
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 38
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 38
 
 
 1136:../stdperiph/source/stm32f37x_sdadc.c ****   {
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
 1176:../stdperiph/source/stm32f37x_sdadc.c ****   * @param  NewState Indicates the new state of the SDADC DMA interface.
 1177:../stdperiph/source/stm32f37x_sdadc.c ****   *           This parameter can be: ENABLE or DISABLE.  
 1178:../stdperiph/source/stm32f37x_sdadc.c ****   * @retval None
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 39
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 39
 
 
 1179:../stdperiph/source/stm32f37x_sdadc.c ****   */
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
 1202:../stdperiph/source/stm32f37x_sdadc.c **** 
 1203:../stdperiph/source/stm32f37x_sdadc.c **** /** @defgroup SDADC_Group6 Interrupts and flags management functions
 1204:../stdperiph/source/stm32f37x_sdadc.c ****  *  @brief   Interrupts and flags management functions
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 40
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 40
 
 
 1205:../stdperiph/source/stm32f37x_sdadc.c ****  *
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
 1259:../stdperiph/source/stm32f37x_sdadc.c ****          (+) SDADC_ClearFlag()    : to clear the flags events.
 1260:../stdperiph/source/stm32f37x_sdadc.c **** 
 1261:../stdperiph/source/stm32f37x_sdadc.c ****     [..] In the Interrupt Mode it is advised to use the following functions:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 41
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 41
 
 
 1262:../stdperiph/source/stm32f37x_sdadc.c ****          (+) SDADC_ITConfig()         : to enable or disable the interrupt source.
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  1099              		.loc 1 1299 0
  1100 000a 0368     		ldr	r3, [r0]
  1101 000c 23EA0101 		bic	r1, r3, r1
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 42
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 42
 
 
  1102              	.LVL80:
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  1126              		.loc 1 1331 0
  1127 0006 0120     		movs	r0, #1
  1128              	.LVL82:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 43
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 43
 
 
  1129 0008 7047     		bx	lr
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  1157              	.LVL86:
  1158 0004 C160     		str	r1, [r0, #12]
  1159 0006 7047     		bx	lr
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 44
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 44
 
 
  1160              		.cfi_endproc
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  1187              		.loc 1 1388 0 is_stmt 0 discriminator 1
  1188 000a 1BB9     		cbnz	r3, .L91
 1389:../stdperiph/source/stm32f37x_sdadc.c ****   {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 45
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 45
 
 
 1390:../stdperiph/source/stm32f37x_sdadc.c ****     /* SDADC_IT is set */
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  1220              		@ link register save eliminated.
  1221              	.LVL95:
 1414:../stdperiph/source/stm32f37x_sdadc.c ****   /* Check the parameters */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 46
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 46
 
 
 1415:../stdperiph/source/stm32f37x_sdadc.c ****   assert_param(IS_SDADC_ALL_PERIPH(SDADCx));
@@ -2722,99 +2722,99 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 1
  1236              		.file 5 "../stdperiph/include/stm32f37x_sdadc.h"
  1237              		.file 6 "../cmsis/include/core_cm4.h"
  1238              		.file 7 "../stdperiph/include/stm32f37x_rcc.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 47
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 47
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f37x_sdadc.c
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:22     .text.SDADC_DeInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:27     .text.SDADC_DeInit:00000000 SDADC_DeInit
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:91     .text.SDADC_DeInit:00000050 $d
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:97     .text.SDADC_Init:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:102    .text.SDADC_Init:00000000 SDADC_Init
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:148    .text.SDADC_StructInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:153    .text.SDADC_StructInit:00000000 SDADC_StructInit
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:174    .text.SDADC_AINInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:179    .text.SDADC_AINInit:00000000 SDADC_AINInit
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:221    .text.SDADC_AINStructInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:226    .text.SDADC_AINStructInit:00000000 SDADC_AINStructInit
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:248    .text.SDADC_ChannelConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:253    .text.SDADC_ChannelConfig:00000000 SDADC_ChannelConfig
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:284    .text.SDADC_ChannelConfig:0000001c $d
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:289    .text.SDADC_Cmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:294    .text.SDADC_Cmd:00000000 SDADC_Cmd
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:319    .text.SDADC_InitModeCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:324    .text.SDADC_InitModeCmd:00000000 SDADC_InitModeCmd
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:349    .text.SDADC_FastConversionCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:354    .text.SDADC_FastConversionCmd:00000000 SDADC_FastConversionCmd
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:379    .text.SDADC_VREFSelect:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:384    .text.SDADC_VREFSelect:00000000 SDADC_VREFSelect
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:408    .text.SDADC_VREFSelect:00000010 $d
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:413    .text.SDADC_CalibrationSequenceConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:418    .text.SDADC_CalibrationSequenceConfig:00000000 SDADC_CalibrationSequenceConfig
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:442    .text.SDADC_StartCalibration:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:447    .text.SDADC_StartCalibration:00000000 SDADC_StartCalibration
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:464    .text.SDADC_ChannelSelect:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:469    .text.SDADC_ChannelSelect:00000000 SDADC_ChannelSelect
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:496    .text.SDADC_ContinuousModeCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:501    .text.SDADC_ContinuousModeCmd:00000000 SDADC_ContinuousModeCmd
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:526    .text.SDADC_SoftwareStartConv:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:531    .text.SDADC_SoftwareStartConv:00000000 SDADC_SoftwareStartConv
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:548    .text.SDADC_GetConversionValue:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:553    .text.SDADC_GetConversionValue:00000000 SDADC_GetConversionValue
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:571    .text.SDADC_RegularSynchroSDADC1:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:576    .text.SDADC_RegularSynchroSDADC1:00000000 SDADC_RegularSynchroSDADC1
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:601    .text.SDADC_GetConversionSDADC12Value:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:606    .text.SDADC_GetConversionSDADC12Value:00000000 SDADC_GetConversionSDADC12Value
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:621    .text.SDADC_GetConversionSDADC12Value:00000008 $d
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:626    .text.SDADC_GetConversionSDADC13Value:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:631    .text.SDADC_GetConversionSDADC13Value:00000000 SDADC_GetConversionSDADC13Value
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:646    .text.SDADC_GetConversionSDADC13Value:00000008 $d
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:651    .text.SDADC_SoftwareStartInjectedConv:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:656    .text.SDADC_SoftwareStartInjectedConv:00000000 SDADC_SoftwareStartInjectedConv
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:673    .text.SDADC_InjectedChannelSelect:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:678    .text.SDADC_InjectedChannelSelect:00000000 SDADC_InjectedChannelSelect
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:695    .text.SDADC_DelayStartInjectedConvCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:700    .text.SDADC_DelayStartInjectedConvCmd:00000000 SDADC_DelayStartInjectedConvCmd
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:725    .text.SDADC_InjectedContinuousModeCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:730    .text.SDADC_InjectedContinuousModeCmd:00000000 SDADC_InjectedContinuousModeCmd
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:755    .text.SDADC_ExternalTrigInjectedConvConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:760    .text.SDADC_ExternalTrigInjectedConvConfig:00000000 SDADC_ExternalTrigInjectedConvConfig
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:784    .text.SDADC_ExternalTrigInjectedConvEdgeConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:789    .text.SDADC_ExternalTrigInjectedConvEdgeConfig:00000000 SDADC_ExternalTrigInjectedConvEdgeConfig
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNkigqF.s 			page 48
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:22     .text.SDADC_DeInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:27     .text.SDADC_DeInit:00000000 SDADC_DeInit
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:91     .text.SDADC_DeInit:00000050 $d
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:97     .text.SDADC_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:102    .text.SDADC_Init:00000000 SDADC_Init
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:148    .text.SDADC_StructInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:153    .text.SDADC_StructInit:00000000 SDADC_StructInit
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:174    .text.SDADC_AINInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:179    .text.SDADC_AINInit:00000000 SDADC_AINInit
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:221    .text.SDADC_AINStructInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:226    .text.SDADC_AINStructInit:00000000 SDADC_AINStructInit
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:248    .text.SDADC_ChannelConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:253    .text.SDADC_ChannelConfig:00000000 SDADC_ChannelConfig
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:284    .text.SDADC_ChannelConfig:0000001c $d
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:289    .text.SDADC_Cmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:294    .text.SDADC_Cmd:00000000 SDADC_Cmd
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:319    .text.SDADC_InitModeCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:324    .text.SDADC_InitModeCmd:00000000 SDADC_InitModeCmd
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:349    .text.SDADC_FastConversionCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:354    .text.SDADC_FastConversionCmd:00000000 SDADC_FastConversionCmd
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:379    .text.SDADC_VREFSelect:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:384    .text.SDADC_VREFSelect:00000000 SDADC_VREFSelect
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:408    .text.SDADC_VREFSelect:00000010 $d
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:413    .text.SDADC_CalibrationSequenceConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:418    .text.SDADC_CalibrationSequenceConfig:00000000 SDADC_CalibrationSequenceConfig
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:442    .text.SDADC_StartCalibration:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:447    .text.SDADC_StartCalibration:00000000 SDADC_StartCalibration
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:464    .text.SDADC_ChannelSelect:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:469    .text.SDADC_ChannelSelect:00000000 SDADC_ChannelSelect
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:496    .text.SDADC_ContinuousModeCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:501    .text.SDADC_ContinuousModeCmd:00000000 SDADC_ContinuousModeCmd
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:526    .text.SDADC_SoftwareStartConv:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:531    .text.SDADC_SoftwareStartConv:00000000 SDADC_SoftwareStartConv
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:548    .text.SDADC_GetConversionValue:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:553    .text.SDADC_GetConversionValue:00000000 SDADC_GetConversionValue
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:571    .text.SDADC_RegularSynchroSDADC1:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:576    .text.SDADC_RegularSynchroSDADC1:00000000 SDADC_RegularSynchroSDADC1
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:601    .text.SDADC_GetConversionSDADC12Value:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:606    .text.SDADC_GetConversionSDADC12Value:00000000 SDADC_GetConversionSDADC12Value
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:621    .text.SDADC_GetConversionSDADC12Value:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:626    .text.SDADC_GetConversionSDADC13Value:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:631    .text.SDADC_GetConversionSDADC13Value:00000000 SDADC_GetConversionSDADC13Value
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:646    .text.SDADC_GetConversionSDADC13Value:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:651    .text.SDADC_SoftwareStartInjectedConv:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:656    .text.SDADC_SoftwareStartInjectedConv:00000000 SDADC_SoftwareStartInjectedConv
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:673    .text.SDADC_InjectedChannelSelect:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:678    .text.SDADC_InjectedChannelSelect:00000000 SDADC_InjectedChannelSelect
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:695    .text.SDADC_DelayStartInjectedConvCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:700    .text.SDADC_DelayStartInjectedConvCmd:00000000 SDADC_DelayStartInjectedConvCmd
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:725    .text.SDADC_InjectedContinuousModeCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:730    .text.SDADC_InjectedContinuousModeCmd:00000000 SDADC_InjectedContinuousModeCmd
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:755    .text.SDADC_ExternalTrigInjectedConvConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:760    .text.SDADC_ExternalTrigInjectedConvConfig:00000000 SDADC_ExternalTrigInjectedConvConfig
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:784    .text.SDADC_ExternalTrigInjectedConvEdgeConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:789    .text.SDADC_ExternalTrigInjectedConvEdgeConfig:00000000 SDADC_ExternalTrigInjectedConvEdgeConfig
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccqSczVh.s 			page 48
 
 
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:813    .text.SDADC_GetInjectedChannel:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:818    .text.SDADC_GetInjectedChannel:00000000 SDADC_GetInjectedChannel
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:843    .text.SDADC_GetInjectedConversionValue:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:848    .text.SDADC_GetInjectedConversionValue:00000000 SDADC_GetInjectedConversionValue
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:873    .text.SDADC_InjectedSynchroSDADC1:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:878    .text.SDADC_InjectedSynchroSDADC1:00000000 SDADC_InjectedSynchroSDADC1
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:903    .text.SDADC_GetInjectedConversionSDADC12Value:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:908    .text.SDADC_GetInjectedConversionSDADC12Value:00000000 SDADC_GetInjectedConversionSDADC12Value
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:923    .text.SDADC_GetInjectedConversionSDADC12Value:00000008 $d
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:928    .text.SDADC_GetInjectedConversionSDADC13Value:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:933    .text.SDADC_GetInjectedConversionSDADC13Value:00000000 SDADC_GetInjectedConversionSDADC13Value
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:948    .text.SDADC_GetInjectedConversionSDADC13Value:00000008 $d
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:953    .text.SDADC_PowerDownCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:958    .text.SDADC_PowerDownCmd:00000000 SDADC_PowerDownCmd
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:983    .text.SDADC_StandbyCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:988    .text.SDADC_StandbyCmd:00000000 SDADC_StandbyCmd
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1013   .text.SDADC_SlowClockCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1018   .text.SDADC_SlowClockCmd:00000000 SDADC_SlowClockCmd
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1043   .text.SDADC_DMAConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1048   .text.SDADC_DMAConfig:00000000 SDADC_DMAConfig
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1076   .text.SDADC_ITConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1081   .text.SDADC_ITConfig:00000000 SDADC_ITConfig
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1109   .text.SDADC_GetFlagStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1114   .text.SDADC_GetFlagStatus:00000000 SDADC_GetFlagStatus
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1141   .text.SDADC_ClearFlag:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1146   .text.SDADC_ClearFlag:00000000 SDADC_ClearFlag
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1164   .text.SDADC_GetITStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1169   .text.SDADC_GetITStatus:00000000 SDADC_GetITStatus
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1209   .text.SDADC_ClearITPendingBit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccNkigqF.s:1214   .text.SDADC_ClearITPendingBit:00000000 SDADC_ClearITPendingBit
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:813    .text.SDADC_GetInjectedChannel:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:818    .text.SDADC_GetInjectedChannel:00000000 SDADC_GetInjectedChannel
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:843    .text.SDADC_GetInjectedConversionValue:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:848    .text.SDADC_GetInjectedConversionValue:00000000 SDADC_GetInjectedConversionValue
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:873    .text.SDADC_InjectedSynchroSDADC1:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:878    .text.SDADC_InjectedSynchroSDADC1:00000000 SDADC_InjectedSynchroSDADC1
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:903    .text.SDADC_GetInjectedConversionSDADC12Value:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:908    .text.SDADC_GetInjectedConversionSDADC12Value:00000000 SDADC_GetInjectedConversionSDADC12Value
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:923    .text.SDADC_GetInjectedConversionSDADC12Value:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:928    .text.SDADC_GetInjectedConversionSDADC13Value:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:933    .text.SDADC_GetInjectedConversionSDADC13Value:00000000 SDADC_GetInjectedConversionSDADC13Value
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:948    .text.SDADC_GetInjectedConversionSDADC13Value:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:953    .text.SDADC_PowerDownCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:958    .text.SDADC_PowerDownCmd:00000000 SDADC_PowerDownCmd
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:983    .text.SDADC_StandbyCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:988    .text.SDADC_StandbyCmd:00000000 SDADC_StandbyCmd
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1013   .text.SDADC_SlowClockCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1018   .text.SDADC_SlowClockCmd:00000000 SDADC_SlowClockCmd
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1043   .text.SDADC_DMAConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1048   .text.SDADC_DMAConfig:00000000 SDADC_DMAConfig
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1076   .text.SDADC_ITConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1081   .text.SDADC_ITConfig:00000000 SDADC_ITConfig
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1109   .text.SDADC_GetFlagStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1114   .text.SDADC_GetFlagStatus:00000000 SDADC_GetFlagStatus
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1141   .text.SDADC_ClearFlag:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1146   .text.SDADC_ClearFlag:00000000 SDADC_ClearFlag
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1164   .text.SDADC_GetITStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1169   .text.SDADC_GetITStatus:00000000 SDADC_GetITStatus
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1209   .text.SDADC_ClearITPendingBit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccqSczVh.s:1214   .text.SDADC_ClearITPendingBit:00000000 SDADC_ClearITPendingBit
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

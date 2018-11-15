@@ -10,7 +10,8 @@ build/DLT698.d: ../user/source/DLT698.c ../user/include/DLT698.h \
  ../stdperiph/include/stm32f37x_rcc.h \
  ../stdperiph/include/stm32f37x_tim.h \
  ../stdperiph/include/stm32f37x_usart.h \
- ../stdperiph/include/stm32f37x_misc.h ../user/include/BaseDef.h
+ ../stdperiph/include/stm32f37x_misc.h ../user/include/BaseDef.h \
+ ../user/include/DLT645.h ../user/include/Uart.h ../user/include/main.h
 
 ../user/include/DLT698.h:
 
@@ -49,3 +50,9 @@ build/DLT698.d: ../user/source/DLT698.c ../user/include/DLT698.h \
 ../stdperiph/include/stm32f37x_misc.h:
 
 ../user/include/BaseDef.h:
+
+../user/include/DLT645.h:
+
+../user/include/Uart.h:
+
+../user/include/main.h:

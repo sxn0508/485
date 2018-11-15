@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
   27:../stdperiph/source/stm32f37x_cec.c ****            (#) Supports listen mode.The CEC Messages addressed to different destination
   28:../stdperiph/source/stm32f37x_cec.c ****                can be received without interfering with CEC bus when Listen mode option is enabled.
   29:../stdperiph/source/stm32f37x_cec.c ****            (#) Configurable Rx-Tolerance(Standard and Extended tolerance margin).
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 2
 
 
   30:../stdperiph/source/stm32f37x_cec.c ****            (#) Error detection with configurable error bit generation.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
   84:../stdperiph/source/stm32f37x_cec.c ****   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   85:../stdperiph/source/stm32f37x_cec.c ****   * See the License for the specific language governing permissions and
   86:../stdperiph/source/stm32f37x_cec.c ****   * limitations under the License.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 3
 
 
   87:../stdperiph/source/stm32f37x_cec.c ****   *
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  141:../stdperiph/source/stm32f37x_cec.c ****   */
  142:../stdperiph/source/stm32f37x_cec.c **** 
  143:../stdperiph/source/stm32f37x_cec.c **** /** @defgroup CEC_Group1 Initialization and Configuration functions
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 4
 
 
  144:../stdperiph/source/stm32f37x_cec.c ****  *  @brief   Initialization and Configuration functions
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
   53              		.section	.text.CEC_Init,"ax",%progbits
   54              		.align	2
   55              		.global	CEC_Init
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 5
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 5
 
 
   56              		.thumb
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  207:../stdperiph/source/stm32f37x_cec.c ****   /* Configure the CEC peripheral */
  208:../stdperiph/source/stm32f37x_cec.c ****   tmpreg |= (CEC_InitStruct->CEC_SignalFreeTime | CEC_InitStruct->CEC_RxTolerance |
   80              		.loc 1 208 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 6
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 6
 
 
   81 000a 0268     		ldr	r2, [r0]
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  125              		.thumb_func
  127              	CEC_StructInit:
  128              	.LFB113:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 7
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 7
 
 
  216:../stdperiph/source/stm32f37x_cec.c **** 
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  239:../stdperiph/source/stm32f37x_cec.c ****   */
  240:../stdperiph/source/stm32f37x_cec.c **** void CEC_Cmd(FunctionalState NewState)
  241:../stdperiph/source/stm32f37x_cec.c **** {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 8
 
 
  162              		.loc 1 241 0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  202              	.LFE115:
  204              		.section	.text.CEC_OwnAddressConfig,"ax",%progbits
  205              		.align	2
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 9
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 9
 
 
  206              		.global	CEC_OwnAddressConfig
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  275:../stdperiph/source/stm32f37x_cec.c **** 
  276:../stdperiph/source/stm32f37x_cec.c **** /**
  277:../stdperiph/source/stm32f37x_cec.c ****   * @brief  Clears the Own Address of the CEC device.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 10
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 10
 
 
  278:../stdperiph/source/stm32f37x_cec.c ****   * @param  CEC_OwnAddress: The CEC own address.
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  309:../stdperiph/source/stm32f37x_cec.c ****   * @retval None
  310:../stdperiph/source/stm32f37x_cec.c ****   */
  311:../stdperiph/source/stm32f37x_cec.c **** void CEC_SendData(uint8_t Data)
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 11
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 11
 
 
  312:../stdperiph/source/stm32f37x_cec.c **** {
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  312              	.LFE119:
  314              		.section	.text.CEC_StartOfMessage,"ax",%progbits
  315              		.align	2
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 12
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 12
 
 
  316              		.global	CEC_StartOfMessage
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  352              		.loc 1 347 0
  353 0000 0122     		movs	r2, #1
  354 0002 014B     		ldr	r3, .L30
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 13
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 13
 
 
  355 0004 1A60     		str	r2, [r3]
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  387:../stdperiph/source/stm32f37x_cec.c ****            (@)In this Mode, it is advised to use the following functions:
  388:../stdperiph/source/stm32f37x_cec.c ****               FlagStatus CEC_GetFlagStatus(uint16_t CEC_FLAG);
  389:../stdperiph/source/stm32f37x_cec.c ****               void CEC_ClearFlag(uint16_t CEC_FLAG);
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 14
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 14
 
 
  390:../stdperiph/source/stm32f37x_cec.c **** 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  444:../stdperiph/source/stm32f37x_cec.c **** void CEC_ITConfig(uint16_t CEC_IT, FunctionalState NewState)
  445:../stdperiph/source/stm32f37x_cec.c **** {
  372              		.loc 1 445 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 15
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 15
 
 
  373              		.cfi_startproc
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  459:../stdperiph/source/stm32f37x_cec.c ****   }
  460:../stdperiph/source/stm32f37x_cec.c **** }
  461:../stdperiph/source/stm32f37x_cec.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 16
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 16
 
 
  462:../stdperiph/source/stm32f37x_cec.c **** /**
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  435              	.LVL24:
  497:../stdperiph/source/stm32f37x_cec.c ****   }
  498:../stdperiph/source/stm32f37x_cec.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 17
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 17
 
 
  499:../stdperiph/source/stm32f37x_cec.c ****   /* Return the CEC flag status */
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  463              	.L44:
  464 0006 00BF     		.align	2
  465              	.L43:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 18
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 18
 
 
  466 0008 00780040 		.word	1073772544
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  561:../stdperiph/source/stm32f37x_cec.c ****   if (((CEC->ISR & CEC_IT) != (uint32_t)RESET) && enablestatus)
  489              		.loc 1 561 0
  490 0006 1269     		ldr	r2, [r2, #16]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 19
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 19
 
 
  491 0008 1042     		tst	r0, r2
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  582:../stdperiph/source/stm32f37x_cec.c ****   *            @arg CEC_IT_TXERR: Tx Error
  583:../stdperiph/source/stm32f37x_cec.c ****   *            @arg CEC_IT_TXUDR: Tx-Buffer Underrun
  584:../stdperiph/source/stm32f37x_cec.c ****   *            @arg CEC_IT_TXEND: End of Transmission
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 20
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 20
 
 
  585:../stdperiph/source/stm32f37x_cec.c ****   *            @arg CEC_IT_TXBR: Tx-Byte Request
@@ -1182,57 +1182,57 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 1
  548              		.file 5 "../stdperiph/include/stm32f37x_cec.h"
  549              		.file 6 "../cmsis/include/core_cm4.h"
  550              		.file 7 "../stdperiph/include/stm32f37x_rcc.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s 			page 21
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s 			page 21
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f37x_cec.c
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:22     .text.CEC_DeInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:27     .text.CEC_DeInit:00000000 CEC_DeInit
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:54     .text.CEC_Init:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:59     .text.CEC_Init:00000000 CEC_Init
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:116    .text.CEC_Init:00000030 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:122    .text.CEC_StructInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:127    .text.CEC_StructInit:00000000 CEC_StructInit
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:155    .text.CEC_Cmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:160    .text.CEC_Cmd:00000000 CEC_Cmd
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:175    .text.CEC_Cmd:00000008 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:180    .text.CEC_ListenModeCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:185    .text.CEC_ListenModeCmd:00000000 CEC_ListenModeCmd
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:200    .text.CEC_ListenModeCmd:00000008 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:205    .text.CEC_OwnAddressConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:210    .text.CEC_OwnAddressConfig:00000000 CEC_OwnAddressConfig
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:234    .text.CEC_OwnAddressConfig:00000014 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:239    .text.CEC_OwnAddressClear:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:244    .text.CEC_OwnAddressClear:00000000 CEC_OwnAddressClear
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:259    .text.CEC_OwnAddressClear:00000008 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:264    .text.CEC_SendData:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:269    .text.CEC_SendData:00000000 CEC_SendData
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:284    .text.CEC_SendData:00000008 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:289    .text.CEC_ReceiveData:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:294    .text.CEC_ReceiveData:00000000 CEC_ReceiveData
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:310    .text.CEC_ReceiveData:00000008 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:315    .text.CEC_StartOfMessage:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:320    .text.CEC_StartOfMessage:00000000 CEC_StartOfMessage
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:335    .text.CEC_StartOfMessage:00000008 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:340    .text.CEC_EndOfMessage:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:345    .text.CEC_EndOfMessage:00000000 CEC_EndOfMessage
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:360    .text.CEC_EndOfMessage:00000008 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:365    .text.CEC_ITConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:370    .text.CEC_ITConfig:00000000 CEC_ITConfig
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:404    .text.CEC_ITConfig:0000001c $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:409    .text.CEC_GetFlagStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:414    .text.CEC_GetFlagStatus:00000000 CEC_GetFlagStatus
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:441    .text.CEC_GetFlagStatus:00000010 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:446    .text.CEC_ClearFlag:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:451    .text.CEC_ClearFlag:00000000 CEC_ClearFlag
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:466    .text.CEC_ClearFlag:00000008 $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:471    .text.CEC_GetITStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:476    .text.CEC_GetITStatus:00000000 CEC_GetITStatus
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:514    .text.CEC_GetITStatus:0000001c $d
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:519    .text.CEC_ClearITPendingBit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:524    .text.CEC_ClearITPendingBit:00000000 CEC_ClearITPendingBit
-C:\Users\strag\AppData\Local\Temp\cc3K4HPI.s:539    .text.CEC_ClearITPendingBit:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:22     .text.CEC_DeInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:27     .text.CEC_DeInit:00000000 CEC_DeInit
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:54     .text.CEC_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:59     .text.CEC_Init:00000000 CEC_Init
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:116    .text.CEC_Init:00000030 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:122    .text.CEC_StructInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:127    .text.CEC_StructInit:00000000 CEC_StructInit
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:155    .text.CEC_Cmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:160    .text.CEC_Cmd:00000000 CEC_Cmd
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:175    .text.CEC_Cmd:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:180    .text.CEC_ListenModeCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:185    .text.CEC_ListenModeCmd:00000000 CEC_ListenModeCmd
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:200    .text.CEC_ListenModeCmd:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:205    .text.CEC_OwnAddressConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:210    .text.CEC_OwnAddressConfig:00000000 CEC_OwnAddressConfig
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:234    .text.CEC_OwnAddressConfig:00000014 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:239    .text.CEC_OwnAddressClear:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:244    .text.CEC_OwnAddressClear:00000000 CEC_OwnAddressClear
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:259    .text.CEC_OwnAddressClear:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:264    .text.CEC_SendData:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:269    .text.CEC_SendData:00000000 CEC_SendData
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:284    .text.CEC_SendData:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:289    .text.CEC_ReceiveData:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:294    .text.CEC_ReceiveData:00000000 CEC_ReceiveData
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:310    .text.CEC_ReceiveData:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:315    .text.CEC_StartOfMessage:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:320    .text.CEC_StartOfMessage:00000000 CEC_StartOfMessage
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:335    .text.CEC_StartOfMessage:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:340    .text.CEC_EndOfMessage:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:345    .text.CEC_EndOfMessage:00000000 CEC_EndOfMessage
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:360    .text.CEC_EndOfMessage:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:365    .text.CEC_ITConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:370    .text.CEC_ITConfig:00000000 CEC_ITConfig
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:404    .text.CEC_ITConfig:0000001c $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:409    .text.CEC_GetFlagStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:414    .text.CEC_GetFlagStatus:00000000 CEC_GetFlagStatus
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:441    .text.CEC_GetFlagStatus:00000010 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:446    .text.CEC_ClearFlag:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:451    .text.CEC_ClearFlag:00000000 CEC_ClearFlag
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:466    .text.CEC_ClearFlag:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:471    .text.CEC_GetITStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:476    .text.CEC_GetITStatus:00000000 CEC_GetITStatus
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:514    .text.CEC_GetITStatus:0000001c $d
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:519    .text.CEC_ClearITPendingBit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:524    .text.CEC_ClearITPendingBit:00000000 CEC_ClearITPendingBit
+C:\Users\strag\AppData\Local\Temp\ccc3cRFh.s:539    .text.CEC_ClearITPendingBit:00000008 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
