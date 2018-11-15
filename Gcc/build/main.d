@@ -13,8 +13,8 @@ build/main.d: ../user/source/main.c ../user/include/main.h \
  ../user/include/GPIO.h ../user/include/Uart.h ../user/include/DLT645.h \
  ../user/include/Uart.h ../user/include/main.h ../user/include/Flash.h \
  ../user/include/Time.h ../user/include/protocol.h ../user/include/uart.h \
- ../user/include/protocol.h ../user/include/DLT698.h \
- ../user/include/DLT698_45.h ../user/include/DLT698_45.h
+ ../user/include/DLT698.h ../user/include/DLT698_45.h \
+ ../user/include/DLT698.h ../user/include/DLT698_45.h
 
 ../user/include/main.h:
 
@@ -68,10 +68,10 @@ build/main.d: ../user/source/main.c ../user/include/main.h \
 
 ../user/include/uart.h:
 
-../user/include/protocol.h:
-
 ../user/include/DLT698.h:
 
 ../user/include/DLT698_45.h:
+
+../user/include/DLT698.h:
 
 ../user/include/DLT698_45.h:

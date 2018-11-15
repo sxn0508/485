@@ -11,8 +11,8 @@ build/protocol.d: ../user/source/protocol.c ../user/include/protocol.h \
  ../stdperiph/include/stm32f37x_tim.h \
  ../stdperiph/include/stm32f37x_usart.h \
  ../stdperiph/include/stm32f37x_misc.h ../user/include/BaseDef.h \
- ../user/include/protocol.h ../user/include/DLT698.h \
- ../user/include/DLT698_45.h
+ ../user/include/DLT698.h ../user/include/DLT698_45.h \
+ ../user/include/DLT698.h
 
 ../user/include/protocol.h:
 
@@ -50,8 +50,8 @@ build/protocol.d: ../user/source/protocol.c ../user/include/protocol.h \
 
 ../user/include/BaseDef.h:
 
-../user/include/protocol.h:
-
 ../user/include/DLT698.h:
 
 ../user/include/DLT698_45.h:
+
+../user/include/DLT698.h:

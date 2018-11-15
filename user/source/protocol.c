@@ -11,7 +11,6 @@
 #include "protocol.h"
 #include "DLT698.h"
 
-#define TICKS_500MS 6
 /********************************************************************
 * 功    能：获取帧指针
 * 输    入：应用层缓存指针，数据长度
@@ -20,16 +19,57 @@
 * 编 写 人：
 * 编写日期：2018-9-9 08:01:18
 **********************************************************************/
-void *pGetpFrame(uint8_t *framebuf, uint32_t len)
+uint8_t *pGetpFrame(uint8_t *pframe, uint32_t dwLen, DLT698_FRAME *p698Frame)
 {
     uint8_t *p;
-    if (len > DRV_BUF_SIZE)
+    UINT16 uwframeLen;
+    UINT32 nHCSPos;
+    UINT32 nFCSPos;
+    UINT16 uwhcs;
+    UINT16 uwfcs;
+    UINT16 SA_Len;
+    int dwAPDULen = 0;
+    //if (len > DRV_BUF_SIZE)
+    //return NULL;
+    p = (uint8_t *)strchr((char *)pframe, 0x68);
+
+    if (p == NULL)
         return NULL;
-    p = (uint8_t *)strchr((char *)framebuf, 0x68);
-    //if (*(framebuf + len - 1) != 0x16)
-    //{
-    //p = NULL;
-    //}
+
+    //帧长占2byte，不含头尾
+    uwframeLen = MAKE_WORD(*(p + 2), *(p + 1));
+
+    if (dwLen + 2 > uwframeLen)
+        return NULL;
+
+    /*SA地址字节数，0代表1个字节*/
+    SA_Len = (*(p + 4) & 0x0F) + 2;
+    nHCSPos += SA_Len + 5;
+
+    //帧头校验hcs
+    uwhcs = PPPINITFCS16;
+    uwhcs = pppfcs16(uwhcs, p + 1, nHCSPos - 1);
+
+    if (uwhcs != MAKE_WORD(*(p + nHCSPos + 1), *(p + nHCSPos)))
+    {
+        return NULL;
+    }
+
+    //帧校验fcs
+    nFCSPos = uwframeLen - 1;
+    uwfcs = PPPINITFCS16;
+    uwfcs = pppfcs16(uwfcs, p + 1, nFCSPos - 1);
+
+    if (uwfcs != MAKE_WORD(*(p + nFCSPos + 1), *(p + nFCSPos)))
+    {
+        return NULL;
+    }
+
+    p698Frame->uwFramelen = uwframeLen;
+    p698Frame->uwSA_len = SA_Len;
+    p698Frame->pStart = p;
+    p698Frame->pSecurityData = p + nHCSPos + 2;
+
     return p;
 }
 

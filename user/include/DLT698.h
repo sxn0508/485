@@ -7,6 +7,17 @@
 #define MAX_ROAD_NUM_PER_ROAD 32
 #define MAX_COLL_OAD_SIZE 127
 
+#define PPPINITFCS16 0xFFFF
+
+typedef struct
+{
+    uint8_t *pStart;        //指向帧头
+    uint8_t *pSecurityData; //指向安全数据
+    uint16_t uwSA_len;      //SA长度
+    uint16_t nHCSPos;
+    uint16_t uwFramelen; //帧长度，不含头尾
+} DLT698_FRAME;
+
 typedef struct
 {
     OAD stOAD;    // OAD
@@ -51,10 +62,24 @@ typedef struct
 
     DATA_UNIT stDataUnit[MAX_COLL_OAD_SIZE]; // OAD + Len + Data pointer to store
 } COLL_STORE_DATA;
+typedef enum
+{
+    GET_COMPLETE,
+    GET_NOT_COMPLETE,
+    GET_PARTLY_COMPLETE
+} GET_COMPLETE_TYPE;
 
-extern int dwGetApdu(UINT8 *pucPtr, UINT8 *pucStr);
+typedef struct
+{
+    OAD stOAD;
+    UINT16 uwAttrIndexRead;
+    GET_COMPLETE_TYPE eIsComplete;
+} GET_NORMAL_INFO;
+
+extern int dwGet698Apdu(DLT698_FRAME *pframe, UINT8 **pAPDU);
+extern int dwGetApdu(UINT8 *pframe, UINT8 **pApdu);
 extern UINT16 pppfcs16(UINT16 fcs, unsigned char *cp, int len);
 extern int dw698LinkAnalyze(UINT8 *pframe, UINT8 *pAPDU);
-//extern int dwAPduAnalyze(UINT8 *pucBuf, UINT32 dwlen);
 extern int dwAPduAnalyze(UINT8 *pucBuf, UINT32 dwlen, COLL_STORE_DATA *pstCollStoreData);
+extern int dwReCalculateFCS(DLT698_FRAME *pframe);
 #endif

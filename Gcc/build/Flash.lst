@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s 			page 1
 
 
    1              		.syntax unified
@@ -31,18 +31,16 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
   29              		.file 1 "../user/source/Flash.c"
    1:../user/source/Flash.c **** #include "Flash.h"
    2:../user/source/Flash.c **** 
-   3:../user/source/Flash.c **** 
-   4:../user/source/Flash.c **** 
-   5:../user/source/Flash.c **** /********************************************************************
-   6:../user/source/Flash.c ****  * 功    能：flash初始化
-   7:../user/source/Flash.c ****  * 输    入：none
-   8:../user/source/Flash.c ****  * 输    出：	none
-   9:../user/source/Flash.c ****  * 编 写 人：stragen
-  10:../user/source/Flash.c ****  * 编写日期：2016.6.23
-  11:../user/source/Flash.c ****  **********************************************************************/
-  12:../user/source/Flash.c **** void vInterFlash_Init(void)
-  13:../user/source/Flash.c **** {
-  30              		.loc 1 13 0
+   3:../user/source/Flash.c **** /********************************************************************
+   4:../user/source/Flash.c ****  * 功    能：flash初始化
+   5:../user/source/Flash.c ****  * 输    入：none
+   6:../user/source/Flash.c ****  * 输    出：	none
+   7:../user/source/Flash.c ****  * 编 写 人：stragen
+   8:../user/source/Flash.c ****  * 编写日期：2016.6.23
+   9:../user/source/Flash.c ****  **********************************************************************/
+  10:../user/source/Flash.c **** void vInterFlash_Init(void)
+  11:../user/source/Flash.c **** {
+  30              		.loc 1 11 0
   31              		.cfi_startproc
   32              		@ args = 0, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -51,18 +49,18 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
   36              		.cfi_def_cfa_offset 8
   37              		.cfi_offset 3, -8
   38              		.cfi_offset 14, -4
-  14:../user/source/Flash.c **** 	FLASH_SetLatency(FLASH_Latency_2);  //设置写延时
-  39              		.loc 1 14 0
+  12:../user/source/Flash.c ****     FLASH_SetLatency(FLASH_Latency_2);                                      //设置写延时
+  39              		.loc 1 12 0
   40 0002 0220     		movs	r0, #2
   41 0004 FFF7FEFF 		bl	FLASH_SetLatency
   42              	.LVL0:
-  15:../user/source/Flash.c **** 	FLASH_ClearFlag(FLASH_FLAG_EOP| FLASH_FLAG_PGERR |FLASH_FLAG_WRPERR);  //清除标志位
-  43              		.loc 1 15 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 2
-
-
+  13:../user/source/Flash.c ****     FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPERR); //清除标志位
+  43              		.loc 1 13 0
   44 0008 3420     		movs	r0, #52
   45 000a FFF7FEFF 		bl	FLASH_ClearFlag
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s 			page 2
+
+
   46              	.LVL1:
   47 000e 08BD     		pop	{r3, pc}
   48              		.cfi_endproc
@@ -74,18 +72,18 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
   55              		.thumb_func
   57              	EEProm_Write:
   58              	.LFB112:
-  16:../user/source/Flash.c **** }
-  17:../user/source/Flash.c **** 
-  18:../user/source/Flash.c **** /********************************************************************
-  19:../user/source/Flash.c ****  * 功    能： 向内部flash写两字节
-  20:../user/source/Flash.c ****  * 输    入： EEPROM的一个存储地址，双字对齐
-  21:../user/source/Flash.c ****  * 输    出：ERROR/SUCESS
-  22:../user/source/Flash.c ****  * 编 写 人：stragen
-  23:../user/source/Flash.c ****  * 编写日期：2016.6.23
-  24:../user/source/Flash.c ****  **********************************************************************/
-  25:../user/source/Flash.c **** ErrorStatus EEProm_Write(uint32_t addr,uint8_t ByteData)
-  26:../user/source/Flash.c **** {
-  59              		.loc 1 26 0
+  14:../user/source/Flash.c **** }
+  15:../user/source/Flash.c **** 
+  16:../user/source/Flash.c **** /********************************************************************
+  17:../user/source/Flash.c ****  * 功    能： 向内部flash写两字节
+  18:../user/source/Flash.c ****  * 输    入： EEPROM的一个存储地址，双字对齐
+  19:../user/source/Flash.c ****  * 输    出：ERROR/SUCESS
+  20:../user/source/Flash.c ****  * 编 写 人：stragen
+  21:../user/source/Flash.c ****  * 编写日期：2016.6.23
+  22:../user/source/Flash.c ****  **********************************************************************/
+  23:../user/source/Flash.c **** ErrorStatus EEProm_Write(uint32_t addr, uint8_t ByteData)
+  24:../user/source/Flash.c **** {
+  59              		.loc 1 24 0
   60              		.cfi_startproc
   61              		@ args = 0, pretend = 0, frame = 0
   62              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -102,31 +100,31 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
   73 0002 0646     		mov	r6, r0
   74 0004 0F46     		mov	r7, r1
   75              	.LVL3:
-  27:../user/source/Flash.c **** 	uint8_t i=2;//flash 重写次数
-  28:../user/source/Flash.c **** 	FLASH_Unlock(); //解锁写保护
-  76              		.loc 1 28 0
+  25:../user/source/Flash.c ****     uint8_t i = 2;         //flash 重写次数
+  26:../user/source/Flash.c ****     FLASH_Unlock();        //解锁写保护
+  76              		.loc 1 26 0
   77 0006 FFF7FEFF 		bl	FLASH_Unlock
   78              	.LVL4:
-  29:../user/source/Flash.c **** 	FLASH_ErasePage(addr);//擦除flash
-  79              		.loc 1 29 0
+  27:../user/source/Flash.c ****     FLASH_ErasePage(addr); //擦除flash
+  79              		.loc 1 27 0
   80 000a 3046     		mov	r0, r6
   81 000c FFF7FEFF 		bl	FLASH_ErasePage
   82              	.LVL5:
-  27:../user/source/Flash.c **** 	uint8_t i=2;//flash 重写次数
-  83              		.loc 1 27 0
+  25:../user/source/Flash.c ****     uint8_t i = 2;         //flash 重写次数
+  83              		.loc 1 25 0
   84 0010 0224     		movs	r4, #2
-  30:../user/source/Flash.c **** 	while((FLASH_ProgramHalfWord(addr, ByteData) != FLASH_COMPLETE) && (i--));
-  85              		.loc 1 30 0
+  28:../user/source/Flash.c ****     while ((FLASH_ProgramHalfWord(addr, ByteData) != FLASH_COMPLETE) && (i--))
+  85              		.loc 1 28 0
   86 0012 00E0     		b	.L5
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 3
-
-
   87              	.LVL6:
   88              	.L7:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s 			page 3
+
+
   89 0014 1C46     		mov	r4, r3
   90              	.LVL7:
   91              	.L5:
-  92              		.loc 1 30 0 is_stmt 0 discriminator 2
+  92              		.loc 1 28 0 is_stmt 0 discriminator 2
   93 0016 BDB2     		uxth	r5, r7
   94 0018 2946     		mov	r1, r5
   95 001a 3046     		mov	r0, r6
@@ -134,7 +132,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
   97              	.LVL8:
   98 0020 0428     		cmp	r0, #4
   99 0022 03D0     		beq	.L4
- 100              		.loc 1 30 0 discriminator 1
+ 100              		.loc 1 28 0 discriminator 1
  101 0024 631E     		subs	r3, r4, #1
  102 0026 DBB2     		uxtb	r3, r3
  103              	.LVL9:
@@ -142,28 +140,29 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
  105 002a F3D1     		bne	.L7
  106              	.LVL10:
  107              	.L4:
-  31:../user/source/Flash.c **** 	FLASH_Lock();
- 108              		.loc 1 31 0 is_stmt 1
+  29:../user/source/Flash.c ****         ;
+  30:../user/source/Flash.c ****     FLASH_Lock();
+ 108              		.loc 1 30 0 is_stmt 1
  109 002c FFF7FEFF 		bl	FLASH_Lock
  110              	.LVL11:
-  32:../user/source/Flash.c **** 	if((uint16_t) *(__IO uint32_t *)addr  != ByteData)   
- 111              		.loc 1 32 0
+  31:../user/source/Flash.c ****     if ((uint16_t) * (__IO uint32_t *)addr != ByteData)
+ 111              		.loc 1 31 0
  112 0030 3368     		ldr	r3, [r6]
  113 0032 9BB2     		uxth	r3, r3
  114 0034 9D42     		cmp	r5, r3
  115 0036 01D0     		beq	.L8
-  33:../user/source/Flash.c **** 	 return ERROR;
- 116              		.loc 1 33 0
+  32:../user/source/Flash.c ****         return ERROR;
+ 116              		.loc 1 32 0
  117 0038 0020     		movs	r0, #0
  118 003a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  119              	.LVL12:
  120              	.L8:
-  34:../user/source/Flash.c **** 	else
-  35:../user/source/Flash.c **** 	 return SUCCESS;
- 121              		.loc 1 35 0
+  33:../user/source/Flash.c ****     else
+  34:../user/source/Flash.c ****         return SUCCESS;
+ 121              		.loc 1 34 0
  122 003c 0120     		movs	r0, #1
-  36:../user/source/Flash.c **** }
- 123              		.loc 1 36 0
+  35:../user/source/Flash.c **** }
+ 123              		.loc 1 35 0
  124 003e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  125              		.cfi_endproc
  126              	.LFE112:
@@ -174,20 +173,20 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
  132              		.thumb_func
  134              	Flash_Write_Word:
  135              	.LFB113:
-  37:../user/source/Flash.c **** 
-  38:../user/source/Flash.c **** /********************************************************************
-  39:../user/source/Flash.c ****  * 功    能： 向内部flash写四字节
-  40:../user/source/Flash.c ****  * 输    入： EEPROM的一个存储地址，四字对齐
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 4
+  36:../user/source/Flash.c **** 
+  37:../user/source/Flash.c **** /********************************************************************
+  38:../user/source/Flash.c ****  * 功    能： 向内部flash写四字节
+  39:../user/source/Flash.c ****  * 输    入： EEPROM的一个存储地址，四字对齐
+  40:../user/source/Flash.c ****  * 输    出：ERROR/SUCESS
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s 			page 4
 
 
-  41:../user/source/Flash.c ****  * 输    出：ERROR/SUCESS
-  42:../user/source/Flash.c ****  * 编 写 人：stragen
-  43:../user/source/Flash.c ****  * 编写日期：2018.5.8
-  44:../user/source/Flash.c ****  **********************************************************************/
-  45:../user/source/Flash.c **** ErrorStatus Flash_Write_Word(uint32_t addr, uint32_t WordData)
-  46:../user/source/Flash.c **** {
- 136              		.loc 1 46 0
+  41:../user/source/Flash.c ****  * 编 写 人：stragen
+  42:../user/source/Flash.c ****  * 编写日期：2018.5.8
+  43:../user/source/Flash.c ****  **********************************************************************/
+  44:../user/source/Flash.c **** ErrorStatus Flash_Write_Word(uint32_t addr, uint32_t WordData)
+  45:../user/source/Flash.c **** {
+ 136              		.loc 1 45 0
  137              		.cfi_startproc
  138              		@ args = 0, pretend = 0, frame = 1024
  139              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -205,19 +204,19 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
  151              	.LCFI3:
  152              		.cfi_def_cfa_offset 1048
  153              	.LVL14:
-  47:../user/source/Flash.c **** 	uint32_t test			= addr/ 0x400;
-  48:../user/source/Flash.c **** 	uint32_t PageAddr		= addr - addr% 0x400;
-  49:../user/source/Flash.c **** 	uint32_t WordOffset		= (addr% 0x400)/ 4;
- 154              		.loc 1 49 0
+  46:../user/source/Flash.c ****     //uint32_t test			= addr/ 0x400;
+  47:../user/source/Flash.c ****     uint32_t PageAddr = addr - addr % 0x400;
+  48:../user/source/Flash.c ****     uint32_t WordOffset = (addr % 0x400) / 4;
+ 154              		.loc 1 48 0
  155 0008 C0F38704 		ubfx	r4, r0, #2, #8
  156              	.LVL15:
-  50:../user/source/Flash.c **** 	uint32_t ReadedWord[256];
-  51:../user/source/Flash.c **** 	uint8_t  RepeatTime		=2;
-  52:../user/source/Flash.c **** 	uint16_t  i;
-  53:../user/source/Flash.c **** 	uint16_t  j;
-  54:../user/source/Flash.c **** 
-  55:../user/source/Flash.c **** 	if(addr%4 != 0)
- 157              		.loc 1 55 0
+  49:../user/source/Flash.c ****     uint32_t ReadedWord[256];
+  50:../user/source/Flash.c ****     uint8_t RepeatTime = 2;
+  51:../user/source/Flash.c ****     uint16_t i;
+  52:../user/source/Flash.c ****     uint16_t j;
+  53:../user/source/Flash.c **** 
+  54:../user/source/Flash.c ****     if (addr % 4 != 0)
+ 157              		.loc 1 54 0
  158 000c 10F0030F 		tst	r0, #3
  159 0010 33D1     		bne	.L17
  160 0012 20F47F76 		bic	r6, r0, #1020
@@ -228,117 +227,118 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
  165 001c 05E0     		b	.L12
  166              	.LVL18:
  167              	.L13:
-  56:../user/source/Flash.c **** 	 return ERROR;
-  57:../user/source/Flash.c **** 	/*读取所在页的原始数据*/
-  58:../user/source/Flash.c **** 	for(i= 0; i<256; i++)
-  59:../user/source/Flash.c **** 	{
-  60:../user/source/Flash.c **** 		ReadedWord[i]= *(__IO uint32_t*)(PageAddr+ i*4);
- 168              		.loc 1 60 0 discriminator 3
+  55:../user/source/Flash.c ****         return ERROR;
+  56:../user/source/Flash.c ****     /*读取所在页的原始数据*/
+  57:../user/source/Flash.c ****     for (i = 0; i < 256; i++)
+  58:../user/source/Flash.c ****     {
+  59:../user/source/Flash.c ****         ReadedWord[i] = *(__IO uint32_t *)(PageAddr + i * 4);
+ 168              		.loc 1 59 0 discriminator 3
  169 001e 56F82320 		ldr	r2, [r6, r3, lsl #2]
  170 0022 4DF82320 		str	r2, [sp, r3, lsl #2]
-  58:../user/source/Flash.c **** 	{
- 171              		.loc 1 58 0 discriminator 3
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 5
-
-
+  57:../user/source/Flash.c ****     {
+ 171              		.loc 1 57 0 discriminator 3
  172 0026 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s 			page 5
+
+
  173              	.LVL19:
  174 0028 9BB2     		uxth	r3, r3
  175              	.LVL20:
  176              	.L12:
-  58:../user/source/Flash.c **** 	{
- 177              		.loc 1 58 0 is_stmt 0 discriminator 1
+  57:../user/source/Flash.c ****     {
+ 177              		.loc 1 57 0 is_stmt 0 discriminator 1
  178 002a FF2B     		cmp	r3, #255
  179 002c F7D9     		bls	.L13
  180 002e 0F46     		mov	r7, r1
  181 0030 8046     		mov	r8, r0
-  61:../user/source/Flash.c **** 	}
-  62:../user/source/Flash.c **** 	ReadedWord[WordOffset] |= 0XFFFFFFFF;
-  63:../user/source/Flash.c **** 	ReadedWord[WordOffset] &= WordData;
- 182              		.loc 1 63 0 is_stmt 1
+  60:../user/source/Flash.c ****     }
+  61:../user/source/Flash.c ****     ReadedWord[WordOffset] |= 0XFFFFFFFF;
+  62:../user/source/Flash.c ****     ReadedWord[WordOffset] &= WordData;
+ 182              		.loc 1 62 0 is_stmt 1
  183 0032 4DF82410 		str	r1, [sp, r4, lsl #2]
-  64:../user/source/Flash.c **** 	FLASH_Unlock(); //解锁写保护
- 184              		.loc 1 64 0
+  63:../user/source/Flash.c ****     FLASH_Unlock();        //解锁写保护
+ 184              		.loc 1 63 0
  185 0036 FFF7FEFF 		bl	FLASH_Unlock
  186              	.LVL21:
-  65:../user/source/Flash.c **** 	FLASH_ErasePage(addr);//擦除flash
- 187              		.loc 1 65 0
+  64:../user/source/Flash.c ****     FLASH_ErasePage(addr); //擦除flash
+ 187              		.loc 1 64 0
  188 003a 4046     		mov	r0, r8
  189 003c FFF7FEFF 		bl	FLASH_ErasePage
  190              	.LVL22:
-  66:../user/source/Flash.c **** 	for(j= 0; j< 256; j++)
- 191              		.loc 1 66 0
+  65:../user/source/Flash.c ****     for (j = 0; j < 256; j++)
+ 191              		.loc 1 65 0
  192 0040 0025     		movs	r5, #0
-  51:../user/source/Flash.c **** 	uint16_t  i;
- 193              		.loc 1 51 0
+  50:../user/source/Flash.c ****     uint16_t i;
+ 193              		.loc 1 50 0
  194 0042 0224     		movs	r4, #2
  195              	.LVL23:
- 196              		.loc 1 66 0
+ 196              		.loc 1 65 0
  197 0044 0FE0     		b	.L14
  198              	.LVL24:
  199              	.L18:
-  67:../user/source/Flash.c **** 	{
-  68:../user/source/Flash.c **** 		while((FLASH_ProgramWord(PageAddr+ j*4, ReadedWord[j]) != FLASH_COMPLETE) && (RepeatTime--));
- 200              		.loc 1 68 0
+  66:../user/source/Flash.c ****     {
+  67:../user/source/Flash.c ****         while ((FLASH_ProgramWord(PageAddr + j * 4, ReadedWord[j]) != FLASH_COMPLETE) && (RepeatTim
+ 200              		.loc 1 67 0
  201 0046 1C46     		mov	r4, r3
  202              	.LVL25:
  203              	.L16:
- 204              		.loc 1 68 0 is_stmt 0 discriminator 2
+ 204              		.loc 1 67 0 is_stmt 0 discriminator 2
  205 0048 5DF82510 		ldr	r1, [sp, r5, lsl #2]
  206 004c 06EB8500 		add	r0, r6, r5, lsl #2
  207 0050 FFF7FEFF 		bl	FLASH_ProgramWord
  208              	.LVL26:
  209 0054 0428     		cmp	r0, #4
  210 0056 04D0     		beq	.L15
- 211              		.loc 1 68 0 discriminator 1
+ 211              		.loc 1 67 0 discriminator 1
  212 0058 631E     		subs	r3, r4, #1
  213 005a DBB2     		uxtb	r3, r3
  214              	.LVL27:
  215 005c 002C     		cmp	r4, #0
  216 005e F2D1     		bne	.L18
- 217              		.loc 1 68 0
+ 217              		.loc 1 67 0
  218 0060 1C46     		mov	r4, r3
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 6
-
-
  219              	.LVL28:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s 			page 6
+
+
  220              	.L15:
-  66:../user/source/Flash.c **** 	{
- 221              		.loc 1 66 0 is_stmt 1 discriminator 2
+  65:../user/source/Flash.c ****     {
+ 221              		.loc 1 65 0 is_stmt 1 discriminator 2
  222 0062 0135     		adds	r5, r5, #1
  223              	.LVL29:
  224 0064 ADB2     		uxth	r5, r5
  225              	.LVL30:
  226              	.L14:
-  66:../user/source/Flash.c **** 	{
- 227              		.loc 1 66 0 is_stmt 0 discriminator 1
+  65:../user/source/Flash.c ****     {
+ 227              		.loc 1 65 0 is_stmt 0 discriminator 1
  228 0066 FF2D     		cmp	r5, #255
  229 0068 EED9     		bls	.L16
-  69:../user/source/Flash.c **** 	}
-  70:../user/source/Flash.c **** 	FLASH_Lock();
+  68:../user/source/Flash.c ****             ;
+  69:../user/source/Flash.c ****     }
+  70:../user/source/Flash.c ****     FLASH_Lock();
  230              		.loc 1 70 0 is_stmt 1
  231 006a FFF7FEFF 		bl	FLASH_Lock
  232              	.LVL31:
-  71:../user/source/Flash.c **** 	if( *(__IO uint32_t *)addr  == WordData)   
+  71:../user/source/Flash.c ****     if (*(__IO uint32_t *)addr == WordData)
  233              		.loc 1 71 0
  234 006e D8F80030 		ldr	r3, [r8]
  235 0072 9F42     		cmp	r7, r3
  236 0074 03D1     		bne	.L19
-  72:../user/source/Flash.c **** 	 return SUCCESS;
+  72:../user/source/Flash.c ****         return SUCCESS;
  237              		.loc 1 72 0
  238 0076 0120     		movs	r0, #1
  239 0078 02E0     		b	.L11
  240              	.LVL32:
  241              	.L17:
-  56:../user/source/Flash.c **** 	/*读取所在页的原始数据*/
- 242              		.loc 1 56 0
+  55:../user/source/Flash.c ****     /*读取所在页的原始数据*/
+ 242              		.loc 1 55 0
  243 007a 0020     		movs	r0, #0
  244              	.LVL33:
  245 007c 00E0     		b	.L11
  246              	.LVL34:
  247              	.L19:
-  73:../user/source/Flash.c **** 	else
-  74:../user/source/Flash.c **** 	 return ERROR;
+  73:../user/source/Flash.c ****     else
+  74:../user/source/Flash.c ****         return ERROR;
  248              		.loc 1 74 0
  249 007e 0020     		movs	r0, #0
  250              	.LVL35:
@@ -358,35 +358,34 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
  264              		.thumb
  265              		.thumb_func
  267              	Flash_Read_Word:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 7
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s 			page 7
 
 
  268              	.LFB114:
   76:../user/source/Flash.c **** 
-  77:../user/source/Flash.c **** 
-  78:../user/source/Flash.c **** /********************************************************************
-  79:../user/source/Flash.c ****  * 功    能： 从FLASH的一个地址上读四个字节
-  80:../user/source/Flash.c ****  * 输    入： FLASH的一个存储地址，四字对齐
-  81:../user/source/Flash.c ****  * 输    出：	none
-  82:../user/source/Flash.c ****  * 编 写 人：stragen
-  83:../user/source/Flash.c ****  * 编写日期：2018.5.8
-  84:../user/source/Flash.c ****  **********************************************************************/
-  85:../user/source/Flash.c **** uint32_t Flash_Read_Word(uint32_t addr)
-  86:../user/source/Flash.c **** {
- 269              		.loc 1 86 0
+  77:../user/source/Flash.c **** /********************************************************************
+  78:../user/source/Flash.c ****  * 功    能： 从FLASH的一个地址上读四个字节
+  79:../user/source/Flash.c ****  * 输    入： FLASH的一个存储地址，四字对齐
+  80:../user/source/Flash.c ****  * 输    出：	none
+  81:../user/source/Flash.c ****  * 编 写 人：stragen
+  82:../user/source/Flash.c ****  * 编写日期：2018.5.8
+  83:../user/source/Flash.c ****  **********************************************************************/
+  84:../user/source/Flash.c **** uint32_t Flash_Read_Word(uint32_t addr)
+  85:../user/source/Flash.c **** {
+ 269              		.loc 1 85 0
  270              		.cfi_startproc
  271              		@ args = 0, pretend = 0, frame = 0
  272              		@ frame_needed = 0, uses_anonymous_args = 0
  273              		@ link register save eliminated.
  274              	.LVL36:
-  87:../user/source/Flash.c **** 	uint32_t ReadByte;
-  88:../user/source/Flash.c **** 	ReadByte= *(__IO uint32_t *)addr;
- 275              		.loc 1 88 0
+  86:../user/source/Flash.c ****     uint32_t ReadByte;
+  87:../user/source/Flash.c ****     ReadByte = *(__IO uint32_t *)addr;
+ 275              		.loc 1 87 0
  276 0000 0068     		ldr	r0, [r0]
  277              	.LVL37:
-  89:../user/source/Flash.c **** 	return ReadByte;
-  90:../user/source/Flash.c **** }
- 278              		.loc 1 90 0
+  88:../user/source/Flash.c ****     return ReadByte;
+  89:../user/source/Flash.c **** }
+ 278              		.loc 1 89 0
  279 0002 7047     		bx	lr
  280              		.cfi_endproc
  281              	.LFE114:
@@ -397,34 +396,33 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
  287              		.thumb_func
  289              	EEProm_Read:
  290              	.LFB115:
-  91:../user/source/Flash.c **** 
-  92:../user/source/Flash.c **** 
-  93:../user/source/Flash.c **** /********************************************************************
-  94:../user/source/Flash.c ****  * 功    能： 从EEPROM的一个地址上读两个字节
-  95:../user/source/Flash.c ****  * 输    入： EEPROM的一个存储地址，双字对齐
-  96:../user/source/Flash.c ****  * 输    出：	none
-  97:../user/source/Flash.c ****  * 编 写 人：stragen
-  98:../user/source/Flash.c ****  * 编写日期：2016.6.23
-  99:../user/source/Flash.c ****  **********************************************************************/
- 100:../user/source/Flash.c **** uint8_t EEProm_Read(uint32_t addr)
- 101:../user/source/Flash.c **** {
- 291              		.loc 1 101 0
+  90:../user/source/Flash.c **** 
+  91:../user/source/Flash.c **** /********************************************************************
+  92:../user/source/Flash.c ****  * 功    能： 从EEPROM的一个地址上读两个字节
+  93:../user/source/Flash.c ****  * 输    入： EEPROM的一个存储地址，双字对齐
+  94:../user/source/Flash.c ****  * 输    出：	none
+  95:../user/source/Flash.c ****  * 编 写 人：stragen
+  96:../user/source/Flash.c ****  * 编写日期：2016.6.23
+  97:../user/source/Flash.c ****  **********************************************************************/
+  98:../user/source/Flash.c **** uint8_t EEProm_Read(uint32_t addr)
+  99:../user/source/Flash.c **** {
+ 291              		.loc 1 99 0
  292              		.cfi_startproc
  293              		@ args = 0, pretend = 0, frame = 0
  294              		@ frame_needed = 0, uses_anonymous_args = 0
  295              		@ link register save eliminated.
  296              	.LVL38:
- 102:../user/source/Flash.c **** 	uint8_t ReadByte;
- 103:../user/source/Flash.c **** 	ReadByte=(uint8_t) *(__IO uint32_t *)addr;
- 297              		.loc 1 103 0
+ 100:../user/source/Flash.c ****     uint8_t ReadByte;
+ 101:../user/source/Flash.c ****     ReadByte = (uint8_t) * (__IO uint32_t *)addr;
+ 297              		.loc 1 101 0
  298 0000 0068     		ldr	r0, [r0]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 8
-
-
  299              	.LVL39:
- 104:../user/source/Flash.c **** 	return ReadByte;
- 105:../user/source/Flash.c **** }
- 300              		.loc 1 105 0
+ 102:../user/source/Flash.c ****     return ReadByte;
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s 			page 8
+
+
+ 103:../user/source/Flash.c **** }
+ 300              		.loc 1 103 0
  301 0002 C0B2     		uxtb	r0, r0
  302 0004 7047     		bx	lr
  303              		.cfi_endproc
@@ -436,21 +434,21 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 1
  310              		.file 4 "../cmsis/include/stm32f37x.h"
  311              		.file 5 "../stdperiph/include/stm32f37x_flash.h"
  312              		.file 6 "../cmsis/include/core_cm4.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s 			page 9
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 Flash.c
-C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s:22     .text.vInterFlash_Init:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s:27     .text.vInterFlash_Init:00000000 vInterFlash_Init
-C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s:52     .text.EEProm_Write:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s:57     .text.EEProm_Write:00000000 EEProm_Write
-C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s:129    .text.Flash_Write_Word:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s:134    .text.Flash_Write_Word:00000000 Flash_Write_Word
-C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s:262    .text.Flash_Read_Word:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s:267    .text.Flash_Read_Word:00000000 Flash_Read_Word
-C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s:284    .text.EEProm_Read:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccfnw5Bf.s:289    .text.EEProm_Read:00000000 EEProm_Read
+C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s:22     .text.vInterFlash_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s:27     .text.vInterFlash_Init:00000000 vInterFlash_Init
+C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s:52     .text.EEProm_Write:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s:57     .text.EEProm_Write:00000000 EEProm_Write
+C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s:129    .text.Flash_Write_Word:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s:134    .text.Flash_Write_Word:00000000 Flash_Write_Word
+C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s:262    .text.Flash_Read_Word:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s:267    .text.Flash_Read_Word:00000000 Flash_Read_Word
+C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s:284    .text.EEProm_Read:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccOcaAs2.s:289    .text.EEProm_Read:00000000 EEProm_Read
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

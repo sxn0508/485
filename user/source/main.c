@@ -17,12 +17,14 @@ bool FLAG_UartDB_HasData = false;
 int main(void)
 {
     ProtocolDef ProtocolType = none;
-    uint8_t tmpAPDU[MAX_APDU_LENGTH];
-    uint8_t *pAPDU = tmpAPDU;
+    //uint8_t tmpAPDU[MAX_APDU_LENGTH];
+    //uint8_t *pAPDU = tmpAPDU;
+    uint8_t *pAPDU = NULL;
     uint32_t dwLen = 0;
-    uint8_t *pframe = NULL;
+    //uint8_t *pframe = NULL;
     uint32_t i;
-    uint32_t test;
+    //uint32_t test;
+    DLT698_FRAME dlt698Frame;
 
     /*配置中断向量组*/
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
@@ -85,18 +87,25 @@ int main(void)
             {
                 Uart_idleReadDisable(pUartDB);
                 FLAG_UartDB_HasData = false;
-                pframe = NULL;
+                dlt698Frame.pStart = NULL;
+                //dwLen = 0;
 
                 /*电表口收帧*/
                 if ((dwLen = Uart_Read(pUartDB, ucApp_Buf_DB2ZD, DRV_BUF_SIZE)) == 0)
                     break;
 
+                if (Voltage_Change_State != Voltage_NOChange)
+                {
+                    Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen + 2, TICKS_500MS);
+                    break;
+                }
+
                 /*收帧处理*/
-                if ((pframe = pGetpFrame(ucApp_Buf_DB2ZD, dwLen)) == NULL)
+                if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL)
                     break;
 
                 /*电压读取部分*/
-                if ((dwLen = dwGetApdu(pframe, pAPDU)) <= 0)
+                if ((dwLen = dwGet698Apdu(&dlt698Frame, &pAPDU)) <= 0)
                     break;
 
                 if (dwAPduAnalyze(pAPDU, dwLen, &stCollData) < 0)
@@ -104,6 +113,7 @@ int main(void)
 
                 for (i = 0; i < stCollData.ucDataNum; i++)
                 {
+
                     if (stCollData.stDataUnit[i].stOAD.OI_date != 0x2000) /*电压OI*/
                         continue;
                     /*uwLen:
@@ -114,19 +124,19 @@ int main(void)
                             12 09 6D —— 元素3：类型18：long-unsigned 241.3V C相
                     */
                     //stCollData.stDataUnit[i].uwLen;
-                    //stCollData.stDataUnit[i].ucVal;
+                    if (stCollData.stDataUnit[i].ucVal == 0)
+                        continue;
                     A_Voltage = MAKE_WORD(*(stCollData.stDataUnit[i].ucPtr + 3),
                                           *(stCollData.stDataUnit[i].ucPtr + 4));
                     B_Voltage = MAKE_WORD(*(stCollData.stDataUnit[i].ucPtr + 6),
                                           *(stCollData.stDataUnit[i].ucPtr + 7));
                     A_Voltage = MAKE_WORD(*(stCollData.stDataUnit[i].ucPtr + 9),
                                           *(stCollData.stDataUnit[i].ucPtr + 10));
-                    if (Voltage_Change_State != Voltage_NOChange)
-                        break;
 
                     if ((A_Voltage <= Voltage_MAX) && (A_Voltage >= Voltage_MIN))
                     {
                         A_Voltage = Voltage_Modifier_Method(A_Voltage);
+                        /*ucPtr是指向APDU数据段的指针，以下直接修改APDU原始帧*/
                         *(stCollData.stDataUnit[i].ucPtr + 3) = LSB(A_Voltage);
                         *(stCollData.stDataUnit[i].ucPtr + 4) = MSB(A_Voltage);
                     }
@@ -145,10 +155,9 @@ int main(void)
                         *(stCollData.stDataUnit[i].ucPtr + 10) = MSB(C_Voltage);
                     }
                 }
-                //voltage -> apdu
-                //apdu -> frame
+                dwReCalculateFCS(&dlt698Frame);
                 //frame -> UartBuf
-                //Uart_Write(DestUart, pdata, dwLen);
+                Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICKS_500MS);
             }
             /*帧转发*/
             break;
@@ -257,7 +266,7 @@ int main(void)
     }     //end while
 } //end main
 
-void RsvFrameHandle(uint8_t *pucBuffer)
+static void RsvFrameHandle(uint8_t *pucBuffer)
 {
     /*帧合法性判断*/
     if (blRecvFrame(pUartZD->pRsvbuf, pucBuffer))
@@ -282,7 +291,7 @@ void RsvFrameHandle(uint8_t *pucBuffer)
     }
 }
 
-void VoltageTimeOutHandle(void)
+static void VoltageTimeOutHandle(void)
 {
     /*召测电压超时*/
     if ((Voltage_Frame_Status == FrameAwaitingReply) &&

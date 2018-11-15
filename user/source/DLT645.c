@@ -1492,10 +1492,10 @@ void vCurrentDirect_Modify(uint8_t *pucBuffer)
     {
     case 0x32: //三相电流数据块
     {
-        pucBuffer[16] = (pucBuffer[16] - 0x33) & 0xEF + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
-        pucBuffer[19] = (pucBuffer[19] - 0x33) & 0xEF + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
-        pucBuffer[22] = (pucBuffer[22] - 0x33) & 0xEF + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
-        for (i = 0; i < 23; i++)                              //数据域长度23
+        pucBuffer[16] = ((pucBuffer[16] - 0x33) & 0xEF) + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
+        pucBuffer[19] = ((pucBuffer[19] - 0x33) & 0xEF) + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
+        pucBuffer[22] = ((pucBuffer[22] - 0x33) & 0xEF) + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
+        for (i = 0; i < 23; i++)                                //数据域长度23
         {
             ucCheckData += pucBuffer[i];
         }
@@ -1505,8 +1505,8 @@ void vCurrentDirect_Modify(uint8_t *pucBuffer)
     }
     case 0x34: //A相电流
     {
-        pucBuffer[16] = (pucBuffer[16] - 0x33) & 0xEF + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
-        for (i = 0; i < 17; i++)                              //数据域长度17
+        pucBuffer[16] = ((pucBuffer[16] - 0x33) & 0xEF) + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
+        for (i = 0; i < 17; i++)                                //数据域长度17
         {
             ucCheckData += pucBuffer[i];
         }
@@ -1516,8 +1516,8 @@ void vCurrentDirect_Modify(uint8_t *pucBuffer)
     }
     case 0x35: //B相电流
     {
-        pucBuffer[16] = (pucBuffer[16] - 0x33) & 0xEF + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
-        for (i = 0; i < 17; i++)                              //数据域长度17
+        pucBuffer[16] = ((pucBuffer[16] - 0x33) & 0xEF) + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
+        for (i = 0; i < 17; i++)                                //数据域长度17
         {
             ucCheckData += pucBuffer[i];
         }
@@ -1527,8 +1527,8 @@ void vCurrentDirect_Modify(uint8_t *pucBuffer)
     }
     case 0x36: //C相电流
     {
-        pucBuffer[16] = (pucBuffer[16] - 0x33) & 0xEF + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
-        for (i = 0; i < 17; i++)                              //数据域长度16
+        pucBuffer[16] = ((pucBuffer[16] - 0x33) & 0xEF) + 0x33; //最高bit位为1，表示为负值，将最高位屏蔽为1
+        for (i = 0; i < 17; i++)                                //数据域长度16
         {
             ucCheckData += pucBuffer[i];
         }
@@ -2547,8 +2547,8 @@ void vEnergy_Modify_ReadValue(uint8_t *pucbuffer)
     pucbuffer[9] = 0x0C;
 
     /*读取存储的上次真实值和修改值*/
-    realValue = Flash_Read_Word(FLASH_REAL_1DAYFROZEN_ADDR + 4);
-    modifiedValue = Flash_Read_Word(FLASH_MODIFIED_1DAYFROZEN_ADDR + 4);
+    realValue = Flash_Read_Word(FLASH_REAL_1DAYFROZEN_ADDR);
+    modifiedValue = Flash_Read_Word(FLASH_MODIFIED_1DAYFROZEN_ADDR);
     /*终端第一次使用*/
     if (realValue == 0XFFFFFFFF)
     {

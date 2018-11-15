@@ -3,8 +3,9 @@
 
 #include <string.h>
 #include "uart.h"
-#include "protocol.h"
+#include "DLT698.h"
 
+#define TICKS_500MS 6
 typedef enum emprotocol
 {
     dlt645,
@@ -14,10 +15,9 @@ typedef enum emprotocol
 
 /*从应用层帧缓存格式化为帧结构*/
 extern uint8_t dlt645_CalCS(uint8_t *pframe, uint32_t cspos);
-extern void *pGetpFrame(uint8_t *framebuf, uint32_t len);
+extern uint8_t *pGetpFrame(uint8_t *pframe, uint32_t dwLen, DLT698_FRAME *p698Frame);
 extern ProtocolDef GetProtocolType(uint8_t *pbuf, uint32_t len);
 extern uint32_t dwUartCopy(UartDef *SrcUart, uint8_t *pdata, UartDef *DestUart);
-//extern uint8_t dlt645_CalCS(Frame07_645Def *pframe);
 
 #endif
 ;
