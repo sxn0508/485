@@ -6,6 +6,7 @@
 #include "DLT698.h"
 
 #define TICKS_500MS 6
+#define TICKS_1000MS 11
 typedef enum emprotocol
 {
     dlt645,

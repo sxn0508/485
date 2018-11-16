@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
   27:../stdperiph/source/stm32f37x_pwr.c ****   * Unless required by applicable law or agreed to in writing, software 
   28:../stdperiph/source/stm32f37x_pwr.c ****   * distributed under the License is distributed on an "AS IS" BASIS, 
   29:../stdperiph/source/stm32f37x_pwr.c ****   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 2
 
 
   30:../stdperiph/source/stm32f37x_pwr.c ****   * See the License for the specific language governing permissions and
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
   84:../stdperiph/source/stm32f37x_pwr.c ****   ==============================================================================
   85:../stdperiph/source/stm32f37x_pwr.c ****                    ##### Backup Domain Access function #####
   86:../stdperiph/source/stm32f37x_pwr.c ****   ==============================================================================
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 3
 
 
   87:../stdperiph/source/stm32f37x_pwr.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  112:../stdperiph/source/stm32f37x_pwr.c ****   *          This parameter can be: ENABLE or DISABLE.
  113:../stdperiph/source/stm32f37x_pwr.c ****   * @retval None
  114:../stdperiph/source/stm32f37x_pwr.c ****   */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 4
 
 
  115:../stdperiph/source/stm32f37x_pwr.c **** void PWR_BackupAccessCmd(FunctionalState NewState)
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  146:../stdperiph/source/stm32f37x_pwr.c ****   * @brief  Configures the voltage threshold detected by the Power Voltage Detector(PVD).
  147:../stdperiph/source/stm32f37x_pwr.c ****   * @param  PWR_PVDLevel: specifies the PVD detection level
  148:../stdperiph/source/stm32f37x_pwr.c ****   *          This parameter can be one of the following values:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 5
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 5
 
 
  149:../stdperiph/source/stm32f37x_pwr.c ****   *             @arg PWR_PVDLevel_0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  110              	.LFE113:
  112              		.section	.text.PWR_PVDCmd,"ax",%progbits
  113              		.align	2
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 6
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 6
 
 
  114              		.global	PWR_PVDCmd
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  205:../stdperiph/source/stm32f37x_pwr.c **** 
  206:../stdperiph/source/stm32f37x_pwr.c ****   (+) WakeUp pins are used to wakeup the system from Standby mode. These pins are 
  207:../stdperiph/source/stm32f37x_pwr.c ****       forced in input pull down configuration and are active on rising edges.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 7
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 7
 
 
  208:../stdperiph/source/stm32f37x_pwr.c ****   (+) There are three WakeUp pins: WakeUp Pin 1 on PA.00, WakeUp Pin 2 on PC.13 and
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  169              	.L16:
  170              		.align	2
  171              	.L15:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 8
 
 
  172 0018 00700040 		.word	1073770496
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  276:../stdperiph/source/stm32f37x_pwr.c ****   if (NewState != DISABLE)
  190              		.loc 1 276 0
  191 0000 21B1     		cbz	r1, .L18
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 9
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 9
 
 
  277:../stdperiph/source/stm32f37x_pwr.c ****   {
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  302:../stdperiph/source/stm32f37x_pwr.c ****     (+) Stop mode: all clocks are stopped, regulator running, regulator in low power mode
  303:../stdperiph/source/stm32f37x_pwr.c ****     (+) Standby mode: VCORE domain powered off
  304:../stdperiph/source/stm32f37x_pwr.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 10
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 10
 
 
  305:../stdperiph/source/stm32f37x_pwr.c ****   *** Sleep mode *** 
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  359:../stdperiph/source/stm32f37x_pwr.c ****              is necessary to:
  360:../stdperiph/source/stm32f37x_pwr.c ****              (+++) Configure the EXTI Line 19 to be sensitive to rising edges (Interrupt 
  361:../stdperiph/source/stm32f37x_pwr.c ****                    or Event modes) using the EXTI_Init() function.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 11
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 11
 
 
  362:../stdperiph/source/stm32f37x_pwr.c ****              (+++) Enable the RTC Tamper or time stamp Interrupt using the RTC_ITConfig() 
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  230 0000 054A     		ldr	r2, .L25
  231 0002 1369     		ldr	r3, [r2, #16]
  232 0004 23F00403 		bic	r3, r3, #4
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 12
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 12
 
 
  233 0008 1361     		str	r3, [r2, #16]
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
   45:../cmsis/include/core_cmInstr.h ****  */
   46:../cmsis/include/core_cmInstr.h **** #define __NOP                             __nop
   47:../cmsis/include/core_cmInstr.h **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 13
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 13
 
 
   48:../cmsis/include/core_cmInstr.h **** 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  102:../cmsis/include/core_cmInstr.h ****     \return               Reversed value
  103:../cmsis/include/core_cmInstr.h ****  */
  104:../cmsis/include/core_cmInstr.h **** #define __REV                             __rev
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 14
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 14
 
 
  105:../cmsis/include/core_cmInstr.h **** 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  159:../cmsis/include/core_cmInstr.h **** 
  160:../cmsis/include/core_cmInstr.h ****     This function performs a exclusive LDR command for 8 bit value.
  161:../cmsis/include/core_cmInstr.h **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 15
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 15
 
 
  162:../cmsis/include/core_cmInstr.h ****     \param [in]    ptr  Pointer to data
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  216:../cmsis/include/core_cmInstr.h ****     \param [in]  value  Value to store
  217:../cmsis/include/core_cmInstr.h ****     \param [in]    ptr  Pointer to location
  218:../cmsis/include/core_cmInstr.h ****     \return          0  Function succeeded
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 16
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 16
 
 
  219:../cmsis/include/core_cmInstr.h ****     \return          1  Function failed
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  273:../cmsis/include/core_cmInstr.h **** #elif defined ( __TMS470__ ) /*---------------- TI CCS Compiler ------------------*/
  274:../cmsis/include/core_cmInstr.h **** /* TI CCS specific functions */
  275:../cmsis/include/core_cmInstr.h **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 17
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 17
 
 
  276:../cmsis/include/core_cmInstr.h **** #include <cmsis_ccs.h>
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  259              		.syntax unified
  260 0014 7047     		bx	lr
  261              	.L26:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 18
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 18
 
 
  262 0016 00BF     		.align	2
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  446:../stdperiph/source/stm32f37x_pwr.c ****   /* Check the parameters */
  447:../stdperiph/source/stm32f37x_pwr.c ****   assert_param(IS_PWR_REGULATOR(PWR_Regulator));
  448:../stdperiph/source/stm32f37x_pwr.c ****   assert_param(IS_PWR_STOP_ENTRY(PWR_STOPEntry));
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 19
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 19
 
 
  449:../stdperiph/source/stm32f37x_pwr.c ****   
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  320              		.syntax unified
  321              	@ 310 "../cmsis/include/core_cmInstr.h" 1
  322 001e 20BF     		wfe
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 20
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 20
 
 
  323              	@ 0 "" 2
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  354              		@ frame_needed = 0, uses_anonymous_args = 0
  355              		@ link register save eliminated.
  491:../stdperiph/source/stm32f37x_pwr.c ****   /* Clear Wakeup flag */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 21
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 21
 
 
  492:../stdperiph/source/stm32f37x_pwr.c ****   PWR->CR |= PWR_CR_CWUF;
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  505:../stdperiph/source/stm32f37x_pwr.c ****   __WFI();
  506:../stdperiph/source/stm32f37x_pwr.c **** }
  507:../stdperiph/source/stm32f37x_pwr.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 22
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 22
 
 
  508:../stdperiph/source/stm32f37x_pwr.c **** /**
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  412 000a 7047     		bx	lr
  413              	.LVL23:
  414              	.L37:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 23
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 23
 
 
  548:../stdperiph/source/stm32f37x_pwr.c ****   }
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  448              	.L42:
  449              		.align	2
  450              	.L41:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 24
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 24
 
 
  451 000c 00700040 		.word	1073770496
@@ -1391,43 +1391,43 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 1
  459              		.file 5 "../cmsis/include/core_cm4.h"
  460              		.file 6 "../cmsis/include/stm32f37x.h"
  461              		.file 7 "../stdperiph/include/stm32f37x_rcc.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccEuam6X.s 			page 25
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccacwaJx.s 			page 25
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f37x_pwr.c
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:22     .text.PWR_DeInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:27     .text.PWR_DeInit:00000000 PWR_DeInit
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:54     .text.PWR_BackupAccessCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:59     .text.PWR_BackupAccessCmd:00000000 PWR_BackupAccessCmd
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:74     .text.PWR_BackupAccessCmd:00000008 $d
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:79     .text.PWR_PVDLevelConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:84     .text.PWR_PVDLevelConfig:00000000 PWR_PVDLevelConfig
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:108    .text.PWR_PVDLevelConfig:00000010 $d
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:113    .text.PWR_PVDCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:118    .text.PWR_PVDCmd:00000000 PWR_PVDCmd
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:133    .text.PWR_PVDCmd:00000008 $d
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:138    .text.PWR_WakeUpPinCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:143    .text.PWR_WakeUpPinCmd:00000000 PWR_WakeUpPinCmd
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:172    .text.PWR_WakeUpPinCmd:00000018 $d
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:177    .text.PWR_SDADCAnalogCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:182    .text.PWR_SDADCAnalogCmd:00000000 PWR_SDADCAnalogCmd
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:211    .text.PWR_SDADCAnalogCmd:00000018 $d
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:216    .text.PWR_EnterSleepMode:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:221    .text.PWR_EnterSleepMode:00000000 PWR_EnterSleepMode
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:264    .text.PWR_EnterSleepMode:00000018 $d
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:271    .text.PWR_EnterSTOPMode:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:276    .text.PWR_EnterSTOPMode:00000000 PWR_EnterSTOPMode
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:338    .text.PWR_EnterSTOPMode:0000002c $d
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:344    .text.PWR_EnterSTANDBYMode:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:349    .text.PWR_EnterSTANDBYMode:00000000 PWR_EnterSTANDBYMode
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:383    .text.PWR_EnterSTANDBYMode:00000020 $d
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:391    .text.PWR_GetFlagStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:396    .text.PWR_GetFlagStatus:00000000 PWR_GetFlagStatus
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:423    .text.PWR_GetFlagStatus:00000010 $d
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:428    .text.PWR_ClearFlag:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:433    .text.PWR_ClearFlag:00000000 PWR_ClearFlag
-C:\Users\strag\AppData\Local\Temp\ccEuam6X.s:451    .text.PWR_ClearFlag:0000000c $d
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:22     .text.PWR_DeInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:27     .text.PWR_DeInit:00000000 PWR_DeInit
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:54     .text.PWR_BackupAccessCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:59     .text.PWR_BackupAccessCmd:00000000 PWR_BackupAccessCmd
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:74     .text.PWR_BackupAccessCmd:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:79     .text.PWR_PVDLevelConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:84     .text.PWR_PVDLevelConfig:00000000 PWR_PVDLevelConfig
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:108    .text.PWR_PVDLevelConfig:00000010 $d
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:113    .text.PWR_PVDCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:118    .text.PWR_PVDCmd:00000000 PWR_PVDCmd
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:133    .text.PWR_PVDCmd:00000008 $d
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:138    .text.PWR_WakeUpPinCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:143    .text.PWR_WakeUpPinCmd:00000000 PWR_WakeUpPinCmd
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:172    .text.PWR_WakeUpPinCmd:00000018 $d
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:177    .text.PWR_SDADCAnalogCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:182    .text.PWR_SDADCAnalogCmd:00000000 PWR_SDADCAnalogCmd
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:211    .text.PWR_SDADCAnalogCmd:00000018 $d
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:216    .text.PWR_EnterSleepMode:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:221    .text.PWR_EnterSleepMode:00000000 PWR_EnterSleepMode
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:264    .text.PWR_EnterSleepMode:00000018 $d
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:271    .text.PWR_EnterSTOPMode:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:276    .text.PWR_EnterSTOPMode:00000000 PWR_EnterSTOPMode
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:338    .text.PWR_EnterSTOPMode:0000002c $d
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:344    .text.PWR_EnterSTANDBYMode:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:349    .text.PWR_EnterSTANDBYMode:00000000 PWR_EnterSTANDBYMode
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:383    .text.PWR_EnterSTANDBYMode:00000020 $d
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:391    .text.PWR_GetFlagStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:396    .text.PWR_GetFlagStatus:00000000 PWR_GetFlagStatus
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:423    .text.PWR_GetFlagStatus:00000010 $d
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:428    .text.PWR_ClearFlag:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:433    .text.PWR_ClearFlag:00000000 PWR_ClearFlag
+C:\Users\strag\AppData\Local\Temp\ccacwaJx.s:451    .text.PWR_ClearFlag:0000000c $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

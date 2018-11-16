@@ -82,4 +82,5 @@ extern UINT16 pppfcs16(UINT16 fcs, unsigned char *cp, int len);
 extern int dw698LinkAnalyze(UINT8 *pframe, UINT8 *pAPDU);
 extern int dwAPduAnalyze(UINT8 *pucBuf, UINT32 dwlen, COLL_STORE_DATA *pstCollStoreData);
 extern int dwReCalculateFCS(DLT698_FRAME *pframe);
+extern void v698VoltageModify(DATA_UNIT *pDataUnit);
 #endif

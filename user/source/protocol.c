@@ -39,7 +39,8 @@ uint8_t *pGetpFrame(uint8_t *pframe, uint32_t dwLen, DLT698_FRAME *p698Frame)
     //帧长占2byte，不含头尾
     uwframeLen = MAKE_WORD(*(p + 2), *(p + 1));
 
-    if (dwLen + 2 > uwframeLen)
+    //if (dwLen + 2 > uwframeLen)
+    if (uwframeLen + 2 > dwLen)
         return NULL;
 
     /*SA地址字节数，0代表1个字节*/
@@ -84,10 +85,19 @@ uint8_t *pGetpFrame(uint8_t *pframe, uint32_t dwLen, DLT698_FRAME *p698Frame)
 ProtocolDef GetProtocolType(uint8_t *pbuf, uint32_t len)
 {
     ProtocolDef ptype = none;
+    //UINT16 uwframeLen;
+    UINT32 nHCSPos;
+    UINT32 nFCSPos;
+    UINT16 uwhcs;
+    UINT16 uwfcs;
+    UINT16 SA_Len;
+
     uint8_t *pframe;
     pframe = (uint8_t *)strchr((char *)pbuf, 0x68);
+
+    if (pframe == NULL)
+        return none;
     uint32_t dlt645_L = *(pframe + 9) + 12;
-    //uint32_t dlt698_L = *(pframe + 1) | (*(pframe + 2) & 0x3F) << 8 + 2;
     uint32_t dlt698_L = MAKE_WORD(*(pframe + 2) & 0x3F, *(pframe + 1)) + 2;
 
     /*8th byte==68*/
@@ -98,11 +108,38 @@ ProtocolDef GetProtocolType(uint8_t *pbuf, uint32_t len)
         len >= dlt645_L &&
         *(pframe + dlt645_L - 2) == dlt645_CalCS(pframe, dlt645_L - 2) &&
         *(pframe + dlt645_L - 1) == 0x16)
+    {
         ptype = dlt645;
+    }
     /*last byte== 16*/
     else if (*(pframe + dlt698_L - 1) == 0x16 &&
              len >= dlt698_L)
+    {
+        /*SA地址字节数，0代表1个字节*/
+        //SA_Len = (*(pframe + 4) & 0x0F) + 2;
+        //jnHCSPos += SA_Len + 5;
+
+        //帧头校验hcs
+        //uwhcs = PPPINITFCS16;
+        //uwhcs = pppfcs16(uwhcs, pframe + 1, nHCSPos - 1);
+
+        //if (uwhcs != MAKE_WORD(*(pframe + nHCSPos + 1), *(pframe + nHCSPos)))
+        //{
+        //   ptype = none;
+        //}
+
+        //帧校验fcs
+        //nFCSPos = dlt698_L - 1;//-2
+        //uwfcs = PPPINITFCS16;
+        //uwfcs = pppfcs16(uwfcs, pframe + 1, nFCSPos - 1);
+        //uwfcs = pppfcs16(uwfcs, pframe + 1, dlt698_L - 4);
+
+        //if (uwfcs != MAKE_WORD(*(pframe + nFCSPos + 1), *(pframe + nFCSPos)))
+        //{
+        //ptype = none;
+        //}
         ptype = dlt698;
+    }
     return ptype;
 }
 /********************************************************************
@@ -135,6 +172,6 @@ uint32_t dwUartCopy(UartDef *SrcUart, uint8_t *pdata, UartDef *DestUart)
         return 0;
     /*向下透传*/
     //Uart_Write(DestUart, pdata, dwLen);
-    Uart_OnceWrite(DestUart, pdata, dwLen, TICKS_500MS);
+    Uart_OnceWrite(DestUart, pdata, dwLen, TICKS_1000MS);
     return dwLen;
 }

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
   28:../user/source/main.c ****     //uint8_t *pframe = NULL;
   29:../user/source/main.c ****     uint32_t i;
   30:../user/source/main.c ****     //uint32_t test;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 2
 
 
   31:../user/source/main.c ****     DLT698_FRAME dlt698Frame;
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
   85:../user/source/main.c ****     tmpAPDU[7] = 0x02;
   86:../user/source/main.c ****     tmpAPDU[8] = 0x00;
   87:../user/source/main.c ****     tmpAPDU[9] = 0x20;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 3
 
 
   88:../user/source/main.c ****     tmpAPDU[10] = 0x21;
@@ -175,10 +175,10 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  139:../user/source/main.c ****                 Uart_idleReadDisable(pUartDB);
  140:../user/source/main.c ****                 FLAG_UartDB_HasData = false;
  141:../user/source/main.c ****                 dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
- 142:../user/source/main.c ****                 ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen);
+ 142:../user/source/main.c ****                 ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //Ð£Ñé´íÎóÒ²ÄÛ¹ý£¿
  143:../user/source/main.c ****             }
  144:../user/source/main.c ****             break;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 4
 
 
  145:../user/source/main.c ****         }
@@ -205,149 +205,170 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  166:../user/source/main.c ****                 if ((dwLen = Uart_Read(pUartDB, ucApp_Buf_DB2ZD, DRV_BUF_SIZE)) == 0)
  167:../user/source/main.c ****                     break;
  168:../user/source/main.c **** 
- 169:../user/source/main.c ****                 if (Voltage_Change_State == Voltage_NOChange)
- 170:../user/source/main.c ****                 {
- 171:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, TICKS_1000MS);
- 172:../user/source/main.c ****                     break;
- 173:../user/source/main.c ****                 }
+ 169:../user/source/main.c **** //if (Voltage_Change_State == Voltage_NOChange)
+ 170:../user/source/main.c **** //{
+ 171:../user/source/main.c **** //Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, TICKS_1000MS);
+ 172:../user/source/main.c **** //break;
+ 173:../user/source/main.c **** //}
  174:../user/source/main.c **** 
- 175:../user/source/main.c ****                 /*ÊÕÖ¡´¦Àí*/
- 176:../user/source/main.c ****                 if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL)
- 177:../user/source/main.c ****                     break;
- 178:../user/source/main.c **** 
- 179:../user/source/main.c ****                 /*µçÑ¹¶ÁÈ¡²¿·Ö*/
- 180:../user/source/main.c ****                 if ((dwLen = dwGet698Apdu(&dlt698Frame, &pAPDU)) <= 0)
- 181:../user/source/main.c ****                     break;
- 182:../user/source/main.c **** 
- 183:../user/source/main.c ****                 if (dwAPduAnalyze(pAPDU, dwLen, &stCollData) < 0)
- 184:../user/source/main.c ****                     break;
- 185:../user/source/main.c ****                 for (i = 0; i < stCollData.ucDataNum; i++)
- 186:../user/source/main.c ****                 {
- 187:../user/source/main.c ****                     if (stCollData.stDataUnit[i].stOAD.OI_date == 0x2000) /*µçÑ¹OI*/
- 188:../user/source/main.c ****                     {
- 189:../user/source/main.c ****                         v698VoltageModify(&stCollData.stDataUnit[i]);
- 190:../user/source/main.c ****                     }
+ 175:../user/source/main.c **** /*ÊÕÖ¡´¦Àí*/
+ 176:../user/source/main.c **** //if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL) //Ð£Ñé´íÎó¾Í²»Í¸´«£¿
+ 177:../user/source/main.c **** //{
+ 178:../user/source/main.c **** //Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, TICKS_1000MS);
+ 179:../user/source/main.c **** //break;
+ 180:../user/source/main.c **** //}
+ 181:../user/source/main.c **** 
+ 182:../user/source/main.c **** /*µçÑ¹¶ÁÈ¡²¿·Ö*/
+ 183:../user/source/main.c **** //if ((dwLen = dwGet698Apdu(&dlt698Frame, &pAPDU)) <= 0)
+ 184:../user/source/main.c **** //break;
+ 185:../user/source/main.c **** 
+ 186:../user/source/main.c **** //if (dwAPduAnalyze(pAPDU, dwLen, &stCollData) < 0)
+ 187:../user/source/main.c **** #if 1
+ 188:../user/source/main.c ****                 if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL) //Ð£Ñé´íÎó¾Í²»Í¸´«£
+ 189:../user/source/main.c ****                 {
+ 190:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, TICKS_1000MS);
  191:../user/source/main.c ****                 }
- 192:../user/source/main.c ****                 dwReCalculateFCS(&dlt698Frame);
- 193:../user/source/main.c ****                 //frame -> UartBuf
- 194:../user/source/main.c ****                 Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICKS_500MS
- 195:../user/source/main.c ****             }
- 196:../user/source/main.c ****             /*Ö¡×ª·¢*/
- 197:../user/source/main.c ****             break;
- 198:../user/source/main.c ****         }
- 199:../user/source/main.c ****         case dlt645:
- 200:../user/source/main.c ****         {
- 201:../user/source/main.c ****             /*´®¿ÚÎÞÊÕ·¢Ê±Î¹¹·¼ä¸ôÎª1ms×óÓÒ*/
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 5
+ 192:../user/source/main.c ****                 //if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) != NULL) //Ð£Ñé´íÎó¾Í²»Í¸´
+ 193:../user/source/main.c ****                 else if (Voltage_Change_State != Voltage_NOChange)
+ 194:../user/source/main.c ****                 {
+ 195:../user/source/main.c ****                     if ((dwLen = dwGet698Apdu(&dlt698Frame, &pAPDU)) > 0)
+ 196:../user/source/main.c ****                     {
+ 197:../user/source/main.c ****                         if (dwAPduAnalyze(pAPDU, dwLen, &stCollData) > 0)
+ 198:../user/source/main.c ****                         {
+ 199:../user/source/main.c **** #endif
+ 200:../user/source/main.c ****                             for (i = 0; i < stCollData.ucDataNum; i++)
+ 201:../user/source/main.c ****                             {
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 5
 
 
- 202:../user/source/main.c ****             vFeedExtWatchDog();
- 203:../user/source/main.c ****             /*¼¯ÖÐÆ÷²àÊý¾ÝÖ¡ÊÕÖ¡´¦Àí*/
- 204:../user/source/main.c ****             if (blDrv_Buf_IsEmpty(pUartZD->pRsvbuf) == false)
- 205:../user/source/main.c ****             {
- 206:../user/source/main.c ****                 RsvFrameHandle(ucApp_Buf_ZD2DB);
- 207:../user/source/main.c ****             }
- 208:../user/source/main.c ****             /*µç±í²àÊÕÖ¡´¦Àí*/
- 209:../user/source/main.c ****             /*Î´ÊÕµ½µç±íÖ¡*/
- 210:../user/source/main.c ****             if (blDrv_Buf_IsEmpty(pUartDB->pRsvbuf) == true)
- 211:../user/source/main.c ****             {
- 212:../user/source/main.c ****                 VoltageTimeOutHandle();
+ 202:../user/source/main.c ****                                 if (stCollData.stDataUnit[i].stOAD.OI_date == 0x2000) /*µçÑ¹OI*/
+ 203:../user/source/main.c ****                                 {
+ 204:../user/source/main.c ****                                     v698VoltageModify(&stCollData.stDataUnit[i]);
+ 205:../user/source/main.c ****                                 }
+ 206:../user/source/main.c ****                             }
+ 207:../user/source/main.c ****                             dwReCalculateFCS(&dlt698Frame);
+ 208:../user/source/main.c ****                         }
+ 209:../user/source/main.c ****                     }
+ 210:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICKS_5
+ 211:../user/source/main.c ****                 }
+ 212:../user/source/main.c ****                 //frame -> UartBuf
  213:../user/source/main.c ****             }
- 214:../user/source/main.c ****             /*ÊÕµ½µç±íÖ¡*/
- 215:../user/source/main.c ****             else
- 216:../user/source/main.c ****             {
- 217:../user/source/main.c ****                 /*·Ç·¨Ö¡*/
- 218:../user/source/main.c ****                 if (!blRecvFrame(pUartDB->pRsvbuf, ucApp_Buf_DB2ZD))
- 219:../user/source/main.c ****                 {
- 220:../user/source/main.c ****                     /*µçÑ¹»ØÖ¡³¬Ê±*/
- 221:../user/source/main.c ****                     if ((Voltage_Frame_Status == FrameAwaitingReply) &&
- 222:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 223:../user/source/main.c ****                     {
- 224:../user/source/main.c ****                         /*ÖÐ¼ÌÆ÷Ê¹ÓÃÉÏ´ÎµÄÕýÈ·µçÑ¹ÖµÌæ´ú»Ø¸´*/
- 225:../user/source/main.c ****                         if (blVoltage_Create(ucApp_Buf_ZD2DB))
- 226:../user/source/main.c ****                         {
- 227:../user/source/main.c ****                             ucDrv_Buf_PutBytes(ucApp_Buf_ZD2DB, pUartZD->pSndbuf, ucApp_Buf_ZD2DB[9
- 228:../user/source/main.c ****                             /*·¢ËÍµçÑ¹Ö¡*/
- 229:../user/source/main.c ****                             if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
- 230:../user/source/main.c ****                             {
- 231:../user/source/main.c ****                                 Uart_DataPut(USART1);
- 232:../user/source/main.c ****                                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
- 233:../user/source/main.c ****                                 Voltage_Frame_Status = FrameReplied;
- 234:../user/source/main.c ****                                 /*¼ÆÊ±Æ÷¸´Î»*/
- 235:../user/source/main.c ****                                 blFramesCounterStatus = false;
- 236:../user/source/main.c ****                                 uwTime2FramesCounter = 0;
- 237:../user/source/main.c ****                             }
- 238:../user/source/main.c ****                         }
- 239:../user/source/main.c ****                     }
- 240:../user/source/main.c ****                 }
- 241:../user/source/main.c ****                 /*ºÏ·¨Ö¡*/
- 242:../user/source/main.c ****                 else
- 243:../user/source/main.c ****                 {
- 244:../user/source/main.c ****                     vDBDataID_Handle(ucApp_Buf_DB2ZD);
- 245:../user/source/main.c ****                     ucDrv_Buf_PutBytes(ucApp_Buf_DB2ZD, pUartZD->pSndbuf, uc645DataDomainLength + 1
- 246:../user/source/main.c ****                     if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
- 247:../user/source/main.c ****                     {
- 248:../user/source/main.c ****                         Uart_DataPut(pUartZD->handler);
- 249:../user/source/main.c ****                     }
- 250:../user/source/main.c ****                 }
- 251:../user/source/main.c ****             }
- 252:../user/source/main.c ****             /*¿ÉÑ¡¹¦ÄÜ£ººìÍâÉèÖÃ²ÎÊý*/
- 253:../user/source/main.c **** #ifdef ENABLE_INFR
- 254:../user/source/main.c ****             /*ºìÍâ´®¿ÚÊÕÖ¡´¦Àí */
- 255:../user/source/main.c ****             if (blDrv_Buf_IsEmpty(pUartIR->pRsvbuf) == false)
- 256:../user/source/main.c ****             {
- 257:../user/source/main.c ****                 if (blRecvFrame(pUartIR->pRsvbuf, ucApp_Buf_INFR))
- 258:../user/source/main.c ****                 {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 6
+ 214:../user/source/main.c ****             /*Ö¡×ª·¢*/
+ 215:../user/source/main.c ****             break;
+ 216:../user/source/main.c ****         }
+ 217:../user/source/main.c ****         case dlt645:
+ 218:../user/source/main.c ****         {
+ 219:../user/source/main.c ****             /*´®¿ÚÎÞÊÕ·¢Ê±Î¹¹·¼ä¸ôÎª1ms×óÓÒ*/
+ 220:../user/source/main.c ****             vFeedExtWatchDog();
+ 221:../user/source/main.c ****             /*¼¯ÖÐÆ÷²àÊý¾ÝÖ¡ÊÕÖ¡´¦Àí*/
+ 222:../user/source/main.c ****             if (blDrv_Buf_IsEmpty(pUartZD->pRsvbuf) == false)
+ 223:../user/source/main.c ****             {
+ 224:../user/source/main.c ****                 RsvFrameHandle(ucApp_Buf_ZD2DB);
+ 225:../user/source/main.c ****             }
+ 226:../user/source/main.c ****             /*µç±í²àÊÕÖ¡´¦Àí*/
+ 227:../user/source/main.c ****             /*Î´ÊÕµ½µç±íÖ¡*/
+ 228:../user/source/main.c ****             if (blDrv_Buf_IsEmpty(pUartDB->pRsvbuf) == true)
+ 229:../user/source/main.c ****             {
+ 230:../user/source/main.c ****                 VoltageTimeOutHandle();
+ 231:../user/source/main.c ****             }
+ 232:../user/source/main.c ****             /*ÊÕµ½µç±íÖ¡*/
+ 233:../user/source/main.c ****             else
+ 234:../user/source/main.c ****             {
+ 235:../user/source/main.c ****                 /*·Ç·¨Ö¡*/
+ 236:../user/source/main.c ****                 if (!blRecvFrame(pUartDB->pRsvbuf, ucApp_Buf_DB2ZD))
+ 237:../user/source/main.c ****                 {
+ 238:../user/source/main.c ****                     /*µçÑ¹»ØÖ¡³¬Ê±*/
+ 239:../user/source/main.c ****                     if ((Voltage_Frame_Status == FrameAwaitingReply) &&
+ 240:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 241:../user/source/main.c ****                     {
+ 242:../user/source/main.c ****                         /*ÖÐ¼ÌÆ÷Ê¹ÓÃÉÏ´ÎµÄÕýÈ·µçÑ¹ÖµÌæ´ú»Ø¸´*/
+ 243:../user/source/main.c ****                         if (blVoltage_Create(ucApp_Buf_ZD2DB))
+ 244:../user/source/main.c ****                         {
+ 245:../user/source/main.c ****                             ucDrv_Buf_PutBytes(ucApp_Buf_ZD2DB, pUartZD->pSndbuf, ucApp_Buf_ZD2DB[9
+ 246:../user/source/main.c ****                             /*·¢ËÍµçÑ¹Ö¡*/
+ 247:../user/source/main.c ****                             if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
+ 248:../user/source/main.c ****                             {
+ 249:../user/source/main.c ****                                 Uart_DataPut(USART1);
+ 250:../user/source/main.c ****                                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
+ 251:../user/source/main.c ****                                 Voltage_Frame_Status = FrameReplied;
+ 252:../user/source/main.c ****                                 /*¼ÆÊ±Æ÷¸´Î»*/
+ 253:../user/source/main.c ****                                 blFramesCounterStatus = false;
+ 254:../user/source/main.c ****                                 uwTime2FramesCounter = 0;
+ 255:../user/source/main.c ****                             }
+ 256:../user/source/main.c ****                         }
+ 257:../user/source/main.c ****                     }
+ 258:../user/source/main.c ****                 }
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 6
 
 
- 259:../user/source/main.c ****                     if (ucApp_Buf_INFR[8] == 0X13)
- 260:../user/source/main.c ****                     {
- 261:../user/source/main.c ****                         ucApp_Buf_INFR[1] = 0x01;
- 262:../user/source/main.c ****                         ucApp_Buf_INFR[2] = 0x01;
- 263:../user/source/main.c ****                         ucApp_Buf_INFR[3] = 0x01;
- 264:../user/source/main.c ****                         ucApp_Buf_INFR[4] = 0x01;
- 265:../user/source/main.c ****                         ucApp_Buf_INFR[5] = 0x01;
- 266:../user/source/main.c ****                         ucApp_Buf_INFR[6] = 0x01;
- 267:../user/source/main.c ****                         ucApp_Buf_INFR[8] = 0x93;
- 268:../user/source/main.c ****                         ucApp_Buf_INFR[9] = 0x06;
- 269:../user/source/main.c ****                         ucApp_Buf_INFR[10] = 0x34;
- 270:../user/source/main.c ****                         ucApp_Buf_INFR[11] = 0x34;
- 271:../user/source/main.c ****                         ucApp_Buf_INFR[12] = 0x34;
- 272:../user/source/main.c ****                         ucApp_Buf_INFR[13] = 0x34;
- 273:../user/source/main.c ****                         ucApp_Buf_INFR[14] = 0x34;
- 274:../user/source/main.c ****                         ucApp_Buf_INFR[15] = 0x34;
- 275:../user/source/main.c ****                         ucApp_Buf_INFR[16] = 0xA7;
- 276:../user/source/main.c ****                         ucApp_Buf_INFR[17] = 0x16;
- 277:../user/source/main.c ****                         ucDrv_Buf_PutBytes(ucApp_Buf_INFR, pUartIR->pSndbuf, 18);
- 278:../user/source/main.c ****                     }
- 279:../user/source/main.c ****                     else
- 280:../user/source/main.c ****                     {
- 281:../user/source/main.c ****                         vINFRDataID_Handle(ucApp_Buf_INFR);
- 282:../user/source/main.c ****                     }
- 283:../user/source/main.c ****                     /*ºìÍâ¿Ú»ØÖ¡*/
- 284:../user/source/main.c ****                     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
- 285:../user/source/main.c ****                     {
- 286:../user/source/main.c ****                         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
- 287:../user/source/main.c ****                         //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Enable);
- 288:../user/source/main.c ****                         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
- 289:../user/source/main.c ****                     }
- 290:../user/source/main.c ****                 }
- 291:../user/source/main.c ****             } //end ºìÍâÊÕÖ¡´¦Àí
- 292:../user/source/main.c **** #endif
- 293:../user/source/main.c ****             break;
- 294:../user/source/main.c ****         } //end while
- 295:../user/source/main.c ****         default:
- 296:../user/source/main.c ****         {
- 297:../user/source/main.c ****             break;
- 298:../user/source/main.c ****         }
- 299:../user/source/main.c ****         } //end switch
- 300:../user/source/main.c ****     }     //end while
- 301:../user/source/main.c **** } //end main
- 302:../user/source/main.c **** 
- 303:../user/source/main.c **** static void RsvFrameHandle(uint8_t *pucBuffer)
- 304:../user/source/main.c **** {
-  29              		.loc 1 304 0
+ 259:../user/source/main.c ****                 /*ºÏ·¨Ö¡*/
+ 260:../user/source/main.c ****                 else
+ 261:../user/source/main.c ****                 {
+ 262:../user/source/main.c ****                     vDBDataID_Handle(ucApp_Buf_DB2ZD);
+ 263:../user/source/main.c ****                     ucDrv_Buf_PutBytes(ucApp_Buf_DB2ZD, pUartZD->pSndbuf, uc645DataDomainLength + 1
+ 264:../user/source/main.c ****                     if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
+ 265:../user/source/main.c ****                     {
+ 266:../user/source/main.c ****                         Uart_DataPut(pUartZD->handler);
+ 267:../user/source/main.c ****                     }
+ 268:../user/source/main.c ****                 }
+ 269:../user/source/main.c ****             }
+ 270:../user/source/main.c ****             /*¿ÉÑ¡¹¦ÄÜ£ººìÍâÉèÖÃ²ÎÊý*/
+ 271:../user/source/main.c **** #ifdef ENABLE_INFR
+ 272:../user/source/main.c ****             /*ºìÍâ´®¿ÚÊÕÖ¡´¦Àí */
+ 273:../user/source/main.c ****             if (blDrv_Buf_IsEmpty(pUartIR->pRsvbuf) == false)
+ 274:../user/source/main.c ****             {
+ 275:../user/source/main.c ****                 if (blRecvFrame(pUartIR->pRsvbuf, ucApp_Buf_INFR))
+ 276:../user/source/main.c ****                 {
+ 277:../user/source/main.c ****                     if (ucApp_Buf_INFR[8] == 0X13)
+ 278:../user/source/main.c ****                     {
+ 279:../user/source/main.c ****                         ucApp_Buf_INFR[1] = 0x01;
+ 280:../user/source/main.c ****                         ucApp_Buf_INFR[2] = 0x01;
+ 281:../user/source/main.c ****                         ucApp_Buf_INFR[3] = 0x01;
+ 282:../user/source/main.c ****                         ucApp_Buf_INFR[4] = 0x01;
+ 283:../user/source/main.c ****                         ucApp_Buf_INFR[5] = 0x01;
+ 284:../user/source/main.c ****                         ucApp_Buf_INFR[6] = 0x01;
+ 285:../user/source/main.c ****                         ucApp_Buf_INFR[8] = 0x93;
+ 286:../user/source/main.c ****                         ucApp_Buf_INFR[9] = 0x06;
+ 287:../user/source/main.c ****                         ucApp_Buf_INFR[10] = 0x34;
+ 288:../user/source/main.c ****                         ucApp_Buf_INFR[11] = 0x34;
+ 289:../user/source/main.c ****                         ucApp_Buf_INFR[12] = 0x34;
+ 290:../user/source/main.c ****                         ucApp_Buf_INFR[13] = 0x34;
+ 291:../user/source/main.c ****                         ucApp_Buf_INFR[14] = 0x34;
+ 292:../user/source/main.c ****                         ucApp_Buf_INFR[15] = 0x34;
+ 293:../user/source/main.c ****                         ucApp_Buf_INFR[16] = 0xA7;
+ 294:../user/source/main.c ****                         ucApp_Buf_INFR[17] = 0x16;
+ 295:../user/source/main.c ****                         ucDrv_Buf_PutBytes(ucApp_Buf_INFR, pUartIR->pSndbuf, 18);
+ 296:../user/source/main.c ****                     }
+ 297:../user/source/main.c ****                     else
+ 298:../user/source/main.c ****                     {
+ 299:../user/source/main.c ****                         vINFRDataID_Handle(ucApp_Buf_INFR);
+ 300:../user/source/main.c ****                     }
+ 301:../user/source/main.c ****                     /*ºìÍâ¿Ú»ØÖ¡*/
+ 302:../user/source/main.c ****                     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
+ 303:../user/source/main.c ****                     {
+ 304:../user/source/main.c ****                         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
+ 305:../user/source/main.c ****                         //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Enable);
+ 306:../user/source/main.c ****                         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
+ 307:../user/source/main.c ****                     }
+ 308:../user/source/main.c ****                 }
+ 309:../user/source/main.c ****             } //end ºìÍâÊÕÖ¡´¦Àí
+ 310:../user/source/main.c **** #endif
+ 311:../user/source/main.c ****             break;
+ 312:../user/source/main.c ****         } //end while
+ 313:../user/source/main.c ****         default:
+ 314:../user/source/main.c ****         {
+ 315:../user/source/main.c ****             break;
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 7
+
+
+ 316:../user/source/main.c ****         }
+ 317:../user/source/main.c ****         } //end switch
+ 318:../user/source/main.c ****     }     //end while
+ 319:../user/source/main.c **** } //end main
+ 320:../user/source/main.c **** 
+ 321:../user/source/main.c **** static void RsvFrameHandle(uint8_t *pucBuffer)
+ 322:../user/source/main.c **** {
+  29              		.loc 1 322 0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -358,14 +379,11 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
   37              		.cfi_offset 3, -16
   38              		.cfi_offset 4, -12
   39              		.cfi_offset 5, -8
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 7
-
-
   40              		.cfi_offset 14, -4
   41 0002 0446     		mov	r4, r0
- 305:../user/source/main.c ****     /*Ö¡ºÏ·¨ÐÔÅÐ¶Ï*/
- 306:../user/source/main.c ****     if (blRecvFrame(pUartZD->pRsvbuf, pucBuffer))
-  42              		.loc 1 306 0
+ 323:../user/source/main.c ****     /*Ö¡ºÏ·¨ÐÔÅÐ¶Ï*/
+ 324:../user/source/main.c ****     if (blRecvFrame(pUartZD->pRsvbuf, pucBuffer))
+  42              		.loc 1 324 0
   43 0004 154B     		ldr	r3, .L5
   44 0006 1B68     		ldr	r3, [r3]
   45 0008 0146     		mov	r1, r0
@@ -374,55 +392,55 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
   48 000c FFF7FEFF 		bl	blRecvFrame
   49              	.LVL2:
   50 0010 18B3     		cbz	r0, .L1
- 307:../user/source/main.c ****     {
- 308:../user/source/main.c ****         /*ÊÇ·ñÕÙ²âµçÑ¹*/
- 309:../user/source/main.c ****         if ((pucBuffer[8] == 0X11) &&
-  51              		.loc 1 309 0
+ 325:../user/source/main.c ****     {
+ 326:../user/source/main.c ****         /*ÊÇ·ñÕÙ²âµçÑ¹*/
+ 327:../user/source/main.c ****         if ((pucBuffer[8] == 0X11) &&
+  51              		.loc 1 327 0
   52 0012 237A     		ldrb	r3, [r4, #8]	@ zero_extendqisi2
   53 0014 112B     		cmp	r3, #17
   54 0016 0ED1     		bne	.L3
- 310:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
-  55              		.loc 1 310 0 discriminator 1
+ 328:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
+  55              		.loc 1 328 0 discriminator 1
   56 0018 A37A     		ldrb	r3, [r4, #10]	@ zero_extendqisi2
- 309:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
-  57              		.loc 1 309 0 discriminator 1
+ 327:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
+  57              		.loc 1 327 0 discriminator 1
   58 001a 332B     		cmp	r3, #51
   59 001c 0BD1     		bne	.L3
- 311:../user/source/main.c ****             (pucBuffer[12] == 0x34) &&
-  60              		.loc 1 311 0
+ 329:../user/source/main.c ****             (pucBuffer[12] == 0x34) &&
+  60              		.loc 1 329 0
   61 001e 237B     		ldrb	r3, [r4, #12]	@ zero_extendqisi2
- 310:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
-  62              		.loc 1 310 0
+ 328:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
+  62              		.loc 1 328 0
   63 0020 342B     		cmp	r3, #52
   64 0022 08D1     		bne	.L3
- 312:../user/source/main.c ****             (pucBuffer[13] == 0x35))
-  65              		.loc 1 312 0
+ 330:../user/source/main.c ****             (pucBuffer[13] == 0x35))
+  65              		.loc 1 330 0
   66 0024 637B     		ldrb	r3, [r4, #13]	@ zero_extendqisi2
- 311:../user/source/main.c ****             (pucBuffer[12] == 0x34) &&
-  67              		.loc 1 311 0
+ 329:../user/source/main.c ****             (pucBuffer[12] == 0x34) &&
+  67              		.loc 1 329 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 8
+
+
   68 0026 352B     		cmp	r3, #53
   69 0028 05D1     		bne	.L3
- 313:../user/source/main.c ****         {
- 314:../user/source/main.c ****             /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÖÃÎ»*/
- 315:../user/source/main.c ****             Voltage_Frame_Status = FrameAwaitingReply;
-  70              		.loc 1 315 0
+ 331:../user/source/main.c ****         {
+ 332:../user/source/main.c ****             /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÖÃÎ»*/
+ 333:../user/source/main.c ****             Voltage_Frame_Status = FrameAwaitingReply;
+  70              		.loc 1 333 0
   71 002a 0022     		movs	r2, #0
   72 002c 0C4B     		ldr	r3, .L5+4
   73 002e 1A70     		strb	r2, [r3]
- 316:../user/source/main.c ****             /*¿ªÊ¼¼ÆÊ±*/
- 317:../user/source/main.c ****             blFramesCounterStatus = true;
-  74              		.loc 1 317 0
+ 334:../user/source/main.c ****             /*¿ªÊ¼¼ÆÊ±*/
+ 335:../user/source/main.c ****             blFramesCounterStatus = true;
+  74              		.loc 1 335 0
   75 0030 0122     		movs	r2, #1
   76 0032 0C4B     		ldr	r3, .L5+8
   77 0034 1A70     		strb	r2, [r3]
   78              	.L3:
- 318:../user/source/main.c ****         }
- 319:../user/source/main.c ****         /*×ª·¢ÕÙ²âÖ¡*/
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 8
-
-
- 320:../user/source/main.c ****         ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, uc645DataDomainLength + 12);
-  79              		.loc 1 320 0
+ 336:../user/source/main.c ****         }
+ 337:../user/source/main.c ****         /*×ª·¢ÕÙ²âÖ¡*/
+ 338:../user/source/main.c ****         ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, uc645DataDomainLength + 12);
+  79              		.loc 1 338 0
   80 0036 0C4D     		ldr	r5, .L5+12
   81 0038 2B68     		ldr	r3, [r5]
   82 003a 0C4A     		ldr	r2, .L5+16
@@ -432,16 +450,16 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
   86 0042 2046     		mov	r0, r4
   87 0044 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
   88              	.LVL3:
- 321:../user/source/main.c ****         if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
-  89              		.loc 1 321 0
+ 339:../user/source/main.c ****         if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
+  89              		.loc 1 339 0
   90 0048 2B68     		ldr	r3, [r5]
   91 004a 9868     		ldr	r0, [r3, #8]
   92 004c FFF7FEFF 		bl	blDrv_Buf_IsEmpty
   93              	.LVL4:
   94 0050 18B9     		cbnz	r0, .L1
- 322:../user/source/main.c ****         {
- 323:../user/source/main.c ****             Uart_DataPut(pUartDB->handler);
-  95              		.loc 1 323 0
+ 340:../user/source/main.c ****         {
+ 341:../user/source/main.c ****             Uart_DataPut(pUartDB->handler);
+  95              		.loc 1 341 0
   96 0052 2B68     		ldr	r3, [r5]
   97 0054 1868     		ldr	r0, [r3]
   98 0056 FFF7FEFF 		bl	Uart_DataPut
@@ -460,58 +478,58 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  111              		.cfi_endproc
  112              	.LFE112:
  114              		.section	.text.VoltageTimeOutHandle,"ax",%progbits
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 9
+
+
  115              		.align	2
  116              		.thumb
  117              		.thumb_func
  119              	VoltageTimeOutHandle:
  120              	.LFB113:
- 324:../user/source/main.c ****         }
- 325:../user/source/main.c ****     }
- 326:../user/source/main.c **** }
- 327:../user/source/main.c **** 
- 328:../user/source/main.c **** static void VoltageTimeOutHandle(void)
- 329:../user/source/main.c **** {
- 121              		.loc 1 329 0
+ 342:../user/source/main.c ****         }
+ 343:../user/source/main.c ****     }
+ 344:../user/source/main.c **** }
+ 345:../user/source/main.c **** 
+ 346:../user/source/main.c **** static void VoltageTimeOutHandle(void)
+ 347:../user/source/main.c **** {
+ 121              		.loc 1 347 0
  122              		.cfi_startproc
  123              		@ args = 0, pretend = 0, frame = 0
  124              		@ frame_needed = 0, uses_anonymous_args = 0
- 330:../user/source/main.c ****     /*ÕÙ²âµçÑ¹³¬Ê±*/
- 331:../user/source/main.c ****     if ((Voltage_Frame_Status == FrameAwaitingReply) &&
- 125              		.loc 1 331 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 9
-
-
+ 348:../user/source/main.c ****     /*ÕÙ²âµçÑ¹³¬Ê±*/
+ 349:../user/source/main.c ****     if ((Voltage_Frame_Status == FrameAwaitingReply) &&
+ 125              		.loc 1 349 0
  126 0000 144B     		ldr	r3, .L11
  127 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  128 0004 23BB     		cbnz	r3, .L10
- 329:../user/source/main.c ****     /*ÕÙ²âµçÑ¹³¬Ê±*/
- 129              		.loc 1 329 0 discriminator 1
+ 347:../user/source/main.c ****     /*ÕÙ²âµçÑ¹³¬Ê±*/
+ 129              		.loc 1 347 0 discriminator 1
  130 0006 10B5     		push	{r4, lr}
  131              	.LCFI1:
  132              		.cfi_def_cfa_offset 8
  133              		.cfi_offset 4, -8
  134              		.cfi_offset 14, -4
- 332:../user/source/main.c ****         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 135              		.loc 1 332 0 discriminator 1
+ 350:../user/source/main.c ****         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 135              		.loc 1 350 0 discriminator 1
  136 0008 1921     		movs	r1, #25
  137 000a 134B     		ldr	r3, .L11+4
  138 000c 1888     		ldrh	r0, [r3]
  139 000e FFF7FEFF 		bl	blTime2_Update
  140              	.LVL7:
- 331:../user/source/main.c ****         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 141              		.loc 1 331 0 discriminator 1
+ 349:../user/source/main.c ****         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 141              		.loc 1 349 0 discriminator 1
  142 0012 E0B1     		cbz	r0, .L7
- 333:../user/source/main.c ****     {
- 334:../user/source/main.c ****         /*ÖÐ¼ÌÆ÷Ê¹ÓÃÉÏ´ÎµÄÕýÈ·µçÑ¹ÖµÌæ´ú»Ø¸´*/
- 335:../user/source/main.c ****         if (blVoltage_Create(ucApp_Buf_ZD2DB))
- 143              		.loc 1 335 0
+ 351:../user/source/main.c ****     {
+ 352:../user/source/main.c ****         /*ÖÐ¼ÌÆ÷Ê¹ÓÃÉÏ´ÎµÄÕýÈ·µçÑ¹ÖµÌæ´ú»Ø¸´*/
+ 353:../user/source/main.c ****         if (blVoltage_Create(ucApp_Buf_ZD2DB))
+ 143              		.loc 1 353 0
  144 0014 1148     		ldr	r0, .L11+8
  145 0016 FFF7FEFF 		bl	blVoltage_Create
  146              	.LVL8:
  147 001a C0B1     		cbz	r0, .L7
- 336:../user/source/main.c ****         {
- 337:../user/source/main.c ****             ucDrv_Buf_PutBytes(ucApp_Buf_ZD2DB, pUartZD->pSndbuf, ucApp_Buf_ZD2DB[9] + 12);
- 148              		.loc 1 337 0
+ 354:../user/source/main.c ****         {
+ 355:../user/source/main.c ****             ucDrv_Buf_PutBytes(ucApp_Buf_ZD2DB, pUartZD->pSndbuf, ucApp_Buf_ZD2DB[9] + 12);
+ 148              		.loc 1 355 0
  149 001c 104C     		ldr	r4, .L11+12
  150 001e 2368     		ldr	r3, [r4]
  151 0020 0E48     		ldr	r0, .L11+8
@@ -520,37 +538,37 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  154 0026 9968     		ldr	r1, [r3, #8]
  155 0028 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
  156              	.LVL9:
- 338:../user/source/main.c ****             if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
- 157              		.loc 1 338 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 10
+
+
+ 356:../user/source/main.c ****             if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
+ 157              		.loc 1 356 0
  158 002c 2368     		ldr	r3, [r4]
  159 002e 9868     		ldr	r0, [r3, #8]
  160 0030 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
  161              	.LVL10:
  162 0034 58B9     		cbnz	r0, .L7
- 339:../user/source/main.c ****             {
- 340:../user/source/main.c ****                 Uart_DataPut(pUartZD->handler);
- 163              		.loc 1 340 0
+ 357:../user/source/main.c ****             {
+ 358:../user/source/main.c ****                 Uart_DataPut(pUartZD->handler);
+ 163              		.loc 1 358 0
  164 0036 2368     		ldr	r3, [r4]
  165 0038 1868     		ldr	r0, [r3]
  166 003a FFF7FEFF 		bl	Uart_DataPut
  167              	.LVL11:
- 341:../user/source/main.c ****                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
- 342:../user/source/main.c ****                 Voltage_Frame_Status = FrameReplied;
- 168              		.loc 1 342 0
+ 359:../user/source/main.c ****                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
+ 360:../user/source/main.c ****                 Voltage_Frame_Status = FrameReplied;
+ 168              		.loc 1 360 0
  169 003e 0122     		movs	r2, #1
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 10
-
-
  170 0040 044B     		ldr	r3, .L11
  171 0042 1A70     		strb	r2, [r3]
- 343:../user/source/main.c ****                 /*¼ÆÊ±Æ÷¸´Î»*/
- 344:../user/source/main.c ****                 blFramesCounterStatus = false;
- 172              		.loc 1 344 0
+ 361:../user/source/main.c ****                 /*¼ÆÊ±Æ÷¸´Î»*/
+ 362:../user/source/main.c ****                 blFramesCounterStatus = false;
+ 172              		.loc 1 362 0
  173 0044 0023     		movs	r3, #0
  174 0046 074A     		ldr	r2, .L11+16
  175 0048 1370     		strb	r3, [r2]
- 345:../user/source/main.c ****                 uwTime2FramesCounter = 0;
- 176              		.loc 1 345 0
+ 363:../user/source/main.c ****                 uwTime2FramesCounter = 0;
+ 176              		.loc 1 363 0
  177 004a 034A     		ldr	r2, .L11+4
  178 004c 1380     		strh	r3, [r2]	@ movhi
  179              	.L7:
@@ -580,6 +598,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  205              	.LFB111:
   19:../user/source/main.c ****     ProtocolDef ProtocolType = none;
  206              		.loc 1 19 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 11
+
+
  207              		.cfi_startproc
  208              		@ args = 0, pretend = 0, frame = 24
  209              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -598,9 +619,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  221              		.loc 1 25 0
  222 0004 0023     		movs	r3, #0
  223 0006 0593     		str	r3, [sp, #20]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 11
-
-
  224              	.LVL13:
   34:../user/source/main.c ****     SysTick_Config(SysTick_100Ms);
  225              		.loc 1 34 0
@@ -609,9 +627,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  228              	.LVL14:
   35:../user/source/main.c ****     /*SysTickÊ¹ÓÃÏµÍ³ÆµÂÊ64MµÄ8·ÖÆµ£º8MHz*/
  229              		.loc 1 35 0
- 230 0010 914B     		ldr	r3, .L34
+ 230 0010 914B     		ldr	r3, .L36
  231 0012 1B68     		ldr	r3, [r3]
- 232 0014 914A     		ldr	r2, .L34+4
+ 232 0014 914A     		ldr	r2, .L36+4
  233 0016 A2FB0323 		umull	r2, r3, r2, r3
  234 001a 9B09     		lsrs	r3, r3, #6
  235              	.LVL15:
@@ -640,6 +658,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
   20:../cmsis/include/core_cm4.h ****  * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
   21:../cmsis/include/core_cm4.h ****  *
   22:../cmsis/include/core_cm4.h ****  ******************************************************************************/
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 12
+
+
   23:../cmsis/include/core_cm4.h **** #if defined ( __ICCARM__ )
   24:../cmsis/include/core_cm4.h ****  #pragma system_include  /* treat file as system include file for MISRA check */
   25:../cmsis/include/core_cm4.h **** #endif
@@ -658,9 +679,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
   38:../cmsis/include/core_cm4.h ****      Function definitions in header files are used to allow 'inlining'. 
   39:../cmsis/include/core_cm4.h **** 
   40:../cmsis/include/core_cm4.h ****    \li Required Rule 18.4, declaration of union type or object of union type: '{...}'.<br>
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 12
-
-
   41:../cmsis/include/core_cm4.h ****      Unions are used for effective representation of core registers.
   42:../cmsis/include/core_cm4.h ****    
   43:../cmsis/include/core_cm4.h ****    \li Advisory Rule 19.7, Function-like macro defined.<br>
@@ -700,6 +718,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
   77:../cmsis/include/core_cm4.h **** 
   78:../cmsis/include/core_cm4.h **** #elif defined ( __GNUC__ )
   79:../cmsis/include/core_cm4.h ****   #define __ASM            __asm                                      /*!< asm keyword for GNU Comp
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 13
+
+
   80:../cmsis/include/core_cm4.h ****   #define __INLINE         inline                                     /*!< inline keyword for GNU C
   81:../cmsis/include/core_cm4.h ****   #define __STATIC_INLINE  static inline
   82:../cmsis/include/core_cm4.h **** 
@@ -718,9 +739,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
   95:../cmsis/include/core_cm4.h ****       #define __FPU_USED       1
   96:../cmsis/include/core_cm4.h ****     #else
   97:../cmsis/include/core_cm4.h ****       #warning "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESEN
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 13
-
-
   98:../cmsis/include/core_cm4.h ****       #define __FPU_USED       0
   99:../cmsis/include/core_cm4.h ****     #endif
  100:../cmsis/include/core_cm4.h ****   #else
@@ -760,6 +778,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  134:../cmsis/include/core_cm4.h ****       #define __FPU_USED       0
  135:../cmsis/include/core_cm4.h ****     #endif
  136:../cmsis/include/core_cm4.h ****   #else
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 14
+
+
  137:../cmsis/include/core_cm4.h ****     #define __FPU_USED         0
  138:../cmsis/include/core_cm4.h ****   #endif
  139:../cmsis/include/core_cm4.h **** 
@@ -778,9 +799,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  152:../cmsis/include/core_cm4.h **** #ifndef __CMSIS_GENERIC
  153:../cmsis/include/core_cm4.h **** 
  154:../cmsis/include/core_cm4.h **** #ifndef __CORE_CM4_H_DEPENDANT
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 14
-
-
  155:../cmsis/include/core_cm4.h **** #define __CORE_CM4_H_DEPENDANT
  156:../cmsis/include/core_cm4.h **** 
  157:../cmsis/include/core_cm4.h **** /* check device defines and use defaults */
@@ -820,6 +838,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  191:../cmsis/include/core_cm4.h ****     \li for automatic generation of peripheral register debug information.
  192:../cmsis/include/core_cm4.h **** */
  193:../cmsis/include/core_cm4.h **** #ifdef __cplusplus
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 15
+
+
  194:../cmsis/include/core_cm4.h ****   #define   __I     volatile             /*!< Defines 'read only' permissions                 */
  195:../cmsis/include/core_cm4.h **** #else
  196:../cmsis/include/core_cm4.h ****   #define   __I     volatile const       /*!< Defines 'read only' permissions                 */
@@ -838,9 +859,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  209:../cmsis/include/core_cm4.h ****   - Core NVIC Register
  210:../cmsis/include/core_cm4.h ****   - Core SCB Register
  211:../cmsis/include/core_cm4.h ****   - Core SysTick Register
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 15
-
-
  212:../cmsis/include/core_cm4.h ****   - Core Debug Register
  213:../cmsis/include/core_cm4.h ****   - Core MPU Register
  214:../cmsis/include/core_cm4.h ****   - Core FPU Register
@@ -880,6 +898,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  248:../cmsis/include/core_cm4.h **** 
  249:../cmsis/include/core_cm4.h **** /** \brief  Union type to access the Interrupt Program Status Register (IPSR).
  250:../cmsis/include/core_cm4.h ****  */
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 16
+
+
  251:../cmsis/include/core_cm4.h **** typedef union
  252:../cmsis/include/core_cm4.h **** {
  253:../cmsis/include/core_cm4.h ****   struct
@@ -898,9 +919,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  266:../cmsis/include/core_cm4.h ****   struct
  267:../cmsis/include/core_cm4.h ****   {
  268:../cmsis/include/core_cm4.h ****     uint32_t ISR:9;                      /*!< bit:  0.. 8  Exception number                   */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 16
-
-
  269:../cmsis/include/core_cm4.h **** #if (__CORTEX_M != 0x04)
  270:../cmsis/include/core_cm4.h ****     uint32_t _reserved0:15;              /*!< bit:  9..23  Reserved                           */
  271:../cmsis/include/core_cm4.h **** #else
@@ -940,6 +958,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  305:../cmsis/include/core_cm4.h **** /** \ingroup    CMSIS_core_register
  306:../cmsis/include/core_cm4.h ****     \defgroup   CMSIS_NVIC  Nested Vectored Interrupt Controller (NVIC)
  307:../cmsis/include/core_cm4.h ****     \brief      Type definitions for the NVIC Registers
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 17
+
+
  308:../cmsis/include/core_cm4.h ****   @{
  309:../cmsis/include/core_cm4.h ****  */
  310:../cmsis/include/core_cm4.h **** 
@@ -958,9 +979,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  323:../cmsis/include/core_cm4.h ****   __IO uint32_t IABR[8];                 /*!< Offset: 0x200 (R/W)  Interrupt Active bit Register   
  324:../cmsis/include/core_cm4.h ****        uint32_t RESERVED4[56];
  325:../cmsis/include/core_cm4.h ****   __IO uint8_t  IP[240];                 /*!< Offset: 0x300 (R/W)  Interrupt Priority Register (8Bi
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 17
-
-
  326:../cmsis/include/core_cm4.h ****        uint32_t RESERVED5[644];
  327:../cmsis/include/core_cm4.h ****   __O  uint32_t STIR;                    /*!< Offset: 0xE00 ( /W)  Software Trigger Interrupt Regis
  328:../cmsis/include/core_cm4.h **** }  NVIC_Type;
@@ -1000,6 +1018,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  362:../cmsis/include/core_cm4.h ****   __I  uint32_t DFR;                     /*!< Offset: 0x048 (R/ )  Debug Feature Register          
  363:../cmsis/include/core_cm4.h ****   __I  uint32_t ADR;                     /*!< Offset: 0x04C (R/ )  Auxiliary Feature Register      
  364:../cmsis/include/core_cm4.h ****   __I  uint32_t MMFR[4];                 /*!< Offset: 0x050 (R/ )  Memory Model Feature Register   
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 18
+
+
  365:../cmsis/include/core_cm4.h ****   __I  uint32_t ISAR[5];                 /*!< Offset: 0x060 (R/ )  Instruction Set Attributes Regis
  366:../cmsis/include/core_cm4.h ****        uint32_t RESERVED0[5];
  367:../cmsis/include/core_cm4.h ****   __IO uint32_t CPACR;                   /*!< Offset: 0x088 (R/W)  Coprocessor Access Control Regis
@@ -1018,9 +1039,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  380:../cmsis/include/core_cm4.h **** #define SCB_CPUID_PARTNO_Pos                4                                             /*!< SCB 
  381:../cmsis/include/core_cm4.h **** #define SCB_CPUID_PARTNO_Msk               (0xFFFUL << SCB_CPUID_PARTNO_Pos)              /*!< SCB 
  382:../cmsis/include/core_cm4.h **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 18
-
-
  383:../cmsis/include/core_cm4.h **** #define SCB_CPUID_REVISION_Pos              0                                             /*!< SCB 
  384:../cmsis/include/core_cm4.h **** #define SCB_CPUID_REVISION_Msk             (0xFUL << SCB_CPUID_REVISION_Pos)              /*!< SCB 
  385:../cmsis/include/core_cm4.h **** 
@@ -1060,6 +1078,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  419:../cmsis/include/core_cm4.h **** #define SCB_VTOR_TBLOFF_Msk                (0x1FFFFFFUL << SCB_VTOR_TBLOFF_Pos)           /*!< SCB 
  420:../cmsis/include/core_cm4.h **** 
  421:../cmsis/include/core_cm4.h **** /* SCB Application Interrupt and Reset Control Register Definitions */
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 19
+
+
  422:../cmsis/include/core_cm4.h **** #define SCB_AIRCR_VECTKEY_Pos              16                                             /*!< SCB 
  423:../cmsis/include/core_cm4.h **** #define SCB_AIRCR_VECTKEY_Msk              (0xFFFFUL << SCB_AIRCR_VECTKEY_Pos)            /*!< SCB 
  424:../cmsis/include/core_cm4.h **** 
@@ -1078,9 +1099,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  437:../cmsis/include/core_cm4.h **** #define SCB_AIRCR_VECTCLRACTIVE_Pos         1                                             /*!< SCB 
  438:../cmsis/include/core_cm4.h **** #define SCB_AIRCR_VECTCLRACTIVE_Msk        (1UL << SCB_AIRCR_VECTCLRACTIVE_Pos)           /*!< SCB 
  439:../cmsis/include/core_cm4.h **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 19
-
-
  440:../cmsis/include/core_cm4.h **** #define SCB_AIRCR_VECTRESET_Pos             0                                             /*!< SCB 
  441:../cmsis/include/core_cm4.h **** #define SCB_AIRCR_VECTRESET_Msk            (1UL << SCB_AIRCR_VECTRESET_Pos)               /*!< SCB 
  442:../cmsis/include/core_cm4.h **** 
@@ -1120,6 +1138,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  476:../cmsis/include/core_cm4.h **** #define SCB_SHCSR_BUSFAULTENA_Pos          17                                             /*!< SCB 
  477:../cmsis/include/core_cm4.h **** #define SCB_SHCSR_BUSFAULTENA_Msk          (1UL << SCB_SHCSR_BUSFAULTENA_Pos)             /*!< SCB 
  478:../cmsis/include/core_cm4.h **** 
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 20
+
+
  479:../cmsis/include/core_cm4.h **** #define SCB_SHCSR_MEMFAULTENA_Pos          16                                             /*!< SCB 
  480:../cmsis/include/core_cm4.h **** #define SCB_SHCSR_MEMFAULTENA_Msk          (1UL << SCB_SHCSR_MEMFAULTENA_Pos)             /*!< SCB 
  481:../cmsis/include/core_cm4.h **** 
@@ -1138,9 +1159,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  494:../cmsis/include/core_cm4.h **** #define SCB_SHCSR_SYSTICKACT_Pos           11                                             /*!< SCB 
  495:../cmsis/include/core_cm4.h **** #define SCB_SHCSR_SYSTICKACT_Msk           (1UL << SCB_SHCSR_SYSTICKACT_Pos)              /*!< SCB 
  496:../cmsis/include/core_cm4.h **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 20
-
-
  497:../cmsis/include/core_cm4.h **** #define SCB_SHCSR_PENDSVACT_Pos            10                                             /*!< SCB 
  498:../cmsis/include/core_cm4.h **** #define SCB_SHCSR_PENDSVACT_Msk            (1UL << SCB_SHCSR_PENDSVACT_Pos)               /*!< SCB 
  499:../cmsis/include/core_cm4.h **** 
@@ -1180,6 +1198,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  533:../cmsis/include/core_cm4.h **** #define SCB_HFSR_VECTTBL_Msk               (1UL << SCB_HFSR_VECTTBL_Pos)                  /*!< SCB 
  534:../cmsis/include/core_cm4.h **** 
  535:../cmsis/include/core_cm4.h **** /* SCB Debug Fault Status Register Definitions */
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 21
+
+
  536:../cmsis/include/core_cm4.h **** #define SCB_DFSR_EXTERNAL_Pos               4                                             /*!< SCB 
  537:../cmsis/include/core_cm4.h **** #define SCB_DFSR_EXTERNAL_Msk              (1UL << SCB_DFSR_EXTERNAL_Pos)                 /*!< SCB 
  538:../cmsis/include/core_cm4.h **** 
@@ -1198,9 +1219,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  551:../cmsis/include/core_cm4.h **** /*@} end of group CMSIS_SCB */
  552:../cmsis/include/core_cm4.h **** 
  553:../cmsis/include/core_cm4.h **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 21
-
-
  554:../cmsis/include/core_cm4.h **** /** \ingroup  CMSIS_core_register
  555:../cmsis/include/core_cm4.h ****     \defgroup CMSIS_SCnSCB System Controls not in SCB (SCnSCB)
  556:../cmsis/include/core_cm4.h ****     \brief      Type definitions for the System Control and ID Register not in the SCB
@@ -1240,6 +1258,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  590:../cmsis/include/core_cm4.h **** 
  591:../cmsis/include/core_cm4.h **** 
  592:../cmsis/include/core_cm4.h **** /** \ingroup  CMSIS_core_register
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 22
+
+
  593:../cmsis/include/core_cm4.h ****     \defgroup CMSIS_SysTick     System Tick Timer (SysTick)
  594:../cmsis/include/core_cm4.h ****     \brief      Type definitions for the System Timer Registers.
  595:../cmsis/include/core_cm4.h ****   @{
@@ -1258,9 +1279,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  608:../cmsis/include/core_cm4.h **** /* SysTick Control / Status Register Definitions */
  609:../cmsis/include/core_cm4.h **** #define SysTick_CTRL_COUNTFLAG_Pos         16                                             /*!< SysT
  610:../cmsis/include/core_cm4.h **** #define SysTick_CTRL_COUNTFLAG_Msk         (1UL << SysTick_CTRL_COUNTFLAG_Pos)            /*!< SysT
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 22
-
-
  611:../cmsis/include/core_cm4.h **** 
  612:../cmsis/include/core_cm4.h **** #define SysTick_CTRL_CLKSOURCE_Pos          2                                             /*!< SysT
  613:../cmsis/include/core_cm4.h **** #define SysTick_CTRL_CLKSOURCE_Msk         (1UL << SysTick_CTRL_CLKSOURCE_Pos)            /*!< SysT
@@ -1300,6 +1318,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  647:../cmsis/include/core_cm4.h **** 
  648:../cmsis/include/core_cm4.h **** /** \brief  Structure type to access the Instrumentation Trace Macrocell Register (ITM).
  649:../cmsis/include/core_cm4.h ****  */
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 23
+
+
  650:../cmsis/include/core_cm4.h **** typedef struct
  651:../cmsis/include/core_cm4.h **** {
  652:../cmsis/include/core_cm4.h ****   __O  union
@@ -1318,9 +1339,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  665:../cmsis/include/core_cm4.h **** 
  666:../cmsis/include/core_cm4.h **** /* ITM Trace Privilege Register Definitions */
  667:../cmsis/include/core_cm4.h **** #define ITM_TPR_PRIVMASK_Pos                0                                          /*!< ITM TPR
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 23
-
-
  668:../cmsis/include/core_cm4.h **** #define ITM_TPR_PRIVMASK_Msk               (0xFUL << ITM_TPR_PRIVMASK_Pos)             /*!< ITM TPR
  669:../cmsis/include/core_cm4.h **** 
  670:../cmsis/include/core_cm4.h **** /* ITM Trace Control Register Definitions */
@@ -1360,6 +1378,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  704:../cmsis/include/core_cm4.h ****   @{
  705:../cmsis/include/core_cm4.h ****  */
  706:../cmsis/include/core_cm4.h **** 
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 24
+
+
  707:../cmsis/include/core_cm4.h **** /** \brief  Structure type to access the Data Watchpoint and Trace Register (DWT).
  708:../cmsis/include/core_cm4.h ****  */
  709:../cmsis/include/core_cm4.h **** typedef struct
@@ -1378,9 +1399,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  722:../cmsis/include/core_cm4.h ****        uint32_t RESERVED0[1];
  723:../cmsis/include/core_cm4.h ****   __IO uint32_t COMP1;                   /*!< Offset: 0x030 (R/W)  Comparator Register 1           
  724:../cmsis/include/core_cm4.h ****   __IO uint32_t MASK1;                   /*!< Offset: 0x034 (R/W)  Mask Register 1                 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 24
-
-
  725:../cmsis/include/core_cm4.h ****   __IO uint32_t FUNCTION1;               /*!< Offset: 0x038 (R/W)  Function Register 1             
  726:../cmsis/include/core_cm4.h ****        uint32_t RESERVED1[1];
  727:../cmsis/include/core_cm4.h ****   __IO uint32_t COMP2;                   /*!< Offset: 0x040 (R/W)  Comparator Register 2           
@@ -1420,6 +1438,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  761:../cmsis/include/core_cm4.h **** #define DWT_CTRL_SLEEPEVTENA_Pos           19                                          /*!< DWT CTR
  762:../cmsis/include/core_cm4.h **** #define DWT_CTRL_SLEEPEVTENA_Msk           (0x1UL << DWT_CTRL_SLEEPEVTENA_Pos)         /*!< DWT CTR
  763:../cmsis/include/core_cm4.h **** 
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 25
+
+
  764:../cmsis/include/core_cm4.h **** #define DWT_CTRL_EXCEVTENA_Pos             18                                          /*!< DWT CTR
  765:../cmsis/include/core_cm4.h **** #define DWT_CTRL_EXCEVTENA_Msk             (0x1UL << DWT_CTRL_EXCEVTENA_Pos)           /*!< DWT CTR
  766:../cmsis/include/core_cm4.h **** 
@@ -1438,9 +1459,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  779:../cmsis/include/core_cm4.h **** #define DWT_CTRL_CYCTAP_Pos                 9                                          /*!< DWT CTR
  780:../cmsis/include/core_cm4.h **** #define DWT_CTRL_CYCTAP_Msk                (0x1UL << DWT_CTRL_CYCTAP_Pos)              /*!< DWT CTR
  781:../cmsis/include/core_cm4.h **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 25
-
-
  782:../cmsis/include/core_cm4.h **** #define DWT_CTRL_POSTINIT_Pos               5                                          /*!< DWT CTR
  783:../cmsis/include/core_cm4.h **** #define DWT_CTRL_POSTINIT_Msk              (0xFUL << DWT_CTRL_POSTINIT_Pos)            /*!< DWT CTR
  784:../cmsis/include/core_cm4.h **** 
@@ -1480,6 +1498,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  818:../cmsis/include/core_cm4.h **** 
  819:../cmsis/include/core_cm4.h **** #define DWT_FUNCTION_DATAVADDR1_Pos        16                                          /*!< DWT FUN
  820:../cmsis/include/core_cm4.h **** #define DWT_FUNCTION_DATAVADDR1_Msk        (0xFUL << DWT_FUNCTION_DATAVADDR1_Pos)      /*!< DWT FUN
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 26
+
+
  821:../cmsis/include/core_cm4.h **** 
  822:../cmsis/include/core_cm4.h **** #define DWT_FUNCTION_DATAVADDR0_Pos        12                                          /*!< DWT FUN
  823:../cmsis/include/core_cm4.h **** #define DWT_FUNCTION_DATAVADDR0_Msk        (0xFUL << DWT_FUNCTION_DATAVADDR0_Pos)      /*!< DWT FUN
@@ -1498,9 +1519,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  836:../cmsis/include/core_cm4.h **** 
  837:../cmsis/include/core_cm4.h **** #define DWT_FUNCTION_EMITRANGE_Pos          5                                          /*!< DWT FUN
  838:../cmsis/include/core_cm4.h **** #define DWT_FUNCTION_EMITRANGE_Msk         (0x1UL << DWT_FUNCTION_EMITRANGE_Pos)       /*!< DWT FUN
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 26
-
-
  839:../cmsis/include/core_cm4.h **** 
  840:../cmsis/include/core_cm4.h **** #define DWT_FUNCTION_FUNCTION_Pos           0                                          /*!< DWT FUN
  841:../cmsis/include/core_cm4.h **** #define DWT_FUNCTION_FUNCTION_Msk          (0xFUL << DWT_FUNCTION_FUNCTION_Pos)        /*!< DWT FUN
@@ -1540,6 +1558,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  875:../cmsis/include/core_cm4.h ****   __IO uint32_t CLAIMSET;                /*!< Offset: 0xFA0 (R/W)  Claim tag set */
  876:../cmsis/include/core_cm4.h ****   __IO uint32_t CLAIMCLR;                /*!< Offset: 0xFA4 (R/W)  Claim tag clear */
  877:../cmsis/include/core_cm4.h ****        uint32_t RESERVED7[8];
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 27
+
+
  878:../cmsis/include/core_cm4.h ****   __I  uint32_t DEVID;                   /*!< Offset: 0xFC8 (R/ )  TPIU_DEVID */
  879:../cmsis/include/core_cm4.h ****   __I  uint32_t DEVTYPE;                 /*!< Offset: 0xFCC (R/ )  TPIU_DEVTYPE */
  880:../cmsis/include/core_cm4.h **** } TPI_Type;
@@ -1558,9 +1579,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  893:../cmsis/include/core_cm4.h **** 
  894:../cmsis/include/core_cm4.h **** #define TPI_FFSR_TCPresent_Pos              2                                          /*!< TPI FFS
  895:../cmsis/include/core_cm4.h **** #define TPI_FFSR_TCPresent_Msk             (0x1UL << TPI_FFSR_TCPresent_Pos)           /*!< TPI FFS
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 27
-
-
  896:../cmsis/include/core_cm4.h **** 
  897:../cmsis/include/core_cm4.h **** #define TPI_FFSR_FtStopped_Pos              1                                          /*!< TPI FFS
  898:../cmsis/include/core_cm4.h **** #define TPI_FFSR_FtStopped_Msk             (0x1UL << TPI_FFSR_FtStopped_Pos)           /*!< TPI FFS
@@ -1600,6 +1618,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  932:../cmsis/include/core_cm4.h **** 
  933:../cmsis/include/core_cm4.h **** #define TPI_FIFO0_ETM0_Pos                  0                                          /*!< TPI FIF
  934:../cmsis/include/core_cm4.h **** #define TPI_FIFO0_ETM0_Msk                 (0xFFUL << TPI_FIFO0_ETM0_Pos)              /*!< TPI FIF
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 28
+
+
  935:../cmsis/include/core_cm4.h **** 
  936:../cmsis/include/core_cm4.h **** /* TPI ITATBCTR2 Register Definitions */
  937:../cmsis/include/core_cm4.h **** #define TPI_ITATBCTR2_ATREADY_Pos           0                                          /*!< TPI ITA
@@ -1618,9 +1639,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  950:../cmsis/include/core_cm4.h **** #define TPI_FIFO1_ETM_bytecount_Pos        24                                          /*!< TPI FIF
  951:../cmsis/include/core_cm4.h **** #define TPI_FIFO1_ETM_bytecount_Msk        (0x3UL << TPI_FIFO1_ETM_bytecount_Pos)      /*!< TPI FIF
  952:../cmsis/include/core_cm4.h **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 28
-
-
  953:../cmsis/include/core_cm4.h **** #define TPI_FIFO1_ITM2_Pos                 16                                          /*!< TPI FIF
  954:../cmsis/include/core_cm4.h **** #define TPI_FIFO1_ITM2_Msk                 (0xFFUL << TPI_FIFO1_ITM2_Pos)              /*!< TPI FIF
  955:../cmsis/include/core_cm4.h **** 
@@ -1660,6 +1678,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  989:../cmsis/include/core_cm4.h **** /* TPI DEVTYPE Register Definitions */
  990:../cmsis/include/core_cm4.h **** #define TPI_DEVTYPE_SubType_Pos             0                                          /*!< TPI DEV
  991:../cmsis/include/core_cm4.h **** #define TPI_DEVTYPE_SubType_Msk            (0xFUL << TPI_DEVTYPE_SubType_Pos)          /*!< TPI DEV
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 29
+
+
  992:../cmsis/include/core_cm4.h **** 
  993:../cmsis/include/core_cm4.h **** #define TPI_DEVTYPE_MajorType_Pos           4                                          /*!< TPI DEV
  994:../cmsis/include/core_cm4.h **** #define TPI_DEVTYPE_MajorType_Msk          (0xFUL << TPI_DEVTYPE_MajorType_Pos)        /*!< TPI DEV
@@ -1678,9 +1699,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1007:../cmsis/include/core_cm4.h ****  */
 1008:../cmsis/include/core_cm4.h **** typedef struct
 1009:../cmsis/include/core_cm4.h **** {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 29
-
-
 1010:../cmsis/include/core_cm4.h ****   __I  uint32_t TYPE;                    /*!< Offset: 0x000 (R/ )  MPU Type Register               
 1011:../cmsis/include/core_cm4.h ****   __IO uint32_t CTRL;                    /*!< Offset: 0x004 (R/W)  MPU Control Register            
 1012:../cmsis/include/core_cm4.h ****   __IO uint32_t RNR;                     /*!< Offset: 0x008 (R/W)  MPU Region RNRber Register      
@@ -1720,6 +1738,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1046:../cmsis/include/core_cm4.h **** 
 1047:../cmsis/include/core_cm4.h **** /* MPU Region Base Address Register */
 1048:../cmsis/include/core_cm4.h **** #define MPU_RBAR_ADDR_Pos                   5                                             /*!< MPU 
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 30
+
+
 1049:../cmsis/include/core_cm4.h **** #define MPU_RBAR_ADDR_Msk                  (0x7FFFFFFUL << MPU_RBAR_ADDR_Pos)             /*!< MPU 
 1050:../cmsis/include/core_cm4.h **** 
 1051:../cmsis/include/core_cm4.h **** #define MPU_RBAR_VALID_Pos                  4                                             /*!< MPU 
@@ -1738,9 +1759,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1064:../cmsis/include/core_cm4.h **** #define MPU_RASR_SIZE_Pos                   1                                             /*!< MPU 
 1065:../cmsis/include/core_cm4.h **** #define MPU_RASR_SIZE_Msk                  (0x1FUL << MPU_RASR_SIZE_Pos)                  /*!< MPU 
 1066:../cmsis/include/core_cm4.h **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 30
-
-
 1067:../cmsis/include/core_cm4.h **** #define MPU_RASR_ENABLE_Pos                 0                                             /*!< MPU 
 1068:../cmsis/include/core_cm4.h **** #define MPU_RASR_ENABLE_Msk                (1UL << MPU_RASR_ENABLE_Pos)                   /*!< MPU 
 1069:../cmsis/include/core_cm4.h **** 
@@ -1780,6 +1798,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1103:../cmsis/include/core_cm4.h **** #define FPU_FPCCR_BFRDY_Pos                 6                                             /*!< FPCC
 1104:../cmsis/include/core_cm4.h **** #define FPU_FPCCR_BFRDY_Msk                (1UL << FPU_FPCCR_BFRDY_Pos)                   /*!< FPCC
 1105:../cmsis/include/core_cm4.h **** 
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 31
+
+
 1106:../cmsis/include/core_cm4.h **** #define FPU_FPCCR_MMRDY_Pos                 5                                             /*!< FPCC
 1107:../cmsis/include/core_cm4.h **** #define FPU_FPCCR_MMRDY_Msk                (1UL << FPU_FPCCR_MMRDY_Pos)                   /*!< FPCC
 1108:../cmsis/include/core_cm4.h **** 
@@ -1798,9 +1819,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1121:../cmsis/include/core_cm4.h **** /* Floating-Point Context Address Register */
 1122:../cmsis/include/core_cm4.h **** #define FPU_FPCAR_ADDRESS_Pos               3                                             /*!< FPCA
 1123:../cmsis/include/core_cm4.h **** #define FPU_FPCAR_ADDRESS_Msk              (0x1FFFFFFFUL << FPU_FPCAR_ADDRESS_Pos)        /*!< FPCA
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 31
-
-
 1124:../cmsis/include/core_cm4.h **** 
 1125:../cmsis/include/core_cm4.h **** /* Floating-Point Default Status Control Register */
 1126:../cmsis/include/core_cm4.h **** #define FPU_FPDSCR_AHP_Pos                 26                                             /*!< FPDS
@@ -1840,6 +1858,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1160:../cmsis/include/core_cm4.h **** #define FPU_MVFR0_A_SIMD_registers_Pos      0                                             /*!< MVFR
 1161:../cmsis/include/core_cm4.h **** #define FPU_MVFR0_A_SIMD_registers_Msk     (0xFUL << FPU_MVFR0_A_SIMD_registers_Pos)      /*!< MVFR
 1162:../cmsis/include/core_cm4.h **** 
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 32
+
+
 1163:../cmsis/include/core_cm4.h **** /* Media and FP Feature Register 1 */
 1164:../cmsis/include/core_cm4.h **** #define FPU_MVFR1_FP_fused_MAC_Pos         28                                             /*!< MVFR
 1165:../cmsis/include/core_cm4.h **** #define FPU_MVFR1_FP_fused_MAC_Msk         (0xFUL << FPU_MVFR1_FP_fused_MAC_Pos)          /*!< MVFR
@@ -1858,9 +1879,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1178:../cmsis/include/core_cm4.h **** 
 1179:../cmsis/include/core_cm4.h **** 
 1180:../cmsis/include/core_cm4.h **** /** \ingroup  CMSIS_core_register
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 32
-
-
 1181:../cmsis/include/core_cm4.h ****     \defgroup CMSIS_CoreDebug       Core Debug Registers (CoreDebug)
 1182:../cmsis/include/core_cm4.h ****     \brief      Type definitions for the Core Debug Registers
 1183:../cmsis/include/core_cm4.h ****   @{
@@ -1900,6 +1918,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1217:../cmsis/include/core_cm4.h **** 
 1218:../cmsis/include/core_cm4.h **** #define CoreDebug_DHCSR_C_SNAPSTALL_Pos     5                                             /*!< Core
 1219:../cmsis/include/core_cm4.h **** #define CoreDebug_DHCSR_C_SNAPSTALL_Msk    (1UL << CoreDebug_DHCSR_C_SNAPSTALL_Pos)       /*!< Core
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 33
+
+
 1220:../cmsis/include/core_cm4.h **** 
 1221:../cmsis/include/core_cm4.h **** #define CoreDebug_DHCSR_C_MASKINTS_Pos      3                                             /*!< Core
 1222:../cmsis/include/core_cm4.h **** #define CoreDebug_DHCSR_C_MASKINTS_Msk     (1UL << CoreDebug_DHCSR_C_MASKINTS_Pos)        /*!< Core
@@ -1918,9 +1939,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1235:../cmsis/include/core_cm4.h **** #define CoreDebug_DCRSR_REGWnR_Msk         (1UL << CoreDebug_DCRSR_REGWnR_Pos)            /*!< Core
 1236:../cmsis/include/core_cm4.h **** 
 1237:../cmsis/include/core_cm4.h **** #define CoreDebug_DCRSR_REGSEL_Pos          0                                             /*!< Core
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 33
-
-
 1238:../cmsis/include/core_cm4.h **** #define CoreDebug_DCRSR_REGSEL_Msk         (0x1FUL << CoreDebug_DCRSR_REGSEL_Pos)         /*!< Core
 1239:../cmsis/include/core_cm4.h **** 
 1240:../cmsis/include/core_cm4.h **** /* Debug Exception and Monitor Control Register */
@@ -1960,6 +1978,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1274:../cmsis/include/core_cm4.h **** #define CoreDebug_DEMCR_VC_MMERR_Pos        4                                             /*!< Core
 1275:../cmsis/include/core_cm4.h **** #define CoreDebug_DEMCR_VC_MMERR_Msk       (1UL << CoreDebug_DEMCR_VC_MMERR_Pos)          /*!< Core
 1276:../cmsis/include/core_cm4.h **** 
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 34
+
+
 1277:../cmsis/include/core_cm4.h **** #define CoreDebug_DEMCR_VC_CORERESET_Pos    0                                             /*!< Core
 1278:../cmsis/include/core_cm4.h **** #define CoreDebug_DEMCR_VC_CORERESET_Msk   (1UL << CoreDebug_DEMCR_VC_CORERESET_Pos)      /*!< Core
 1279:../cmsis/include/core_cm4.h **** 
@@ -1978,9 +1999,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1292:../cmsis/include/core_cm4.h **** #define DWT_BASE            (0xE0001000UL)                            /*!< DWT Base Address        
 1293:../cmsis/include/core_cm4.h **** #define TPI_BASE            (0xE0040000UL)                            /*!< TPI Base Address        
 1294:../cmsis/include/core_cm4.h **** #define CoreDebug_BASE      (0xE000EDF0UL)                            /*!< Core Debug Base Address 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 34
-
-
 1295:../cmsis/include/core_cm4.h **** #define SysTick_BASE        (SCS_BASE +  0x0010UL)                    /*!< SysTick Base Address    
 1296:../cmsis/include/core_cm4.h **** #define NVIC_BASE           (SCS_BASE +  0x0100UL)                    /*!< NVIC Base Address       
 1297:../cmsis/include/core_cm4.h **** #define SCB_BASE            (SCS_BASE +  0x0D00UL)                    /*!< System Control Block Bas
@@ -2020,6 +2038,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1331:../cmsis/include/core_cm4.h **** */
 1332:../cmsis/include/core_cm4.h **** 
 1333:../cmsis/include/core_cm4.h **** 
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 35
+
+
 1334:../cmsis/include/core_cm4.h **** 
 1335:../cmsis/include/core_cm4.h **** /* ##########################   NVIC functions  #################################### */
 1336:../cmsis/include/core_cm4.h **** /** \ingroup  CMSIS_Core_FunctionInterface
@@ -2038,9 +2059,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1349:../cmsis/include/core_cm4.h **** 
 1350:../cmsis/include/core_cm4.h ****     \param [in]      PriorityGroup  Priority grouping field.
 1351:../cmsis/include/core_cm4.h ****  */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 35
-
-
 1352:../cmsis/include/core_cm4.h **** __STATIC_INLINE void NVIC_SetPriorityGrouping(uint32_t PriorityGroup)
 1353:../cmsis/include/core_cm4.h **** {
 1354:../cmsis/include/core_cm4.h ****   uint32_t reg_value;
@@ -2080,6 +2098,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1388:../cmsis/include/core_cm4.h **** }
 1389:../cmsis/include/core_cm4.h **** 
 1390:../cmsis/include/core_cm4.h **** 
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 36
+
+
 1391:../cmsis/include/core_cm4.h **** /** \brief  Disable External Interrupt
 1392:../cmsis/include/core_cm4.h **** 
 1393:../cmsis/include/core_cm4.h ****     The function disables a device-specific interrupt in the NVIC interrupt controller.
@@ -2098,9 +2119,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1406:../cmsis/include/core_cm4.h ****     for the specified interrupt.
 1407:../cmsis/include/core_cm4.h **** 
 1408:../cmsis/include/core_cm4.h ****     \param [in]      IRQn  Interrupt number.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 36
-
-
 1409:../cmsis/include/core_cm4.h ****     
 1410:../cmsis/include/core_cm4.h ****     \return             0  Interrupt status is not pending.
 1411:../cmsis/include/core_cm4.h ****     \return             1  Interrupt status is pending.
@@ -2140,6 +2158,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1445:../cmsis/include/core_cm4.h ****     The function reads the active register in NVIC and returns the active bit.
 1446:../cmsis/include/core_cm4.h ****     
 1447:../cmsis/include/core_cm4.h ****     \param [in]      IRQn  Interrupt number.
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 37
+
+
 1448:../cmsis/include/core_cm4.h ****     
 1449:../cmsis/include/core_cm4.h ****     \return             0  Interrupt status is not active.
 1450:../cmsis/include/core_cm4.h ****     \return             1  Interrupt status is active.
@@ -2158,9 +2179,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1463:../cmsis/include/core_cm4.h **** 
 1464:../cmsis/include/core_cm4.h ****     \param [in]      IRQn  Interrupt number. 
 1465:../cmsis/include/core_cm4.h ****     \param [in]  priority  Priority to set.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 37
-
-
 1466:../cmsis/include/core_cm4.h ****  */
 1467:../cmsis/include/core_cm4.h **** __STATIC_INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
 1468:../cmsis/include/core_cm4.h **** {
@@ -2200,6 +2218,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1502:../cmsis/include/core_cm4.h ****     priority bits (__NVIC_PRIO_BITS), the samllest possible priority group is set.
 1503:../cmsis/include/core_cm4.h **** 
 1504:../cmsis/include/core_cm4.h ****     \param [in]     PriorityGroup  Used priority group.
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 38
+
+
 1505:../cmsis/include/core_cm4.h ****     \param [in]   PreemptPriority  Preemptive priority value (starting from 0).
 1506:../cmsis/include/core_cm4.h ****     \param [in]       SubPriority  Subpriority value (starting from 0).
 1507:../cmsis/include/core_cm4.h ****     \return                        Encoded priority. Value can be used in the function \ref NVIC_Se
@@ -2218,9 +2239,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1520:../cmsis/include/core_cm4.h ****            ((SubPriority     & ((1 << (SubPriorityBits    )) - 1)))
 1521:../cmsis/include/core_cm4.h ****          );
 1522:../cmsis/include/core_cm4.h **** }
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 38
-
-
 1523:../cmsis/include/core_cm4.h **** 
 1524:../cmsis/include/core_cm4.h **** 
 1525:../cmsis/include/core_cm4.h **** /** \brief  Decode Priority
@@ -2260,6 +2278,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1559:../cmsis/include/core_cm4.h ****   SCB->AIRCR  = ((0x5FA << SCB_AIRCR_VECTKEY_Pos)      |
 1560:../cmsis/include/core_cm4.h ****                  (SCB->AIRCR & SCB_AIRCR_PRIGROUP_Msk) |
 1561:../cmsis/include/core_cm4.h ****                  SCB_AIRCR_SYSRESETREQ_Msk);                   /* Keep priority group unchanged */
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 39
+
+
 1562:../cmsis/include/core_cm4.h ****   __DSB();                                                     /* Ensure completion of memory acces
 1563:../cmsis/include/core_cm4.h ****   while(1);                                                    /* wait until reset */
 1564:../cmsis/include/core_cm4.h **** }
@@ -2278,9 +2299,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1577:../cmsis/include/core_cm4.h **** #if (__Vendor_SysTickConfig == 0)
 1578:../cmsis/include/core_cm4.h **** 
 1579:../cmsis/include/core_cm4.h **** /** \brief  System Tick Configuration
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 39
-
-
 1580:../cmsis/include/core_cm4.h **** 
 1581:../cmsis/include/core_cm4.h ****     The function initializes the System Timer and its interrupt, and starts the System Tick Timer.
 1582:../cmsis/include/core_cm4.h ****     Counter is in free running mode to generate periodic interrupts.   
@@ -2307,7 +2325,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  243 0022 23F07F43 		bic	r3, r3, #-16777216
  244              	.LVL16:
  245 0026 013B     		subs	r3, r3, #1
- 246 0028 8D4A     		ldr	r2, .L34+8
+ 246 0028 8D4A     		ldr	r2, .L36+8
  247 002a 5360     		str	r3, [r2, #4]
  248              	.LVL17:
  249              	.LBB12:
@@ -2315,11 +2333,14 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
 1470:../cmsis/include/core_cm4.h ****   else {
  251              		.loc 2 1470 0
  252 002c F021     		movs	r1, #240
- 253 002e 8D4B     		ldr	r3, .L34+12
+ 253 002e 8D4B     		ldr	r3, .L36+12
  254 0030 83F82310 		strb	r1, [r3, #35]
  255              	.LVL18:
  256              	.LBE13:
  257              	.LBE12:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 40
+
+
 1599:../cmsis/include/core_cm4.h ****   NVIC_SetPriority (SysTick_IRQn, (1<<__NVIC_PRIO_BITS) - 1);  /* set Priority for Systick Interrup
 1600:../cmsis/include/core_cm4.h ****   SysTick->VAL   = 0;                                          /* Load the SysTick Counter Value */
  258              		.loc 2 1600 0
@@ -2338,14 +2359,11 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  269 0040 FFF7FEFF 		bl	SysTick_CLKSourceConfig
  270              	.LVL19:
  271              	.LBB14:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 40
-
-
  272              	.LBB15:
 1470:../cmsis/include/core_cm4.h ****   else {
  273              		.loc 2 1470 0
  274 0044 F022     		movs	r2, #240
- 275 0046 874B     		ldr	r3, .L34+12
+ 275 0046 874B     		ldr	r3, .L36+12
  276 0048 83F82320 		strb	r2, [r3, #35]
  277              	.LVL20:
  278              	.LBE15:
@@ -2380,6 +2398,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  300              	.LVL27:
   50:../user/source/main.c ****     /*µãÁÁÔËÐÐµÆ*/
  301              		.loc 1 50 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 41
+
+
  302 0068 FFF7FEFF 		bl	vEnergy_Modify_Init
  303              	.LVL28:
   52:../user/source/main.c **** #ifdef TEST
@@ -2396,50 +2417,50 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  312 0072 012C     		cmp	r4, #1
  313 0074 3AD0     		beq	.L17
  314 0076 002C     		cmp	r4, #0
- 315 0078 00F0A980 		beq	.L18
+ 315 0078 00F0A880 		beq	.L18
  316 007c 022C     		cmp	r4, #2
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 41
-
-
  317 007e F8D1     		bne	.L16
  128:../user/source/main.c ****             Uart_idleReadEnable(pUartDB);
  318              		.loc 1 128 0
- 319 0080 794B     		ldr	r3, .L34+16
+ 319 0080 794B     		ldr	r3, .L36+16
  320 0082 1868     		ldr	r0, [r3]
  321 0084 FFF7FEFF 		bl	Uart_idleReadEnable
  322              	.LVL31:
  129:../user/source/main.c ****             if (FLAG_UartZD_HasData)
  323              		.loc 1 129 0
- 324 0088 784B     		ldr	r3, .L34+20
+ 324 0088 784B     		ldr	r3, .L36+20
  325 008a 1868     		ldr	r0, [r3]
  326 008c FFF7FEFF 		bl	Uart_idleReadEnable
  327              	.LVL32:
  130:../user/source/main.c ****             {
  328              		.loc 1 130 0
- 329 0090 774B     		ldr	r3, .L34+24
+ 329 0090 774B     		ldr	r3, .L36+24
  330 0092 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  331 0094 93B1     		cbz	r3, .L20
  132:../user/source/main.c ****                 FLAG_UartZD_HasData = false;
  332              		.loc 1 132 0
- 333 0096 744D     		ldr	r5, .L34+16
+ 333 0096 744D     		ldr	r5, .L36+16
  334 0098 2868     		ldr	r0, [r5]
  335 009a FFF7FEFF 		bl	Uart_idleReadDisable
  336              	.LVL33:
  133:../user/source/main.c ****                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
  337              		.loc 1 133 0
  338 009e 0022     		movs	r2, #0
- 339 00a0 734B     		ldr	r3, .L34+24
+ 339 00a0 734B     		ldr	r3, .L36+24
  340 00a2 1A70     		strb	r2, [r3]
  134:../user/source/main.c ****                 ProtocolType = GetProtocolType(ucApp_Buf_ZD2DB, dwLen);
  341              		.loc 1 134 0
- 342 00a4 734C     		ldr	r4, .L34+28
+ 342 00a4 734C     		ldr	r4, .L36+28
  343              	.LVL34:
- 344 00a6 714B     		ldr	r3, .L34+20
+ 344 00a6 714B     		ldr	r3, .L36+20
  345 00a8 1A68     		ldr	r2, [r3]
  346 00aa 2146     		mov	r1, r4
  347 00ac 2868     		ldr	r0, [r5]
  348 00ae FFF7FEFF 		bl	dwUartCopy
  349              	.LVL35:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 42
+
+
  135:../user/source/main.c ****             }
  350              		.loc 1 135 0
  351 00b2 0146     		mov	r1, r0
@@ -2452,29 +2473,26 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  358              	.L20:
  137:../user/source/main.c ****             {
  359              		.loc 1 137 0
- 360 00bc 6E4B     		ldr	r3, .L34+32
+ 360 00bc 6E4B     		ldr	r3, .L36+32
  361 00be 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  362 00c0 002B     		cmp	r3, #0
  363 00c2 D6D0     		beq	.L16
  139:../user/source/main.c ****                 FLAG_UartDB_HasData = false;
  364              		.loc 1 139 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 42
-
-
- 365 00c4 694D     		ldr	r5, .L34+20
+ 365 00c4 694D     		ldr	r5, .L36+20
  366 00c6 2868     		ldr	r0, [r5]
  367 00c8 FFF7FEFF 		bl	Uart_idleReadDisable
  368              	.LVL39:
  140:../user/source/main.c ****                 dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
  369              		.loc 1 140 0
  370 00cc 0022     		movs	r2, #0
- 371 00ce 6A4B     		ldr	r3, .L34+32
+ 371 00ce 6A4B     		ldr	r3, .L36+32
  372 00d0 1A70     		strb	r2, [r3]
- 141:../user/source/main.c ****                 ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen);
+ 141:../user/source/main.c ****                 ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //Ð£Ñé´íÎóÒ²ÄÛ¹ý£¿
  373              		.loc 1 141 0
- 374 00d2 6A4C     		ldr	r4, .L34+36
+ 374 00d2 6A4C     		ldr	r4, .L36+36
  375              	.LVL40:
- 376 00d4 644B     		ldr	r3, .L34+16
+ 376 00d4 644B     		ldr	r3, .L36+16
  377 00d6 1A68     		ldr	r2, [r3]
  378 00d8 2146     		mov	r1, r4
  379 00da 2868     		ldr	r0, [r5]
@@ -2493,60 +2511,60 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  391              	.L17:
  148:../user/source/main.c ****             Uart_idleReadEnable(pUartDB);
  392              		.loc 1 148 0
- 393 00ec 5E4B     		ldr	r3, .L34+16
+ 393 00ec 5E4B     		ldr	r3, .L36+16
  394 00ee 1868     		ldr	r0, [r3]
  395 00f0 FFF7FEFF 		bl	Uart_idleReadEnable
  396              	.LVL45:
  149:../user/source/main.c ****             if (FLAG_UartZD_HasData)
  397              		.loc 1 149 0
- 398 00f4 5D4B     		ldr	r3, .L34+20
+ 398 00f4 5D4B     		ldr	r3, .L36+20
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 43
+
+
  399 00f6 1868     		ldr	r0, [r3]
  400 00f8 FFF7FEFF 		bl	Uart_idleReadEnable
  401              	.LVL46:
  150:../user/source/main.c ****             {
  402              		.loc 1 150 0
- 403 00fc 5C4B     		ldr	r3, .L34+24
+ 403 00fc 5C4B     		ldr	r3, .L36+24
  404 00fe 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  405 0100 63B1     		cbz	r3, .L22
  152:../user/source/main.c ****                 FLAG_UartZD_HasData = false;
  406              		.loc 1 152 0
- 407 0102 594D     		ldr	r5, .L34+16
+ 407 0102 594D     		ldr	r5, .L36+16
  408 0104 2868     		ldr	r0, [r5]
  409 0106 FFF7FEFF 		bl	Uart_idleReadDisable
  410              	.LVL47:
  153:../user/source/main.c ****                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
  411              		.loc 1 153 0
  412 010a 0022     		movs	r2, #0
- 413 010c 584B     		ldr	r3, .L34+24
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 43
-
-
+ 413 010c 584B     		ldr	r3, .L36+24
  414 010e 1A70     		strb	r2, [r3]
  154:../user/source/main.c ****                 //if (pframe = pGetpFrame(ucApp_Buf_ZD2DB, dwLen) == NULL)
  415              		.loc 1 154 0
- 416 0110 564B     		ldr	r3, .L34+20
+ 416 0110 564B     		ldr	r3, .L36+20
  417 0112 1A68     		ldr	r2, [r3]
- 418 0114 5749     		ldr	r1, .L34+28
+ 418 0114 5749     		ldr	r1, .L36+28
  419 0116 2868     		ldr	r0, [r5]
  420 0118 FFF7FEFF 		bl	dwUartCopy
  421              	.LVL48:
  422              	.L22:
  158:../user/source/main.c ****             {
  423              		.loc 1 158 0
- 424 011c 564B     		ldr	r3, .L34+32
+ 424 011c 564B     		ldr	r3, .L36+32
  425 011e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  426 0120 002B     		cmp	r3, #0
  427 0122 A6D0     		beq	.L16
  160:../user/source/main.c ****                 FLAG_UartDB_HasData = false;
  428              		.loc 1 160 0
- 429 0124 514D     		ldr	r5, .L34+20
+ 429 0124 514D     		ldr	r5, .L36+20
  430 0126 2868     		ldr	r0, [r5]
  431 0128 FFF7FEFF 		bl	Uart_idleReadDisable
  432              	.LVL49:
  161:../user/source/main.c ****                 dlt698Frame.pStart = NULL;
  433              		.loc 1 161 0
  434 012c 0023     		movs	r3, #0
- 435 012e 524A     		ldr	r2, .L34+32
+ 435 012e 524A     		ldr	r2, .L36+32
  436 0130 1370     		strb	r3, [r2]
  162:../user/source/main.c ****                 //dwLen = 0;
  437              		.loc 1 162 0
@@ -2554,469 +2572,472 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 1
  166:../user/source/main.c ****                     break;
  439              		.loc 1 166 0
  440 0134 4FF47A72 		mov	r2, #1000
- 441 0138 5049     		ldr	r1, .L34+36
+ 441 0138 5049     		ldr	r1, .L36+36
  442 013a 2868     		ldr	r0, [r5]
  443 013c FFF7FEFF 		bl	Uart_Read
  444              	.LVL50:
- 445 0140 0146     		mov	r1, r0
+ 445 0140 0546     		mov	r5, r0
  446 0142 0028     		cmp	r0, #0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 44
+
+
  447 0144 95D0     		beq	.L16
- 169:../user/source/main.c ****                 {
- 448              		.loc 1 169 0
- 449 0146 4E4B     		ldr	r3, .L34+40
- 450 0148 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 451 014a 3BB9     		cbnz	r3, .L23
- 171:../user/source/main.c ****                     break;
- 452              		.loc 1 171 0
- 453 014c 0B23     		movs	r3, #11
- 454 014e 0246     		mov	r2, r0
- 455 0150 4A49     		ldr	r1, .L34+36
- 456 0152 4548     		ldr	r0, .L34+16
- 457              	.LVL51:
- 458 0154 0068     		ldr	r0, [r0]
- 459 0156 FFF7FEFF 		bl	Uart_OnceWrite
- 460              	.LVL52:
- 172:../user/source/main.c ****                 }
- 461              		.loc 1 172 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 44
-
-
- 462 015a 8AE7     		b	.L16
+ 188:../user/source/main.c ****                 {
+ 448              		.loc 1 188 0
+ 449 0146 01AA     		add	r2, sp, #4
+ 450 0148 0146     		mov	r1, r0
+ 451 014a 4C48     		ldr	r0, .L36+36
+ 452              	.LVL51:
+ 453 014c FFF7FEFF 		bl	pGetpFrame
+ 454              	.LVL52:
+ 455 0150 38B9     		cbnz	r0, .L23
+ 190:../user/source/main.c ****                 }
+ 456              		.loc 1 190 0
+ 457 0152 0B23     		movs	r3, #11
+ 458 0154 2A46     		mov	r2, r5
+ 459 0156 4949     		ldr	r1, .L36+36
+ 460 0158 4348     		ldr	r0, .L36+16
+ 461 015a 0068     		ldr	r0, [r0]
+ 462 015c FFF7FEFF 		bl	Uart_OnceWrite
  463              	.LVL53:
- 464              	.L23:
- 176:../user/source/main.c ****                     break;
- 465              		.loc 1 176 0
- 466 015c 01AA     		add	r2, sp, #4
- 467 015e 4748     		ldr	r0, .L34+36
- 468              	.LVL54:
- 469 0160 FFF7FEFF 		bl	pGetpFrame
- 470              	.LVL55:
- 471 0164 0028     		cmp	r0, #0
- 472 0166 84D0     		beq	.L16
- 180:../user/source/main.c ****                     break;
- 473              		.loc 1 180 0
- 474 0168 05A9     		add	r1, sp, #20
- 475 016a 01A8     		add	r0, sp, #4
- 476 016c FFF7FEFF 		bl	dwGet698Apdu
- 477              	.LVL56:
- 478 0170 0146     		mov	r1, r0
- 479 0172 0028     		cmp	r0, #0
- 480 0174 3FF47DAF 		beq	.L16
- 183:../user/source/main.c ****                     break;
- 481              		.loc 1 183 0
- 482 0178 424A     		ldr	r2, .L34+44
- 483 017a 0598     		ldr	r0, [sp, #20]
- 484              	.LVL57:
- 485 017c FFF7FEFF 		bl	dwAPduAnalyze
- 486              	.LVL58:
- 487 0180 0028     		cmp	r0, #0
- 488 0182 FFF676AF 		blt	.L16
- 489 0186 0025     		movs	r5, #0
- 490 0188 10E0     		b	.L24
- 491              	.LVL59:
- 492              	.L26:
- 187:../user/source/main.c ****                     {
- 493              		.loc 1 187 0
- 494 018a 05EB4502 		add	r2, r5, r5, lsl #1
- 495 018e 9300     		lsls	r3, r2, #2
- 496 0190 3C4A     		ldr	r2, .L34+44
- 497 0192 1344     		add	r3, r3, r2
- 498 0194 1B89     		ldrh	r3, [r3, #8]
- 499 0196 B3F5005F 		cmp	r3, #8192
- 500 019a 06D1     		bne	.L25
- 189:../user/source/main.c ****                     }
- 501              		.loc 1 189 0
- 502 019c 05EB4503 		add	r3, r5, r5, lsl #1
- 503 01a0 9800     		lsls	r0, r3, #2
- 504 01a2 0830     		adds	r0, r0, #8
- 505 01a4 1044     		add	r0, r0, r2
- 506 01a6 FFF7FEFF 		bl	v698VoltageModify
- 507              	.LVL60:
- 508              	.L25:
- 185:../user/source/main.c ****                 {
- 509              		.loc 1 185 0 discriminator 2
- 510 01aa 0135     		adds	r5, r5, #1
- 511              	.LVL61:
- 512              	.L24:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 45
+ 464 0160 87E7     		b	.L16
+ 465              	.L23:
+ 193:../user/source/main.c ****                 {
+ 466              		.loc 1 193 0
+ 467 0162 474B     		ldr	r3, .L36+40
+ 468 0164 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 469 0166 002B     		cmp	r3, #0
+ 470 0168 83D0     		beq	.L16
+ 195:../user/source/main.c ****                     {
+ 471              		.loc 1 195 0
+ 472 016a 05A9     		add	r1, sp, #20
+ 473 016c 01A8     		add	r0, sp, #4
+ 474 016e FFF7FEFF 		bl	dwGet698Apdu
+ 475              	.LVL54:
+ 476 0172 0146     		mov	r1, r0
+ 477 0174 00B3     		cbz	r0, .L24
+ 197:../user/source/main.c ****                         {
+ 478              		.loc 1 197 0
+ 479 0176 434A     		ldr	r2, .L36+44
+ 480 0178 0598     		ldr	r0, [sp, #20]
+ 481              	.LVL55:
+ 482 017a FFF7FEFF 		bl	dwAPduAnalyze
+ 483              	.LVL56:
+ 484 017e 0028     		cmp	r0, #0
+ 485 0180 12DC     		bgt	.L34
+ 486 0182 19E0     		b	.L24
+ 487              	.LVL57:
+ 488              	.L27:
+ 202:../user/source/main.c ****                                 {
+ 489              		.loc 1 202 0
+ 490 0184 05EB4502 		add	r2, r5, r5, lsl #1
+ 491 0188 9300     		lsls	r3, r2, #2
+ 492 018a 3E4A     		ldr	r2, .L36+44
+ 493 018c 1344     		add	r3, r3, r2
+ 494 018e 1B89     		ldrh	r3, [r3, #8]
+ 495 0190 B3F5005F 		cmp	r3, #8192
+ 496 0194 06D1     		bne	.L26
+ 204:../user/source/main.c ****                                 }
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 45
 
 
- 185:../user/source/main.c ****                 {
- 513              		.loc 1 185 0 is_stmt 0 discriminator 1
- 514 01ac 354B     		ldr	r3, .L34+44
- 515 01ae 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
- 516 01b0 9D42     		cmp	r5, r3
- 517 01b2 EAD3     		bcc	.L26
- 192:../user/source/main.c ****                 //frame -> UartBuf
- 518              		.loc 1 192 0 is_stmt 1
- 519 01b4 01A8     		add	r0, sp, #4
- 520 01b6 FFF7FEFF 		bl	dwReCalculateFCS
- 521              	.LVL62:
- 194:../user/source/main.c ****             }
- 522              		.loc 1 194 0
- 523 01ba BDF81020 		ldrh	r2, [sp, #16]
- 524 01be 0623     		movs	r3, #6
- 525 01c0 0232     		adds	r2, r2, #2
- 526 01c2 0199     		ldr	r1, [sp, #4]
- 527 01c4 2848     		ldr	r0, .L34+16
- 528 01c6 0068     		ldr	r0, [r0]
- 529 01c8 FFF7FEFF 		bl	Uart_OnceWrite
- 530              	.LVL63:
- 531 01cc 51E7     		b	.L16
- 532              	.LVL64:
- 533              	.L18:
- 202:../user/source/main.c ****             /*¼¯ÖÐÆ÷²àÊý¾ÝÖ¡ÊÕÖ¡´¦Àí*/
- 534              		.loc 1 202 0
- 535 01ce FFF7FEFF 		bl	vFeedExtWatchDog
- 536              	.LVL65:
- 204:../user/source/main.c ****             {
- 537              		.loc 1 204 0
- 538 01d2 254B     		ldr	r3, .L34+16
- 539 01d4 1B68     		ldr	r3, [r3]
- 540 01d6 5868     		ldr	r0, [r3, #4]
- 541 01d8 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 542              	.LVL66:
- 543 01dc 10B9     		cbnz	r0, .L27
- 206:../user/source/main.c ****             }
- 544              		.loc 1 206 0
- 545 01de 2548     		ldr	r0, .L34+28
- 546 01e0 FFF7FEFF 		bl	RsvFrameHandle
- 547              	.LVL67:
- 548              	.L27:
- 210:../user/source/main.c ****             {
- 549              		.loc 1 210 0
- 550 01e4 214B     		ldr	r3, .L34+20
- 551 01e6 1B68     		ldr	r3, [r3]
- 552 01e8 5868     		ldr	r0, [r3, #4]
- 553 01ea FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 554              	.LVL68:
- 555 01ee 10B1     		cbz	r0, .L28
- 212:../user/source/main.c ****             }
- 556              		.loc 1 212 0
- 557 01f0 FFF7FEFF 		bl	VoltageTimeOutHandle
- 558              	.LVL69:
- 559 01f4 66E0     		b	.L29
- 560              	.L28:
- 218:../user/source/main.c ****                 {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 46
+ 497              		.loc 1 204 0
+ 498 0196 05EB4503 		add	r3, r5, r5, lsl #1
+ 499 019a 9800     		lsls	r0, r3, #2
+ 500 019c 0830     		adds	r0, r0, #8
+ 501 019e 1044     		add	r0, r0, r2
+ 502 01a0 FFF7FEFF 		bl	v698VoltageModify
+ 503              	.LVL58:
+ 504              	.L26:
+ 200:../user/source/main.c ****                             {
+ 505              		.loc 1 200 0 discriminator 2
+ 506 01a4 0135     		adds	r5, r5, #1
+ 507              	.LVL59:
+ 508 01a6 00E0     		b	.L25
+ 509              	.LVL60:
+ 510              	.L34:
+ 511 01a8 0025     		movs	r5, #0
+ 512              	.L25:
+ 513              	.LVL61:
+ 200:../user/source/main.c ****                             {
+ 514              		.loc 1 200 0 is_stmt 0 discriminator 1
+ 515 01aa 364B     		ldr	r3, .L36+44
+ 516 01ac 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 517 01ae 9D42     		cmp	r5, r3
+ 518 01b0 E8D3     		bcc	.L27
+ 207:../user/source/main.c ****                         }
+ 519              		.loc 1 207 0 is_stmt 1
+ 520 01b2 01A8     		add	r0, sp, #4
+ 521 01b4 FFF7FEFF 		bl	dwReCalculateFCS
+ 522              	.LVL62:
+ 523              	.L24:
+ 210:../user/source/main.c ****                 }
+ 524              		.loc 1 210 0
+ 525 01b8 BDF81020 		ldrh	r2, [sp, #16]
+ 526 01bc 0623     		movs	r3, #6
+ 527 01be 0232     		adds	r2, r2, #2
+ 528 01c0 0199     		ldr	r1, [sp, #4]
+ 529 01c2 2948     		ldr	r0, .L36+16
+ 530 01c4 0068     		ldr	r0, [r0]
+ 531 01c6 FFF7FEFF 		bl	Uart_OnceWrite
+ 532              	.LVL63:
+ 533 01ca 52E7     		b	.L16
+ 534              	.L18:
+ 220:../user/source/main.c ****             /*¼¯ÖÐÆ÷²àÊý¾ÝÖ¡ÊÕÖ¡´¦Àí*/
+ 535              		.loc 1 220 0
+ 536 01cc FFF7FEFF 		bl	vFeedExtWatchDog
+ 537              	.LVL64:
+ 222:../user/source/main.c ****             {
+ 538              		.loc 1 222 0
+ 539 01d0 254B     		ldr	r3, .L36+16
+ 540 01d2 1B68     		ldr	r3, [r3]
+ 541 01d4 5868     		ldr	r0, [r3, #4]
+ 542 01d6 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 543              	.LVL65:
+ 544 01da 10B9     		cbnz	r0, .L28
+ 224:../user/source/main.c ****             }
+ 545              		.loc 1 224 0
+ 546 01dc 2548     		ldr	r0, .L36+28
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 46
 
 
- 561              		.loc 1 218 0
- 562 01f6 1D4B     		ldr	r3, .L34+20
- 563 01f8 1B68     		ldr	r3, [r3]
- 564 01fa 2049     		ldr	r1, .L34+36
- 565 01fc 5868     		ldr	r0, [r3, #4]
- 566 01fe FFF7FEFF 		bl	blRecvFrame
- 567              	.LVL70:
- 568 0202 0028     		cmp	r0, #0
- 569 0204 48D1     		bne	.L30
- 221:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 570              		.loc 1 221 0
- 571 0206 204B     		ldr	r3, .L34+48
- 572 0208 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 573 020a 002B     		cmp	r3, #0
- 574 020c 5AD1     		bne	.L29
- 222:../user/source/main.c ****                     {
- 575              		.loc 1 222 0 discriminator 1
- 576 020e 1921     		movs	r1, #25
- 577 0210 1E4B     		ldr	r3, .L34+52
- 578 0212 1888     		ldrh	r0, [r3]
- 579 0214 FFF7FEFF 		bl	blTime2_Update
- 580              	.LVL71:
- 221:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 581              		.loc 1 221 0 discriminator 1
- 582 0218 0028     		cmp	r0, #0
- 583 021a 53D0     		beq	.L29
- 225:../user/source/main.c ****                         {
- 584              		.loc 1 225 0
- 585 021c 1548     		ldr	r0, .L34+28
- 586 021e FFF7FEFF 		bl	blVoltage_Create
- 587              	.LVL72:
- 588 0222 0028     		cmp	r0, #0
- 589 0224 4ED0     		beq	.L29
- 227:../user/source/main.c ****                             /*·¢ËÍµçÑ¹Ö¡*/
- 590              		.loc 1 227 0
- 591 0226 104D     		ldr	r5, .L34+16
- 592 0228 2B68     		ldr	r3, [r5]
- 593 022a 1248     		ldr	r0, .L34+28
- 594 022c 427A     		ldrb	r2, [r0, #9]	@ zero_extendqisi2
- 595 022e 9968     		ldr	r1, [r3, #8]
- 596 0230 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
- 597              	.LVL73:
- 229:../user/source/main.c ****                             {
- 598              		.loc 1 229 0
- 599 0234 2B68     		ldr	r3, [r5]
- 600 0236 9868     		ldr	r0, [r3, #8]
- 601 0238 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 602              	.LVL74:
- 603 023c 0028     		cmp	r0, #0
- 604 023e 41D1     		bne	.L29
- 231:../user/source/main.c ****                                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
- 605              		.loc 1 231 0
- 606 0240 1348     		ldr	r0, .L34+56
- 607 0242 FFF7FEFF 		bl	Uart_DataPut
- 608              	.LVL75:
- 233:../user/source/main.c ****                                 /*¼ÆÊ±Æ÷¸´Î»*/
- 609              		.loc 1 233 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 47
+ 547 01de FFF7FEFF 		bl	RsvFrameHandle
+ 548              	.LVL66:
+ 549              	.L28:
+ 228:../user/source/main.c ****             {
+ 550              		.loc 1 228 0
+ 551 01e2 224B     		ldr	r3, .L36+20
+ 552 01e4 1B68     		ldr	r3, [r3]
+ 553 01e6 5868     		ldr	r0, [r3, #4]
+ 554 01e8 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 555              	.LVL67:
+ 556 01ec 10B1     		cbz	r0, .L29
+ 230:../user/source/main.c ****             }
+ 557              		.loc 1 230 0
+ 558 01ee FFF7FEFF 		bl	VoltageTimeOutHandle
+ 559              	.LVL68:
+ 560 01f2 67E0     		b	.L30
+ 561              	.L29:
+ 236:../user/source/main.c ****                 {
+ 562              		.loc 1 236 0
+ 563 01f4 1D4B     		ldr	r3, .L36+20
+ 564 01f6 1B68     		ldr	r3, [r3]
+ 565 01f8 2049     		ldr	r1, .L36+36
+ 566 01fa 5868     		ldr	r0, [r3, #4]
+ 567 01fc FFF7FEFF 		bl	blRecvFrame
+ 568              	.LVL69:
+ 569 0200 0028     		cmp	r0, #0
+ 570 0202 49D1     		bne	.L31
+ 239:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 571              		.loc 1 239 0
+ 572 0204 204B     		ldr	r3, .L36+48
+ 573 0206 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 574 0208 002B     		cmp	r3, #0
+ 575 020a 5BD1     		bne	.L30
+ 240:../user/source/main.c ****                     {
+ 576              		.loc 1 240 0 discriminator 1
+ 577 020c 1921     		movs	r1, #25
+ 578 020e 1F4B     		ldr	r3, .L36+52
+ 579 0210 1888     		ldrh	r0, [r3]
+ 580 0212 FFF7FEFF 		bl	blTime2_Update
+ 581              	.LVL70:
+ 239:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 582              		.loc 1 239 0 discriminator 1
+ 583 0216 0028     		cmp	r0, #0
+ 584 0218 54D0     		beq	.L30
+ 243:../user/source/main.c ****                         {
+ 585              		.loc 1 243 0
+ 586 021a 1648     		ldr	r0, .L36+28
+ 587 021c FFF7FEFF 		bl	blVoltage_Create
+ 588              	.LVL71:
+ 589 0220 0028     		cmp	r0, #0
+ 590 0222 4FD0     		beq	.L30
+ 245:../user/source/main.c ****                             /*·¢ËÍµçÑ¹Ö¡*/
+ 591              		.loc 1 245 0
+ 592 0224 104D     		ldr	r5, .L36+16
+ 593 0226 2B68     		ldr	r3, [r5]
+ 594 0228 1248     		ldr	r0, .L36+28
+ 595 022a 427A     		ldrb	r2, [r0, #9]	@ zero_extendqisi2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 47
 
 
- 610 0246 0122     		movs	r2, #1
- 611 0248 0F4B     		ldr	r3, .L34+48
- 612 024a 1A70     		strb	r2, [r3]
- 235:../user/source/main.c ****                                 uwTime2FramesCounter = 0;
- 613              		.loc 1 235 0
- 614 024c 0023     		movs	r3, #0
- 615 024e 114A     		ldr	r2, .L34+60
- 616 0250 1370     		strb	r3, [r2]
- 236:../user/source/main.c ****                             }
- 617              		.loc 1 236 0
- 618 0252 0E4A     		ldr	r2, .L34+52
- 619 0254 1380     		strh	r3, [r2]	@ movhi
- 620 0256 35E0     		b	.L29
- 621              	.L35:
- 622              		.align	2
- 623              	.L34:
- 624 0258 00000000 		.word	SystemCoreClock
- 625 025c CDCCCCCC 		.word	-858993459
- 626 0260 10E000E0 		.word	-536813552
- 627 0264 00ED00E0 		.word	-536810240
- 628 0268 00000000 		.word	pUartZD
- 629 026c 00000000 		.word	pUartDB
- 630 0270 00000000 		.word	.LANCHOR0
- 631 0274 00000000 		.word	ucApp_Buf_ZD2DB
- 632 0278 00000000 		.word	.LANCHOR1
- 633 027c 00000000 		.word	ucApp_Buf_DB2ZD
- 634 0280 00000000 		.word	Voltage_Change_State
- 635 0284 00000000 		.word	stCollData
- 636 0288 00000000 		.word	Voltage_Frame_Status
- 637 028c 00000000 		.word	uwTime2FramesCounter
- 638 0290 00380140 		.word	1073821696
- 639 0294 00000000 		.word	blFramesCounterStatus
- 640              	.L30:
- 244:../user/source/main.c ****                     ucDrv_Buf_PutBytes(ucApp_Buf_DB2ZD, pUartZD->pSndbuf, uc645DataDomainLength + 1
- 641              		.loc 1 244 0
- 642 0298 2F4E     		ldr	r6, .L36
- 643 029a 3046     		mov	r0, r6
- 644 029c FFF7FEFF 		bl	vDBDataID_Handle
- 645              	.LVL76:
- 245:../user/source/main.c ****                     if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
- 646              		.loc 1 245 0
- 647 02a0 2E4D     		ldr	r5, .L36+4
- 648 02a2 2B68     		ldr	r3, [r5]
- 649 02a4 2E4A     		ldr	r2, .L36+8
- 650 02a6 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
- 651 02a8 0C32     		adds	r2, r2, #12
- 652 02aa 9968     		ldr	r1, [r3, #8]
- 653 02ac 3046     		mov	r0, r6
- 654 02ae FFF7FEFF 		bl	ucDrv_Buf_PutBytes
- 655              	.LVL77:
- 246:../user/source/main.c ****                     {
- 656              		.loc 1 246 0
- 657 02b2 2B68     		ldr	r3, [r5]
- 658 02b4 9868     		ldr	r0, [r3, #8]
- 659 02b6 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 660              	.LVL78:
- 661 02ba 18B9     		cbnz	r0, .L29
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 48
+ 596 022c 9968     		ldr	r1, [r3, #8]
+ 597 022e FFF7FEFF 		bl	ucDrv_Buf_PutBytes
+ 598              	.LVL72:
+ 247:../user/source/main.c ****                             {
+ 599              		.loc 1 247 0
+ 600 0232 2B68     		ldr	r3, [r5]
+ 601 0234 9868     		ldr	r0, [r3, #8]
+ 602 0236 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 603              	.LVL73:
+ 604 023a 0028     		cmp	r0, #0
+ 605 023c 42D1     		bne	.L30
+ 249:../user/source/main.c ****                                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
+ 606              		.loc 1 249 0
+ 607 023e 1448     		ldr	r0, .L36+56
+ 608 0240 FFF7FEFF 		bl	Uart_DataPut
+ 609              	.LVL74:
+ 251:../user/source/main.c ****                                 /*¼ÆÊ±Æ÷¸´Î»*/
+ 610              		.loc 1 251 0
+ 611 0244 0122     		movs	r2, #1
+ 612 0246 104B     		ldr	r3, .L36+48
+ 613 0248 1A70     		strb	r2, [r3]
+ 253:../user/source/main.c ****                                 uwTime2FramesCounter = 0;
+ 614              		.loc 1 253 0
+ 615 024a 0023     		movs	r3, #0
+ 616 024c 114A     		ldr	r2, .L36+60
+ 617 024e 1370     		strb	r3, [r2]
+ 254:../user/source/main.c ****                             }
+ 618              		.loc 1 254 0
+ 619 0250 0E4A     		ldr	r2, .L36+52
+ 620 0252 1380     		strh	r3, [r2]	@ movhi
+ 621 0254 36E0     		b	.L30
+ 622              	.L37:
+ 623 0256 00BF     		.align	2
+ 624              	.L36:
+ 625 0258 00000000 		.word	SystemCoreClock
+ 626 025c CDCCCCCC 		.word	-858993459
+ 627 0260 10E000E0 		.word	-536813552
+ 628 0264 00ED00E0 		.word	-536810240
+ 629 0268 00000000 		.word	pUartZD
+ 630 026c 00000000 		.word	pUartDB
+ 631 0270 00000000 		.word	.LANCHOR0
+ 632 0274 00000000 		.word	ucApp_Buf_ZD2DB
+ 633 0278 00000000 		.word	.LANCHOR1
+ 634 027c 00000000 		.word	ucApp_Buf_DB2ZD
+ 635 0280 00000000 		.word	Voltage_Change_State
+ 636 0284 00000000 		.word	stCollData
+ 637 0288 00000000 		.word	Voltage_Frame_Status
+ 638 028c 00000000 		.word	uwTime2FramesCounter
+ 639 0290 00380140 		.word	1073821696
+ 640 0294 00000000 		.word	blFramesCounterStatus
+ 641              	.L31:
+ 262:../user/source/main.c ****                     ucDrv_Buf_PutBytes(ucApp_Buf_DB2ZD, pUartZD->pSndbuf, uc645DataDomainLength + 1
+ 642              		.loc 1 262 0
+ 643 0298 2F4E     		ldr	r6, .L38
+ 644 029a 3046     		mov	r0, r6
+ 645 029c FFF7FEFF 		bl	vDBDataID_Handle
+ 646              	.LVL75:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 48
 
 
- 248:../user/source/main.c ****                     }
- 662              		.loc 1 248 0
- 663 02bc 2B68     		ldr	r3, [r5]
- 664 02be 1868     		ldr	r0, [r3]
- 665 02c0 FFF7FEFF 		bl	Uart_DataPut
- 666              	.LVL79:
- 667              	.L29:
- 255:../user/source/main.c ****             {
- 668              		.loc 1 255 0
- 669 02c4 274B     		ldr	r3, .L36+12
- 670 02c6 1B68     		ldr	r3, [r3]
- 671 02c8 5868     		ldr	r0, [r3, #4]
- 672 02ca FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 673              	.LVL80:
- 674 02ce 0028     		cmp	r0, #0
- 675 02d0 7FF4CFAE 		bne	.L16
- 257:../user/source/main.c ****                 {
- 676              		.loc 1 257 0
- 677 02d4 234B     		ldr	r3, .L36+12
- 678 02d6 1B68     		ldr	r3, [r3]
- 679 02d8 2349     		ldr	r1, .L36+16
- 680 02da 5868     		ldr	r0, [r3, #4]
- 681 02dc FFF7FEFF 		bl	blRecvFrame
- 682              	.LVL81:
- 683 02e0 0028     		cmp	r0, #0
- 684 02e2 3FF4C6AE 		beq	.L16
- 259:../user/source/main.c ****                     {
- 685              		.loc 1 259 0
- 686 02e6 204B     		ldr	r3, .L36+16
- 687 02e8 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
- 688 02ea 132B     		cmp	r3, #19
- 689 02ec 1DD1     		bne	.L31
- 261:../user/source/main.c ****                         ucApp_Buf_INFR[2] = 0x01;
- 690              		.loc 1 261 0
- 691 02ee 1E48     		ldr	r0, .L36+16
- 692 02f0 0123     		movs	r3, #1
- 693 02f2 4370     		strb	r3, [r0, #1]
- 262:../user/source/main.c ****                         ucApp_Buf_INFR[3] = 0x01;
- 694              		.loc 1 262 0
- 695 02f4 8370     		strb	r3, [r0, #2]
- 263:../user/source/main.c ****                         ucApp_Buf_INFR[4] = 0x01;
- 696              		.loc 1 263 0
- 697 02f6 C370     		strb	r3, [r0, #3]
- 264:../user/source/main.c ****                         ucApp_Buf_INFR[5] = 0x01;
- 698              		.loc 1 264 0
- 699 02f8 0371     		strb	r3, [r0, #4]
- 265:../user/source/main.c ****                         ucApp_Buf_INFR[6] = 0x01;
- 700              		.loc 1 265 0
- 701 02fa 4371     		strb	r3, [r0, #5]
- 266:../user/source/main.c ****                         ucApp_Buf_INFR[8] = 0x93;
- 702              		.loc 1 266 0
- 703 02fc 8371     		strb	r3, [r0, #6]
- 267:../user/source/main.c ****                         ucApp_Buf_INFR[9] = 0x06;
- 704              		.loc 1 267 0
- 705 02fe 9323     		movs	r3, #147
- 706 0300 0372     		strb	r3, [r0, #8]
- 268:../user/source/main.c ****                         ucApp_Buf_INFR[10] = 0x34;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 49
+ 263:../user/source/main.c ****                     if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
+ 647              		.loc 1 263 0
+ 648 02a0 2E4D     		ldr	r5, .L38+4
+ 649 02a2 2B68     		ldr	r3, [r5]
+ 650 02a4 2E4A     		ldr	r2, .L38+8
+ 651 02a6 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 652 02a8 0C32     		adds	r2, r2, #12
+ 653 02aa 9968     		ldr	r1, [r3, #8]
+ 654 02ac 3046     		mov	r0, r6
+ 655 02ae FFF7FEFF 		bl	ucDrv_Buf_PutBytes
+ 656              	.LVL76:
+ 264:../user/source/main.c ****                     {
+ 657              		.loc 1 264 0
+ 658 02b2 2B68     		ldr	r3, [r5]
+ 659 02b4 9868     		ldr	r0, [r3, #8]
+ 660 02b6 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 661              	.LVL77:
+ 662 02ba 18B9     		cbnz	r0, .L30
+ 266:../user/source/main.c ****                     }
+ 663              		.loc 1 266 0
+ 664 02bc 2B68     		ldr	r3, [r5]
+ 665 02be 1868     		ldr	r0, [r3]
+ 666 02c0 FFF7FEFF 		bl	Uart_DataPut
+ 667              	.LVL78:
+ 668              	.L30:
+ 273:../user/source/main.c ****             {
+ 669              		.loc 1 273 0
+ 670 02c4 274B     		ldr	r3, .L38+12
+ 671 02c6 1B68     		ldr	r3, [r3]
+ 672 02c8 5868     		ldr	r0, [r3, #4]
+ 673 02ca FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 674              	.LVL79:
+ 675 02ce 0028     		cmp	r0, #0
+ 676 02d0 7FF4CFAE 		bne	.L16
+ 275:../user/source/main.c ****                 {
+ 677              		.loc 1 275 0
+ 678 02d4 234B     		ldr	r3, .L38+12
+ 679 02d6 1B68     		ldr	r3, [r3]
+ 680 02d8 2349     		ldr	r1, .L38+16
+ 681 02da 5868     		ldr	r0, [r3, #4]
+ 682 02dc FFF7FEFF 		bl	blRecvFrame
+ 683              	.LVL80:
+ 684 02e0 0028     		cmp	r0, #0
+ 685 02e2 3FF4C6AE 		beq	.L16
+ 277:../user/source/main.c ****                     {
+ 686              		.loc 1 277 0
+ 687 02e6 204B     		ldr	r3, .L38+16
+ 688 02e8 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ 689 02ea 132B     		cmp	r3, #19
+ 690 02ec 1DD1     		bne	.L32
+ 279:../user/source/main.c ****                         ucApp_Buf_INFR[2] = 0x01;
+ 691              		.loc 1 279 0
+ 692 02ee 1E48     		ldr	r0, .L38+16
+ 693 02f0 0123     		movs	r3, #1
+ 694 02f2 4370     		strb	r3, [r0, #1]
+ 280:../user/source/main.c ****                         ucApp_Buf_INFR[3] = 0x01;
+ 695              		.loc 1 280 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 49
 
 
- 707              		.loc 1 268 0
- 708 0302 0623     		movs	r3, #6
- 709 0304 4372     		strb	r3, [r0, #9]
- 269:../user/source/main.c ****                         ucApp_Buf_INFR[11] = 0x34;
- 710              		.loc 1 269 0
- 711 0306 3423     		movs	r3, #52
- 712 0308 8372     		strb	r3, [r0, #10]
- 270:../user/source/main.c ****                         ucApp_Buf_INFR[12] = 0x34;
- 713              		.loc 1 270 0
- 714 030a C372     		strb	r3, [r0, #11]
- 271:../user/source/main.c ****                         ucApp_Buf_INFR[13] = 0x34;
- 715              		.loc 1 271 0
- 716 030c 0373     		strb	r3, [r0, #12]
- 272:../user/source/main.c ****                         ucApp_Buf_INFR[14] = 0x34;
- 717              		.loc 1 272 0
- 718 030e 4373     		strb	r3, [r0, #13]
- 273:../user/source/main.c ****                         ucApp_Buf_INFR[15] = 0x34;
- 719              		.loc 1 273 0
- 720 0310 8373     		strb	r3, [r0, #14]
- 274:../user/source/main.c ****                         ucApp_Buf_INFR[16] = 0xA7;
- 721              		.loc 1 274 0
- 722 0312 C373     		strb	r3, [r0, #15]
- 275:../user/source/main.c ****                         ucApp_Buf_INFR[17] = 0x16;
- 723              		.loc 1 275 0
- 724 0314 A723     		movs	r3, #167
- 725 0316 0374     		strb	r3, [r0, #16]
- 276:../user/source/main.c ****                         ucDrv_Buf_PutBytes(ucApp_Buf_INFR, pUartIR->pSndbuf, 18);
- 726              		.loc 1 276 0
- 727 0318 1623     		movs	r3, #22
- 728 031a 4374     		strb	r3, [r0, #17]
- 277:../user/source/main.c ****                     }
- 729              		.loc 1 277 0
- 730 031c 114B     		ldr	r3, .L36+12
- 731 031e 1B68     		ldr	r3, [r3]
- 732 0320 1222     		movs	r2, #18
- 733 0322 9968     		ldr	r1, [r3, #8]
- 734 0324 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
- 735              	.LVL82:
- 736 0328 02E0     		b	.L32
- 737              	.L31:
- 281:../user/source/main.c ****                     }
- 738              		.loc 1 281 0
- 739 032a 0F48     		ldr	r0, .L36+16
- 740 032c FFF7FEFF 		bl	vINFRDataID_Handle
- 741              	.LVL83:
- 742              	.L32:
- 284:../user/source/main.c ****                     {
- 743              		.loc 1 284 0
- 744 0330 0C4B     		ldr	r3, .L36+12
- 745 0332 1B68     		ldr	r3, [r3]
- 746 0334 9868     		ldr	r0, [r3, #8]
- 747 0336 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 748              	.LVL84:
- 749 033a 0028     		cmp	r0, #0
- 750 033c 7FF499AE 		bne	.L16
- 286:../user/source/main.c ****                         //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Enable);
- 751              		.loc 1 286 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 50
+ 696 02f4 8370     		strb	r3, [r0, #2]
+ 281:../user/source/main.c ****                         ucApp_Buf_INFR[4] = 0x01;
+ 697              		.loc 1 281 0
+ 698 02f6 C370     		strb	r3, [r0, #3]
+ 282:../user/source/main.c ****                         ucApp_Buf_INFR[5] = 0x01;
+ 699              		.loc 1 282 0
+ 700 02f8 0371     		strb	r3, [r0, #4]
+ 283:../user/source/main.c ****                         ucApp_Buf_INFR[6] = 0x01;
+ 701              		.loc 1 283 0
+ 702 02fa 4371     		strb	r3, [r0, #5]
+ 284:../user/source/main.c ****                         ucApp_Buf_INFR[8] = 0x93;
+ 703              		.loc 1 284 0
+ 704 02fc 8371     		strb	r3, [r0, #6]
+ 285:../user/source/main.c ****                         ucApp_Buf_INFR[9] = 0x06;
+ 705              		.loc 1 285 0
+ 706 02fe 9323     		movs	r3, #147
+ 707 0300 0372     		strb	r3, [r0, #8]
+ 286:../user/source/main.c ****                         ucApp_Buf_INFR[10] = 0x34;
+ 708              		.loc 1 286 0
+ 709 0302 0623     		movs	r3, #6
+ 710 0304 4372     		strb	r3, [r0, #9]
+ 287:../user/source/main.c ****                         ucApp_Buf_INFR[11] = 0x34;
+ 711              		.loc 1 287 0
+ 712 0306 3423     		movs	r3, #52
+ 713 0308 8372     		strb	r3, [r0, #10]
+ 288:../user/source/main.c ****                         ucApp_Buf_INFR[12] = 0x34;
+ 714              		.loc 1 288 0
+ 715 030a C372     		strb	r3, [r0, #11]
+ 289:../user/source/main.c ****                         ucApp_Buf_INFR[13] = 0x34;
+ 716              		.loc 1 289 0
+ 717 030c 0373     		strb	r3, [r0, #12]
+ 290:../user/source/main.c ****                         ucApp_Buf_INFR[14] = 0x34;
+ 718              		.loc 1 290 0
+ 719 030e 4373     		strb	r3, [r0, #13]
+ 291:../user/source/main.c ****                         ucApp_Buf_INFR[15] = 0x34;
+ 720              		.loc 1 291 0
+ 721 0310 8373     		strb	r3, [r0, #14]
+ 292:../user/source/main.c ****                         ucApp_Buf_INFR[16] = 0xA7;
+ 722              		.loc 1 292 0
+ 723 0312 C373     		strb	r3, [r0, #15]
+ 293:../user/source/main.c ****                         ucApp_Buf_INFR[17] = 0x16;
+ 724              		.loc 1 293 0
+ 725 0314 A723     		movs	r3, #167
+ 726 0316 0374     		strb	r3, [r0, #16]
+ 294:../user/source/main.c ****                         ucDrv_Buf_PutBytes(ucApp_Buf_INFR, pUartIR->pSndbuf, 18);
+ 727              		.loc 1 294 0
+ 728 0318 1623     		movs	r3, #22
+ 729 031a 4374     		strb	r3, [r0, #17]
+ 295:../user/source/main.c ****                     }
+ 730              		.loc 1 295 0
+ 731 031c 114B     		ldr	r3, .L38+12
+ 732 031e 1B68     		ldr	r3, [r3]
+ 733 0320 1222     		movs	r2, #18
+ 734 0322 9968     		ldr	r1, [r3, #8]
+ 735 0324 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
+ 736              	.LVL81:
+ 737 0328 02E0     		b	.L33
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 50
 
 
- 752 0340 0A4D     		ldr	r5, .L36+20
- 753 0342 0022     		movs	r2, #0
- 754 0344 0A49     		ldr	r1, .L36+24
- 755 0346 2846     		mov	r0, r5
- 756 0348 FFF7FEFF 		bl	USART_ITConfig
- 757              	.LVL85:
- 288:../user/source/main.c ****                     }
- 758              		.loc 1 288 0
- 759 034c 0122     		movs	r2, #1
- 760 034e 0949     		ldr	r1, .L36+28
- 761 0350 2846     		mov	r0, r5
- 762 0352 FFF7FEFF 		bl	USART_ITConfig
- 763              	.LVL86:
- 764 0356 8CE6     		b	.L16
- 765              	.L37:
- 766              		.align	2
- 767              	.L36:
- 768 0358 00000000 		.word	ucApp_Buf_DB2ZD
- 769 035c 00000000 		.word	pUartZD
- 770 0360 00000000 		.word	uc645DataDomainLength
- 771 0364 00000000 		.word	pUartIR
- 772 0368 00000000 		.word	ucApp_Buf_INFR
- 773 036c 00440040 		.word	1073759232
- 774 0370 05010500 		.word	327941
- 775 0374 07010700 		.word	459015
- 776              		.cfi_endproc
- 777              	.LFE111:
- 779              		.global	FLAG_UartDB_HasData
- 780              		.global	FLAG_UartZD_HasData
- 781              		.comm	stCollData,1532,4
- 782              		.section	.bss.FLAG_UartDB_HasData,"aw",%nobits
- 783              		.set	.LANCHOR1,. + 0
- 786              	FLAG_UartDB_HasData:
- 787 0000 00       		.space	1
- 788              		.section	.bss.FLAG_UartZD_HasData,"aw",%nobits
- 789              		.set	.LANCHOR0,. + 0
- 792              	FLAG_UartZD_HasData:
- 793 0000 00       		.space	1
- 794              		.text
- 795              	.Letext0:
- 796              		.file 3 "../cmsis/include/stm32f37x.h"
- 797              		.file 4 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\machine\\_defaul
- 798              		.file 5 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
- 799              		.file 6 "../user/include/BaseDef.h"
- 800              		.file 7 "../user/include/Uart.h"
- 801              		.file 8 "../user/include/DLT645.h"
- 802              		.file 9 "../user/include/DLT698_45.h"
- 803              		.file 10 "../user/include/DLT698.h"
- 804              		.file 11 "../user/include/protocol.h"
- 805              		.file 12 "../cmsis/include/system_stm32f37x.h"
- 806              		.file 13 "../user/include/Time.h"
- 807              		.file 14 "../stdperiph/include/stm32f37x_misc.h"
- 808              		.file 15 "../user/include/Flash.h"
- 809              		.file 16 "../user/include/GPIO.h"
- 810              		.file 17 "../stdperiph/include/stm32f37x_usart.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 51
+ 738              	.L32:
+ 299:../user/source/main.c ****                     }
+ 739              		.loc 1 299 0
+ 740 032a 0F48     		ldr	r0, .L38+16
+ 741 032c FFF7FEFF 		bl	vINFRDataID_Handle
+ 742              	.LVL82:
+ 743              	.L33:
+ 302:../user/source/main.c ****                     {
+ 744              		.loc 1 302 0
+ 745 0330 0C4B     		ldr	r3, .L38+12
+ 746 0332 1B68     		ldr	r3, [r3]
+ 747 0334 9868     		ldr	r0, [r3, #8]
+ 748 0336 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 749              	.LVL83:
+ 750 033a 0028     		cmp	r0, #0
+ 751 033c 7FF499AE 		bne	.L16
+ 304:../user/source/main.c ****                         //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Enable);
+ 752              		.loc 1 304 0
+ 753 0340 0A4D     		ldr	r5, .L38+20
+ 754 0342 0022     		movs	r2, #0
+ 755 0344 0A49     		ldr	r1, .L38+24
+ 756 0346 2846     		mov	r0, r5
+ 757 0348 FFF7FEFF 		bl	USART_ITConfig
+ 758              	.LVL84:
+ 306:../user/source/main.c ****                     }
+ 759              		.loc 1 306 0
+ 760 034c 0122     		movs	r2, #1
+ 761 034e 0949     		ldr	r1, .L38+28
+ 762 0350 2846     		mov	r0, r5
+ 763 0352 FFF7FEFF 		bl	USART_ITConfig
+ 764              	.LVL85:
+ 765 0356 8CE6     		b	.L16
+ 766              	.L39:
+ 767              		.align	2
+ 768              	.L38:
+ 769 0358 00000000 		.word	ucApp_Buf_DB2ZD
+ 770 035c 00000000 		.word	pUartZD
+ 771 0360 00000000 		.word	uc645DataDomainLength
+ 772 0364 00000000 		.word	pUartIR
+ 773 0368 00000000 		.word	ucApp_Buf_INFR
+ 774 036c 00440040 		.word	1073759232
+ 775 0370 05010500 		.word	327941
+ 776 0374 07010700 		.word	459015
+ 777              		.cfi_endproc
+ 778              	.LFE111:
+ 780              		.global	FLAG_UartDB_HasData
+ 781              		.global	FLAG_UartZD_HasData
+ 782              		.comm	stCollData,1532,4
+ 783              		.section	.bss.FLAG_UartDB_HasData,"aw",%nobits
+ 784              		.set	.LANCHOR1,. + 0
+ 787              	FLAG_UartDB_HasData:
+ 788 0000 00       		.space	1
+ 789              		.section	.bss.FLAG_UartZD_HasData,"aw",%nobits
+ 790              		.set	.LANCHOR0,. + 0
+ 793              	FLAG_UartZD_HasData:
+ 794 0000 00       		.space	1
+ 795              		.text
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 51
+
+
+ 796              	.Letext0:
+ 797              		.file 3 "../cmsis/include/stm32f37x.h"
+ 798              		.file 4 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\machine\\_defaul
+ 799              		.file 5 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 800              		.file 6 "../user/include/BaseDef.h"
+ 801              		.file 7 "../user/include/Uart.h"
+ 802              		.file 8 "../user/include/DLT645.h"
+ 803              		.file 9 "../user/include/DLT698_45.h"
+ 804              		.file 10 "../user/include/DLT698.h"
+ 805              		.file 11 "../user/include/protocol.h"
+ 806              		.file 12 "../cmsis/include/system_stm32f37x.h"
+ 807              		.file 13 "../user/include/Time.h"
+ 808              		.file 14 "../stdperiph/include/stm32f37x_misc.h"
+ 809              		.file 15 "../user/include/Flash.h"
+ 810              		.file 16 "../user/include/GPIO.h"
+ 811              		.file 17 "../stdperiph/include/stm32f37x_usart.h"
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 52
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:22     .text.RsvFrameHandle:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:26     .text.RsvFrameHandle:00000000 RsvFrameHandle
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:106    .text.RsvFrameHandle:0000005c $d
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:115    .text.VoltageTimeOutHandle:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:119    .text.VoltageTimeOutHandle:00000000 VoltageTimeOutHandle
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:190    .text.VoltageTimeOutHandle:00000054 $d
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:199    .text.main:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:204    .text.main:00000000 main
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:624    .text.main:00000258 $d
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:22     .text.RsvFrameHandle:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:26     .text.RsvFrameHandle:00000000 RsvFrameHandle
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:106    .text.RsvFrameHandle:0000005c $d
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:115    .text.VoltageTimeOutHandle:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:119    .text.VoltageTimeOutHandle:00000000 VoltageTimeOutHandle
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:190    .text.VoltageTimeOutHandle:00000054 $d
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:199    .text.main:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:204    .text.main:00000000 main
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:625    .text.main:00000258 $d
                             *COM*:000005fc stCollData
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:642    .text.main:00000298 $t
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:768    .text.main:00000358 $d
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:786    .bss.FLAG_UartDB_HasData:00000000 FLAG_UartDB_HasData
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:792    .bss.FLAG_UartZD_HasData:00000000 FLAG_UartZD_HasData
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:787    .bss.FLAG_UartDB_HasData:00000000 $d
-C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s:793    .bss.FLAG_UartZD_HasData:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:643    .text.main:00000298 $t
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:769    .text.main:00000358 $d
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:787    .bss.FLAG_UartDB_HasData:00000000 FLAG_UartDB_HasData
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:793    .bss.FLAG_UartZD_HasData:00000000 FLAG_UartZD_HasData
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:788    .bss.FLAG_UartDB_HasData:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s:794    .bss.FLAG_UartZD_HasData:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
@@ -3049,14 +3070,14 @@ Uart_idleReadDisable
 dwUartCopy
 GetProtocolType
 Uart_Read
-Uart_OnceWrite
 pGetpFrame
+Uart_OnceWrite
 dwGet698Apdu
 dwAPduAnalyze
 v698VoltageModify
 dwReCalculateFCS
 SystemCoreClock
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cc1UBjdX.s 			page 52
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccNKFkgs.s 			page 53
 
 
 ucApp_Buf_DB2ZD

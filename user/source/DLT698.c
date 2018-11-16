@@ -1,6 +1,7 @@
 #include "DLT698.h"
 //#include "DLT698_45.h"
 #include "BaseDef.h"
+#include "DLT645.h"
 
 static int dwDlt698DataLen(UINT8 *ucRcvBuf, int dwRcvLen);
 inline int dwDlt698Len(UINT8 *ucRcvBuf, int *LenBytes);
@@ -161,8 +162,9 @@ int dwUnpackSecurity(UINT8 *ucSecurityBuf, int dwSourceLen, UINT8 **clearAPDU)
 
 int dwGet698Apdu(DLT698_FRAME *pframe, UINT8 **pAPDU)
 {
-    UINT16 dwLen; //clearApdu len
+    UINT16 dwLen;
 #if 1
+    /*security response len*/
     dwLen = pframe->uwFramelen - pframe->uwSA_len - 8;
     if ((dwLen = dwUnpackSecurity(pframe->pSecurityData, dwLen, pAPDU)) < 0)
     {
@@ -339,8 +341,10 @@ int dwGetOad(UINT8 *pucStr, OAD *pstOad)
     pstOad->OI_date = MAKE_WORD(*pucStr, *(pucStr + 1));
     pucStr += 2;
 
-    pstOad->attr_ID = *pucStr++;
-    pstOad->attr_index = *pucStr++;
+    pstOad->attr_ID = *pucStr;
+    pucStr++;
+    pstOad->attr_index = *pucStr;
+    pucStr++;
 
     return 4;
 }
@@ -561,12 +565,19 @@ int dwGetResponseRecord(UINT8 *pucBuf, COLL_STORE_DATA *stCollData)
         return -1;
     }
 
-    bzero(&stCollData, sizeof(COLL_STORE_DATA));
+    bzero(stCollData, sizeof(COLL_STORE_DATA));
     //stCollData.uwConfigNo = uwConfigNo;
 
     for (i = 0; i < ucResultNum; i++)
     {
         Ptr += dwGetOad(Ptr, &stCollData->stMainOAD);
+#if 0
+        stCollData->stMainOAD.OI_date = MAKE_WORD(*Ptr, *(Ptr + 1));
+        Ptr += 2;
+        stCollData->stMainOAD.attr_ID = *Ptr++;
+        stCollData->stMainOAD.attr_index = *Ptr++;
+        Ptr += 4;
+#endif
 
         stCollData->eDataCls = eDataClass(stCollData->stMainOAD);
         if (stCollData->eDataCls == D_CLASS_NULL)
@@ -2295,3 +2306,37 @@ BOOL FormatDataToBinaryS(UINT8 *pData, UINT8 byDataFormat, struct tm *pstTime, U
     return blDataValid;
 }
 #endif
+
+void v698VoltageModify(DATA_UNIT *pDataUnit)
+{
+    DATA_UNIT *pdata = pDataUnit;
+    UINT8 i;
+    /*Ptr是指向APDU数据段的指针，以下直接修改APDU原始帧*/
+    UINT8 *Ptr = pdata->ucPtr;
+    UINT8 ucArrays;
+    int dwValue;
+    int dwVoltageValue[3];
+
+    if (pdata->ucVal == 0)
+        return;
+    if (*Ptr == 0) //NULL
+    {
+        return;
+    }
+    else if (*Ptr++ == 1) //array
+    {
+        ucArrays = *Ptr++; //电压值个数，对应A/B/C相
+        Ptr++;
+        for (i = 0; i < ucArrays; i++)
+        {
+            dwValue = MAKE_WORD(*Ptr, *(Ptr + 1));
+            if ((dwValue > Voltage_MAX) || (dwValue < Voltage_MIN))
+            {
+                dwVoltageValue[i] = Voltage_Modifier_Method(dwValue);
+                *Ptr = MSB(dwVoltageValue[i]);
+                *(Ptr + 1) = LSB(dwVoltageValue[i]);
+            }
+            Ptr += 3;
+        }
+    }
+}
