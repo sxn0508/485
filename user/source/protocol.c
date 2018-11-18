@@ -23,12 +23,12 @@ uint8_t *pGetpFrame(uint8_t *pframe, uint32_t dwLen, DLT698_FRAME *p698Frame)
 {
     uint8_t *p;
     UINT16 uwframeLen;
-    UINT32 nHCSPos;
+    UINT32 nHCSPos = 0;
     UINT32 nFCSPos;
     UINT16 uwhcs;
     UINT16 uwfcs;
     UINT16 SA_Len;
-    int dwAPDULen = 0;
+    //int dwAPDULen = 0;
     //if (len > DRV_BUF_SIZE)
     //return NULL;
     p = (uint8_t *)strchr((char *)pframe, 0x68);
@@ -86,11 +86,11 @@ ProtocolDef GetProtocolType(uint8_t *pbuf, uint32_t len)
 {
     ProtocolDef ptype = none;
     //UINT16 uwframeLen;
-    UINT32 nHCSPos;
-    UINT32 nFCSPos;
-    UINT16 uwhcs;
-    UINT16 uwfcs;
-    UINT16 SA_Len;
+    //UINT32 nHCSPos;
+    //UINT32 nFCSPos;
+    //UINT16 uwhcs;
+    //UINT16 uwfcs;
+    //UINT16 SA_Len;
 
     uint8_t *pframe;
     pframe = (uint8_t *)strchr((char *)pbuf, 0x68);

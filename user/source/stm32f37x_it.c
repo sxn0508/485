@@ -31,14 +31,11 @@
 //#include "stdlib.h"
 #include "stm32f37x_it.h"
 #include "main.h"
+#include "GPIO.h"
 #include "Uart.h"
 #include "Time.h"
+#include "DLT645.h"
 
-extern UartDef *pUartZD;
-extern UartDef *pUartDB;
-extern UartDef *pUartIR;
-
-static uint16_t TICKS;
 uint16_t capture = 0;
 /** @addtogroup Template_Project
   * @{
@@ -154,17 +151,7 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-    if (TICKS++ & 0x07 == 0)
-    {
-        if (Bit_SET == GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13))
-        {
-            GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET); //拉低PC13
-        }
-        else
-        {
-            GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);
-        }
-    }
+    TICKS++;
 }
 
 /******************************************************************************/
@@ -367,4 +354,22 @@ void TIM5_IRQHandler(void)
 	}
  */
 }
+
+/********************************************************************
+* 功    能：外部中断5~9中断服务函数
+* 输    入：None
+* 输    出：None
+*           
+* 编 写 人：stragen
+* 编写日期：2018年9月5日08:41:59
+**********************************************************************/
+void EXTI9_5_IRQHandler(void)
+{
+    if (EXTI_GetITStatus(EXTI_Line7) != RESET)
+    {
+        vUartZD_BaudelayCal(&uwBaudelay);
+        EXTI_ClearITPendingBit(EXTI_Line7);
+    }
+}
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -4,8 +4,8 @@
 #include "stm32f37x.h"
 #include "BaseDef.h"
 
-#define SysTick_1000Ms SystemCoreClock / 8
-#define SysTick_100Ms SystemCoreClock / 80
+//#define SysTick_1000Ms SystemCoreClock / 8
+//#define SysTick_100Ms SystemCoreClock / 80
 
 /***************
  *默认功能：修改电压上限值，电压值不回时替代回帧
@@ -27,11 +27,15 @@
 #define TRANSFORMER_CAPACITY_200KVA
 //#define TRANSFORMER_CAPACITY_400KVA
 
-static void VoltageTimeOutHandle(void);
-static void RsvFrameHandle(uint8_t *pucBuffer);
+extern volatile uint32_t irqCount;
+extern volatile uint32_t uwBaudelay;
+
 //static void vNVIC_IRQ_Config(void);
 //static void vVoltageHandle(uint8_t * pucBuffer);
 
 extern bool FLAG_UartZD_HasData;
 extern bool FLAG_UartDB_HasData;
+
+extern void vUartZD_BaudelayCal(volatile uint32_t *pBaudelay);
+
 #endif

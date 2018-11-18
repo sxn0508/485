@@ -5,6 +5,34 @@ bool blWordsCounterStatus = false; //默认不计时
 bool blFramesCounterStatus = false;
 uint16_t uwTime2WordsCounter = 0;  //计数值默认为0
 uint16_t uwTime2FramesCounter = 0; //计数值默认为0
+uint32_t TICKS;
+
+void vSystickSetAccuracy(uint32_t accuracy)
+{
+    uint32_t ticks = SystemCoreClock / accuracy;
+
+    if (ticks > SysTick_LOAD_RELOAD_Msk)
+        return; /* Reload value impossible */
+
+    SysTick->LOAD = (ticks & SysTick_LOAD_RELOAD_Msk) - 1; /* set reload register */
+    //NVIC_SetPriority(SysTick_IRQn, (1 << __NVIC_PRIO_BITS) - 1); /* set Priority for Systick Interrupt */
+    SysTick->VAL = 0; /* Load the SysTick Counter Value */
+    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk |
+                    //SysTick_CTRL_TICKINT_Msk |
+                    SysTick_CTRL_ENABLE_Msk; /* Enable SysTick IRQ and SysTick Timer */
+    gSystickAccuracy = accuracy;
+}
+
+void vSystickIntCmd(FunctionalState value)
+{
+    if (value == ENABLE)
+    {
+        SysTick->CTRL |= SysTick_CTRL_TICKINT_Msk;
+        NVIC_SetPriority(SysTick_IRQn, (1 << __NVIC_PRIO_BITS) - 1); /* set Priority for Systick Interrupt */
+    }
+    else
+        SysTick->CTRL &= (!SysTick_CTRL_TICKINT_Msk);
+}
 
 /********************************************************************
 * 功    能：计时器初始化函数

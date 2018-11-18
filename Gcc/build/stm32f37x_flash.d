@@ -4,6 +4,7 @@ build/stm32f37x_flash.d: ../stdperiph/source/stm32f37x_flash.c \
  ../cmsis/include/core_cmFunc.h ../cmsis/include/core_cm4_simd.h \
  ../cmsis/include/system_stm32f37x.h ../user/include/stm32f37x_conf.h \
  ../stdperiph/include/stm32f37x_dbgmcu.h \
+ ../stdperiph/include/stm32f37x_exti.h \
  ../stdperiph/include/stm32f37x_gpio.h \
  ../stdperiph/include/stm32f37x_syscfg.h \
  ../stdperiph/include/stm32f37x_rcc.h \
@@ -28,6 +29,8 @@ build/stm32f37x_flash.d: ../stdperiph/source/stm32f37x_flash.c \
 ../user/include/stm32f37x_conf.h:
 
 ../stdperiph/include/stm32f37x_dbgmcu.h:
+
+../stdperiph/include/stm32f37x_exti.h:
 
 ../stdperiph/include/stm32f37x_gpio.h:
 

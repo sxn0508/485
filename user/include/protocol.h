@@ -4,9 +4,10 @@
 #include <string.h>
 #include "uart.h"
 #include "DLT698.h"
+#include "Time.h"
 
-#define TICKS_500MS 6
-#define TICKS_1000MS 11
+#define TICKS_500MS (500 * TICK_1MS)
+#define TICKS_1000MS (1000 * TICK_1MS)
 typedef enum emprotocol
 {
     dlt645,

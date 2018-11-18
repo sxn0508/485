@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
   28:../stdperiph/source/stm32f37x_can.c ****             GPIO_PinAFConfig(GPIOx, GPIO_PinSourcex, GPIO_AF_CANx); 
   29:../stdperiph/source/stm32f37x_can.c ****        (++) Configure these CAN pins in alternate function mode by calling
   30:../stdperiph/source/stm32f37x_can.c ****             the function  GPIO_Init();   
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 2
 
 
   31:../stdperiph/source/stm32f37x_can.c ****     (#) Initialise and configure the CAN using CAN_Init() and 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
   85:../stdperiph/source/stm32f37x_can.c ****   * @{
   86:../stdperiph/source/stm32f37x_can.c ****   */
   87:../stdperiph/source/stm32f37x_can.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 3
 
 
   88:../stdperiph/source/stm32f37x_can.c **** /** @defgroup CAN 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  142:../stdperiph/source/stm32f37x_can.c ****           ##### Initialization and Configuration functions #####
  143:../stdperiph/source/stm32f37x_can.c ****  ===============================================================================
  144:../stdperiph/source/stm32f37x_can.c ****     [..] This section provides functions allowing to 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 4
 
 
  145:../stdperiph/source/stm32f37x_can.c ****          (#) Initialize the CAN peripherals : Prescaler, operating mode, the maximum number 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  199:../stdperiph/source/stm32f37x_can.c ****   assert_param(IS_CAN_BS1(CAN_InitStruct->CAN_BS1));
  200:../stdperiph/source/stm32f37x_can.c ****   assert_param(IS_CAN_BS2(CAN_InitStruct->CAN_BS2));
  201:../stdperiph/source/stm32f37x_can.c ****   assert_param(IS_CAN_PRESCALER(CAN_InitStruct->CAN_Prescaler));
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 5
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 5
 
 
  202:../stdperiph/source/stm32f37x_can.c **** 
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  256:../stdperiph/source/stm32f37x_can.c ****     }
  257:../stdperiph/source/stm32f37x_can.c ****     else
  258:../stdperiph/source/stm32f37x_can.c ****     {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 6
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 6
 
 
  259:../stdperiph/source/stm32f37x_can.c ****       CANx->MCR &= ~(uint32_t)CAN_MCR_NART;
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  313:../stdperiph/source/stm32f37x_can.c **** }
  314:../stdperiph/source/stm32f37x_can.c **** 
  315:../stdperiph/source/stm32f37x_can.c **** /**
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 7
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 7
 
 
  316:../stdperiph/source/stm32f37x_can.c ****   * @brief  Configures the CAN reception filter according to the specified
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  370:../stdperiph/source/stm32f37x_can.c ****         (0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterMaskIdLow);
  371:../stdperiph/source/stm32f37x_can.c ****   }
  372:../stdperiph/source/stm32f37x_can.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 8
 
 
  373:../stdperiph/source/stm32f37x_can.c ****   /* Filter Mode */
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  427:../stdperiph/source/stm32f37x_can.c ****   CAN_InitStruct->CAN_NART = DISABLE;
  428:../stdperiph/source/stm32f37x_can.c ****   
  429:../stdperiph/source/stm32f37x_can.c ****   /* Initialize the receive FIFO locked mode */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 9
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 9
 
 
  430:../stdperiph/source/stm32f37x_can.c ****   CAN_InitStruct->CAN_RFLM = DISABLE;
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  484:../stdperiph/source/stm32f37x_can.c ****   assert_param(IS_CAN_ALL_PERIPH(CANx));
  485:../stdperiph/source/stm32f37x_can.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
  486:../stdperiph/source/stm32f37x_can.c ****   
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 10
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 10
 
 
  487:../stdperiph/source/stm32f37x_can.c ****   if (NewState != DISABLE)
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  541:../stdperiph/source/stm32f37x_can.c **** 
  542:../stdperiph/source/stm32f37x_can.c **** /** @defgroup CAN_Group2 CAN Frames Transmission functions
  543:../stdperiph/source/stm32f37x_can.c ****  *  @brief    CAN Frames Transmission functions 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 11
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 11
 
 
  544:../stdperiph/source/stm32f37x_can.c ****  *
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  598:../stdperiph/source/stm32f37x_can.c ****       assert_param(IS_CAN_STDID(TxMessage->StdId));  
  599:../stdperiph/source/stm32f37x_can.c ****       CANx->sTxMailBox[transmit_mailbox].TIR |= ((TxMessage->StdId << 21) | \
  600:../stdperiph/source/stm32f37x_can.c ****                                                   TxMessage->RTR);
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 12
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 12
 
 
  601:../stdperiph/source/stm32f37x_can.c ****     }
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  655:../stdperiph/source/stm32f37x_can.c ****       break;
  656:../stdperiph/source/stm32f37x_can.c ****     default:
  657:../stdperiph/source/stm32f37x_can.c ****       state = CAN_TxStatus_Failed;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 13
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 13
 
 
  658:../stdperiph/source/stm32f37x_can.c ****       break;
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  712:../stdperiph/source/stm32f37x_can.c **** 
  713:../stdperiph/source/stm32f37x_can.c **** 
  714:../stdperiph/source/stm32f37x_can.c **** /** @defgroup CAN_Group3 CAN Frames Reception functions
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 14
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 14
 
 
  715:../stdperiph/source/stm32f37x_can.c ****  *  @brief    CAN Frames Reception functions 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  769:../stdperiph/source/stm32f37x_can.c ****   /* Release FIFO0 */
  770:../stdperiph/source/stm32f37x_can.c ****   if (FIFONumber == CAN_FIFO0)
  771:../stdperiph/source/stm32f37x_can.c ****   {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 15
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 15
 
 
  772:../stdperiph/source/stm32f37x_can.c ****     CANx->RF0R |= CAN_RF0R_RFOM0;
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  826:../stdperiph/source/stm32f37x_can.c ****     message_pending = 0;
  827:../stdperiph/source/stm32f37x_can.c ****   }
  828:../stdperiph/source/stm32f37x_can.c ****   return message_pending;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 16
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 16
 
 
  829:../stdperiph/source/stm32f37x_can.c **** }
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  883:../stdperiph/source/stm32f37x_can.c ****       status = CAN_ModeStatus_Failed;
  884:../stdperiph/source/stm32f37x_can.c ****     }
  885:../stdperiph/source/stm32f37x_can.c ****     else
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 17
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 17
 
 
  886:../stdperiph/source/stm32f37x_can.c ****     {
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  940:../stdperiph/source/stm32f37x_can.c ****   */
  941:../stdperiph/source/stm32f37x_can.c **** uint8_t CAN_Sleep(CAN_TypeDef* CANx)
  942:../stdperiph/source/stm32f37x_can.c **** {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 18
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 18
 
 
  943:../stdperiph/source/stm32f37x_can.c ****   uint8_t sleepstatus = CAN_Sleep_Failed;
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  997:../stdperiph/source/stm32f37x_can.c ****  *
  998:../stdperiph/source/stm32f37x_can.c **** @verbatim    
  999:../stdperiph/source/stm32f37x_can.c ****  ===============================================================================
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 19
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 19
 
 
 1000:../stdperiph/source/stm32f37x_can.c ****           ##### CAN Bus Error management functions  ##### 
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1054:../stdperiph/source/stm32f37x_can.c **** {
 1055:../stdperiph/source/stm32f37x_can.c ****   uint8_t counter=0;
 1056:../stdperiph/source/stm32f37x_can.c ****   
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 20
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 20
 
 
 1057:../stdperiph/source/stm32f37x_can.c ****   /* Check the parameters */
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1111:../stdperiph/source/stm32f37x_can.c ****                 Set when when the last request (transmit or abort) has 
 1112:../stdperiph/source/stm32f37x_can.c ****                 been performed. 
 1113:../stdperiph/source/stm32f37x_can.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 21
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 21
 
 
 1114:../stdperiph/source/stm32f37x_can.c ****         (+)Receive Flags
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1168:../stdperiph/source/stm32f37x_can.c ****                 messages are pending in the receive FIFO.
 1169:../stdperiph/source/stm32f37x_can.c ****                 The corresponding interrupt pending bits are cleared 
 1170:../stdperiph/source/stm32f37x_can.c ****                 only by hardware.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 22
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 22
 
 
 1171:../stdperiph/source/stm32f37x_can.c ****            (##) CAN_IT_FF0,              
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1225:../stdperiph/source/stm32f37x_can.c ****         (+)In the Interrupt Mode it is advised to use the following functions:
 1226:../stdperiph/source/stm32f37x_can.c ****            (##) CAN_ITConfig()       : to enable or disable the interrupt source.
 1227:../stdperiph/source/stm32f37x_can.c ****            (##) CAN_GetITStatus()    : to check if Interrupt occurs.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 23
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 23
 
 
 1228:../stdperiph/source/stm32f37x_can.c ****            (##) CAN_ClearITPendingBit() : to clear the Interrupt pending Bit (corresponding Flag).
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1282:../stdperiph/source/stm32f37x_can.c ****   *            @arg CAN_FLAG_RQCP1: Request MailBox1 Flag
 1283:../stdperiph/source/stm32f37x_can.c ****   *            @arg CAN_FLAG_RQCP2: Request MailBox2 Flag
 1284:../stdperiph/source/stm32f37x_can.c ****   *            @arg CAN_FLAG_FMP0: FIFO 0 Message Pending Flag   
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 24
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 24
 
 
 1285:../stdperiph/source/stm32f37x_can.c ****   *            @arg CAN_FLAG_FF0: FIFO 0 Full Flag       
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1339:../stdperiph/source/stm32f37x_can.c ****     { 
 1340:../stdperiph/source/stm32f37x_can.c ****       /* CAN_FLAG is set */
 1341:../stdperiph/source/stm32f37x_can.c ****       bitstatus = SET;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 25
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 25
 
 
 1342:../stdperiph/source/stm32f37x_can.c ****     }
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1396:../stdperiph/source/stm32f37x_can.c ****   * @retval None
 1397:../stdperiph/source/stm32f37x_can.c ****   */
 1398:../stdperiph/source/stm32f37x_can.c **** void CAN_ClearFlag(CAN_TypeDef* CANx, uint32_t CAN_FLAG)
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 26
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 26
 
 
 1399:../stdperiph/source/stm32f37x_can.c **** {
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1453:../stdperiph/source/stm32f37x_can.c ****   *            @arg CAN_IT_BOF: Bus-off Interrupt  
 1454:../stdperiph/source/stm32f37x_can.c ****   *            @arg CAN_IT_LEC: Last error code Interrupt
 1455:../stdperiph/source/stm32f37x_can.c ****   *            @arg CAN_IT_ERR: Error Interrupt
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 27
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 27
 
 
 1456:../stdperiph/source/stm32f37x_can.c ****   * @retval The current state of CAN_IT (SET or RESET).
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1510:../stdperiph/source/stm32f37x_can.c ****         break;
 1511:../stdperiph/source/stm32f37x_can.c ****       case CAN_IT_EPV:
 1512:../stdperiph/source/stm32f37x_can.c ****         /* Check CAN_ESR_EPVF bit */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 28
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 28
 
 
 1513:../stdperiph/source/stm32f37x_can.c ****         itstatus = CheckITStatus(CANx->ESR, CAN_ESR_EPVF);  
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1567:../stdperiph/source/stm32f37x_can.c **** 
 1568:../stdperiph/source/stm32f37x_can.c ****   switch (CAN_IT)
 1569:../stdperiph/source/stm32f37x_can.c ****   {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 29
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 29
 
 
 1570:../stdperiph/source/stm32f37x_can.c ****     case CAN_IT_TME:
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1624:../stdperiph/source/stm32f37x_can.c ****        /* @note BOFF, EPVF and EWGF Flags are cleared by hardware depending on the CAN Bus status*/
 1625:../stdperiph/source/stm32f37x_can.c ****        break;
 1626:../stdperiph/source/stm32f37x_can.c ****     default:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 30
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 30
 
 
 1627:../stdperiph/source/stm32f37x_can.c ****        break;
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
   55              		.thumb
   56              		.thumb_func
   58              	CAN_DeInit:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 31
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 31
 
 
   59              	.LFB111:
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  109 0000 0368     		ldr	r3, [r0]
  110 0002 23F00203 		bic	r3, r3, #2
  111 0006 0360     		str	r3, [r0]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 32
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 32
 
 
  207:../stdperiph/source/stm32f37x_can.c **** 
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  155              		.loc 1 233 0
  156 0046 CB79     		ldrb	r3, [r1, #7]	@ zero_extendqisi2
  157 0048 012B     		cmp	r3, #1
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 33
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 33
 
 
  158 004a 04D1     		bne	.L16
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  203 0092 04D1     		bne	.L22
  265:../stdperiph/source/stm32f37x_can.c ****     }
  204              		.loc 1 265 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 34
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 34
 
 
  205 0094 0368     		ldr	r3, [r0]
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  247 00d6 013A     		subs	r2, r2, #1
  286:../stdperiph/source/stm32f37x_can.c ****                ((uint32_t)CAN_InitStruct->CAN_Prescaler - 1);
  248              		.loc 1 286 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 35
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 35
 
 
  249 00d8 1343     		orrs	r3, r3, r2
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  307:../stdperiph/source/stm32f37x_can.c ****     }
  293              		.loc 1 307 0
  294 010a 0120     		movs	r0, #1
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 36
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 36
 
 
  295              	.LVL20:
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  344 0030 C2F80C12 		str	r1, [r2, #524]
  348:../stdperiph/source/stm32f37x_can.c ****        ((0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterMaskIdLow) << 16) |
  345              		.loc 1 348 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 37
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 37
 
 
  346 0034 817A     		ldrb	r1, [r0, #10]	@ zero_extendqisi2
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  385 006e 45EA0645 		orr	r5, r5, r6, lsl #16
  364:../stdperiph/source/stm32f37x_can.c ****        ((0x0000FFFF & (uint32_t)CAN_FilterInitStruct->CAN_FilterIdHigh) << 16) |
  386              		.loc 1 364 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 38
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 38
 
 
  387 0072 4831     		adds	r1, r1, #72
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  430 00bc 05D1     		bne	.L37
  395:../stdperiph/source/stm32f37x_can.c ****   }
  431              		.loc 1 395 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 39
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 39
 
 
  432 00be 0C49     		ldr	r1, .L40
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  482              		.loc 1 418 0
  483 0000 0023     		movs	r3, #0
  484 0002 8371     		strb	r3, [r0, #6]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 40
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 40
 
 
  421:../stdperiph/source/stm32f37x_can.c ****   
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  529 0006 42F00102 		orr	r2, r2, #1
  530 000a C3F80022 		str	r2, [r3, #512]
  465:../stdperiph/source/stm32f37x_can.c ****   CAN1->FMR |= (uint32_t)(CAN_BankNumber)<<8;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 41
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 41
 
 
  531              		.loc 1 465 0
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  581              	.LFE116:
  583 0016 00BF     		.section	.text.CAN_TTComModeCmd,"ax",%progbits
  584              		.align	2
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 42
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 42
 
 
  585              		.global	CAN_TTComModeCmd
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  630 0050 D0F8A431 		ldr	r3, [r0, #420]
  631 0054 23F48073 		bic	r3, r3, #256
  632 0058 C0F8A431 		str	r3, [r0, #420]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 43
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 43
 
 
  633 005c 7047     		bx	lr
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  682              	.L59:
  589:../stdperiph/source/stm32f37x_can.c ****   }
  683              		.loc 1 589 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 44
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 44
 
 
  684 0026 0420     		movs	r0, #4
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  606:../stdperiph/source/stm32f37x_can.c ****                                                   TxMessage->RTR);
  729              		.loc 1 606 0
  730 0068 2243     		orrs	r2, r2, r4
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 45
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 45
 
 
  605:../stdperiph/source/stm32f37x_can.c ****                                                   TxMessage->IDE | \
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  771              		.loc 1 621 0
  772 00ac 4A7C     		ldrb	r2, [r1, #17]	@ zero_extendqisi2
  773 00ae 1204     		lsls	r2, r2, #16
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 46
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 46
 
 
  620:../stdperiph/source/stm32f37x_can.c ****                                              ((uint32_t)TxMessage->Data[6] << 16) |
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  820 0002 0DD0     		beq	.L65
  821 0004 11B1     		cbz	r1, .L66
  822 0006 0229     		cmp	r1, #2
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 47
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 47
 
 
  823 0008 0ED0     		beq	.L67
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  869 0046 084A     		ldr	r2, .L77
  870 0048 9342     		cmp	r3, r2
  871 004a 07D0     		beq	.L72
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 48
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 48
 
 
  872 004c 084A     		ldr	r2, .L77+8
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  918              		.section	.text.CAN_CancelTransmit,"ax",%progbits
  919              		.align	2
  920              		.global	CAN_CancelTransmit
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 49
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 49
 
 
  921              		.thumb
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  970              		.loc 1 739 0
  971              		.cfi_startproc
  972              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 50
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 50
 
 
  973              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1019              		.loc 1 760 0
  1020 004c 00EB0113 		add	r3, r0, r1, lsl #4
  1021 0050 D3F8B841 		ldr	r4, [r3, #440]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 51
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 51
 
 
  1022 0054 D472     		strb	r4, [r2, #11]
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1065              	.LCFI6:
  1066              		.cfi_restore 4
  1067              		.cfi_def_cfa_offset 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 52
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 52
 
 
  1068 00a4 7047     		bx	lr
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1119 0002 C068     		ldr	r0, [r0, #12]
  1120              	.LVL61:
  1121 0004 00F00300 		and	r0, r0, #3
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 53
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 53
 
 
  1122              	.LVL62:
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1169 0012 00E0     		b	.L99
  1170              	.LVL69:
  1171              	.L101:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 54
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 54
 
 
  879:../stdperiph/source/stm32f37x_can.c ****     }
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1215 0048 12F0030F 		tst	r2, #3
  1216 004c 01D0     		beq	.L105
  896:../stdperiph/source/stm32f37x_can.c ****     {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 55
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 55
 
 
  1217              		.loc 1 896 0 is_stmt 0 discriminator 1
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1261 0086 03F00303 		and	r3, r3, #3
  1262 008a 022B     		cmp	r3, #2
  1263 008c 07D0     		beq	.L113
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 56
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 56
 
 
  921:../stdperiph/source/stm32f37x_can.c ****     }
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1312 0002 23F00303 		bic	r3, r3, #3
  1313 0006 43F00203 		orr	r3, r3, #2
  1314 000a 0360     		str	r3, [r0]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 57
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 57
 
 
  952:../stdperiph/source/stm32f37x_can.c ****   {
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  978:../stdperiph/source/stm32f37x_can.c ****   {
  1362              		.loc 1 978 0
  1363 0010 4268     		ldr	r2, [r0, #4]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 58
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 58
 
 
  1364 0012 12F0020F 		tst	r2, #2
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1413              		.section	.text.CAN_GetReceiveErrorCounter,"ax",%progbits
  1414              		.align	2
  1415              		.global	CAN_GetReceiveErrorCounter
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 59
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 59
 
 
  1416              		.thumb
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1259:../stdperiph/source/stm32f37x_can.c ****   /* Check the parameters */
  1469              		.loc 1 1259 0
  1470              		.cfi_startproc
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 60
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 60
 
 
  1471              		@ args = 0, pretend = 0, frame = 0
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1520 0012 7047     		bx	lr
  1521              	.LVL116:
  1522              	.L130:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 61
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 61
 
 
 1321:../stdperiph/source/stm32f37x_can.c ****   { 
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
 1366:../stdperiph/source/stm32f37x_can.c ****     { 
  1568              		.loc 1 1366 0
  1569 0050 0369     		ldr	r3, [r0, #16]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 62
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 62
 
 
  1570 0052 1940     		ands	r1, r1, r3
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1619              	.LFB132:
 1399:../stdperiph/source/stm32f37x_can.c ****   uint32_t flagtmp=0;
  1620              		.loc 1 1399 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 63
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 63
 
 
  1621              		.cfi_startproc
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1665 0034 7000F030 		.word	821035120
  1666              		.cfi_endproc
  1667              	.LFE132:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 64
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 64
 
 
  1669              		.section	.text.CAN_GetITStatus,"ax",%progbits
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1721 0044 52D1     		bne	.L168
  1722 0046 36E0     		b	.L163
  1723              	.L160:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 65
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 65
 
 
  1724 0048 B1F5803F 		cmp	r1, #65536
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1771              	.LVL156:
 1486:../stdperiph/source/stm32f37x_can.c ****       case CAN_IT_FMP1:
  1772              		.loc 1 1486 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 66
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 66
 
 
  1773 0082 08BD     		pop	{r3, pc}
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1819              	.L165:
 1505:../stdperiph/source/stm32f37x_can.c ****         break;
  1820              		.loc 1 1505 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 67
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 67
 
 
  1821 00ac 4068     		ldr	r0, [r0, #4]
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1867 00d6 7021     		movs	r1, #112
  1868              	.LVL191:
  1869 00d8 FFF7FEFF 		bl	CheckITStatus
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 68
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 68
 
 
  1870              	.LVL192:
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1918              		.loc 1 1568 0
  1919 0000 B1F5807F 		cmp	r1, #256
  1920 0004 37D0     		beq	.L174
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 69
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 69
 
 
  1921 0006 0CD8     		bhi	.L175
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  1969              		.loc 1 1581 0
  1970 005c 7047     		bx	lr
  1971              	.L180:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 70
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 70
 
 
 1584:../stdperiph/source/stm32f37x_can.c ****       break;
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  2012 0086 7047     		bx	lr
  2013              	.L182:
 1615:../stdperiph/source/stm32f37x_can.c ****       /* Clear CAN_MSR_ERRI (rc_w1) */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 71
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 71
 
 
  2014              		.loc 1 1615 0
@@ -4236,71 +4236,71 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 1
  2043              		.file 5 "../stdperiph/include/stm32f37x_can.h"
  2044              		.file 6 "../cmsis/include/core_cm4.h"
  2045              		.file 7 "../stdperiph/include/stm32f37x_rcc.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 72
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 72
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f37x_can.c
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:22     .text.CheckITStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:26     .text.CheckITStatus:00000000 CheckITStatus
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:53     .text.CAN_DeInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:58     .text.CAN_DeInit:00000000 CAN_DeInit
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:90     .text.CAN_DeInit:00000020 $d
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:95     .text.CAN_Init:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:100    .text.CAN_Init:00000000 CAN_Init
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:302    .text.CAN_FilterInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:307    .text.CAN_FilterInit:00000000 CAN_FilterInit
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:464    .text.CAN_FilterInit:000000f0 $d
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:469    .text.CAN_StructInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:474    .text.CAN_StructInit:00000000 CAN_StructInit
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:513    .text.CAN_SlaveStartBank:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:518    .text.CAN_SlaveStartBank:00000000 CAN_SlaveStartBank
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:549    .text.CAN_SlaveStartBank:00000038 $d
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:554    .text.CAN_DBGFreeze:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:559    .text.CAN_DBGFreeze:00000000 CAN_DBGFreeze
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:584    .text.CAN_TTComModeCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:589    .text.CAN_TTComModeCmd:00000000 CAN_TTComModeCmd
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:638    .text.CAN_Transmit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:643    .text.CAN_Transmit:00000000 CAN_Transmit
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:805    .text.CAN_TransmitStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:810    .text.CAN_TransmitStatus:00000000 CAN_TransmitStatus
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:912    .text.CAN_TransmitStatus:00000068 $d
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:919    .text.CAN_CancelTransmit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:924    .text.CAN_CancelTransmit:00000000 CAN_CancelTransmit
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:963    .text.CAN_Receive:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:968    .text.CAN_Receive:00000000 CAN_Receive
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1073   .text.CAN_FIFORelease:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1078   .text.CAN_FIFORelease:00000000 CAN_FIFORelease
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1103   .text.CAN_MessagePending:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1108   .text.CAN_MessagePending:00000000 CAN_MessagePending
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1146   .text.CAN_OperatingModeRequest:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1151   .text.CAN_OperatingModeRequest:00000000 CAN_OperatingModeRequest
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1297   .text.CAN_Sleep:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1302   .text.CAN_Sleep:00000000 CAN_Sleep
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1335   .text.CAN_WakeUp:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1340   .text.CAN_WakeUp:00000000 CAN_WakeUp
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1390   .text.CAN_GetLastErrorCode:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1395   .text.CAN_GetLastErrorCode:00000000 CAN_GetLastErrorCode
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1414   .text.CAN_GetReceiveErrorCounter:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1419   .text.CAN_GetReceiveErrorCounter:00000000 CAN_GetReceiveErrorCounter
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1438   .text.CAN_GetLSBTransmitErrorCounter:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1443   .text.CAN_GetLSBTransmitErrorCounter:00000000 CAN_GetLSBTransmitErrorCounter
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1462   .text.CAN_ITConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1467   .text.CAN_ITConfig:00000000 CAN_ITConfig
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1495   .text.CAN_GetFlagStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1500   .text.CAN_GetFlagStatus:00000000 CAN_GetFlagStatus
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1613   .text.CAN_ClearFlag:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1618   .text.CAN_ClearFlag:00000000 CAN_ClearFlag
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1665   .text.CAN_ClearFlag:00000034 $d
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1670   .text.CAN_GetITStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1675   .text.CAN_GetITStatus:00000000 CAN_GetITStatus
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1900   .text.CAN_GetITStatus:000000f0 $d
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1905   .text.CAN_ClearITPendingBit:00000000 $t
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s 			page 73
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:22     .text.CheckITStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:26     .text.CheckITStatus:00000000 CheckITStatus
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:53     .text.CAN_DeInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:58     .text.CAN_DeInit:00000000 CAN_DeInit
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:90     .text.CAN_DeInit:00000020 $d
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:95     .text.CAN_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:100    .text.CAN_Init:00000000 CAN_Init
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:302    .text.CAN_FilterInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:307    .text.CAN_FilterInit:00000000 CAN_FilterInit
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:464    .text.CAN_FilterInit:000000f0 $d
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:469    .text.CAN_StructInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:474    .text.CAN_StructInit:00000000 CAN_StructInit
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:513    .text.CAN_SlaveStartBank:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:518    .text.CAN_SlaveStartBank:00000000 CAN_SlaveStartBank
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:549    .text.CAN_SlaveStartBank:00000038 $d
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:554    .text.CAN_DBGFreeze:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:559    .text.CAN_DBGFreeze:00000000 CAN_DBGFreeze
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:584    .text.CAN_TTComModeCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:589    .text.CAN_TTComModeCmd:00000000 CAN_TTComModeCmd
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:638    .text.CAN_Transmit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:643    .text.CAN_Transmit:00000000 CAN_Transmit
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:805    .text.CAN_TransmitStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:810    .text.CAN_TransmitStatus:00000000 CAN_TransmitStatus
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:912    .text.CAN_TransmitStatus:00000068 $d
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:919    .text.CAN_CancelTransmit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:924    .text.CAN_CancelTransmit:00000000 CAN_CancelTransmit
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:963    .text.CAN_Receive:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:968    .text.CAN_Receive:00000000 CAN_Receive
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1073   .text.CAN_FIFORelease:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1078   .text.CAN_FIFORelease:00000000 CAN_FIFORelease
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1103   .text.CAN_MessagePending:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1108   .text.CAN_MessagePending:00000000 CAN_MessagePending
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1146   .text.CAN_OperatingModeRequest:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1151   .text.CAN_OperatingModeRequest:00000000 CAN_OperatingModeRequest
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1297   .text.CAN_Sleep:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1302   .text.CAN_Sleep:00000000 CAN_Sleep
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1335   .text.CAN_WakeUp:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1340   .text.CAN_WakeUp:00000000 CAN_WakeUp
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1390   .text.CAN_GetLastErrorCode:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1395   .text.CAN_GetLastErrorCode:00000000 CAN_GetLastErrorCode
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1414   .text.CAN_GetReceiveErrorCounter:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1419   .text.CAN_GetReceiveErrorCounter:00000000 CAN_GetReceiveErrorCounter
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1438   .text.CAN_GetLSBTransmitErrorCounter:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1443   .text.CAN_GetLSBTransmitErrorCounter:00000000 CAN_GetLSBTransmitErrorCounter
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1462   .text.CAN_ITConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1467   .text.CAN_ITConfig:00000000 CAN_ITConfig
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1495   .text.CAN_GetFlagStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1500   .text.CAN_GetFlagStatus:00000000 CAN_GetFlagStatus
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1613   .text.CAN_ClearFlag:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1618   .text.CAN_ClearFlag:00000000 CAN_ClearFlag
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1665   .text.CAN_ClearFlag:00000034 $d
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1670   .text.CAN_GetITStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1675   .text.CAN_GetITStatus:00000000 CAN_GetITStatus
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1900   .text.CAN_GetITStatus:000000f0 $d
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1905   .text.CAN_ClearITPendingBit:00000000 $t
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cct5k6hi.s 			page 73
 
 
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:1910   .text.CAN_ClearITPendingBit:00000000 CAN_ClearITPendingBit
-C:\Users\strag\AppData\Local\Temp\ccpfiTDv.s:2034   .text.CAN_ClearITPendingBit:0000009c $d
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:1910   .text.CAN_ClearITPendingBit:00000000 CAN_ClearITPendingBit
+C:\Users\strag\AppData\Local\Temp\cct5k6hi.s:2034   .text.CAN_ClearITPendingBit:0000009c $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

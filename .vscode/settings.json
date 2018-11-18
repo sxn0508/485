@@ -15,7 +15,8 @@
         "dlt698.h": "c",
         "basedef.h": "c",
         "dlt698_45.h": "c",
-        "stm32f37x_conf.h": "c"
+        "stm32f37x_conf.h": "c",
+        "time.h": "c"
     },
     "C_Cpp.intelliSenseEngineFallback": "Enabled"
 }

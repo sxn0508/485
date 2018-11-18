@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
   27:../stdperiph/source/stm32f37x_dac.c ****          and DACx_OUTy is available once writing to DHRx register using 
   28:../stdperiph/source/stm32f37x_dac.c ****          DAC_SetChannel1Data()/DAC_SetChannel2Data.
   29:../stdperiph/source/stm32f37x_dac.c ****       
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 2
 
 
   30:../stdperiph/source/stm32f37x_dac.c ****     [..] Digital to Analog conversion can be triggered by:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
   84:../stdperiph/source/stm32f37x_dac.c ****              using RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC, ENABLE)
   85:../stdperiph/source/stm32f37x_dac.c **** 
   86:../stdperiph/source/stm32f37x_dac.c ****          (+) Configure DACx_OUTy (DAC1_OUT1: PA4, DAC1_OUT2: PA5, DAC2_OUT1: PA6)
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 3
 
 
   87:../stdperiph/source/stm32f37x_dac.c ****              in analog mode.
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  141:../stdperiph/source/stm32f37x_dac.c **** 
  142:../stdperiph/source/stm32f37x_dac.c **** /* DOR register offset */
  143:../stdperiph/source/stm32f37x_dac.c **** #define DOR_OFFSET                 ((uint32_t)0x0000002C)
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 4
 
 
  144:../stdperiph/source/stm32f37x_dac.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
   48 000e FFF7FEFF 		bl	RCC_APB1PeriphResetCmd
   49              	.LVL2:
  180:../stdperiph/source/stm32f37x_dac.c ****     /* Release DAC1 from reset state */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 5
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 5
 
 
  181:../stdperiph/source/stm32f37x_dac.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_DAC1, DISABLE);
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  202:../stdperiph/source/stm32f37x_dac.c ****   * @retval None
  203:../stdperiph/source/stm32f37x_dac.c ****   */
  204:../stdperiph/source/stm32f37x_dac.c **** void DAC_Init(DAC_TypeDef* DACx, uint32_t DAC_Channel, DAC_InitTypeDef* DAC_InitStruct)
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 6
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 6
 
 
  205:../stdperiph/source/stm32f37x_dac.c **** {
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  226:../stdperiph/source/stm32f37x_dac.c ****              DAC_InitStruct->DAC_LFSRUnmask_TriangleAmplitude | DAC_InitStruct->DAC_OutputBuffer);
  115              		.loc 1 226 0
  116 001a 2B43     		orrs	r3, r3, r5
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 7
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 7
 
 
  117              	.LVL12:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  247:../stdperiph/source/stm32f37x_dac.c ****   /* Initialize the DAC_LFSRUnmask_TriangleAmplitude member */
  248:../stdperiph/source/stm32f37x_dac.c ****   DAC_InitStruct->DAC_LFSRUnmask_TriangleAmplitude = DAC_LFSRUnmask_Bit0;
  154              		.loc 1 248 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 8
 
 
  155 0006 8360     		str	r3, [r0, #8]
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  183              	.LVL18:
  184 000a 1143     		orrs	r1, r1, r2
  185 000c 0160     		str	r1, [r0]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 9
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 9
 
 
  186 000e 7047     		bx	lr
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  215              		.loc 1 303 0
  216 0000 3AB1     		cbz	r2, .L14
  304:../stdperiph/source/stm32f37x_dac.c ****   {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 10
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 10
 
 
  305:../stdperiph/source/stm32f37x_dac.c ****     /* Enable software trigger for the selected DAC channel */
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  252              		@ args = 0, pretend = 0, frame = 0
  253              		@ frame_needed = 0, uses_anonymous_args = 0
  254              		@ link register save eliminated.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 11
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 11
 
 
  255              	.LVL28:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  357:../stdperiph/source/stm32f37x_dac.c ****   * @retval None
  358:../stdperiph/source/stm32f37x_dac.c ****   */
  359:../stdperiph/source/stm32f37x_dac.c **** void DAC_WaveGenerationCmd(DAC_TypeDef* DACx, uint32_t DAC_Channel, uint32_t DAC_Wave, FunctionalSt
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 12
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 12
 
 
  360:../stdperiph/source/stm32f37x_dac.c **** {
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  379:../stdperiph/source/stm32f37x_dac.c **** /**
  380:../stdperiph/source/stm32f37x_dac.c ****   * @brief  Set the specified data holding register value for DAC channel1.
  381:../stdperiph/source/stm32f37x_dac.c ****   * @param  DACx: where x can be 1 or 2 to select the DAC peripheral.  
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 13
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 13
 
 
  382:../stdperiph/source/stm32f37x_dac.c ****   * @param  DAC_Align: Specifies the data alignment for DAC channel1.
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  349              		.section	.text.DAC_SetChannel2Data,"ax",%progbits
  350              		.align	2
  351              		.global	DAC_SetChannel2Data
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 14
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 14
 
 
  352              		.thumb
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  432:../stdperiph/source/stm32f37x_dac.c **** }
  380              		.loc 1 432 0
  381 0014 02B0     		add	sp, sp, #8
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 15
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 15
 
 
  382              	.LCFI6:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  406              		.loc 1 464 0
  407 0004 43EA0223 		orr	r3, r3, r2, lsl #8
  408              	.LVL40:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 16
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 16
 
 
  409 0008 01E0     		b	.L28
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  441              		.cfi_def_cfa_offset 8
  489:../stdperiph/source/stm32f37x_dac.c ****   __IO uint32_t tmp = 0;
  442              		.loc 1 489 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 17
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 17
 
 
  443 0002 0023     		movs	r3, #0
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  514:../stdperiph/source/stm32f37x_dac.c **** @endverbatim
  515:../stdperiph/source/stm32f37x_dac.c ****   * @{
  516:../stdperiph/source/stm32f37x_dac.c ****   */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 18
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 18
 
 
  517:../stdperiph/source/stm32f37x_dac.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  497              	.LVL51:
  498 0018 02FA01F1 		lsl	r1, r2, r1
  499              	.LVL52:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 19
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 19
 
 
  500 001c 23EA0101 		bic	r1, r3, r1
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  519              	.LVL53:
  586:../stdperiph/source/stm32f37x_dac.c ****   /* Check the parameters */
  587:../stdperiph/source/stm32f37x_dac.c ****   assert_param(IS_DAC_ALL_PERIPH(DACx));
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 20
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 20
 
 
  588:../stdperiph/source/stm32f37x_dac.c ****   assert_param(IS_DAC_CHANNEL(DAC_Channel));
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  613:../stdperiph/source/stm32f37x_dac.c ****   *            @arg DAC_FLAG_DMAUDR: DMA underrun flag
  614:../stdperiph/source/stm32f37x_dac.c ****   * @note   The DMA underrun occurs when a second external trigger arrives before
  615:../stdperiph/source/stm32f37x_dac.c ****   *         the acknowledgement for the first external trigger is received (first request).
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 21
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 21
 
 
  616:../stdperiph/source/stm32f37x_dac.c ****   * @retval The new state of DAC_FLAG (SET or RESET).
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  581              		.thumb_func
  583              	DAC_ClearFlag:
  584              	.LFB125:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 22
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 22
 
 
  641:../stdperiph/source/stm32f37x_dac.c **** 
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  675:../stdperiph/source/stm32f37x_dac.c ****   * @note   The DMA underrun occurs when a second external trigger arrives before
  676:../stdperiph/source/stm32f37x_dac.c ****   *         the acknowledgement for the first external trigger is received (first request).
  677:../stdperiph/source/stm32f37x_dac.c ****   * @retval The new state of DAC_IT (SET or RESET).
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 23
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 23
 
 
  678:../stdperiph/source/stm32f37x_dac.c ****   */
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  696:../stdperiph/source/stm32f37x_dac.c ****   }
  637              		.loc 1 696 0
  638 0016 0120     		movs	r0, #1
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 24
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 24
 
 
  639              	.LVL74:
@@ -1438,51 +1438,51 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 1
  670              		.file 3 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
  671              		.file 4 "../cmsis/include/stm32f37x.h"
  672              		.file 5 "../stdperiph/include/stm32f37x_dac.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 25
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 25
 
 
  673              		.file 6 "../cmsis/include/core_cm4.h"
  674              		.file 7 "../stdperiph/include/stm32f37x_rcc.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s 			page 26
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s 			page 26
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f37x_dac.c
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:22     .text.DAC_DeInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:27     .text.DAC_DeInit:00000000 DAC_DeInit
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:73     .text.DAC_DeInit:00000034 $d
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:78     .text.DAC_Init:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:83     .text.DAC_Init:00000000 DAC_Init
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:136    .text.DAC_StructInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:141    .text.DAC_StructInit:00000000 DAC_StructInit
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:163    .text.DAC_Cmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:168    .text.DAC_Cmd:00000000 DAC_Cmd
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:202    .text.DAC_SoftwareTriggerCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:207    .text.DAC_SoftwareTriggerCmd:00000000 DAC_SoftwareTriggerCmd
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:243    .text.DAC_DualSoftwareTriggerCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:248    .text.DAC_DualSoftwareTriggerCmd:00000000 DAC_DualSoftwareTriggerCmd
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:273    .text.DAC_WaveGenerationCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:278    .text.DAC_WaveGenerationCmd:00000000 DAC_WaveGenerationCmd
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:310    .text.DAC_SetChannel1Data:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:315    .text.DAC_SetChannel1Data:00000000 DAC_SetChannel1Data
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:350    .text.DAC_SetChannel2Data:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:355    .text.DAC_SetChannel2Data:00000000 DAC_SetChannel2Data
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:390    .text.DAC_SetDualChannelData:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:395    .text.DAC_SetDualChannelData:00000000 DAC_SetDualChannelData
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:426    .text.DAC_GetDataOutputValue:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:431    .text.DAC_GetDataOutputValue:00000000 DAC_GetDataOutputValue
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:468    .text.DAC_DMACmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:473    .text.DAC_DMACmd:00000000 DAC_DMACmd
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:507    .text.DAC_ITConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:512    .text.DAC_ITConfig:00000000 DAC_ITConfig
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:544    .text.DAC_GetFlagStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:549    .text.DAC_GetFlagStatus:00000000 DAC_GetFlagStatus
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:578    .text.DAC_ClearFlag:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:583    .text.DAC_ClearFlag:00000000 DAC_ClearFlag
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:600    .text.DAC_GetITStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:605    .text.DAC_GetITStatus:00000000 DAC_GetITStatus
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:646    .text.DAC_ClearITPendingBit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccKlxoBG.s:651    .text.DAC_ClearITPendingBit:00000000 DAC_ClearITPendingBit
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:22     .text.DAC_DeInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:27     .text.DAC_DeInit:00000000 DAC_DeInit
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:73     .text.DAC_DeInit:00000034 $d
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:78     .text.DAC_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:83     .text.DAC_Init:00000000 DAC_Init
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:136    .text.DAC_StructInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:141    .text.DAC_StructInit:00000000 DAC_StructInit
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:163    .text.DAC_Cmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:168    .text.DAC_Cmd:00000000 DAC_Cmd
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:202    .text.DAC_SoftwareTriggerCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:207    .text.DAC_SoftwareTriggerCmd:00000000 DAC_SoftwareTriggerCmd
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:243    .text.DAC_DualSoftwareTriggerCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:248    .text.DAC_DualSoftwareTriggerCmd:00000000 DAC_DualSoftwareTriggerCmd
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:273    .text.DAC_WaveGenerationCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:278    .text.DAC_WaveGenerationCmd:00000000 DAC_WaveGenerationCmd
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:310    .text.DAC_SetChannel1Data:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:315    .text.DAC_SetChannel1Data:00000000 DAC_SetChannel1Data
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:350    .text.DAC_SetChannel2Data:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:355    .text.DAC_SetChannel2Data:00000000 DAC_SetChannel2Data
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:390    .text.DAC_SetDualChannelData:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:395    .text.DAC_SetDualChannelData:00000000 DAC_SetDualChannelData
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:426    .text.DAC_GetDataOutputValue:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:431    .text.DAC_GetDataOutputValue:00000000 DAC_GetDataOutputValue
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:468    .text.DAC_DMACmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:473    .text.DAC_DMACmd:00000000 DAC_DMACmd
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:507    .text.DAC_ITConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:512    .text.DAC_ITConfig:00000000 DAC_ITConfig
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:544    .text.DAC_GetFlagStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:549    .text.DAC_GetFlagStatus:00000000 DAC_GetFlagStatus
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:578    .text.DAC_ClearFlag:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:583    .text.DAC_ClearFlag:00000000 DAC_ClearFlag
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:600    .text.DAC_GetITStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:605    .text.DAC_GetITStatus:00000000 DAC_GetITStatus
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:646    .text.DAC_ClearITPendingBit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccvr6JKk.s:651    .text.DAC_ClearITPendingBit:00000000 DAC_ClearITPendingBit
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

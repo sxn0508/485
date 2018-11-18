@@ -4,6 +4,7 @@ build/DLT698.d: ../user/source/DLT698.c ../user/include/DLT698.h \
  ../cmsis/include/core_cmInstr.h ../cmsis/include/core_cmFunc.h \
  ../cmsis/include/core_cm4_simd.h ../cmsis/include/system_stm32f37x.h \
  ../user/include/stm32f37x_conf.h ../stdperiph/include/stm32f37x_dbgmcu.h \
+ ../stdperiph/include/stm32f37x_exti.h \
  ../stdperiph/include/stm32f37x_flash.h \
  ../stdperiph/include/stm32f37x_gpio.h \
  ../stdperiph/include/stm32f37x_syscfg.h \
@@ -34,6 +35,8 @@ build/DLT698.d: ../user/source/DLT698.c ../user/include/DLT698.h \
 ../user/include/stm32f37x_conf.h:
 
 ../stdperiph/include/stm32f37x_dbgmcu.h:
+
+../stdperiph/include/stm32f37x_exti.h:
 
 ../stdperiph/include/stm32f37x_flash.h:
 

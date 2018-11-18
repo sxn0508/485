@@ -13,6 +13,7 @@
 #include "stm32f37x_it.h"
 
 static void vIRQ_UART_Config(void); //串口中断初始化
+#if 0
 /********************************************************************
 * 功    能：串口初始化函数
 * 输    入：None
@@ -62,6 +63,7 @@ void vUart_Init(void)
     USART_Cmd(USART3, ENABLE);
     USART_Cmd(USART2, ENABLE);
 }
+#endif
 /********************************************************************
   * @brief 串口中断初始化函数
   * @param  None
@@ -221,11 +223,11 @@ int32_t Uart_OnceWrite(UartDef *puart, const uint8_t *pbuf, uint32_t count, uint
     * 输出参数: 无
     * 返 回 值: > 0：实际读取的数量   0：无数据或count==0或错误 
     ****************************************************************/
-uint32_t Uart_IdleRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t idleMs)
+uint32_t Uart_IdleRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t tickCount)
 {
     volatile uint32_t readlen = 0;
     volatile uint32_t readlenow = 0;
-    volatile idleMsCount;
+    volatile idleTickCount;
     uint16_t i;
     /*读取数量> 0，<缓存长度*/
     if (!count || count > DRV_BUF_SIZE)
@@ -233,28 +235,28 @@ uint32_t Uart_IdleRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t id
         return 0;
     }
     /*保证最小延时*/
-    if (idleMs < 0xFFFFFFFF)
+    if (tickCount < 0xFFFFFFFF)
     {
-        idleMsCount = ++idleMs;
+        idleTickCount = ++tickCount;
     }
-    USART_ITConfig(puart->handler, USART_IT_RXNE, ENABLE);
+    //USART_ITConfig(puart->handler, USART_IT_RXNE, ENABLE);
     readlenow = uwBuf_UnReadLen(puart->pRsvbuf);
-    while (readlenow < count && idleMsCount > 0)
+    while (readlenow < count && idleTickCount > 0)
     {
-        /*idleMsCount计时累减*/
+        /*idleTickCount计时累减*/
         if ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) != 0U)
         {
-            idleMsCount--;
+            idleTickCount--;
         }
         readlenow = uwBuf_UnReadLen(puart->pRsvbuf);
-        /*readlennow 有变化，idleMsCount重载*/
+        /*readlennow 有变化，idleTickCount重载*/
         if (readlenow > readlen)
         {
-            idleMsCount = idleMs;
+            idleTickCount = tickCount;
             readlen = readlenow;
         }
     }
-    USART_ITConfig(puart->handler, USART_IT_RXNE, DISABLE);
+    //USART_ITConfig(puart->handler, USART_IT_RXNE, DISABLE);
     if (readlen)
     {
         /*实际读到的长度*/
@@ -275,7 +277,7 @@ uint32_t Uart_IdleRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t id
     * 输出参数: 无
     * 返 回 值: > 0：实际读取的数量   0：无数据或count==0或错误 
     ****************************************************************/
-uint32_t Uart_OnceRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t delay)
+uint32_t Uart_OnceRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t tickCount)
 {
     volatile uint32_t readlen = 0;
     uint16_t i;
@@ -286,7 +288,7 @@ uint32_t Uart_OnceRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t de
     }
     USART_ITConfig(puart->handler, USART_IT_RXNE, ENABLE);
     readlen = uwBuf_UnReadLen(puart->pRsvbuf);
-    while (delay)
+    while (tickCount)
     {
         readlen = uwBuf_UnReadLen(puart->pRsvbuf);
         /*多余的字节本次丢弃，并调用BufClear防止后面再读取*/
@@ -294,7 +296,7 @@ uint32_t Uart_OnceRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t de
             break;
         if ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) != 0U)
         {
-            delay--;
+            tickCount--;
         }
     }
     USART_ITConfig(puart->handler, USART_IT_RXNE, DISABLE);
@@ -468,4 +470,163 @@ bool blBufcmp(struct ucbuf *uc_buf, char *ptchr, uint8_t ln)
     return (ln ? false : true);
 }
 
+#endif
+/********************************************************************
+* 功    能：串口初始化函数
+* 输    入：串口结构体指针，波特率baudrate
+* 输    出：None
+*           
+* 编 写 人：
+* 编写日期：2018.9.4
+**********************************************************************/
+void vUart_EnableBaudrate(UartDef *puart, uint32_t baudrate)
+{
+    GPIO_InitTypeDef GPIO_Initstruc;
+    USART_InitTypeDef USART_Initstruct;
+    NVIC_InitTypeDef NVIC_Initstruct;
+
+    USART_DeInit(puart->handler);
+
+    /*串口基本参数配置*/
+    if (puart->handler == USART1)
+    {
+        /*PB6 PB7作为串口1*/
+        RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
+        GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_7);
+        GPIO_PinAFConfig(GPIOB, GPIO_PinSource7, GPIO_AF_7);
+        GPIO_Initstruc.GPIO_Mode = GPIO_Mode_AF;
+        GPIO_Initstruc.GPIO_OType = GPIO_OType_PP;
+        GPIO_Initstruc.GPIO_PuPd = GPIO_PuPd_UP;
+        GPIO_Initstruc.GPIO_Speed = GPIO_Speed_2MHz;
+        GPIO_Initstruc.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
+        GPIO_Init(GPIOB, &GPIO_Initstruc);
+        /*开启串口时钟*/
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+    }
+    else if (puart->handler == USART3)
+    {
+        /*PB8 PB9作为串口3*/
+        RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
+        GPIO_PinAFConfig(GPIOB, GPIO_PinSource8, GPIO_AF_7);
+        GPIO_PinAFConfig(GPIOB, GPIO_PinSource9, GPIO_AF_7);
+        GPIO_Initstruc.GPIO_Mode = GPIO_Mode_AF;
+        GPIO_Initstruc.GPIO_OType = GPIO_OType_PP;
+        GPIO_Initstruc.GPIO_PuPd = GPIO_PuPd_UP;
+        GPIO_Initstruc.GPIO_Speed = GPIO_Speed_2MHz;
+        GPIO_Initstruc.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9;
+        GPIO_Init(GPIOB, &GPIO_Initstruc);
+        /*开启串口时钟*/
+        RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
+    }
+    USART_Initstruct.USART_BaudRate = baudrate;
+    USART_Initstruct.USART_Mode = (USART_Mode_Rx | USART_Mode_Tx);
+    USART_Initstruct.USART_WordLength = USART_WordLength_9b;
+    USART_Initstruct.USART_Parity = USART_Parity_Even;
+    USART_Initstruct.USART_StopBits = USART_StopBits_1;
+    USART_Initstruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    USART_OverSampling8Cmd(puart->handler, ENABLE);
+    USART_Init(puart->handler, &USART_Initstruct);
+
+    /*配置中断优先级*/
+    if (puart->handler == USART1)
+    {
+        NVIC_Initstruct.NVIC_IRQChannel = USART1_IRQn;
+        //NVIC_Initstruct.NVIC_IRQChannelSubPriority = 1;
+    }
+    else if (puart->handler == USART3)
+    {
+        NVIC_Initstruct.NVIC_IRQChannel = USART3_IRQn;
+        //NVIC_Initstruct.NVIC_IRQChannelSubPriority = 0;
+    }
+    NVIC_Initstruct.NVIC_IRQChannelSubPriority = 0;
+    NVIC_Initstruct.NVIC_IRQChannelPreemptionPriority = 1;
+    NVIC_Initstruct.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_Initstruct);
+    /*使能接收中断*/
+    USART_ITConfig(puart->handler, USART_IT_RXNE, ENABLE);
+    USART_Cmd(puart->handler, ENABLE);
+}
+
+#if 0
+/********************************************************************
+* 功    能：串口初始化函数
+* 输    入：串口结构体指针，波特率baudrate
+* 输    出：None
+*           
+* 编 写 人：
+* 编写日期：2018.9.4
+**********************************************************************/
+void vUart_ChangeBaudrate(UartDef *puart, uint32_t baudrate)
+{
+    //GPIO_InitTypeDef GPIO_Initstruc;
+    USART_InitTypeDef USART_Initstruct;
+    //NVIC_InitTypeDef NVIC_Initstruct;
+
+    //USART_DeInit(puart->handler);
+    USART_Cmd(puart->handler, DISABLE);
+
+#if 0
+    /*串口基本参数配置*/
+    if (puart->handler == USART1)
+    {
+        /*PB6 PB7作为串口1*/
+        RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
+        GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_7);
+        GPIO_PinAFConfig(GPIOB, GPIO_PinSource7, GPIO_AF_7);
+        GPIO_Initstruc.GPIO_Mode = GPIO_Mode_AF;
+        GPIO_Initstruc.GPIO_OType = GPIO_OType_PP;
+        GPIO_Initstruc.GPIO_PuPd = GPIO_PuPd_UP;
+        GPIO_Initstruc.GPIO_Speed = GPIO_Speed_2MHz;
+        GPIO_Initstruc.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
+        GPIO_Init(GPIOB, &GPIO_Initstruc);
+        /*开启串口时钟*/
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+    }
+    else if (puart->handler == USART3)
+    {
+        /*PB8 PB9作为串口3*/
+        RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
+        GPIO_PinAFConfig(GPIOB, GPIO_PinSource8, GPIO_AF_7);
+        GPIO_PinAFConfig(GPIOB, GPIO_PinSource9, GPIO_AF_7);
+        GPIO_Initstruc.GPIO_Mode = GPIO_Mode_AF;
+        GPIO_Initstruc.GPIO_OType = GPIO_OType_PP;
+        GPIO_Initstruc.GPIO_PuPd = GPIO_PuPd_UP;
+        GPIO_Initstruc.GPIO_Speed = GPIO_Speed_2MHz;
+        GPIO_Initstruc.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9;
+        GPIO_Init(GPIOB, &GPIO_Initstruc);
+        /*开启串口时钟*/
+        RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
+    }
+#endif
+
+    USART_Initstruct.USART_BaudRate = baudrate;
+    USART_Initstruct.USART_Mode = (USART_Mode_Rx | USART_Mode_Tx);
+    USART_Initstruct.USART_WordLength = USART_WordLength_9b;
+    USART_Initstruct.USART_Parity = USART_Parity_Even;
+    USART_Initstruct.USART_StopBits = USART_StopBits_1;
+    USART_Initstruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    USART_OverSampling8Cmd(puart->handler, ENABLE);
+    USART_Init(puart->handler, &USART_Initstruct);
+
+#if 0
+    /*配置中断优先级*/
+    if (puart->handler == USART1)
+    {
+        NVIC_Initstruct.NVIC_IRQChannel = USART1_IRQn;
+        //NVIC_Initstruct.NVIC_IRQChannelSubPriority = 1;
+    }
+    else if (puart->handler == USART3)
+    {
+        NVIC_Initstruct.NVIC_IRQChannel = USART3_IRQn;
+        //NVIC_Initstruct.NVIC_IRQChannelSubPriority = 0;
+    }
+    NVIC_Initstruct.NVIC_IRQChannelSubPriority = 0;
+    NVIC_Initstruct.NVIC_IRQChannelPreemptionPriority = 1;
+    NVIC_Initstruct.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_Initstruct);
+    /*使能接收中断*/
+    //USART_ITConfig(puart->handler, USART_IT_RXNE, ENABLE);
+#endif
+    USART_Cmd(puart->handler, ENABLE);
+}
 #endif

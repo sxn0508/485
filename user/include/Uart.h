@@ -25,19 +25,19 @@ typedef struct Uart
     struct ucbuf *pSndbuf;
 } UartDef;
 
-//extern uint16_t uwBuf_UnReadLen(const struct ucbuf *ucdrv_buf);                                //驱动缓存中未读取的字节数
-//extern uint16_t uwBuf_EmpLen(const struct ucbuf *ucdrv_buf);                                   //驱动缓存中的剩余空间
-extern void vUart_Init(void);                                                                  //串口初始化
+//extern void vUart_Init(void);                                                                  //串口初始化
 extern bool blDrv_Buf_IsEmpty(const struct ucbuf *ucdrv_buf);                                  //判断驱动缓存是否为空
 extern bool blDrv_Buf_IsFull(const struct ucbuf *ucdrv_buf);                                   //判断驱动缓存是否满
 extern bool ucDrv_Buf_GetBytes(struct ucbuf *ucdrv_buf, uint8_t *ucdata_buf, uint16_t length); //从驱动缓存中读取指定数量的字节到数据缓存数组
 extern bool ucDrv_Buf_PutBytes(uint8_t *ucdata_buf, struct ucbuf *ucdrv_buf, uint16_t length); //从驱动缓存中读取指定数量的字节到数据缓存数组
 extern void Uart_DataPut(USART_TypeDef *USART_X);                                              //出口发送
+extern void vUart_EnableBaudrate(UartDef *puart, uint32_t baudrate);
+//extern void vUart_ChangeBaudrate(UartDef *puart, uint32_t baudrate);
 
 extern int32_t Uart_OnceWrite(UartDef *puart, const uint8_t *pbuf, uint32_t count, uint32_t delay);
 extern void Uart_Write(UartDef *puart, const uint8_t *pbuf, uint32_t count);
-extern uint32_t Uart_IdleRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t idleMs);
-extern uint32_t Uart_OnceRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t delay);
+extern uint32_t Uart_IdleRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t tickCount);
+extern uint32_t Uart_OnceRead(UartDef *puart, uint8_t *buf, uint32_t count, uint32_t tickCount);
 extern uint32_t Uart_Read(UartDef *puart, uint8_t *buf, uint32_t count);
 extern void Uart_idleReadEnable(UartDef *puart);
 extern void Uart_idleReadDisable(UartDef *puart);

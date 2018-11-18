@@ -8,122 +8,54 @@
 #include "DLT698.h"
 #include "DLT698_45.h"
 
+uint32_t gSystickAccuracy; //1秒内的SysTick数
+
 /*698数据存储单元*/
 COLL_STORE_DATA stCollData;
 /*串口收帧标志*/
 bool FLAG_UartZD_HasData = false;
 bool FLAG_UartDB_HasData = false;
-//#define TEST
+volatile uint32_t irqCount = 100;
+volatile uint32_t uwBaudelay;
+
+static void vLedRun(uint32_t delay);
+static void VoltageTimeOutHandle(void);
+static void RsvFrameHandle(uint8_t *pucBuffer);
+static void vAutoSetBaudrate(void);
 
 int main(void)
 {
     ProtocolDef ProtocolType = none;
-#ifdef TEST
-    uint8_t tmpAPDU[MAX_APDU_LENGTH];
-    uint8_t *ptmpAPDU = tmpAPDU;
-#endif
     uint8_t *pAPDU = NULL;
     uint32_t dwLen = 0;
-    uint8_t ucVoltageIdex;
-    //uint8_t *pframe = NULL;
+    //uint8_t ucVoltageIdex;
     uint32_t i;
-    //uint32_t test;
     DLT698_FRAME dlt698Frame;
 
-    /*配置中断向量组*/
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-    SysTick_Config(SysTick_100Ms);
+    //SysTick_Config(SysTick_100Ms);
     /*SysTick使用系统频率64M的8分频：8MHz*/
-    SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
-    NVIC_SetPriority(SysTick_IRQn, -1);
+    //SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
+    //NVIC_SetPriority(SysTick_IRQn, -1);
     vInterFlash_Init();
     vGPIO_Init();
     vFeedExtWatchDog();
-    vUart_Init(); //RXNE中断使能
-    /*定时器2初始化*/
     vTimer_Init();
+    vLed_Light();
+    vAutoSetBaudrate(); //集中器侧读取一帧，识别波特率
     /*电压修改的上下限值设为默认值；开启修改功能 */
     Voltage_Change_Init();
     /*电流重过载参数设置*/
     vCurrent_Limit_DefaultSet();
     /*电量修改的上下限值设为默认值；开启修改功能 */
     vEnergy_Modify_Init();
-    /*点亮运行灯*/
-    vLed_Light();
-#ifdef TEST
-    //response normal 85 01 2a 20 00 02 00 01 01 03 12 08 d6 12 00 00 12 00 00 00 00
-    tmpAPDU[0] = 0x85;
-    tmpAPDU[1] = 0x01;
-    tmpAPDU[2] = 0x2a;
-    tmpAPDU[3] = 0x20;
-    tmpAPDU[4] = 0x00;
-    tmpAPDU[5] = 0x02;
-    tmpAPDU[6] = 0x00;
-    tmpAPDU[7] = 0x01;
-    tmpAPDU[8] = 0x01;
-    tmpAPDU[9] = 0x03;
-    tmpAPDU[10] = 0x12;
-    tmpAPDU[11] = 0x08;
-    tmpAPDU[12] = 0xd6;
-    tmpAPDU[13] = 0x12;
-    tmpAPDU[14] = 0x00;
-    tmpAPDU[15] = 0x00;
-    tmpAPDU[16] = 0x12;
-    tmpAPDU[17] = 0x00;
-    tmpAPDU[18] = 0x00;
-    tmpAPDU[19] = 0x00;
-    tmpAPDU[20] = 0x00;
-//response record 85 03 27 50 04 02 00 02 00 20 21 02 00 00 20 00 02 00 01 01 1c 07 e2 0b 0f 00 00 00 00 00 00
-#ifdef RECORD_TEST
-    tmpAPDU[0] = 0x85;
-    tmpAPDU[1] = 0x03;
-    tmpAPDU[2] = 0x2d;
-    tmpAPDU[3] = 0x50;
-    tmpAPDU[4] = 0x04;
-    tmpAPDU[5] = 0x02;
-    tmpAPDU[6] = 0x00;
-    tmpAPDU[7] = 0x02;
-    tmpAPDU[8] = 0x00;
-    tmpAPDU[9] = 0x20;
-    tmpAPDU[10] = 0x21;
-    tmpAPDU[11] = 0x02;
-    tmpAPDU[12] = 0x00;
-    tmpAPDU[13] = 0x00;
-    tmpAPDU[14] = 0x20;
-    tmpAPDU[15] = 0x00;
-    tmpAPDU[16] = 0x02;
-    tmpAPDU[17] = 0x00;
-    tmpAPDU[18] = 0x01;
-    tmpAPDU[19] = 0x01;
-    tmpAPDU[20] = 0x1c;
-    tmpAPDU[21] = 0x07;
-    tmpAPDU[22] = 0xe2;
-    tmpAPDU[23] = 0x0b;
-    tmpAPDU[24] = 0x0f;
-    tmpAPDU[25] = 0x00;
-    tmpAPDU[26] = 0x00;
-    tmpAPDU[27] = 0x00;
-    tmpAPDU[28] = 0x00;
-    tmpAPDU[29] = 0x00;
-    tmpAPDU[30] = 0x00;
-#endif
-    if (dwAPduAnalyze(ptmpAPDU, 31, &stCollData) >= 0)
-    {
-        for (i = 0; i < stCollData.ucDataNum; i++)
-        {
-            if (stCollData.stDataUnit[i].stOAD.OI_date == 0x2000) /*电压OI*/
-            {
-                v698VoltageModify(&stCollData.stDataUnit[i]);
-            }
-        }
-    }
-#endif
     while (1)
     {
         switch (ProtocolType)
         {
         case none:
         {
+            vLedRun(TICK_200MS);
             /*识别规约类型*/
             Uart_idleReadEnable(pUartZD);
             Uart_idleReadEnable(pUartDB);
@@ -133,6 +65,7 @@ int main(void)
                 FLAG_UartZD_HasData = false;
                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
                 ProtocolType = GetProtocolType(ucApp_Buf_ZD2DB, dwLen);
+                Uart_idleReadEnable(pUartZD);
             }
             if (FLAG_UartDB_HasData)
             {
@@ -140,11 +73,13 @@ int main(void)
                 FLAG_UartDB_HasData = false;
                 dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
                 ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //校验错误也嫩过？
+                Uart_idleReadEnable(pUartDB);
             }
             break;
         }
         case dlt698:
         {
+            vLedRun(TICK_1S);
             Uart_idleReadEnable(pUartZD);
             Uart_idleReadEnable(pUartDB);
             if (FLAG_UartZD_HasData)
@@ -152,8 +87,9 @@ int main(void)
                 Uart_idleReadDisable(pUartZD);
                 FLAG_UartZD_HasData = false;
                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
+                Uart_idleReadEnable(pUartZD);
                 //if (pframe = pGetpFrame(ucApp_Buf_ZD2DB, dwLen) == NULL)
-                //break;
+                break;
             }
             if (FLAG_UartDB_HasData)
             {
@@ -165,29 +101,10 @@ int main(void)
                 /*电表口收帧*/
                 if ((dwLen = Uart_Read(pUartDB, ucApp_Buf_DB2ZD, DRV_BUF_SIZE)) == 0)
                     break;
-
-//if (Voltage_Change_State == Voltage_NOChange)
-//{
-//Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, TICKS_1000MS);
-//break;
-//}
-
-/*收帧处理*/
-//if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL) //校验错误就不透传？
-//{
-//Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, TICKS_1000MS);
-//break;
-//}
-
-/*电压读取部分*/
-//if ((dwLen = dwGet698Apdu(&dlt698Frame, &pAPDU)) <= 0)
-//break;
-
-//if (dwAPduAnalyze(pAPDU, dwLen, &stCollData) < 0)
 #if 1
                 if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL) //校验错误就不透传？
                 {
-                    Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, TICKS_1000MS);
+                    Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, 1000 * TICK_1MS);
                 }
                 //if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) != NULL) //校验错误就不透传？
                 else if (Voltage_Change_State != Voltage_NOChange)
@@ -207,15 +124,16 @@ int main(void)
                             dwReCalculateFCS(&dlt698Frame);
                         }
                     }
-                    Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICKS_500MS);
+                    Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICK_500MS);
                 }
                 //frame -> UartBuf
             }
-            /*帧转发*/
+            Uart_idleReadEnable(pUartDB);
             break;
         }
         case dlt645:
         {
+            vLedRun(TICK_1S);
             /*串口无收发时喂狗间隔为1ms左右*/
             vFeedExtWatchDog();
             /*集中器侧数据帧收帧处理*/
@@ -362,6 +280,146 @@ static void VoltageTimeOutHandle(void)
                 blFramesCounterStatus = false;
                 uwTime2FramesCounter = 0;
             }
+        }
+    }
+}
+/********************************************************************
+* 功    能：根据串口1位数据电平持续时间计算波特率
+* 输    入：电平持续时间
+* 输    出：对应波特率
+* 说    名：
+* 编 写 人：
+* 编写日期：2018年9月10日16:01:21
+**********************************************************************/
+uint32_t uwFindBaudRate(uint32_t baudDelay)
+{
+    /* Baud 1200 :1666us*/
+    //if (baudDelay > 1500 && baudDelay < 1800)
+    //   return 1200;
+    /* Baud 1200:833us*/
+    if (baudDelay > 820 && baudDelay < 850)
+        return 1200;
+    /* Baud 2400:417us*/
+    else if (baudDelay > 400 && baudDelay < 430)
+        return 2400;
+    /* Baud 4800:208us*/
+    else if (baudDelay > 190 && baudDelay < 220)
+        return 4800;
+    /* Baud 9600 :104us*/
+    else if (baudDelay > 90 && baudDelay < 120)
+        return 9600;
+    else
+        /*default baudrate*/
+        return 2400;
+}
+
+/********************************************************************
+* 功    能：计算串口1位数据电平持续时间
+* 输    入：持续时间存储位置
+* 输    出：None
+* 说    明：中断服务函数中记录n个中断的时标
+*           相邻时标计算脉冲持续时间
+*           查找最短持续时间
+* 编 写 人：
+* 编写日期：2018年9月5日15:08:58
+**********************************************************************/
+void vUartZD_BaudelayCal(volatile uint32_t *pBaudelay)
+{
+
+    static uint32_t LAST_TICK = 0xFFFFFFFF;
+    uint32_t nowtick = 0;
+    uint32_t tmpdelay = 0;
+    irqCount--;
+    /*取当前tick数，0~0xFFFF循环*/
+    nowtick = TICKS;
+    /*初次收到串口数据，系统tick最大65535*/
+    if (LAST_TICK != 0xFFFFFFFF)
+    {
+        /*与lastick相减得到本次delay*/
+        tmpdelay = (nowtick + 0xFFFF - LAST_TICK) & 0xFFFF;
+        /*当前tick数存为count*/
+        LAST_TICK = nowtick;
+        /*与上次delay比较，取较小值存为delay*/
+        if (tmpdelay < *pBaudelay)
+        {
+            *pBaudelay = tmpdelay;
+        }
+    }
+    else //之前已有边沿中断
+    {
+        /*当前tick数存为lastick*/
+        /*delay= 0xFFFFFFFF*/
+        LAST_TICK = nowtick;
+    }
+}
+
+void vAutoSetBaudrate(void)
+{
+    uint32_t Uart_BaudRate;
+    vSystickSetAccuracy(1000000); //SysTick = 1us
+    vSystickIntCmd(ENABLE);
+    /*TICK使能后才能初始化外部中断*/
+    vExti_Init(); //
+    irqCount = 100;
+    uwBaudelay = 0xFFFFFFFF;
+    while (irqCount)
+    {
+        vFeedExtWatchDog();
+    }
+    EXTI_DeInit();
+    Uart_BaudRate = uwFindBaudRate(uwBaudelay);
+    vSystickSetAccuracy(1000); //systick=1ms
+    vSystickIntCmd(ENABLE);
+    vUart_EnableBaudrate(pUartZD, Uart_BaudRate); //使能接收中断
+    vUart_EnableBaudrate(pUartDB, Uart_BaudRate);
+    /*接收后续字节并忽略*/
+    Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
+    vBuf_Clear(pUartZD->pRsvbuf);
+    //Uart_idleReadEnable(pUartZD);
+    //Uart_idleReadEnable(pUartDB);
+
+#if 0
+    Uart_ITReadEnable(pUartZD);
+    /*last loop do not clear FLAG,second loop do not receive second frame*/
+    while (!FLAG_UartZD_HasData)
+    {
+        vFeedExtWatchDog();
+    }
+    Uart_ITReadDisable(pUartZD);
+    FLAG_UartZD_HasData = false;
+    pdataDown->len = Uart_Read(pUartZD, (uint8_t *)pdataDown, BUF_SIZE);
+    if (pdataDown->len == 0)
+    {
+        UartDB_BaudRate = 0;
+        continue;
+    }
+    do
+    {
+        vFeedExtWatchDog();
+        vUart_EnableBaudrate(pUartDB, UartDB_BaudRate);
+        Uart_OnceWrite(pUartDB, (uint8_t *)pdataDown, pdataDown->len, 1000);
+        pdataUp->len = Uart_IdleRead(pUartDB, (uint8_t *)pdataUp, BUF_SIZE, 500);
+        pframe = pGetpFrame((uint8_t *)pdataUp, pdataUp->len);
+        /*9600 -> 4800 -> 2400 -> 1200*/
+        UartDB_BaudRate = UartDB_BaudRate >> 1;
+    } while (pframe == NULL && UartDB_BaudRate > 600);
+    /*if no reply from DB,UartDB_BaudRate always == 600*/
+    //} while (UartDB_BaudRate < 1200); //波特率匹配完成
+#endif
+}
+void vLedRun(uint32_t delay)
+{
+    static uint32_t last_tick = 0;
+    if (TICKS - last_tick > delay)
+    {
+        last_tick = TICKS;
+        if (Bit_SET == GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13))
+        {
+            GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET); //拉低PC13
+        }
+        else
+        {
+            GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);
         }
     }
 }

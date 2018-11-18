@@ -4,6 +4,7 @@ build/stm32f37x_it.d: ../user/source/stm32f37x_it.c \
  ../cmsis/include/core_cmFunc.h ../cmsis/include/core_cm4_simd.h \
  ../cmsis/include/system_stm32f37x.h ../user/include/stm32f37x_conf.h \
  ../stdperiph/include/stm32f37x_dbgmcu.h \
+ ../stdperiph/include/stm32f37x_exti.h \
  ../stdperiph/include/stm32f37x_flash.h \
  ../stdperiph/include/stm32f37x_gpio.h \
  ../stdperiph/include/stm32f37x_syscfg.h \
@@ -11,7 +12,9 @@ build/stm32f37x_it.d: ../user/source/stm32f37x_it.c \
  ../stdperiph/include/stm32f37x_tim.h \
  ../stdperiph/include/stm32f37x_usart.h \
  ../stdperiph/include/stm32f37x_misc.h ../user/include/main.h \
- ../user/include/BaseDef.h ../user/include/Uart.h ../user/include/Time.h
+ ../user/include/BaseDef.h ../user/include/GPIO.h ../user/include/Time.h \
+ ../user/include/Uart.h ../user/include/Time.h ../user/include/DLT645.h \
+ ../user/include/Uart.h ../user/include/main.h
 
 ../user/include/stm32f37x_it.h:
 
@@ -31,6 +34,8 @@ build/stm32f37x_it.d: ../user/source/stm32f37x_it.c \
 
 ../stdperiph/include/stm32f37x_dbgmcu.h:
 
+../stdperiph/include/stm32f37x_exti.h:
+
 ../stdperiph/include/stm32f37x_flash.h:
 
 ../stdperiph/include/stm32f37x_gpio.h:
@@ -49,6 +54,16 @@ build/stm32f37x_it.d: ../user/source/stm32f37x_it.c \
 
 ../user/include/BaseDef.h:
 
+../user/include/GPIO.h:
+
+../user/include/Time.h:
+
 ../user/include/Uart.h:
 
 ../user/include/Time.h:
+
+../user/include/DLT645.h:
+
+../user/include/Uart.h:
+
+../user/include/main.h:
