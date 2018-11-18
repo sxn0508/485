@@ -17,6 +17,7 @@ bool FLAG_UartZD_HasData = false;
 bool FLAG_UartDB_HasData = false;
 volatile uint32_t irqCount = 100;
 volatile uint32_t uwBaudelay;
+uint32_t uwBootDelay = 2000000;
 
 static void vLedRun(uint32_t delay);
 static void VoltageTimeOutHandle(void);
@@ -32,6 +33,10 @@ int main(void)
     uint32_t i;
     DLT698_FRAME dlt698Frame;
 
+    while (uwBootDelay--)
+    {
+        vFeedExtWatchDog();
+    }
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
     //SysTick_Config(SysTick_100Ms);
     /*SysTick使用系统频率64M的8分频：8MHz*/
@@ -55,6 +60,7 @@ int main(void)
         {
         case none:
         {
+            vFeedExtWatchDog();
             vLedRun(TICK_200MS);
             /*识别规约类型*/
             Uart_idleReadEnable(pUartZD);
@@ -63,6 +69,7 @@ int main(void)
             {
                 Uart_idleReadDisable(pUartZD);
                 FLAG_UartZD_HasData = false;
+                vFeedExtWatchDog();
                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
                 ProtocolType = GetProtocolType(ucApp_Buf_ZD2DB, dwLen);
                 Uart_idleReadEnable(pUartZD);
@@ -71,6 +78,7 @@ int main(void)
             {
                 Uart_idleReadDisable(pUartDB);
                 FLAG_UartDB_HasData = false;
+                vFeedExtWatchDog();
                 dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
                 ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //校验错误也嫩过？
                 Uart_idleReadEnable(pUartDB);
@@ -79,6 +87,7 @@ int main(void)
         }
         case dlt698:
         {
+            vFeedExtWatchDog();
             vLedRun(TICK_1S);
             Uart_idleReadEnable(pUartZD);
             Uart_idleReadEnable(pUartDB);
@@ -86,6 +95,7 @@ int main(void)
             {
                 Uart_idleReadDisable(pUartZD);
                 FLAG_UartZD_HasData = false;
+                vFeedExtWatchDog();
                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
                 Uart_idleReadEnable(pUartZD);
                 //if (pframe = pGetpFrame(ucApp_Buf_ZD2DB, dwLen) == NULL)
@@ -93,6 +103,7 @@ int main(void)
             }
             if (FLAG_UartDB_HasData)
             {
+                vFeedExtWatchDog();
                 Uart_idleReadDisable(pUartDB);
                 FLAG_UartDB_HasData = false;
                 dlt698Frame.pStart = NULL;
@@ -104,6 +115,7 @@ int main(void)
 #if 1
                 if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL) //校验错误就不透传？
                 {
+                    vFeedExtWatchDog();
                     Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, 1000 * TICK_1MS);
                 }
                 //if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) != NULL) //校验错误就不透传？
@@ -124,6 +136,7 @@ int main(void)
                             dwReCalculateFCS(&dlt698Frame);
                         }
                     }
+                    vFeedExtWatchDog();
                     Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICK_500MS);
                 }
                 //frame -> UartBuf
@@ -373,6 +386,7 @@ void vAutoSetBaudrate(void)
     vUart_EnableBaudrate(pUartZD, Uart_BaudRate); //使能接收中断
     vUart_EnableBaudrate(pUartDB, Uart_BaudRate);
     /*接收后续字节并忽略*/
+    vFeedExtWatchDog();
     Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
     vBuf_Clear(pUartZD->pRsvbuf);
     //Uart_idleReadEnable(pUartZD);
