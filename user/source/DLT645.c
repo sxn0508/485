@@ -21,6 +21,7 @@ const DefDataIDHandle INFRDataID_Handle_List[] = {
     {{0X33, 0X74, 0X34, 0X33}, vEnergy_Modify_RaitoSet}, //扩充：正向有功电能量修改比例设置ID_00014100,
     {{0X33, 0X75, 0X34, 0X33}, vEnergy_Modify_Reset},    //扩充：正向有功电能量修改恢复出厂设置ID_00014200,
     {{0X33, 0X76, 0X34, 0X33}, vEnergy_Modify_ReadSet},  //扩充：正向有功电能量修改读取设：置
+    {{0X33, 0X77, 0X34, 0X33}, vEnergy_Modify_ReadSet},  //扩充：正向有功电能量修改读取设：置
     /*电流重过载*/
     {{0X33, 0X37, 0X35, 0X35}, vCurrent_Limit_Set},                    //扩充：设置电流重过载参数:电流上限
     {{0X33, 0X38, 0X35, 0X35}, vCurrent_Limit_ReadSet},                //扩充：设置电流重过载参数:电流上限读取
