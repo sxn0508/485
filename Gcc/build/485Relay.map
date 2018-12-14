@@ -1624,7 +1624,7 @@ LOAD d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi
 .eh_frame       0x08000188        0x0
  .eh_frame      0x08000188        0x0 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
 
-.text           0x08000188     0x3ee8
+.text           0x08000188     0x3ec0
                 0x08000188                . = ALIGN (0x4)
  *(.text)
  .text          0x08000188       0x5c d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
@@ -2072,65 +2072,65 @@ LOAD d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi
                 0x08003e20      0x1a8 build/DLT645.o
                 0x08003e20                DBDataID_Handle_List
  .rodata.INFRDataID_Handle_List
-                0x08003fc8       0x90 build/DLT645.o
+                0x08003fc8       0x68 build/DLT645.o
                 0x08003fc8                INFRDataID_Handle_List
  *(.glue_7)
- .glue_7        0x08004058        0x0 linker stubs
+ .glue_7        0x08004030        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x08004058        0x0 linker stubs
+ .glue_7t       0x08004030        0x0 linker stubs
  *(.init)
- .init          0x08004058        0x4 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crti.o
-                0x08004058                _init
- .init          0x0800405c        0x8 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtn.o
+ .init          0x08004030        0x4 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crti.o
+                0x08004030                _init
+ .init          0x08004034        0x8 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtn.o
  *(.fini)
- .fini          0x08004064        0x4 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crti.o
-                0x08004064                _fini
- .fini          0x08004068        0x8 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtn.o
-                0x08004070                . = ALIGN (0x4)
-                0x08004070                _etext = .
+ .fini          0x0800403c        0x4 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crti.o
+                0x0800403c                _fini
+ .fini          0x08004040        0x8 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtn.o
+                0x08004048                . = ALIGN (0x4)
+                0x08004048                _etext = .
 
-.vfp11_veneer   0x08004070        0x0
- .vfp11_veneer  0x08004070        0x0 linker stubs
+.vfp11_veneer   0x08004048        0x0
+ .vfp11_veneer  0x08004048        0x0 linker stubs
 
-.v4_bx          0x08004070        0x0
- .v4_bx         0x08004070        0x0 linker stubs
+.v4_bx          0x08004048        0x0
+ .v4_bx         0x08004048        0x0 linker stubs
 
-.iplt           0x08004070        0x0
- .iplt          0x08004070        0x0 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
+.iplt           0x08004048        0x0
+ .iplt          0x08004048        0x0 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x08004070        0x8
-                0x08004070                __exidx_start = .
+.ARM            0x08004048        0x8
+                0x08004048                __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x08004070        0x8 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu\libgcc.a(_udivmoddi4.o)
-                0x08004078                __exidx_end = .
+ .ARM.exidx     0x08004048        0x8 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu\libgcc.a(_udivmoddi4.o)
+                0x08004050                __exidx_end = .
 
-.rel.dyn        0x08004078        0x0
- .rel.iplt      0x08004078        0x0 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
+.rel.dyn        0x08004050        0x0
+ .rel.iplt      0x08004050        0x0 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
 
-.preinit_array  0x08004078        0x0
-                0x08004078                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x08004050        0x0
+                0x08004050                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x08004078                PROVIDE (__preinit_array_end, .)
+                0x08004050                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x08004078        0x4
-                0x08004078                PROVIDE (__init_array_start, .)
+.init_array     0x08004050        0x4
+                0x08004050                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x08004078        0x4 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
-                0x0800407c                PROVIDE (__init_array_end, .)
+ .init_array    0x08004050        0x4 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
+                0x08004054                PROVIDE (__init_array_end, .)
 
-.fini_array     0x0800407c        0x4
+.fini_array     0x08004054        0x4
                 [!provide]                PROVIDE (__fini_array_start, .)
  *(.fini_array*)
- .fini_array    0x0800407c        0x4 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
+ .fini_array    0x08004054        0x4 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
  *(SORT(.fini_array.*))
                 [!provide]                PROVIDE (__fini_array_end, .)
-                0x08004080                _sidata = .
+                0x08004058                _sidata = .
 
-.data           0x20000000       0x38 load address 0x08004080
+.data           0x20000000       0x38 load address 0x08004058
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
@@ -2160,14 +2160,14 @@ LOAD d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi
                 0x20000038                . = ALIGN (0x4)
                 0x20000038                _edata = .
 
-.jcr            0x20000038        0x0 load address 0x080040b8
+.jcr            0x20000038        0x0 load address 0x08004090
  .jcr           0x20000038        0x0 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
 
-.igot.plt       0x20000038        0x0 load address 0x080040b8
+.igot.plt       0x20000038        0x0 load address 0x08004090
  .igot.plt      0x20000038        0x0 d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7e-m/fpu/crtbegin.o
                 0x20000038                . = ALIGN (0x4)
 
-.bss            0x20000038      0xb04 load address 0x080040b8
+.bss            0x20000038      0xb04 load address 0x08004090
                 0x20000038                _sbss = .
                 0x20000038                __bss_start__ = _sbss
  *(.bss)
@@ -2239,7 +2239,7 @@ LOAD d:/gcc-arm-none-eabi-5_4-2016q3-20160926-win32/bin/../lib/gcc/arm-none-eabi
                 [!provide]                PROVIDE (_end, _ebss)
 
 ._user_heap_stack
-                0x20000b3c      0x300 load address 0x08004bbc
+                0x20000b3c      0x300 load address 0x08004b94
                 0x20000b3c                . = ALIGN (0x4)
                 0x20000c3c                . = (. + _Min_Heap_Size)
  *fill*         0x20000b3c      0x100 

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
   27:../stdperiph/source/stm32f37x_usart.c ****     [..]
   28:../stdperiph/source/stm32f37x_usart.c ****         (#) Enable peripheral clock using RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE)
   29:../stdperiph/source/stm32f37x_usart.c ****             function for USART1 or using RCC_APB1PeriphClockCmd(RCC_APB1Periph_USARTx, ENABLE)
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 2
 
 
   30:../stdperiph/source/stm32f37x_usart.c ****             function for USART2 and USART3.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
   84:../stdperiph/source/stm32f37x_usart.c **** /** @addtogroup STM32F37x_StdPeriph_Driver
   85:../stdperiph/source/stm32f37x_usart.c ****   * @{
   86:../stdperiph/source/stm32f37x_usart.c ****   */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 3
 
 
   87:../stdperiph/source/stm32f37x_usart.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  141:../stdperiph/source/stm32f37x_usart.c ****    |---------------------|---------------------------------------|             
  142:../stdperiph/source/stm32f37x_usart.c ****    |    0    |    0      |    | SB | 8 bit data | STB |          |
  143:../stdperiph/source/stm32f37x_usart.c ****    |---------|-----------|---------------------------------------|  
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 4
 
 
  144:../stdperiph/source/stm32f37x_usart.c ****    |    0    |    1      |    | SB | 7 bit data | PB | STB |     |
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
   48 000e FFF7FEFF 		bl	RCC_APB2PeriphResetCmd
   49              	.LVL2:
  180:../stdperiph/source/stm32f37x_usart.c ****     RCC_APB2PeriphResetCmd(RCC_APB2Periph_USART1, DISABLE);
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 5
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 5
 
 
   50              		.loc 1 180 0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
   92 0054 08BD     		pop	{r3, pc}
   93              	.L7:
   94 0056 00BF     		.align	2
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 6
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 6
 
 
   95              	.L6:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  217:../stdperiph/source/stm32f37x_usart.c ****   assert_param(IS_USART_HARDWARE_FLOW_CONTROL(USART_InitStruct->USART_HardwareFlowControl));
  218:../stdperiph/source/stm32f37x_usart.c ****   
  219:../stdperiph/source/stm32f37x_usart.c ****   /* Disable USART */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 7
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 7
 
 
  220:../stdperiph/source/stm32f37x_usart.c ****   USARTx->CR1 &= (uint32_t)~((uint32_t)USART_CR1_UE);
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  156 002c 2B69     		ldr	r3, [r5, #16]
  243:../stdperiph/source/stm32f37x_usart.c ****             USART_InitStruct->USART_Mode;
  157              		.loc 1 243 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 8
 
 
  158 002e 0B43     		orrs	r3, r3, r1
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  189              	.L9:
  268:../stdperiph/source/stm32f37x_usart.c ****   }
  269:../stdperiph/source/stm32f37x_usart.c ****   else if (USARTx == USART2)
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 9
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 9
 
 
  190              		.loc 1 269 0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  224              		.loc 1 289 0
  225 0078 01FB1322 		mls	r2, r1, r3, r2
  226              	.LVL36:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 10
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 10
 
 
  227              	.L13:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  260              		@ sp needed
  261 00a2 30BD     		pop	{r4, r5, pc}
  262              	.LVL43:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 11
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 11
 
 
  263              	.L18:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  304 0016 00BF     		.section	.text.USART_ClockInit,"ax",%progbits
  305              		.align	2
  306              		.global	USART_ClockInit
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 12
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 12
 
 
  307              		.thumb
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  332 000c 1A43     		orrs	r2, r2, r3
  357:../stdperiph/source/stm32f37x_usart.c ****                        USART_ClockInitStruct->USART_CPHA | USART_ClockInitStruct->USART_LastBit);
  333              		.loc 1 357 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 13
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 13
 
 
  334 000e 8B68     		ldr	r3, [r1, #8]
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  373:../stdperiph/source/stm32f37x_usart.c ****   USART_ClockInitStruct->USART_CPHA = USART_CPHA_1Edge;
  373              		.loc 1 373 0
  374 0006 8360     		str	r3, [r0, #8]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 14
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 14
 
 
  374:../stdperiph/source/stm32f37x_usart.c ****   USART_ClockInitStruct->USART_LastBit = USART_LastBit_Disable;
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  406 0012 0360     		str	r3, [r0]
  407 0014 7047     		bx	lr
  408              		.cfi_endproc
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 15
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 15
 
 
  409              	.LFE116:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  429:../stdperiph/source/stm32f37x_usart.c ****        in the USART CR3 register */
  430:../stdperiph/source/stm32f37x_usart.c ****     USARTx->CR1 &= (uint32_t)~USART_DirectionMode;
  435              		.loc 1 430 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 16
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 16
 
 
  436 000a 0368     		ldr	r3, [r0]
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  457:../stdperiph/source/stm32f37x_usart.c ****     USARTx->CR1 &= (uint32_t)~((uint32_t)USART_CR1_OVER8);
  466              		.loc 1 457 0
  467 000c 0368     		ldr	r3, [r0]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 17
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 17
 
 
  468 000e 23F40043 		bic	r3, r3, #32768
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  498 000e 23F40063 		bic	r3, r3, #2048
  499 0012 8360     		str	r3, [r0, #8]
  500 0014 7047     		bx	lr
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 18
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 18
 
 
  501              		.cfi_endproc
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  527 000c 4368     		ldr	r3, [r0, #4]
  528 000e 23F40023 		bic	r3, r3, #524288
  529 0012 4360     		str	r3, [r0, #4]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 19
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 19
 
 
  530 0014 7047     		bx	lr
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  544:../stdperiph/source/stm32f37x_usart.c ****        the CR2 register */
  545:../stdperiph/source/stm32f37x_usart.c ****     USARTx->CR2 &= (uint32_t)~((uint32_t)USART_CR2_DATAINV);
  556              		.loc 1 545 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 20
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 20
 
 
  557 000c 4368     		ldr	r3, [r0, #4]
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  584 0006 4160     		str	r1, [r0, #4]
  585 0008 7047     		bx	lr
  586              	.LVL62:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 21
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 21
 
 
  587              	.L42:
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  614 0002 4368     		ldr	r3, [r0, #4]
  615 0004 43F40043 		orr	r3, r3, #32768
  616 0008 4360     		str	r3, [r0, #4]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 22
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 22
 
 
  617 000a 7047     		bx	lr
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  647 000a 7047     		bx	lr
  648              	.L48:
  630:../stdperiph/source/stm32f37x_usart.c ****   }
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 23
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 23
 
 
  631:../stdperiph/source/stm32f37x_usart.c ****   else
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  679 000c 4161     		str	r1, [r0, #20]
  680 000e 7047     		bx	lr
  681              		.cfi_endproc
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 24
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 24
 
 
  682              	.LFE125:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  677:../stdperiph/source/stm32f37x_usart.c **** /**
  678:../stdperiph/source/stm32f37x_usart.c ****   * @}
  679:../stdperiph/source/stm32f37x_usart.c ****   */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 25
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 25
 
 
  680:../stdperiph/source/stm32f37x_usart.c **** 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  730 0004 43F00203 		orr	r3, r3, #2
  731 0008 0360     		str	r3, [r0]
  732 000a 7047     		bx	lr
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 26
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 26
 
 
  733              	.L53:
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  761 0008 8368     		ldr	r3, [r0, #8]
  762 000a 1943     		orrs	r1, r1, r3
  763              	.LVL72:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 27
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 27
 
 
  764 000c 8160     		str	r1, [r0, #8]
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  795:../stdperiph/source/stm32f37x_usart.c **** {
  777              		.loc 1 795 0
  778              		.cfi_startproc
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 28
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 28
 
 
  779              		@ args = 0, pretend = 0, frame = 0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  824:../stdperiph/source/stm32f37x_usart.c **** void USART_AutoBaudRateConfig(USART_TypeDef* USARTx, uint32_t USART_AutoBaudRate)
  825:../stdperiph/source/stm32f37x_usart.c **** {
  807              		.loc 1 825 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 29
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 29
 
 
  808              		.cfi_startproc
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  856:../stdperiph/source/stm32f37x_usart.c **** @endverbatim
  857:../stdperiph/source/stm32f37x_usart.c ****   * @{
  858:../stdperiph/source/stm32f37x_usart.c ****   */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 30
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 30
 
 
  859:../stdperiph/source/stm32f37x_usart.c **** 
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  887:../stdperiph/source/stm32f37x_usart.c ****   return (uint16_t)(USARTx->RDR & (uint16_t)0x01FF);
  862              		.loc 1 887 0
  863 0000 808C     		ldrh	r0, [r0, #36]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 31
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 31
 
 
  864              	.LVL79:
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  929:../stdperiph/source/stm32f37x_usart.c ****   */
  930:../stdperiph/source/stm32f37x_usart.c **** void USART_SetAddress(USART_TypeDef* USARTx, uint8_t USART_Address)
  931:../stdperiph/source/stm32f37x_usart.c **** {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 32
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 32
 
 
  879              		.loc 1 931 0
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  912              		.loc 1 954 0
  913 0000 21B1     		cbz	r1, .L64
  955:../stdperiph/source/stm32f37x_usart.c ****   {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 33
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 33
 
 
  956:../stdperiph/source/stm32f37x_usart.c ****     /* Enable the USART mute mode by setting the MME bit in the CR1 register */
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  944 0002 23F40063 		bic	r3, r3, #2048
  945 0006 0360     		str	r3, [r0]
  982:../stdperiph/source/stm32f37x_usart.c ****   USARTx->CR1 |= USART_WakeUp;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 34
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 34
 
 
  946              		.loc 1 982 0
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  984              		.global	USART_LINBreakDetectLengthConfig
  985              		.thumb
  986              		.thumb_func
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 35
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 35
 
 
  988              	USART_LINBreakDetectLengthConfig:
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1054:../stdperiph/source/stm32f37x_usart.c ****   *            @arg USART_LINBreakDetectLength_11b: 11-bit break detection
 1055:../stdperiph/source/stm32f37x_usart.c ****   * @retval None
 1056:../stdperiph/source/stm32f37x_usart.c ****   */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 36
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 36
 
 
 1057:../stdperiph/source/stm32f37x_usart.c **** void USART_LINBreakDetectLengthConfig(USART_TypeDef* USARTx, uint32_t USART_LINBreakDetectLength)
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1080:../stdperiph/source/stm32f37x_usart.c ****   if (NewState != DISABLE)
  1023              		.loc 1 1080 0
  1024 0000 21B1     		cbz	r1, .L70
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 37
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 37
 
 
 1081:../stdperiph/source/stm32f37x_usart.c ****   {
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1115:../stdperiph/source/stm32f37x_usart.c ****          -@- In Half-duplex mode the following bits must be kept cleared:
 1116:../stdperiph/source/stm32f37x_usart.c ****              (+@) LINEN and CLKEN bits in the USART_CR2 register.
 1117:../stdperiph/source/stm32f37x_usart.c ****              (+@) SCEN and IREN bits in the USART_CR3 register.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 38
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 38
 
 
 1118:../stdperiph/source/stm32f37x_usart.c **** 
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1076              	.LFB140:
 1145:../stdperiph/source/stm32f37x_usart.c ****   }
 1146:../stdperiph/source/stm32f37x_usart.c **** }
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 39
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 39
 
 
 1147:../stdperiph/source/stm32f37x_usart.c **** 
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1201:../stdperiph/source/stm32f37x_usart.c ****   * @{
 1202:../stdperiph/source/stm32f37x_usart.c ****   */
 1203:../stdperiph/source/stm32f37x_usart.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 40
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 40
 
 
 1204:../stdperiph/source/stm32f37x_usart.c **** /**
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1107              		@ args = 0, pretend = 0, frame = 0
  1108              		@ frame_needed = 0, uses_anonymous_args = 0
  1109              		@ link register save eliminated.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 41
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 41
 
 
  1110              	.LVL93:
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1255:../stdperiph/source/stm32f37x_usart.c ****   assert_param(IS_USART_ALL_PERIPH(USARTx)); 
 1256:../stdperiph/source/stm32f37x_usart.c ****   assert_param(IS_FUNCTIONAL_STATE(NewState));
 1257:../stdperiph/source/stm32f37x_usart.c ****   if (NewState != DISABLE)
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 42
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 42
 
 
  1141              		.loc 1 1257 0
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1173 0002 23F46023 		bic	r3, r3, #917504
  1174 0006 8360     		str	r3, [r0, #8]
 1282:../stdperiph/source/stm32f37x_usart.c ****   /* Set the USART auto retry count*/
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 43
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 43
 
 
 1283:../stdperiph/source/stm32f37x_usart.c ****   USARTx->CR3 |= (uint32_t)((uint32_t)USART_AutoCount << 0x11);
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1214              		.thumb
  1215              		.thumb_func
  1217              	USART_IrDAConfig:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 44
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 44
 
 
  1218              	.LFB145:
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1354:../stdperiph/source/stm32f37x_usart.c **** void USART_IrDAConfig(USART_TypeDef* USARTx, uint32_t USART_IrDAMode)
 1355:../stdperiph/source/stm32f37x_usart.c **** {
  1219              		.loc 1 1355 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 45
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 45
 
 
  1220              		.cfi_startproc
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1378:../stdperiph/source/stm32f37x_usart.c ****   {
 1379:../stdperiph/source/stm32f37x_usart.c ****     /* Enable the IrDA mode by setting the IREN bit in the CR3 register */
 1380:../stdperiph/source/stm32f37x_usart.c ****     USARTx->CR3 |= USART_CR3_IREN;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 46
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 46
 
 
  1254              		.loc 1 1380 0
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1415:../stdperiph/source/stm32f37x_usart.c ****             1/16 bit time, depending on the oversampling rate).
 1416:../stdperiph/source/stm32f37x_usart.c ****        
 1417:../stdperiph/source/stm32f37x_usart.c **** @endverbatim
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 47
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 47
 
 
 1418:../stdperiph/source/stm32f37x_usart.c ****   * @{
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1444:../stdperiph/source/stm32f37x_usart.c **** 
 1445:../stdperiph/source/stm32f37x_usart.c **** /**
 1446:../stdperiph/source/stm32f37x_usart.c ****   * @brief  Configures the USART's DE polarity
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 48
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 48
 
 
 1447:../stdperiph/source/stm32f37x_usart.c ****   * @param  USARTx: where x can be 1 or 2 or 3 to select the USART peripheral.
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1336              		@ frame_needed = 0, uses_anonymous_args = 0
  1337              		@ link register save eliminated.
  1338              	.LVL105:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 49
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 49
 
 
 1473:../stdperiph/source/stm32f37x_usart.c ****   /* Check the parameters */
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1498:../stdperiph/source/stm32f37x_usart.c ****   /* Set the new value for the DE deassertion time */
 1499:../stdperiph/source/stm32f37x_usart.c ****   USARTx->CR1 |=((uint32_t)USART_DEDeassertionTime << (uint32_t)0x10);
  1370              		.loc 1 1499 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 50
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 50
 
 
  1371 0008 0368     		ldr	r3, [r0]
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1389              		@ args = 0, pretend = 0, frame = 0
  1390              		@ frame_needed = 0, uses_anonymous_args = 0
  1391              		@ link register save eliminated.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 51
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 51
 
 
  1392              	.LVL109:
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1566:../stdperiph/source/stm32f37x_usart.c ****   * @retval None
 1567:../stdperiph/source/stm32f37x_usart.c ****   */
 1568:../stdperiph/source/stm32f37x_usart.c **** void USART_DMAReceptionErrorConfig(USART_TypeDef* USARTx, uint32_t USART_DMAOnError)
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 52
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 52
 
 
 1569:../stdperiph/source/stm32f37x_usart.c **** {
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1598:../stdperiph/source/stm32f37x_usart.c ****     [..] In Polling Mode, the SPI communication can be managed by these flags:
 1599:../stdperiph/source/stm32f37x_usart.c ****          (#) USART_FLAG_REACK: to indicate the status of the Receive Enable 
 1600:../stdperiph/source/stm32f37x_usart.c ****              acknowledge flag
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 53
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 53
 
 
 1601:../stdperiph/source/stm32f37x_usart.c ****          (#) USART_FLAG_TEACK: to indicate the status of the Transmit Enable 
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1655:../stdperiph/source/stm32f37x_usart.c ****              (##) USART_IT_LBD: specifies the interrupt source for LIN Break 
 1656:../stdperiph/source/stm32f37x_usart.c ****                   detection interrupt.
 1657:../stdperiph/source/stm32f37x_usart.c ****              (##) USART_IT_TXE: specifies the interrupt source for Tansmit Data 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 54
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 54
 
 
 1658:../stdperiph/source/stm32f37x_usart.c ****                   Register empty interrupt.
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1457              		.cfi_offset 5, -4
  1458              	.LVL116:
 1702:../stdperiph/source/stm32f37x_usart.c ****   uint32_t usartreg = 0, itpos = 0, itmask = 0;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 55
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 55
 
 
 1703:../stdperiph/source/stm32f37x_usart.c ****   uint32_t usartxbase = 0;
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1486              		.loc 1 1729 0
  1487 0020 1AB1     		cbz	r2, .L101
 1730:../stdperiph/source/stm32f37x_usart.c ****   {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 56
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 56
 
 
 1731:../stdperiph/source/stm32f37x_usart.c ****     *(__IO uint32_t*)usartxbase  |= itmask;
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1754:../stdperiph/source/stm32f37x_usart.c **** {
  1521              		.loc 1 1754 0
  1522              		.cfi_startproc
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 57
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 57
 
 
  1523              		@ args = 0, pretend = 0, frame = 0
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1777:../stdperiph/source/stm32f37x_usart.c ****   * @param  USART_OVRDetection: specifies the OVR detection status in case of OVR error.
 1778:../stdperiph/source/stm32f37x_usart.c ****   *          This parameter can be any combination of the following values:
 1779:../stdperiph/source/stm32f37x_usart.c ****   *            @arg USART_OVRDetection_Enable: OVR error detection enabled when
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 58
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 58
 
 
 1780:../stdperiph/source/stm32f37x_usart.c ****   *                                            the USART OVR error is asserted.
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1809:../stdperiph/source/stm32f37x_usart.c ****   *            @arg USART_FLAG_ABRF:  Auto baud rate flag.
 1810:../stdperiph/source/stm32f37x_usart.c ****   *            @arg USART_FLAG_ABRE:  Auto baud rate error flag.
 1811:../stdperiph/source/stm32f37x_usart.c ****   *            @arg USART_FLAG_EOB:  End of block flag.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 59
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 59
 
 
 1812:../stdperiph/source/stm32f37x_usart.c ****   *            @arg USART_FLAG_RTO:  Receive time out flag.
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1608 000e 00BF     		.section	.text.USART_ClearFlag,"ax",%progbits
  1609              		.align	2
  1610              		.global	USART_ClearFlag
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 60
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 60
 
 
  1611              		.thumb
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1629              		.align	2
  1630              		.global	USART_GetITStatus
  1631              		.thumb
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 61
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 61
 
 
  1632              		.thumb_func
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1652              	.LVL141:
 1916:../stdperiph/source/stm32f37x_usart.c ****   itmask = (uint32_t)0x01 << itmask;
  1653              		.loc 1 1916 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 62
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 62
 
 
  1654 0008 0123     		movs	r3, #1
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1933:../stdperiph/source/stm32f37x_usart.c ****   bitpos &= USARTx->ISR;
  1692              		.loc 1 1933 0
  1693 002c C269     		ldr	r2, [r0, #28]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 63
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 63
 
 
  1694 002e 1140     		ands	r1, r1, r2
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
 1951:../stdperiph/source/stm32f37x_usart.c ****   *            @arg USART_IT_WU:  Wake up interrupt.
 1952:../stdperiph/source/stm32f37x_usart.c ****   *            @arg USART_IT_CM:  Character match interrupt.
 1953:../stdperiph/source/stm32f37x_usart.c ****   *            @arg USART_IT_EOB:  End of block interrupt.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 64
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 64
 
 
 1954:../stdperiph/source/stm32f37x_usart.c ****   *            @arg USART_IT_RTO:  Receive time out interrupt.
@@ -3838,117 +3838,117 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 1
  1756              		.file 5 "../stdperiph/include/stm32f37x_rcc.h"
  1757              		.file 6 "../stdperiph/include/stm32f37x_usart.h"
  1758              		.file 7 "../cmsis/include/core_cm4.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 65
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 65
 
 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 66
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 66
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f37x_usart.c
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:22     .text.USART_DeInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:27     .text.USART_DeInit:00000000 USART_DeInit
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:96     .text.USART_DeInit:00000058 $d
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:103    .text.USART_Init:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:108    .text.USART_Init:00000000 USART_Init
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:266    .text.USART_Init:000000a4 $d
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:272    .text.USART_StructInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:277    .text.USART_StructInit:00000000 USART_StructInit
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:305    .text.USART_ClockInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:310    .text.USART_ClockInit:00000000 USART_ClockInit
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:355    .text.USART_ClockStructInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:360    .text.USART_ClockStructInit:00000000 USART_ClockStructInit
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:382    .text.USART_Cmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:387    .text.USART_Cmd:00000000 USART_Cmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:412    .text.USART_DirectionModeCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:417    .text.USART_DirectionModeCmd:00000000 USART_DirectionModeCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:445    .text.USART_OverSampling8Cmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:450    .text.USART_OverSampling8Cmd:00000000 USART_OverSampling8Cmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:475    .text.USART_OneBitMethodCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:480    .text.USART_OneBitMethodCmd:00000000 USART_OneBitMethodCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:505    .text.USART_MSBFirstCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:510    .text.USART_MSBFirstCmd:00000000 USART_MSBFirstCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:535    .text.USART_DataInvCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:540    .text.USART_DataInvCmd:00000000 USART_DataInvCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:565    .text.USART_InvPinCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:570    .text.USART_InvPinCmd:00000000 USART_InvPinCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:598    .text.USART_SWAPPinCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:603    .text.USART_SWAPPinCmd:00000000 USART_SWAPPinCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:628    .text.USART_ReceiverTimeOutCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:633    .text.USART_ReceiverTimeOutCmd:00000000 USART_ReceiverTimeOutCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:658    .text.USART_SetReceiverTimeOut:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:663    .text.USART_SetReceiverTimeOut:00000000 USART_SetReceiverTimeOut
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:685    .text.USART_SetPrescaler:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:690    .text.USART_SetPrescaler:00000000 USART_SetPrescaler
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:713    .text.USART_STOPModeCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:718    .text.USART_STOPModeCmd:00000000 USART_STOPModeCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:743    .text.USART_StopModeWakeUpSourceConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:748    .text.USART_StopModeWakeUpSourceConfig:00000000 USART_StopModeWakeUpSourceConfig
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:770    .text.USART_AutoBaudRateCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:775    .text.USART_AutoBaudRateCmd:00000000 USART_AutoBaudRateCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:800    .text.USART_AutoBaudRateConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:805    .text.USART_AutoBaudRateConfig:00000000 USART_AutoBaudRateConfig
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:827    .text.USART_SendData:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:832    .text.USART_SendData:00000000 USART_SendData
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:849    .text.USART_ReceiveData:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:854    .text.USART_ReceiveData:00000000 USART_ReceiveData
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:872    .text.USART_SetAddress:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:877    .text.USART_SetAddress:00000000 USART_SetAddress
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:899    .text.USART_MuteModeCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:904    .text.USART_MuteModeCmd:00000000 USART_MuteModeCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:929    .text.USART_MuteModeWakeUpConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:934    .text.USART_MuteModeWakeUpConfig:00000000 USART_MuteModeWakeUpConfig
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:956    .text.USART_AddressDetectionConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:961    .text.USART_AddressDetectionConfig:00000000 USART_AddressDetectionConfig
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:983    .text.USART_LINBreakDetectLengthConfig:00000000 $t
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s 			page 67
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:22     .text.USART_DeInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:27     .text.USART_DeInit:00000000 USART_DeInit
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:96     .text.USART_DeInit:00000058 $d
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:103    .text.USART_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:108    .text.USART_Init:00000000 USART_Init
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:266    .text.USART_Init:000000a4 $d
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:272    .text.USART_StructInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:277    .text.USART_StructInit:00000000 USART_StructInit
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:305    .text.USART_ClockInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:310    .text.USART_ClockInit:00000000 USART_ClockInit
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:355    .text.USART_ClockStructInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:360    .text.USART_ClockStructInit:00000000 USART_ClockStructInit
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:382    .text.USART_Cmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:387    .text.USART_Cmd:00000000 USART_Cmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:412    .text.USART_DirectionModeCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:417    .text.USART_DirectionModeCmd:00000000 USART_DirectionModeCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:445    .text.USART_OverSampling8Cmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:450    .text.USART_OverSampling8Cmd:00000000 USART_OverSampling8Cmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:475    .text.USART_OneBitMethodCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:480    .text.USART_OneBitMethodCmd:00000000 USART_OneBitMethodCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:505    .text.USART_MSBFirstCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:510    .text.USART_MSBFirstCmd:00000000 USART_MSBFirstCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:535    .text.USART_DataInvCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:540    .text.USART_DataInvCmd:00000000 USART_DataInvCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:565    .text.USART_InvPinCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:570    .text.USART_InvPinCmd:00000000 USART_InvPinCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:598    .text.USART_SWAPPinCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:603    .text.USART_SWAPPinCmd:00000000 USART_SWAPPinCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:628    .text.USART_ReceiverTimeOutCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:633    .text.USART_ReceiverTimeOutCmd:00000000 USART_ReceiverTimeOutCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:658    .text.USART_SetReceiverTimeOut:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:663    .text.USART_SetReceiverTimeOut:00000000 USART_SetReceiverTimeOut
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:685    .text.USART_SetPrescaler:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:690    .text.USART_SetPrescaler:00000000 USART_SetPrescaler
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:713    .text.USART_STOPModeCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:718    .text.USART_STOPModeCmd:00000000 USART_STOPModeCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:743    .text.USART_StopModeWakeUpSourceConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:748    .text.USART_StopModeWakeUpSourceConfig:00000000 USART_StopModeWakeUpSourceConfig
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:770    .text.USART_AutoBaudRateCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:775    .text.USART_AutoBaudRateCmd:00000000 USART_AutoBaudRateCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:800    .text.USART_AutoBaudRateConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:805    .text.USART_AutoBaudRateConfig:00000000 USART_AutoBaudRateConfig
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:827    .text.USART_SendData:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:832    .text.USART_SendData:00000000 USART_SendData
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:849    .text.USART_ReceiveData:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:854    .text.USART_ReceiveData:00000000 USART_ReceiveData
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:872    .text.USART_SetAddress:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:877    .text.USART_SetAddress:00000000 USART_SetAddress
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:899    .text.USART_MuteModeCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:904    .text.USART_MuteModeCmd:00000000 USART_MuteModeCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:929    .text.USART_MuteModeWakeUpConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:934    .text.USART_MuteModeWakeUpConfig:00000000 USART_MuteModeWakeUpConfig
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:956    .text.USART_AddressDetectionConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:961    .text.USART_AddressDetectionConfig:00000000 USART_AddressDetectionConfig
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:983    .text.USART_LINBreakDetectLengthConfig:00000000 $t
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc7eQDas.s 			page 67
 
 
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:988    .text.USART_LINBreakDetectLengthConfig:00000000 USART_LINBreakDetectLengthConfig
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1010   .text.USART_LINCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1015   .text.USART_LINCmd:00000000 USART_LINCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1040   .text.USART_HalfDuplexCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1045   .text.USART_HalfDuplexCmd:00000000 USART_HalfDuplexCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1070   .text.USART_SetGuardTime:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1075   .text.USART_SetGuardTime:00000000 USART_SetGuardTime
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1098   .text.USART_SmartCardCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1103   .text.USART_SmartCardCmd:00000000 USART_SmartCardCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1128   .text.USART_SmartCardNACKCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1133   .text.USART_SmartCardNACKCmd:00000000 USART_SmartCardNACKCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1158   .text.USART_SetAutoRetryCount:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1163   .text.USART_SetAutoRetryCount:00000000 USART_SetAutoRetryCount
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1185   .text.USART_SetBlockLength:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1190   .text.USART_SetBlockLength:00000000 USART_SetBlockLength
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1212   .text.USART_IrDAConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1217   .text.USART_IrDAConfig:00000000 USART_IrDAConfig
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1239   .text.USART_IrDACmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1244   .text.USART_IrDACmd:00000000 USART_IrDACmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1269   .text.USART_DECmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1274   .text.USART_DECmd:00000000 USART_DECmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1299   .text.USART_DEPolarityConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1304   .text.USART_DEPolarityConfig:00000000 USART_DEPolarityConfig
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1326   .text.USART_SetDEAssertionTime:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1331   .text.USART_SetDEAssertionTime:00000000 USART_SetDEAssertionTime
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1353   .text.USART_SetDEDeassertionTime:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1358   .text.USART_SetDEDeassertionTime:00000000 USART_SetDEDeassertionTime
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1380   .text.USART_DMACmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1385   .text.USART_DMACmd:00000000 USART_DMACmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1413   .text.USART_DMAReceptionErrorConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1418   .text.USART_DMAReceptionErrorConfig:00000000 USART_DMAReceptionErrorConfig
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1440   .text.USART_ITConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1445   .text.USART_ITConfig:00000000 USART_ITConfig
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1514   .text.USART_RequestCmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1519   .text.USART_RequestCmd:00000000 USART_RequestCmd
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1550   .text.USART_OverrunDetectionConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1555   .text.USART_OverrunDetectionConfig:00000000 USART_OverrunDetectionConfig
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1577   .text.USART_GetFlagStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1582   .text.USART_GetFlagStatus:00000000 USART_GetFlagStatus
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1609   .text.USART_ClearFlag:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1614   .text.USART_ClearFlag:00000000 USART_ClearFlag
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1629   .text.USART_GetITStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1634   .text.USART_GetITStatus:00000000 USART_GetITStatus
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1725   .text.USART_ClearITPendingBit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccFmgSEW.s:1730   .text.USART_ClearITPendingBit:00000000 USART_ClearITPendingBit
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:988    .text.USART_LINBreakDetectLengthConfig:00000000 USART_LINBreakDetectLengthConfig
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1010   .text.USART_LINCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1015   .text.USART_LINCmd:00000000 USART_LINCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1040   .text.USART_HalfDuplexCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1045   .text.USART_HalfDuplexCmd:00000000 USART_HalfDuplexCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1070   .text.USART_SetGuardTime:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1075   .text.USART_SetGuardTime:00000000 USART_SetGuardTime
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1098   .text.USART_SmartCardCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1103   .text.USART_SmartCardCmd:00000000 USART_SmartCardCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1128   .text.USART_SmartCardNACKCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1133   .text.USART_SmartCardNACKCmd:00000000 USART_SmartCardNACKCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1158   .text.USART_SetAutoRetryCount:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1163   .text.USART_SetAutoRetryCount:00000000 USART_SetAutoRetryCount
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1185   .text.USART_SetBlockLength:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1190   .text.USART_SetBlockLength:00000000 USART_SetBlockLength
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1212   .text.USART_IrDAConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1217   .text.USART_IrDAConfig:00000000 USART_IrDAConfig
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1239   .text.USART_IrDACmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1244   .text.USART_IrDACmd:00000000 USART_IrDACmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1269   .text.USART_DECmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1274   .text.USART_DECmd:00000000 USART_DECmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1299   .text.USART_DEPolarityConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1304   .text.USART_DEPolarityConfig:00000000 USART_DEPolarityConfig
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1326   .text.USART_SetDEAssertionTime:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1331   .text.USART_SetDEAssertionTime:00000000 USART_SetDEAssertionTime
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1353   .text.USART_SetDEDeassertionTime:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1358   .text.USART_SetDEDeassertionTime:00000000 USART_SetDEDeassertionTime
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1380   .text.USART_DMACmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1385   .text.USART_DMACmd:00000000 USART_DMACmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1413   .text.USART_DMAReceptionErrorConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1418   .text.USART_DMAReceptionErrorConfig:00000000 USART_DMAReceptionErrorConfig
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1440   .text.USART_ITConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1445   .text.USART_ITConfig:00000000 USART_ITConfig
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1514   .text.USART_RequestCmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1519   .text.USART_RequestCmd:00000000 USART_RequestCmd
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1550   .text.USART_OverrunDetectionConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1555   .text.USART_OverrunDetectionConfig:00000000 USART_OverrunDetectionConfig
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1577   .text.USART_GetFlagStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1582   .text.USART_GetFlagStatus:00000000 USART_GetFlagStatus
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1609   .text.USART_ClearFlag:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1614   .text.USART_ClearFlag:00000000 USART_ClearFlag
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1629   .text.USART_GetITStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1634   .text.USART_GetITStatus:00000000 USART_GetITStatus
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1725   .text.USART_ClearITPendingBit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc7eQDas.s:1730   .text.USART_ClearITPendingBit:00000000 USART_ClearITPendingBit
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

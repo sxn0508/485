@@ -17,18 +17,22 @@ const DefDataIDHandle INFRDataID_Handle_List[] = {
     {{0X33, 0X3C, 0X34, 0X35}, vVoltage_SetMinValue},    //扩充：电压设置合格下限
     {{0X33, 0X3D, 0X34, 0X35}, vVoltage_SetMaxMaxValue}, //扩充：电压设置修改上限
     {{0X33, 0X3E, 0X34, 0X35}, vVoltage_SetMinMinValue}, //扩充：电压设置修改下限
-    {{0X33, 0X73, 0X34, 0X33}, vEnergy_Modify_AbleSet},  //扩充：正向有功电能量修改使能/禁能ID_00014000,
-    {{0X33, 0X74, 0X34, 0X33}, vEnergy_Modify_RaitoSet}, //扩充：正向有功电能量修改比例设置ID_00014100,
-    {{0X33, 0X75, 0X34, 0X33}, vEnergy_Modify_Reset},    //扩充：正向有功电能量修改恢复出厂设置ID_00014200,
-    {{0X33, 0X76, 0X34, 0X33}, vEnergy_Modify_ReadSet},  //扩充：正向有功电能量修改读取设：置
-    {{0X33, 0X77, 0X34, 0X33}, vEnergy_Modify_ReadSet},  //扩充：正向有功电能量修改读取设：置
-    /*电流重过载*/
+#ifdef ENABLE_ENERGY_MODIFY
+    {{0X33, 0X73, 0X34, 0X33}, vEnergy_Modify_AbleSet},   //扩充：正向有功电能量修改使能/禁能ID_00014000,
+    {{0X33, 0X74, 0X34, 0X33}, vEnergy_Modify_RaitoSet},  //扩充：正向有功电能量修改比例设置ID_00014100,
+    {{0X33, 0X75, 0X34, 0X33}, vEnergy_Modify_Reset},     //扩充：正向有功电能量修改恢复出厂设置ID_00014200,
+    {{0X33, 0X76, 0X34, 0X33}, vEnergy_Modify_ReadSet},   //扩充：正向有功电能量修改读取设：置
+    {{0X33, 0X77, 0X34, 0X33}, vEnergy_Modify_ReadValue}, //扩充：正向有功电能量修改读取设：置
+#endif
+/*电流重过载*/
+#ifdef ENABLE_CURRENT_LIMIT
     {{0X33, 0X37, 0X35, 0X35}, vCurrent_Limit_Set},                    //扩充：设置电流重过载参数:电流上限
     {{0X33, 0X38, 0X35, 0X35}, vCurrent_Limit_ReadSet},                //扩充：设置电流重过载参数:电流上限读取
     {{0X33, 0X39, 0X35, 0X35}, vCurrent_CTRatio_Set},                  //扩充：设置电流重过载参数:二次侧CT变比
     {{0X33, 0X3A, 0X35, 0X35}, vCurrent_CTRatio_ReadSet},              //扩充：读取电流重过载参数:二次侧CT变比
     {{0X33, 0X3B, 0X35, 0X35}, vCurrent_TransFormer_Capacity_ReadSet}, //扩充：读取电流重过载参数:变压器容量
-    {{0X32, 0X32, 0X32, 0X32}, vRead_Version},                         //扩充：读取程序版本
+#endif
+    {{0X32, 0X32, 0X32, 0X32}, vRead_Version}, //扩充：读取程序版本
 };
 const DefDataIDHandle DBDataID_Handle_List[] = {
     {{0X33, 0X34, 0X34, 0X35}, vVoltageHandle}, //A相电压ID_02010100,
