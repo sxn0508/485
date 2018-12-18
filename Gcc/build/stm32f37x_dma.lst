@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
   27:../stdperiph/source/stm32f37x_dma.c ****         mode (if needed) using the DMA_Init() function.
   28:../stdperiph/source/stm32f37x_dma.c ****     (#) Enable the NVIC and the corresponding interrupt(s) using the function 
   29:../stdperiph/source/stm32f37x_dma.c ****         DMA_ITConfig() if you need to use DMA interrupts.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 2
 
 
   30:../stdperiph/source/stm32f37x_dma.c ****     (#) Enable the DMA channel using the DMA_Cmd() function.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
   84:../stdperiph/source/stm32f37x_dma.c **** /* Private define ------------------------------------------------------------*/
   85:../stdperiph/source/stm32f37x_dma.c **** #define CCR_CLEAR_MASK   ((uint32_t)0xFFFF800F) /* DMA Channel config registers Masks */
   86:../stdperiph/source/stm32f37x_dma.c **** #define FLAG_Mask        ((uint32_t)0x10000000) /* DMA2 FLAG mask                     */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 3
 
 
   87:../stdperiph/source/stm32f37x_dma.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
   31              		.cfi_startproc
   32              		@ args = 0, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 4
 
 
   34              		@ link register save eliminated.
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
   64 002a 9842     		cmp	r0, r3
   65 002c 05D1     		bne	.L4
  164:../stdperiph/source/stm32f37x_dma.c ****   {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 5
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 5
 
 
  165:../stdperiph/source/stm32f37x_dma.c ****     /* Reset interrupt pending bits for DMA1 Channel2 */
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  103 006c 5360     		str	r3, [r2, #4]
  104 006e 7047     		bx	lr
  105              	.L7:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 6
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 6
 
 
  182:../stdperiph/source/stm32f37x_dma.c ****   }
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  199:../stdperiph/source/stm32f37x_dma.c ****   {
  200:../stdperiph/source/stm32f37x_dma.c ****     /* Reset interrupt pending bits for DMA2 Channel2 */
  201:../stdperiph/source/stm32f37x_dma.c ****     DMA2->IFCR |= DMA2_CHANNEL2_IT_MASK;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 7
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 7
 
 
  143              		.loc 1 201 0
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  180 00ea 5360     		str	r3, [r2, #4]
  181              	.L1:
  182 00ec 7047     		bx	lr
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 8
 
 
  183              	.L15:
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  236:../stdperiph/source/stm32f37x_dma.c ****   /* Check the parameters */
  237:../stdperiph/source/stm32f37x_dma.c ****   assert_param(IS_DMA_ALL_PERIPH(DMAy_Channelx));
  238:../stdperiph/source/stm32f37x_dma.c ****   assert_param(IS_DMA_DIR(DMA_InitStruct->DMA_DIR));
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 9
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 9
 
 
  239:../stdperiph/source/stm32f37x_dma.c ****   assert_param(IS_DMA_PERIPHERAL_INC_STATE(DMA_InitStruct->DMA_PeripheralInc));
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  266:../stdperiph/source/stm32f37x_dma.c ****             DMA_InitStruct->DMA_Priority | DMA_InitStruct->DMA_M2M;
  247              		.loc 1 266 0
  248 0022 4B6A     		ldr	r3, [r1, #36]
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 10
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 10
 
 
  265:../stdperiph/source/stm32f37x_dma.c ****             DMA_InitStruct->DMA_PeripheralDataSize | DMA_InitStruct->DMA_MemoryDataSize |
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  283:../stdperiph/source/stm32f37x_dma.c **** 
  284:../stdperiph/source/stm32f37x_dma.c **** /**
  285:../stdperiph/source/stm32f37x_dma.c ****   * @brief  Fills each DMA_InitStruct member with its default value.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 11
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 11
 
 
  286:../stdperiph/source/stm32f37x_dma.c ****   * @param  DMA_InitStruct: pointer to a DMA_InitTypeDef structure which will
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  313:../stdperiph/source/stm32f37x_dma.c ****   /* Initialize the DMA_M2M member */
  314:../stdperiph/source/stm32f37x_dma.c ****   DMA_InitStruct->DMA_M2M = DMA_M2M_Disable;
  314              		.loc 1 314 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 12
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 12
 
 
  315 0016 8362     		str	r3, [r0, #40]
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  346 0014 1B0C     		lsrs	r3, r3, #16
  347 0016 0360     		str	r3, [r0]
  348 0018 7047     		bx	lr
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 13
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 13
 
 
  349              		.cfi_endproc
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  385:../stdperiph/source/stm32f37x_dma.c **** {
  360              		.loc 1 385 0
  361              		.cfi_startproc
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 14
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 14
 
 
  362              		@ args = 0, pretend = 0, frame = 0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  396              		.align	2
  397              		.global	DMA_ITConfig
  398              		.thumb
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 15
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 15
 
 
  399              		.thumb_func
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  460:../stdperiph/source/stm32f37x_dma.c ****   * @{
  461:../stdperiph/source/stm32f37x_dma.c ****   */
  462:../stdperiph/source/stm32f37x_dma.c **** 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 16
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 16
 
 
  463:../stdperiph/source/stm32f37x_dma.c **** /**
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  428              		.section	.text.DMA_GetFlagStatus,"ax",%progbits
  429              		.align	2
  430              		.global	DMA_GetFlagStatus
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 17
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 17
 
 
  431              		.thumb
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  543:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA2_FLAG_TE4: DMA2 Channel4 transfer error flag.
  544:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA2_FLAG_GL5: DMA2 Channel5 global flag.
  545:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA2_FLAG_TC5: DMA2 Channel5 transfer complete flag.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 18
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 18
 
 
  546:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA2_FLAG_HT5: DMA2 Channel5 half transfer flag.
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  458 0010 0342     		tst	r3, r0
  459 0012 01D0     		beq	.L31
  578:../stdperiph/source/stm32f37x_dma.c ****   {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 19
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 19
 
 
  579:../stdperiph/source/stm32f37x_dma.c ****     /* DMAy_FLAG is set */
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  608:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA1_FLAG_GL4: DMA1 Channel4 global flag.
  609:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA1_FLAG_TC4: DMA1 Channel4 transfer complete flag.
  610:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA1_FLAG_HT4: DMA1 Channel4 half transfer flag.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 20
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 20
 
 
  611:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA1_FLAG_TE4: DMA1 Channel4 transfer error flag.
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  494 0000 10F0805F 		tst	r0, #268435456
  495 0004 02D0     		beq	.L35
  658:../stdperiph/source/stm32f37x_dma.c ****   {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 21
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 21
 
 
  659:../stdperiph/source/stm32f37x_dma.c ****     /* Clear the selected DMAy flags */
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  690:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA1_IT_TC5: DMA1 Channel5 transfer complete interrupt.
  691:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA1_IT_HT5: DMA1 Channel5 half transfer interrupt.
  692:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA1_IT_TE5: DMA1 Channel5 transfer error interrupt.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 22
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 22
 
 
  693:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA1_IT_GL6: DMA1 Channel6 global interrupt.
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  529 0004 02D0     		beq	.L40
  739:../stdperiph/source/stm32f37x_dma.c ****   {
  740:../stdperiph/source/stm32f37x_dma.c ****     /* Get DMA2 ISR register value */
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 23
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 23
 
 
  741:../stdperiph/source/stm32f37x_dma.c ****     tmpreg = DMA2->ISR;
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  562              	.LFE120:
  564              		.section	.text.DMA_ClearITPendingBit,"ax",%progbits
  565              		.align	2
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 24
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 24
 
 
  566              		.global	DMA_ClearITPendingBit
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  812:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA2_IT_GL5: DMA2 Channel5 global interrupt.
  813:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA2_IT_TC5: DMA2 Channel5 transfer complete interrupt.
  814:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA2_IT_HT5: DMA2 Channel5 half transfer interrupt.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 25
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 25
 
 
  815:../stdperiph/source/stm32f37x_dma.c ****   *            @arg DMA2_IT_TE5: DMA2 Channel5 transfer error interrupt.
@@ -1497,38 +1497,38 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 1
  602              		.file 4 "../cmsis/include/stm32f37x.h"
  603              		.file 5 "../stdperiph/include/stm32f37x_dma.h"
  604              		.file 6 "../cmsis/include/core_cm4.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccikFMLm.s 			page 26
+ARM GAS  C:\Users\strag\AppData\Local\Temp\cc93KM1f.s 			page 26
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f37x_dma.c
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:22     .text.DMA_DeInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:27     .text.DMA_DeInit:00000000 DMA_DeInit
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:186    .text.DMA_DeInit:000000f0 $d
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:204    .text.DMA_Init:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:209    .text.DMA_Init:00000000 DMA_Init
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:280    .text.DMA_StructInit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:285    .text.DMA_StructInit:00000000 DMA_StructInit
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:321    .text.DMA_Cmd:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:326    .text.DMA_Cmd:00000000 DMA_Cmd
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:353    .text.DMA_SetCurrDataCounter:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:358    .text.DMA_SetCurrDataCounter:00000000 DMA_SetCurrDataCounter
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:373    .text.DMA_GetCurrDataCounter:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:378    .text.DMA_GetCurrDataCounter:00000000 DMA_GetCurrDataCounter
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:396    .text.DMA_ITConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:401    .text.DMA_ITConfig:00000000 DMA_ITConfig
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:429    .text.DMA_GetFlagStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:434    .text.DMA_GetFlagStatus:00000000 DMA_GetFlagStatus
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:474    .text.DMA_GetFlagStatus:0000001c $d
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:480    .text.DMA_ClearFlag:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:485    .text.DMA_ClearFlag:00000000 DMA_ClearFlag
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:508    .text.DMA_ClearFlag:00000014 $d
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:514    .text.DMA_GetITStatus:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:519    .text.DMA_GetITStatus:00000000 DMA_GetITStatus
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:559    .text.DMA_GetITStatus:0000001c $d
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:565    .text.DMA_ClearITPendingBit:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:570    .text.DMA_ClearITPendingBit:00000000 DMA_ClearITPendingBit
-C:\Users\strag\AppData\Local\Temp\ccikFMLm.s:593    .text.DMA_ClearITPendingBit:00000014 $d
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:22     .text.DMA_DeInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:27     .text.DMA_DeInit:00000000 DMA_DeInit
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:186    .text.DMA_DeInit:000000f0 $d
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:204    .text.DMA_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:209    .text.DMA_Init:00000000 DMA_Init
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:280    .text.DMA_StructInit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:285    .text.DMA_StructInit:00000000 DMA_StructInit
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:321    .text.DMA_Cmd:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:326    .text.DMA_Cmd:00000000 DMA_Cmd
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:353    .text.DMA_SetCurrDataCounter:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:358    .text.DMA_SetCurrDataCounter:00000000 DMA_SetCurrDataCounter
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:373    .text.DMA_GetCurrDataCounter:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:378    .text.DMA_GetCurrDataCounter:00000000 DMA_GetCurrDataCounter
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:396    .text.DMA_ITConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:401    .text.DMA_ITConfig:00000000 DMA_ITConfig
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:429    .text.DMA_GetFlagStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:434    .text.DMA_GetFlagStatus:00000000 DMA_GetFlagStatus
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:474    .text.DMA_GetFlagStatus:0000001c $d
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:480    .text.DMA_ClearFlag:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:485    .text.DMA_ClearFlag:00000000 DMA_ClearFlag
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:508    .text.DMA_ClearFlag:00000014 $d
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:514    .text.DMA_GetITStatus:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:519    .text.DMA_GetITStatus:00000000 DMA_GetITStatus
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:559    .text.DMA_GetITStatus:0000001c $d
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:565    .text.DMA_ClearITPendingBit:00000000 $t
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:570    .text.DMA_ClearITPendingBit:00000000 DMA_ClearITPendingBit
+C:\Users\strag\AppData\Local\Temp\cc93KM1f.s:593    .text.DMA_ClearITPendingBit:00000014 $d
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS
