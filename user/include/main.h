@@ -18,8 +18,8 @@
 //#define ENABLE_ESTATUS //电表状态字修改功能
 //#define ENABLE_CURRENT_DEVIATION			//电流各相差值修改功能
 //#define ENABLE_CURRENT_LIMIT				//电流最大值修改功能
-#define ENABLE_ENERGY_MODIFY //修改正向有功
-#define ENABLE_INFR          //红外设置参数功能
+//#define ENABLE_ENERGY_MODIFY //修改正向有功
+#define ENABLE_INFR //红外设置参数功能
 #define ENABLE_698
 /*变压器容量，决定三相电流的最大值*/
 //#define TRANSFORMER_CAPACITY_50KVA

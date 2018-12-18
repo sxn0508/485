@@ -31,10 +31,13 @@ const DefDataIDHandle INFRDataID_Handle_List[] = {
     {{0X33, 0X3C, 0X34, 0X35}, vVoltage_SetMinValue},    //扩充：电压设置合格下限
     {{0X33, 0X3D, 0X34, 0X35}, vVoltage_SetMaxMaxValue}, //扩充：电压设置修改上限
     {{0X33, 0X3E, 0X34, 0X35}, vVoltage_SetMinMinValue}, //扩充：电压设置修改下限
-    {{0X33, 0X73, 0X34, 0X33}, vEnergy_Modify_AbleSet},  //扩充：正向有功电能量修改使能/禁能ID_00014000,
-    {{0X33, 0X74, 0X34, 0X33}, vEnergy_Modify_RaitoSet}, //扩充：正向有功电能量修改比例设置ID_00014100,
-    {{0X33, 0X75, 0X34, 0X33}, vEnergy_Modify_Reset},    //扩充：正向有功电能量修改恢复出厂设置ID_00014200,
-    {{0X33, 0X76, 0X34, 0X33}, vEnergy_Modify_ReadSet},  //扩充：正向有功电能量修改读取设：置
+#ifdef ENABLE_ENERGY_MODIFY
+    {{0X33, 0X73, 0X34, 0X33}, vEnergy_Modify_AbleSet},   //扩充：正向有功电能量修改使能/禁能ID_00014000,
+    {{0X33, 0X74, 0X34, 0X33}, vEnergy_Modify_RaitoSet},  //扩充：正向有功电能量修改比例设置ID_00014100,
+    {{0X33, 0X75, 0X34, 0X33}, vEnergy_Modify_Reset},     //扩充：正向有功电能量修改恢复出厂设置ID_00014200,
+    {{0X33, 0X76, 0X34, 0X33}, vEnergy_Modify_ReadSet},   //扩充：正向有功电能量修改读取设：置
+    {{0X33, 0X77, 0X34, 0X33}, vEnergy_Modify_ReadValue}, //扩充：正向有功电能量修改读取设：置
+#endif
     /*电流重过载*/
     {{0X33, 0X37, 0X35, 0X35}, vCurrent_Limit_Set},                    //扩充：设置电流重过载参数:电流上限
     {{0X33, 0X38, 0X35, 0X35}, vCurrent_Limit_ReadSet},                //扩充：设置电流重过载参数:电流上限读取
@@ -59,6 +62,12 @@ const DefDataIDHandle DBDataID_Handle_List[] = {
     {{0X33, 0X35, 0X35, 0X35}, vCurrent_Limit_Modify}, //B相电流ID_02020200,
     {{0X33, 0X36, 0X35, 0X35}, vCurrent_Limit_Modify}, //C相电流ID_02020300,
     {{0X33, 0X32, 0X35, 0X35}, vCurrent_Limit_Modify}, //电流数据块ID_0202FF00,
+    /*电流重过载*/
+    {{0X33, 0X37, 0X35, 0X35}, vCurrent_Limit_Set},                    //扩充：设置电流重过载参数:电流上限
+    {{0X33, 0X38, 0X35, 0X35}, vCurrent_Limit_ReadSet},                //扩充：设置电流重过载参数:电流上限读取
+    {{0X33, 0X39, 0X35, 0X35}, vCurrent_CTRatio_Set},                  //扩充：设置电流重过载参数:二次侧CT变比
+    {{0X33, 0X3A, 0X35, 0X35}, vCurrent_CTRatio_ReadSet},              //扩充：读取电流重过载参数:二次侧CT变比
+    {{0X33, 0X3B, 0X35, 0X35}, vCurrent_TransFormer_Capacity_ReadSet}, //扩充：读取电流重过载参数:变压器容量
 #endif
 #endif
     {{0X37, 0X38, 0X33, 0X38}, Estatus_Modify_CurrentEvent}, //电表运行状态字4ID_04000504,
@@ -66,44 +75,39 @@ const DefDataIDHandle DBDataID_Handle_List[] = {
     {{0X39, 0X38, 0X33, 0X38}, Estatus_Modify_CurrentEvent}, //电表运行状态字6ID_04000506,
     {{0X3A, 0X38, 0X33, 0X38}, Estatus_Modify_CurrentEvent}, //电表运行状态字7ID_04000507,
     {{0X32, 0X38, 0X33, 0X38}, Estatus_Modify_CurrentEvent}, //电表运行状态字数据块ID_040005FF,
-    {{0X33, 0X33, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功总电能ID_00010000,
-    {{0X33, 0X34, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功费率1电能ID_00010100,
-    {{0X33, 0X35, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功费率2电能ID_00010200,
-    {{0X33, 0X36, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功费率3电能ID_00010300,
-    {{0X33, 0X37, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功费率4电能ID_00010400,
-    {{0X33, 0X32, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功电能数据块ID_0001FF00,
-    {{0X33, 0X33, 0X48, 0X33}, vNowEnergy_Modifier},         //当前A相正向有功ID_00150000,
-    {{0X33, 0X33, 0X5C, 0X33}, vNowEnergy_Modifier},         //当前B相正向有功ID_00290000,
-    {{0X33, 0X33, 0X70, 0X33}, vNowEnergy_Modifier},         //当前C相正向有功ID_003D0000,
-    {{0X34, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},         //上1日冻结正向有功电能数据（费率1~4）ID_05060101,
-    {{0X35, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},         //上2日冻结正向有功电能数据（费率1~4）ID_05060102,
-    {{0X36, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},         //上3日冻结正向有功电能数据（费率1~4） ID_05060103,
-    {{0X34, 0X33, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功总电能ID_00010001,
-    {{0X34, 0X34, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功费率1电能ID_00010101,
-    {{0X34, 0X35, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功费率1电能 ID_00010201,
-    {{0X34, 0X36, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功费率1电能ID_00010301,
-    {{0X34, 0X37, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功费率1电能ID_00010401,
-    {{0X34, 0X32, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功电能数据块ID_0001FF01,
-    {{0X34, 0X33, 0X48, 0X33}, vAccountEnergy_Modify},       //上1结算日A相正向有功电能ID_00150001,
-    {{0X34, 0X33, 0X5C, 0X33}, vAccountEnergy_Modify},       //上1结算日B相正向有功电能ID_00290001,
-    {{0X34, 0X33, 0X70, 0X33}, vAccountEnergy_Modify},       //上1结算日C相正向有功电能ID_003D0001,
-    {{0X33, 0X37, 0X34, 0X35}, Get_VChange_State},           //扩充：电压修改使能/禁能ID_02010400,
-    {{0X33, 0X38, 0X34, 0X35}, Set_Voltage_Limit},           //扩充：电压限值设置ID_02010500,
-    {{0X33, 0X39, 0X34, 0X35}, Query_Voltage_Limit},         //扩充：电压限值查询ID_02010600,
-    {{0X33, 0X3A, 0X34, 0X35}, Default_Reset},               //扩充：电压修改功能恢复出厂设置ID_02010700,
-
-    /*电流重过载*/
-    {{0X33, 0X37, 0X35, 0X35}, vCurrent_Limit_Set},                    //扩充：设置电流重过载参数:电流上限
-    {{0X33, 0X38, 0X35, 0X35}, vCurrent_Limit_ReadSet},                //扩充：设置电流重过载参数:电流上限读取
-    {{0X33, 0X39, 0X35, 0X35}, vCurrent_CTRatio_Set},                  //扩充：设置电流重过载参数:二次侧CT变比
-    {{0X33, 0X3A, 0X35, 0X35}, vCurrent_CTRatio_ReadSet},              //扩充：读取电流重过载参数:二次侧CT变比
-    {{0X33, 0X3B, 0X35, 0X35}, vCurrent_TransFormer_Capacity_ReadSet}, //扩充：读取电流重过载参数:变压器容量
-
+#ifdef ENABLE_ENERGY_MODIFY
+    {{0X33, 0X33, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功总电能ID_00010000,
+    {{0X33, 0X34, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功费率1电能ID_00010100,
+    {{0X33, 0X35, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功费率2电能ID_00010200,
+    {{0X33, 0X36, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功费率3电能ID_00010300,
+    {{0X33, 0X37, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功费率4电能ID_00010400,
+    {{0X33, 0X32, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功电能数据块ID_0001FF00,
+    {{0X33, 0X33, 0X48, 0X33}, vNowEnergy_Modifier},      //当前A相正向有功ID_00150000,
+    {{0X33, 0X33, 0X5C, 0X33}, vNowEnergy_Modifier},      //当前B相正向有功ID_00290000,
+    {{0X33, 0X33, 0X70, 0X33}, vNowEnergy_Modifier},      //当前C相正向有功ID_003D0000,
+    {{0X34, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},      //上1日冻结正向有功电能数据（费率1~4）ID_05060101,
+    {{0X35, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},      //上2日冻结正向有功电能数据（费率1~4）ID_05060102,
+    {{0X36, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},      //上3日冻结正向有功电能数据（费率1~4） ID_05060103,
+    {{0X34, 0X33, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功总电能ID_00010001,
+    {{0X34, 0X34, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功费率1电能ID_00010101,
+    {{0X34, 0X35, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功费率1电能 ID_00010201,
+    {{0X34, 0X36, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功费率1电能ID_00010301,
+    {{0X34, 0X37, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功费率1电能ID_00010401,
+    {{0X34, 0X32, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功电能数据块ID_0001FF01,
+    {{0X34, 0X33, 0X48, 0X33}, vAccountEnergy_Modify},    //上1结算日A相正向有功电能ID_00150001,
+    {{0X34, 0X33, 0X5C, 0X33}, vAccountEnergy_Modify},    //上1结算日B相正向有功电能ID_00290001,
+    {{0X34, 0X33, 0X70, 0X33}, vAccountEnergy_Modify},    //上1结算日C相正向有功电能ID_003D0001,
     {{0X33, 0X73, 0X34, 0X33}, vEnergy_Modify_AbleSet},   //扩充：正向有功电能量修改使能/禁能ID_00014000,
     {{0X33, 0X74, 0X34, 0X33}, vEnergy_Modify_RaitoSet},  //扩充：正向有功电能量修改比例设置ID_00014100,
     {{0X33, 0X75, 0X34, 0X33}, vEnergy_Modify_Reset},     //扩充：正向有功电能量回复出厂设置ID_00014200,
     {{0X33, 0X76, 0X34, 0X33}, vEnergy_Modify_ReadSet},   //扩充：正向有功电能量修改读取设置
     {{0X33, 0X77, 0X34, 0X33}, vEnergy_Modify_ReadValue}, //扩充：正向有功电能量读取存储的真实值和修改值ID_00014200,
+#endif
+    {{0X33, 0X37, 0X34, 0X35}, Get_VChange_State},   //扩充：电压修改使能/禁能ID_02010400,
+    {{0X33, 0X38, 0X34, 0X35}, Set_Voltage_Limit},   //扩充：电压限值设置ID_02010500,
+    {{0X33, 0X39, 0X34, 0X35}, Query_Voltage_Limit}, //扩充：电压限值查询ID_02010600,
+    {{0X33, 0X3A, 0X34, 0X35}, Default_Reset},       //扩充：电压修改功能恢复出厂设置ID_02010700,
+
     /*4号补遗负荷曲线连续抄读部分中的电压曲线、电流曲线修改,2018年8月7日20:53:4：0*/
     {{0X33, 0X34, 0X43, 0X39}, vLoadProfile_Voltage_Modify}, //A相电压曲线连续抄读ID_06100101,
     {{0X34, 0X34, 0X43, 0X39}, vLoadProfile_Voltage_Modify}, //B电压数据块曲线连续抄读ID_06100102,

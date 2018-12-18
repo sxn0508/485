@@ -112,7 +112,6 @@ int main(void)
                 /*电表口收帧*/
                 if ((dwLen = Uart_Read(pUartDB, ucApp_Buf_DB2ZD, DRV_BUF_SIZE)) == 0)
                     break;
-#if 1
                 if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL) //校验错误就不透传？
                 {
                     vFeedExtWatchDog();
@@ -125,7 +124,6 @@ int main(void)
                     {
                         if (dwAPduAnalyze(pAPDU, dwLen, &stCollData) > 0)
                         {
-#endif
                             for (i = 0; i < stCollData.ucDataNum; i++)
                             {
                                 if (stCollData.stDataUnit[i].stOAD.OI_date == 0x2000) /*电压OI*/

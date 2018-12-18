@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 1
   27:../stdperiph/source/stm32f37x_misc.c ****         -@- Lower priority values gives higher priority.
   28:../stdperiph/source/stm32f37x_misc.c ****         -@- Priority Order:
   29:../stdperiph/source/stm32f37x_misc.c ****             (#@) Lowest Preemption priority.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s 			page 2
 
 
   30:../stdperiph/source/stm32f37x_misc.c ****             (#@) Lowest Subpriority.
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 1
   84:../stdperiph/source/stm32f37x_misc.c ****   *            @arg NVIC_PriorityGroup_0: 0 bits for preemption priority
   85:../stdperiph/source/stm32f37x_misc.c ****   *                                4 bits for subpriority.
   86:../stdperiph/source/stm32f37x_misc.c ****   *     @note When NVIC_PriorityGroup_0 is selected, it will no be any nested 
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s 			page 3
 
 
   87:../stdperiph/source/stm32f37x_misc.c ****   *           interrupt. This interrupts priority is managed only with subpriority.  
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 1
  115:../stdperiph/source/stm32f37x_misc.c ****   */
  116:../stdperiph/source/stm32f37x_misc.c **** void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct)
  117:../stdperiph/source/stm32f37x_misc.c **** {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s 			page 4
 
 
   58              		.loc 1 117 0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 1
   93              		.loc 1 136 0
   94 0024 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
   95              	.LVL10:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 5
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s 			page 5
 
 
   96 0026 DBB2     		uxtb	r3, r3
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 1
  140              	NVIC_SetVectorTable:
  141              	.LFB113:
  147:../stdperiph/source/stm32f37x_misc.c ****   }
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 6
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s 			page 6
 
 
  148:../stdperiph/source/stm32f37x_misc.c **** }
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 1
  174:../stdperiph/source/stm32f37x_misc.c ****   *            @arg NVIC_LP_SLEEPONEXIT: Low Power Sleep on Exit.
  175:../stdperiph/source/stm32f37x_misc.c ****   * @param  NewState: new state of LP condition. This parameter can be: ENABLE or DISABLE.
  176:../stdperiph/source/stm32f37x_misc.c ****   * @retval None
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 7
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s 			page 7
 
 
  177:../stdperiph/source/stm32f37x_misc.c ****   */
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 1
  194:../stdperiph/source/stm32f37x_misc.c **** /**
  195:../stdperiph/source/stm32f37x_misc.c ****   * @brief  Configures the SysTick clock source.
  196:../stdperiph/source/stm32f37x_misc.c ****   * @param  SysTick_CLKSource: specifies the SysTick clock source.
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s 			page 8
 
 
  197:../stdperiph/source/stm32f37x_misc.c ****   *          This parameter can be one of the following values:
@@ -472,26 +472,26 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 1
  244              		.file 4 "../cmsis/include/core_cm4.h"
  245              		.file 5 "../cmsis/include/stm32f37x.h"
  246              		.file 6 "../stdperiph/include/stm32f37x_misc.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s 			page 9
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f37x_misc.c
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:22     .text.NVIC_PriorityGroupConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:27     .text.NVIC_PriorityGroupConfig:00000000 NVIC_PriorityGroupConfig
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:46     .text.NVIC_PriorityGroupConfig:00000010 $d
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:51     .text.NVIC_Init:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:56     .text.NVIC_Init:00000000 NVIC_Init
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:129    .text.NVIC_Init:0000005c $d
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:135    .text.NVIC_SetVectorTable:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:140    .text.NVIC_SetVectorTable:00000000 NVIC_SetVectorTable
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:160    .text.NVIC_SetVectorTable:00000010 $d
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:165    .text.NVIC_SystemLPConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:170    .text.NVIC_SystemLPConfig:00000000 NVIC_SystemLPConfig
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:199    .text.NVIC_SystemLPConfig:00000018 $d
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:204    .text.SysTick_CLKSourceConfig:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:209    .text.SysTick_CLKSourceConfig:00000000 SysTick_CLKSourceConfig
-C:\Users\strag\AppData\Local\Temp\ccZrO7G3.s:236    .text.SysTick_CLKSourceConfig:0000001c $d
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:22     .text.NVIC_PriorityGroupConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:27     .text.NVIC_PriorityGroupConfig:00000000 NVIC_PriorityGroupConfig
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:46     .text.NVIC_PriorityGroupConfig:00000010 $d
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:51     .text.NVIC_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:56     .text.NVIC_Init:00000000 NVIC_Init
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:129    .text.NVIC_Init:0000005c $d
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:135    .text.NVIC_SetVectorTable:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:140    .text.NVIC_SetVectorTable:00000000 NVIC_SetVectorTable
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:160    .text.NVIC_SetVectorTable:00000010 $d
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:165    .text.NVIC_SystemLPConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:170    .text.NVIC_SystemLPConfig:00000000 NVIC_SystemLPConfig
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:199    .text.NVIC_SystemLPConfig:00000018 $d
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:204    .text.SysTick_CLKSourceConfig:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:209    .text.SysTick_CLKSourceConfig:00000000 SysTick_CLKSourceConfig
+C:\Users\strag\AppData\Local\Temp\ccHGSbk0.s:236    .text.SysTick_CLKSourceConfig:0000001c $d
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

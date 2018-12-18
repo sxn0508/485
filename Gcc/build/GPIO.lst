@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
   43              		.cfi_offset 14, -4
   44 0004 83B0     		sub	sp, sp, #12
   45              	.LCFI1:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 2
 
 
   46              		.cfi_def_cfa_offset 40
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
   87 0050 0821     		movs	r1, #8
   88 0052 4046     		mov	r0, r8
   89 0054 FFF7FEFF 		bl	GPIO_PinAFConfig
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 3
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 3
 
 
   90              	.LVL4:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
  130 00a0 FFF7FEFF 		bl	RCC_AHBPeriphClockCmd
  131              	.LVL9:
   41:../user/source/GPIO.c ****     GPIO_Initstruc.GPIO_Pin = GPIO_Pin_13;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 4
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 4
 
 
  132              		.loc 1 41 0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
  171              		.loc 1 56 0
  172 00f2 2246     		mov	r2, r4
  173 00f4 2946     		mov	r1, r5
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 5
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 5
 
 
  174 00f6 4FF09040 		mov	r0, #1207959552
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
  219              		.align	2
  220              		.global	vExti_Init
  221              		.thumb
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 6
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 6
 
 
  222              		.thumb_func
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
   89:../user/source/GPIO.c ****     GPIO_Init(GPIOB, &GPIOInitStruct);
  255              		.loc 1 89 0
  256 0022 04A9     		add	r1, sp, #16
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 7
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 7
 
 
  257 0024 1248     		ldr	r0, .L7
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
  295 0066 FFF7FEFF 		bl	NVIC_Init
  296              	.LVL22:
  106:../user/source/GPIO.c **** }
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 8
 
 
  297              		.loc 1 106 0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
  119:../user/source/GPIO.c ****     }
  120:../user/source/GPIO.c ****     else
  121:../user/source/GPIO.c ****     {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 9
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 9
 
 
  122:../user/source/GPIO.c ****         GPIO_WriteBit(GPIOA, GPIO_Pin_0, Bit_SET);
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
  385              		.file 3 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
  386              		.file 4 "../cmsis/include/stm32f37x.h"
  387              		.file 5 "../stdperiph/include/stm32f37x_exti.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 10
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 10
 
 
  388              		.file 6 "../stdperiph/include/stm32f37x_gpio.h"
@@ -546,22 +546,22 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 1
  390              		.file 8 "../stdperiph/include/stm32f37x_rcc.h"
  391              		.file 9 "../stdperiph/include/stm32f37x_syscfg.h"
  392              		.file 10 "../cmsis/include/core_cm4.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s 			page 11
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 GPIO.c
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:22     .text.vGPIO_Init:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:27     .text.vGPIO_Init:00000000 vGPIO_Init
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:214    .text.vGPIO_Init:0000013c $d
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:219    .text.vExti_Init:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:224    .text.vExti_Init:00000000 vExti_Init
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:306    .text.vExti_Init:00000070 $d
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:311    .text.vFeedExtWatchDog:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:316    .text.vFeedExtWatchDog:00000000 vFeedExtWatchDog
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:352    .text.vLed_Light:00000000 $t
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:357    .text.vLed_Light:00000000 vLed_Light
-C:\Users\strag\AppData\Local\Temp\ccwjj6qE.s:378    .text.vLed_Light:00000010 $d
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:22     .text.vGPIO_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:27     .text.vGPIO_Init:00000000 vGPIO_Init
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:214    .text.vGPIO_Init:0000013c $d
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:219    .text.vExti_Init:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:224    .text.vExti_Init:00000000 vExti_Init
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:306    .text.vExti_Init:00000070 $d
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:311    .text.vFeedExtWatchDog:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:316    .text.vFeedExtWatchDog:00000000 vFeedExtWatchDog
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:352    .text.vLed_Light:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:357    .text.vLed_Light:00000000 vLed_Light
+C:\Users\strag\AppData\Local\Temp\ccv4TKaW.s:378    .text.vLed_Light:00000010 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
