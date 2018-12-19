@@ -15,15 +15,22 @@ COLL_STORE_DATA stCollData;
 /*串口收帧标志*/
 bool FLAG_UartZD_HasData = false;
 bool FLAG_UartDB_HasData = false;
-volatile uint32_t irqCount = 100;
-volatile uint32_t uwBaudelay;
+//volatile uint32_t irqCount = 100;
+//volatile uint32_t uwBaudelay;
+//volatile uint32_t Uart_BaudRate;
+struct AUTO_BAUD AutoBaud485 =
+    {
+        .irqCount = 100,
+        .uwBaudelay = 0xFFFFFFFF,
+        .Uart_BaudRate = 0,
+};
 uint32_t uwBootDelay = 2000000;
 
 static void vLedRun(uint32_t delay);
 static void VoltageTimeOutHandle(void);
 static void RsvFrameHandle(uint8_t *pucBuffer);
 static void vAutoSetBaudrate(void);
-
+static uint32_t uwFindBaudRate(uint32_t baudDelay);
 int main(void)
 {
     ProtocolDef ProtocolType = none;
@@ -32,7 +39,7 @@ int main(void)
     //uint8_t ucVoltageIdex;
     uint32_t i;
     DLT698_FRAME dlt698Frame;
-
+    vGPIO_Init();
     while (uwBootDelay--)
     {
         vFeedExtWatchDog();
@@ -43,11 +50,18 @@ int main(void)
     //SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
     //NVIC_SetPriority(SysTick_IRQn, -1);
     vInterFlash_Init();
-    vGPIO_Init();
+    //vGPIO_Init();
     vFeedExtWatchDog();
     vTimer_Init();
     vLed_Light();
-    vAutoSetBaudrate(); //集中器侧读取一帧，识别波特率
+#if 1
+    vSystickSetAccuracy(1000000); //SysTick = 1us
+    vSystickIntCmd(ENABLE);
+    /*TICK使能后才能初始化外部中断*/
+    vExti_Init(); //
+    vUart_EnableBaudrate(pUartIR, 1200);
+#endif
+    //vAutoSetBaudrate(); //集中器侧读取一帧，识别波特率
     /*电压修改的上下限值设为默认值；开启修改功能 */
     Voltage_Change_Init();
     /*电流重过载参数设置*/
@@ -56,32 +70,73 @@ int main(void)
     vEnergy_Modify_Init();
     while (1)
     {
+        /*可选功能：红外设置参数*/
+#ifdef ENABLE_INFR
+        /*红外串口收帧处理 */
+        if (blDrv_Buf_IsEmpty(pUartIR->pRsvbuf) == false)
+        {
+            if (blRecvFrame(pUartIR->pRsvbuf, ucApp_Buf_INFR))
+            {
+                vINFRDataID_Handle(ucApp_Buf_INFR);
+                /*红外口回帧*/
+                if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
+                {
+                    USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
+                    //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Enable);
+                    USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
+                }
+            }
+        } //end 红外收帧处理
+#endif
         switch (ProtocolType)
         {
         case none:
         {
             vFeedExtWatchDog();
             vLedRun(TICK_200MS);
-            /*识别规约类型*/
-            Uart_idleReadEnable(pUartZD);
-            Uart_idleReadEnable(pUartDB);
-            if (FLAG_UartZD_HasData)
+            if (AutoBaud485.Uart_BaudRate == 0)
             {
-                Uart_idleReadDisable(pUartZD);
-                FLAG_UartZD_HasData = false;
-                vFeedExtWatchDog();
-                dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
-                ProtocolType = GetProtocolType(ucApp_Buf_ZD2DB, dwLen);
-                Uart_idleReadEnable(pUartZD);
+                if (AutoBaud485.irqCount > 0)
+                {
+                    break;
+                }
+                else
+                {
+                    EXTI_DeInit();
+                    AutoBaud485.Uart_BaudRate = uwFindBaudRate(AutoBaud485.uwBaudelay);
+                    vSystickSetAccuracy(1000); //systick=1ms
+                    vSystickIntCmd(ENABLE);
+                    vUart_EnableBaudrate(pUartZD, AutoBaud485.Uart_BaudRate); //使能接收中断
+                    vUart_EnableBaudrate(pUartDB, AutoBaud485.Uart_BaudRate);
+                    /*接收后续字节并忽略*/
+                    vFeedExtWatchDog();
+                    Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
+                    vBuf_Clear(pUartZD->pRsvbuf);
+                }
             }
-            if (FLAG_UartDB_HasData)
+            else
             {
-                Uart_idleReadDisable(pUartDB);
-                FLAG_UartDB_HasData = false;
-                vFeedExtWatchDog();
-                dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
-                ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //校验错误也嫩过？
+                /*识别规约类型*/
+                Uart_idleReadEnable(pUartZD);
                 Uart_idleReadEnable(pUartDB);
+                if (FLAG_UartZD_HasData)
+                {
+                    Uart_idleReadDisable(pUartZD);
+                    FLAG_UartZD_HasData = false;
+                    vFeedExtWatchDog();
+                    dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
+                    ProtocolType = GetProtocolType(ucApp_Buf_ZD2DB, dwLen);
+                    Uart_idleReadEnable(pUartZD);
+                }
+                if (FLAG_UartDB_HasData)
+                {
+                    Uart_idleReadDisable(pUartDB);
+                    FLAG_UartDB_HasData = false;
+                    vFeedExtWatchDog();
+                    dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
+                    ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //校验错误也嫩过？
+                    Uart_idleReadEnable(pUartDB);
+                }
             }
             break;
         }
@@ -98,7 +153,6 @@ int main(void)
                 vFeedExtWatchDog();
                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
                 Uart_idleReadEnable(pUartZD);
-                //if (pframe = pGetpFrame(ucApp_Buf_ZD2DB, dwLen) == NULL)
                 break;
             }
             if (FLAG_UartDB_HasData)
@@ -107,7 +161,6 @@ int main(void)
                 Uart_idleReadDisable(pUartDB);
                 FLAG_UartDB_HasData = false;
                 dlt698Frame.pStart = NULL;
-                //dwLen = 0;
 
                 /*电表口收帧*/
                 if ((dwLen = Uart_Read(pUartDB, ucApp_Buf_DB2ZD, DRV_BUF_SIZE)) == 0)
@@ -117,7 +170,6 @@ int main(void)
                     vFeedExtWatchDog();
                     Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, 1000 * TICK_1MS);
                 }
-                //if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) != NULL) //校验错误就不透传？
                 else if (Voltage_Change_State != Voltage_NOChange)
                 {
                     if ((dwLen = dwGet698Apdu(&dlt698Frame, &pAPDU)) > 0)
@@ -137,7 +189,6 @@ int main(void)
                     vFeedExtWatchDog();
                     Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICK_500MS);
                 }
-                //frame -> UartBuf
             }
             Uart_idleReadEnable(pUartDB);
             break;
@@ -198,44 +249,6 @@ int main(void)
             }
             /*可选功能：红外设置参数*/
 #ifdef ENABLE_INFR
-            /*红外串口收帧处理 */
-            if (blDrv_Buf_IsEmpty(pUartIR->pRsvbuf) == false)
-            {
-                if (blRecvFrame(pUartIR->pRsvbuf, ucApp_Buf_INFR))
-                {
-                    if (ucApp_Buf_INFR[8] == 0X13)
-                    {
-                        ucApp_Buf_INFR[1] = 0x01;
-                        ucApp_Buf_INFR[2] = 0x01;
-                        ucApp_Buf_INFR[3] = 0x01;
-                        ucApp_Buf_INFR[4] = 0x01;
-                        ucApp_Buf_INFR[5] = 0x01;
-                        ucApp_Buf_INFR[6] = 0x01;
-                        ucApp_Buf_INFR[8] = 0x93;
-                        ucApp_Buf_INFR[9] = 0x06;
-                        ucApp_Buf_INFR[10] = 0x34;
-                        ucApp_Buf_INFR[11] = 0x34;
-                        ucApp_Buf_INFR[12] = 0x34;
-                        ucApp_Buf_INFR[13] = 0x34;
-                        ucApp_Buf_INFR[14] = 0x34;
-                        ucApp_Buf_INFR[15] = 0x34;
-                        ucApp_Buf_INFR[16] = 0xA7;
-                        ucApp_Buf_INFR[17] = 0x16;
-                        ucDrv_Buf_PutBytes(ucApp_Buf_INFR, pUartIR->pSndbuf, 18);
-                    }
-                    else
-                    {
-                        vINFRDataID_Handle(ucApp_Buf_INFR);
-                    }
-                    /*红外口回帧*/
-                    if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
-                    {
-                        USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
-                        //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Enable);
-                        USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
-                    }
-                }
-            } //end 红外收帧处理
 #endif
             break;
         } //end while
@@ -340,7 +353,7 @@ void vUartZD_BaudelayCal(volatile uint32_t *pBaudelay)
     static uint32_t LAST_TICK = 0xFFFFFFFF;
     uint32_t nowtick = 0;
     uint32_t tmpdelay = 0;
-    irqCount--;
+    AutoBaud485.irqCount--;
     /*取当前tick数，0~0xFFFF循环*/
     nowtick = TICKS;
     /*初次收到串口数据，系统tick最大65535*/
@@ -366,29 +379,26 @@ void vUartZD_BaudelayCal(volatile uint32_t *pBaudelay)
 
 void vAutoSetBaudrate(void)
 {
-    uint32_t Uart_BaudRate;
     vSystickSetAccuracy(1000000); //SysTick = 1us
     vSystickIntCmd(ENABLE);
     /*TICK使能后才能初始化外部中断*/
     vExti_Init(); //
-    irqCount = 100;
-    uwBaudelay = 0xFFFFFFFF;
-    while (irqCount)
+    AutoBaud485.irqCount = 100;
+    AutoBaud485.uwBaudelay = 0xFFFFFFFF;
+    while (AutoBaud485.irqCount)
     {
         vFeedExtWatchDog();
     }
     EXTI_DeInit();
-    Uart_BaudRate = uwFindBaudRate(uwBaudelay);
+    AutoBaud485.Uart_BaudRate = uwFindBaudRate(AutoBaud485.uwBaudelay);
     vSystickSetAccuracy(1000); //systick=1ms
     vSystickIntCmd(ENABLE);
-    vUart_EnableBaudrate(pUartZD, Uart_BaudRate); //使能接收中断
-    vUart_EnableBaudrate(pUartDB, Uart_BaudRate);
+    vUart_EnableBaudrate(pUartZD, AutoBaud485.Uart_BaudRate); //使能接收中断
+    vUart_EnableBaudrate(pUartDB, AutoBaud485.Uart_BaudRate);
     /*接收后续字节并忽略*/
     vFeedExtWatchDog();
     Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
     vBuf_Clear(pUartZD->pRsvbuf);
-    //Uart_idleReadEnable(pUartZD);
-    //Uart_idleReadEnable(pUartDB);
 
 #if 0
     Uart_ITReadEnable(pUartZD);

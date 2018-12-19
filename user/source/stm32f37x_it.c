@@ -367,7 +367,7 @@ void EXTI9_5_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line7) != RESET)
     {
-        vUartZD_BaudelayCal(&uwBaudelay);
+        vUartZD_BaudelayCal(&AutoBaud485.uwBaudelay);
         EXTI_ClearITPendingBit(EXTI_Line7);
     }
 }

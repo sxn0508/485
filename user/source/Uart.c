@@ -518,6 +518,12 @@ void vUart_EnableBaudrate(UartDef *puart, uint32_t baudrate)
         /*开启串口时钟*/
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
     }
+    else if (puart->handler == USART2)
+    {
+        //RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+        /*开启串口时钟*/
+        RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+    }
     USART_Initstruct.USART_BaudRate = baudrate;
     USART_Initstruct.USART_Mode = (USART_Mode_Rx | USART_Mode_Tx);
     USART_Initstruct.USART_WordLength = USART_WordLength_9b;
@@ -537,6 +543,10 @@ void vUart_EnableBaudrate(UartDef *puart, uint32_t baudrate)
     {
         NVIC_Initstruct.NVIC_IRQChannel = USART3_IRQn;
         //NVIC_Initstruct.NVIC_IRQChannelSubPriority = 0;
+    }
+    else if (puart->handler == USART2)
+    {
+        NVIC_Initstruct.NVIC_IRQChannel = USART2_IRQn;
     }
     NVIC_Initstruct.NVIC_IRQChannelSubPriority = 0;
     NVIC_Initstruct.NVIC_IRQChannelPreemptionPriority = 1;

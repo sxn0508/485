@@ -368,11 +368,11 @@ void vINFRDataID_Handle(uint8_t *pucBuffer)
     if (i < idcount)
     {
 #ifndef ENABLE_ENERGY_MODIFY
-        if (((DBDataID_Handle_List[i].Handle == vEnergy_Modify_AbleSet)) ||
-            ((DBDataID_Handle_List[i].Handle == vEnergy_Modify_RaitoSet)) ||
-            ((DBDataID_Handle_List[i].Handle == vEnergy_Modify_Reset)) ||
-            ((DBDataID_Handle_List[i].Handle == vEnergy_Modify_ReadSet)) ||
-            ((DBDataID_Handle_List[i].Handle == vEnergy_Modify_ReadValue)))
+        if (((INFRDataID_Handle_List[i].Handle == vEnergy_Modify_AbleSet)) ||
+            ((INFRDataID_Handle_List[i].Handle == vEnergy_Modify_RaitoSet)) ||
+            ((INFRDataID_Handle_List[i].Handle == vEnergy_Modify_Reset)) ||
+            ((INFRDataID_Handle_List[i].Handle == vEnergy_Modify_ReadSet)) ||
+            ((INFRDataID_Handle_List[i].Handle == vEnergy_Modify_ReadValue)))
             return;
 #endif
         INFRDataID_Handle_List[i].Handle(pucBuffer);

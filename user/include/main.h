@@ -27,8 +27,16 @@
 #define TRANSFORMER_CAPACITY_200KVA
 //#define TRANSFORMER_CAPACITY_400KVA
 
-extern volatile uint32_t irqCount;
-extern volatile uint32_t uwBaudelay;
+struct AUTO_BAUD
+{
+    volatile uint32_t irqCount;
+    volatile uint32_t uwBaudelay;
+    volatile uint32_t Uart_BaudRate;
+};
+
+extern struct AUTO_BAUD AutoBaud485;
+//extern volatile uint32_t irqCount;
+//extern volatile uint32_t uwBaudelay;
 
 //static void vNVIC_IRQ_Config(void);
 //static void vVoltageHandle(uint8_t * pucBuffer);
