@@ -15,7 +15,6 @@
 //#define ENABLE_CURRENT_DEVIATION			//电流各相差值修改功能
 //#define ENABLE_CURRENT_LIMIT				//电流最大值修改功能
 #define ENABLE_ENERGY_MODIFY //修改正向有功
-#define ENABLE_INFR          //红外设置参数功能
 
 /*变压器容量，决定三相电流的最大值*/
 //#define TRANSFORMER_CAPACITY_50KVA
@@ -26,6 +25,5 @@
 static void VoltageTimeOutHandle(void);
 static void RsvFrameHandle(uint8_t *pucBuffer);
 static void vNVIC_IRQ_Config(void);
-//static void vVoltageHandle(uint8_t * pucBuffer);
 
 #endif

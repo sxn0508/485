@@ -224,7 +224,6 @@ void USART1_IRQHandler(void)
 **********************************************************************/
 void USART2_IRQHandler(void)
 {
-#ifdef ENABLE_INFR
     if (USART_GetFlagStatus(USART2, USART_FLAG_ORE) == SET)
         USART_ClearFlag(USART2, USART_FLAG_ORE);
     if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
@@ -251,7 +250,6 @@ void USART2_IRQHandler(void)
             USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
         }
     }
-#endif
 }
 
 /********************************************************************
