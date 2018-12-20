@@ -15,15 +15,14 @@ COLL_STORE_DATA stCollData;
 /*串口收帧标志*/
 bool FLAG_UartZD_HasData = false;
 bool FLAG_UartDB_HasData = false;
-//volatile uint32_t irqCount = 100;
-//volatile uint32_t uwBaudelay;
-//volatile uint32_t Uart_BaudRate;
+/*自动波特率识别相关参数*/
 struct AUTO_BAUD AutoBaud485 =
     {
         .irqCount = 100,
         .uwBaudelay = 0xFFFFFFFF,
         .Uart_BaudRate = 0,
 };
+/*上电后延时启动参数*/
 uint32_t uwBootDelay = 2000000;
 
 static void vLedRun(uint32_t delay);
@@ -31,37 +30,33 @@ static void VoltageTimeOutHandle(void);
 static void RsvFrameHandle(uint8_t *pucBuffer);
 static void vAutoSetBaudrate(void);
 static uint32_t uwFindBaudRate(uint32_t baudDelay);
+
 int main(void)
 {
+    /*485口波特率类型*/
     ProtocolDef ProtocolType = none;
+    /*698帧APDU数据段指针*/
     uint8_t *pAPDU = NULL;
     uint32_t dwLen = 0;
-    //uint8_t ucVoltageIdex;
     uint32_t i;
+    /*698帧链路层参数*/
     DLT698_FRAME dlt698Frame;
     vGPIO_Init();
+    /*集中器上电过程中485总线有乱码，此时不能识别波特率*/
     while (uwBootDelay--)
     {
         vFeedExtWatchDog();
     }
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-    //SysTick_Config(SysTick_100Ms);
-    /*SysTick使用系统频率64M的8分频：8MHz*/
-    //SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
-    //NVIC_SetPriority(SysTick_IRQn, -1);
     vInterFlash_Init();
-    //vGPIO_Init();
     vFeedExtWatchDog();
     vTimer_Init();
     vLed_Light();
-#if 1
     vSystickSetAccuracy(1000000); //SysTick = 1us
     vSystickIntCmd(ENABLE);
     /*TICK使能后才能初始化外部中断*/
     vExti_Init(); //
     vUart_EnableBaudrate(pUartIR, 1200);
-#endif
-    //vAutoSetBaudrate(); //集中器侧读取一帧，识别波特率
     /*电压修改的上下限值设为默认值；开启修改功能 */
     Voltage_Change_Init();
     /*电流重过载参数设置*/
@@ -70,8 +65,7 @@ int main(void)
     vEnergy_Modify_Init();
     while (1)
     {
-        /*可选功能：红外设置参数*/
-#ifdef ENABLE_INFR
+        vFeedExtWatchDog();
         /*红外串口收帧处理 */
         if (blDrv_Buf_IsEmpty(pUartIR->pRsvbuf) == false)
         {
@@ -82,12 +76,11 @@ int main(void)
                 if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
                 {
                     USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
-                    //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Enable);
                     USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
                 }
             }
         } //end 红外收帧处理
-#endif
+        /*485口收帧处理*/
         switch (ProtocolType)
         {
         case none:
@@ -112,13 +105,13 @@ int main(void)
                     vFeedExtWatchDog();
                     Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
                     vBuf_Clear(pUartZD->pRsvbuf);
+                    Uart_idleReadEnable(pUartZD);
+                    Uart_idleReadEnable(pUartDB);
                 }
             }
             else
             {
                 /*识别规约类型*/
-                Uart_idleReadEnable(pUartZD);
-                Uart_idleReadEnable(pUartDB);
                 if (FLAG_UartZD_HasData)
                 {
                     Uart_idleReadDisable(pUartZD);
@@ -165,12 +158,13 @@ int main(void)
                 /*电表口收帧*/
                 if ((dwLen = Uart_Read(pUartDB, ucApp_Buf_DB2ZD, DRV_BUF_SIZE)) == 0)
                     break;
-                if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL) //校验错误就不透传？
+                if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL ||
+                    Voltage_Change_State == Voltage_NOChange)
                 {
                     vFeedExtWatchDog();
                     Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, 1000 * TICK_1MS);
                 }
-                else if (Voltage_Change_State != Voltage_NOChange)
+                else
                 {
                     if ((dwLen = dwGet698Apdu(&dlt698Frame, &pAPDU)) > 0)
                     {
@@ -248,8 +242,7 @@ int main(void)
                 }
             }
             /*可选功能：红外设置参数*/
-#ifdef ENABLE_INFR
-#endif
+            /*该部分移植到规约状态机之外，与698规约共用*/
             break;
         } //end while
         default:

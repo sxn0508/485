@@ -230,39 +230,31 @@ void USART1_IRQHandler(void)
 **********************************************************************/
 void USART2_IRQHandler(void)
 {
-#ifdef ENABLE_INFR
     if (USART_GetFlagStatus(pUartIR->handler, USART_FLAG_ORE) == SET)
         USART_ClearFlag(pUartIR->handler, USART_FLAG_ORE);
     if (USART_GetITStatus(pUartIR->handler, USART_IT_RXNE) != RESET)
     {
         USART_ClearITPendingBit(pUartIR->handler, USART_IT_RXNE);
-        //if (blDrv_Buf_IsFull(&ucDrv_Buf_Uart2_Rcv) != true) //if串口2接收缓存区不满
         if (blDrv_Buf_IsFull(pUartIR->pRsvbuf) != true) //if串口2接收缓存区不满
         {
-            //ucDrv_Buf_Uart2_Rcv.ucBuf[ucDrv_Buf_Uart2_Rcv.WR_Index] = (uint8_t)USART_ReceiveData(pUartIR->handler);
             pUartIR->pRsvbuf->data[pUartIR->pRsvbuf->wr] = (uint8_t)USART_ReceiveData(pUartIR->handler);
-            //ucDrv_Buf_Uart2_Rcv.WR_Index = (ucDrv_Buf_Uart2_Rcv.WR_Index + 1) % DRV_BUF_SIZE;
             pUartIR->pRsvbuf->wr = (pUartIR->pRsvbuf->wr + 1) % DRV_BUF_SIZE;
         }
     };
     if (USART_GetITStatus(pUartIR->handler, USART_IT_TXE) != RESET)
     {
         USART_ClearITPendingBit(pUartIR->handler, USART_IT_TXE);
-        //USART_SendData(pUartIR->handler, (uint16_t)ucDrv_Buf_Uart2_Snd.ucBuf[ucDrv_Buf_Uart2_Snd.RD_Index]);
         USART_SendData(pUartIR->handler, (uint16_t)pUartIR->pSndbuf->data[pUartIR->pSndbuf->rd]);
-        //ucDrv_Buf_Uart2_Snd.RD_Index = (ucDrv_Buf_Uart2_Snd.RD_Index + 1) % DRV_BUF_SIZE;
         pUartIR->pSndbuf->rd = (pUartIR->pSndbuf->rd + 1) % DRV_BUF_SIZE;
         if (blDrv_Buf_IsEmpty(pUartIR->pSndbuf) == true)
         {
             USART_ITConfig(pUartIR->handler, USART_IT_TXE, DISABLE);
-            //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Disable);
             while (RESET == USART_GetFlagStatus(pUartIR->handler, USART_FLAG_TC))
             {
             }
             USART_ITConfig(pUartIR->handler, USART_IT_RXNE, ENABLE);
         }
     }
-#endif
 }
 
 /********************************************************************

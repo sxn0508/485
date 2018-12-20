@@ -21,7 +21,6 @@ uint8_t ucApp_Buf_INFR[DATA_BUF_SIZE];  //红外口应用缓存
 #define ENABLE_CURRENT_DEVIATION			//电流各相差值修改功能
 #define ENABLE_CURRENT_LIMIT				//电流最大值修改功能
 #define ENABLE_ENERGY_MODIFY				//修改正向有功
-#define ENABLE_INFR							//修改正向有功
 */
 const DefDataIDHandle INFRDataID_Handle_List[] = {
     {{0X33, 0X37, 0X34, 0X35}, Get_VChange_State},       //扩充：电压修改使能/禁能ID_02010400,
@@ -419,15 +418,12 @@ void Get_VChange_State(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 /********************************************************************
  * 功    能：扩充帧：电压限值设置
@@ -472,15 +468,13 @@ void Set_Voltage_Limit(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -516,15 +510,13 @@ void Query_Voltage_Limit(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 24);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -563,15 +555,13 @@ void Default_Reset(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口发送*/
-#ifdef ENABLE_INFR
+    /*红外口发送*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -1595,15 +1585,13 @@ void vCurrent_Limit_Set(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -1653,15 +1641,13 @@ void vCurrent_CTRatio_Set(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -1696,15 +1682,13 @@ void vCurrent_Limit_ReadSet(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 19);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -1738,15 +1722,13 @@ void vCurrent_CTRatio_ReadSet(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 18);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -1779,15 +1761,13 @@ void vCurrent_TransFormer_Capacity_ReadSet(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 18);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /*****************************************************
@@ -2350,15 +2330,13 @@ void vEnergy_Modify_AbleSet(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -2410,15 +2388,13 @@ void vEnergy_Modify_RaitoSet(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -2475,15 +2451,13 @@ void vEnergy_Modify_Reset(uint8_t *pucBuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 #if 1
 /********************************************************************
@@ -2521,7 +2495,6 @@ void vEnergy_Modify_ReadSet(uint8_t *pucbuffer)
     {
         Uart_DataPut(USART3);
     }
-#ifdef ENABLE_INFR
     /*红外口回复*/
     ucDrv_Buf_PutBytes(pucbuffer, pUartIR->pSndbuf, 18);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
@@ -2529,7 +2502,6 @@ void vEnergy_Modify_ReadSet(uint8_t *pucbuffer)
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 #endif
 /********************************************************************
@@ -2577,15 +2549,13 @@ void vEnergy_Modify_ReadValue(uint8_t *pucbuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucbuffer, pUartIR->pSndbuf, 24);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -2626,14 +2596,12 @@ void vVoltage_SetMaxValue(uint8_t *pucBuffer)
         pucBuffer[10] += pucBuffer[i];
     }
     pucBuffer[11] = 0x16; //结束符
-#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 /********************************************************************
  * 功    能：电压合格下限修改函数（红外口收帧处理：）
@@ -2673,14 +2641,12 @@ void vVoltage_SetMinValue(uint8_t *pucBuffer)
         pucBuffer[10] += pucBuffer[i];
     }
     pucBuffer[11] = 0x16;
-#ifdef ENABLE_INFR
     ucDrv_Buf_PutBytes(pucBuffer, pUartIR->pSndbuf, 12);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
 
 /********************************************************************
@@ -3085,13 +3051,11 @@ void vRead_Version(uint8_t *pucbuffer)
     {
         Uart_DataPut(USART3);
     }
-/*红外口回复*/
-#ifdef ENABLE_INFR
+    /*红外口回复*/
     ucDrv_Buf_PutBytes(pucbuffer, pUartIR->pSndbuf, 20);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
         USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
     }
-#endif
 }
