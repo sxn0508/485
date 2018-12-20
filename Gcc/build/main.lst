@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 1
 
 
    1              		.syntax unified
@@ -45,400 +45,393 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
   15:../user/source/main.c **** /*´®¿ÚÊÕÖ¡±êÖ¾*/
   16:../user/source/main.c **** bool FLAG_UartZD_HasData = false;
   17:../user/source/main.c **** bool FLAG_UartDB_HasData = false;
-  18:../user/source/main.c **** //volatile uint32_t irqCount = 100;
-  19:../user/source/main.c **** //volatile uint32_t uwBaudelay;
-  20:../user/source/main.c **** //volatile uint32_t Uart_BaudRate;
-  21:../user/source/main.c **** struct AUTO_BAUD AutoBaud485 =
-  22:../user/source/main.c ****     {
-  23:../user/source/main.c ****         .irqCount = 100,
-  24:../user/source/main.c ****         .uwBaudelay = 0xFFFFFFFF,
-  25:../user/source/main.c ****         .Uart_BaudRate = 0,
-  26:../user/source/main.c **** };
-  27:../user/source/main.c **** uint32_t uwBootDelay = 2000000;
-  28:../user/source/main.c **** 
-  29:../user/source/main.c **** static void vLedRun(uint32_t delay);
-  30:../user/source/main.c **** static void VoltageTimeOutHandle(void);
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 2
+  18:../user/source/main.c **** /*×Ô¶¯²¨ÌØÂÊÊ¶±ðÏà¹Ø²ÎÊý*/
+  19:../user/source/main.c **** struct AUTO_BAUD AutoBaud485 =
+  20:../user/source/main.c ****     {
+  21:../user/source/main.c ****         .irqCount = 100,
+  22:../user/source/main.c ****         .uwBaudelay = 0xFFFFFFFF,
+  23:../user/source/main.c ****         .Uart_BaudRate = 0,
+  24:../user/source/main.c **** };
+  25:../user/source/main.c **** /*ÉÏµçºóÑÓÊ±Æô¶¯²ÎÊý*/
+  26:../user/source/main.c **** uint32_t uwBootDelay = 2000000;
+  27:../user/source/main.c **** 
+  28:../user/source/main.c **** static void vLedRun(uint32_t delay);
+  29:../user/source/main.c **** static void VoltageTimeOutHandle(void);
+  30:../user/source/main.c **** static void RsvFrameHandle(uint8_t *pucBuffer);
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 2
 
 
-  31:../user/source/main.c **** static void RsvFrameHandle(uint8_t *pucBuffer);
-  32:../user/source/main.c **** static void vAutoSetBaudrate(void);
-  33:../user/source/main.c **** static uint32_t uwFindBaudRate(uint32_t baudDelay);
+  31:../user/source/main.c **** static void vAutoSetBaudrate(void);
+  32:../user/source/main.c **** static uint32_t uwFindBaudRate(uint32_t baudDelay);
+  33:../user/source/main.c **** 
   34:../user/source/main.c **** int main(void)
   35:../user/source/main.c **** {
-  36:../user/source/main.c ****     ProtocolDef ProtocolType = none;
-  37:../user/source/main.c ****     uint8_t *pAPDU = NULL;
-  38:../user/source/main.c ****     uint32_t dwLen = 0;
-  39:../user/source/main.c ****     //uint8_t ucVoltageIdex;
-  40:../user/source/main.c ****     uint32_t i;
-  41:../user/source/main.c ****     DLT698_FRAME dlt698Frame;
-  42:../user/source/main.c ****     vGPIO_Init();
-  43:../user/source/main.c ****     while (uwBootDelay--)
-  44:../user/source/main.c ****     {
-  45:../user/source/main.c ****         vFeedExtWatchDog();
-  46:../user/source/main.c ****     }
-  47:../user/source/main.c ****     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-  48:../user/source/main.c ****     //SysTick_Config(SysTick_100Ms);
-  49:../user/source/main.c ****     /*SysTickÊ¹ÓÃÏµÍ³ÆµÂÊ64MµÄ8·ÖÆµ£º8MHz*/
-  50:../user/source/main.c ****     //SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
-  51:../user/source/main.c ****     //NVIC_SetPriority(SysTick_IRQn, -1);
-  52:../user/source/main.c ****     vInterFlash_Init();
-  53:../user/source/main.c ****     //vGPIO_Init();
-  54:../user/source/main.c ****     vFeedExtWatchDog();
-  55:../user/source/main.c ****     vTimer_Init();
-  56:../user/source/main.c ****     vLed_Light();
-  57:../user/source/main.c **** #if 1
-  58:../user/source/main.c ****     vSystickSetAccuracy(1000000); //SysTick = 1us
-  59:../user/source/main.c ****     vSystickIntCmd(ENABLE);
-  60:../user/source/main.c ****     /*TICKÊ¹ÄÜºó²ÅÄÜ³õÊ¼»¯Íâ²¿ÖÐ¶Ï*/
-  61:../user/source/main.c ****     vExti_Init(); //
-  62:../user/source/main.c ****     vUart_EnableBaudrate(pUartIR, 1200);
-  63:../user/source/main.c **** #endif
-  64:../user/source/main.c ****     //vAutoSetBaudrate(); //¼¯ÖÐÆ÷²à¶ÁÈ¡Ò»Ö¡£¬Ê¶±ð²¨ÌØÂÊ
-  65:../user/source/main.c ****     /*µçÑ¹ÐÞ¸ÄµÄÉÏÏÂÏÞÖµÉèÎªÄ¬ÈÏÖµ£»¿ªÆôÐÞ¸Ä¹¦ÄÜ */
-  66:../user/source/main.c ****     Voltage_Change_Init();
-  67:../user/source/main.c ****     /*µçÁ÷ÖØ¹ýÔØ²ÎÊýÉèÖÃ*/
-  68:../user/source/main.c ****     vCurrent_Limit_DefaultSet();
-  69:../user/source/main.c ****     /*µçÁ¿ÐÞ¸ÄµÄÉÏÏÂÏÞÖµÉèÎªÄ¬ÈÏÖµ£»¿ªÆôÐÞ¸Ä¹¦ÄÜ */
-  70:../user/source/main.c ****     vEnergy_Modify_Init();
-  71:../user/source/main.c ****     while (1)
-  72:../user/source/main.c ****     {
-  73:../user/source/main.c ****         /*¿ÉÑ¡¹¦ÄÜ£ººìÍâÉèÖÃ²ÎÊý*/
-  74:../user/source/main.c **** #ifdef ENABLE_INFR
-  75:../user/source/main.c ****         /*ºìÍâ´®¿ÚÊÕÖ¡´¦Àí */
-  76:../user/source/main.c ****         if (blDrv_Buf_IsEmpty(pUartIR->pRsvbuf) == false)
-  77:../user/source/main.c ****         {
-  78:../user/source/main.c ****             if (blRecvFrame(pUartIR->pRsvbuf, ucApp_Buf_INFR))
-  79:../user/source/main.c ****             {
-  80:../user/source/main.c ****                 vINFRDataID_Handle(ucApp_Buf_INFR);
-  81:../user/source/main.c ****                 /*ºìÍâ¿Ú»ØÖ¡*/
-  82:../user/source/main.c ****                 if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
-  83:../user/source/main.c ****                 {
-  84:../user/source/main.c ****                     USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
-  85:../user/source/main.c ****                     //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Enable);
-  86:../user/source/main.c ****                     USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
-  87:../user/source/main.c ****                 }
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 3
+  36:../user/source/main.c ****     /*485¿Ú²¨ÌØÂÊÀàÐÍ*/
+  37:../user/source/main.c ****     ProtocolDef ProtocolType = none;
+  38:../user/source/main.c ****     /*698Ö¡APDUÊý¾Ý¶ÎÖ¸Õë*/
+  39:../user/source/main.c ****     uint8_t *pAPDU = NULL;
+  40:../user/source/main.c ****     uint32_t dwLen = 0;
+  41:../user/source/main.c ****     uint32_t i;
+  42:../user/source/main.c ****     /*698Ö¡Á´Â·²ã²ÎÊý*/
+  43:../user/source/main.c ****     DLT698_FRAME dlt698Frame;
+  44:../user/source/main.c ****     vGPIO_Init();
+  45:../user/source/main.c ****     /*¼¯ÖÐÆ÷ÉÏµç¹ý³ÌÖÐ485×ÜÏßÓÐÂÒÂë£¬´ËÊ±²»ÄÜÊ¶±ð²¨ÌØÂÊ*/
+  46:../user/source/main.c ****     while (uwBootDelay--)
+  47:../user/source/main.c ****     {
+  48:../user/source/main.c ****         vFeedExtWatchDog();
+  49:../user/source/main.c ****     }
+  50:../user/source/main.c ****     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+  51:../user/source/main.c ****     vInterFlash_Init();
+  52:../user/source/main.c ****     vFeedExtWatchDog();
+  53:../user/source/main.c ****     vTimer_Init();
+  54:../user/source/main.c ****     vLed_Light();
+  55:../user/source/main.c ****     vSystickSetAccuracy(1000000); //SysTick = 1us
+  56:../user/source/main.c ****     vSystickIntCmd(ENABLE);
+  57:../user/source/main.c ****     /*TICKÊ¹ÄÜºó²ÅÄÜ³õÊ¼»¯Íâ²¿ÖÐ¶Ï*/
+  58:../user/source/main.c ****     vExti_Init(); //
+  59:../user/source/main.c ****     vUart_EnableBaudrate(pUartIR, 1200);
+  60:../user/source/main.c ****     /*µçÑ¹ÐÞ¸ÄµÄÉÏÏÂÏÞÖµÉèÎªÄ¬ÈÏÖµ£»¿ªÆôÐÞ¸Ä¹¦ÄÜ */
+  61:../user/source/main.c ****     Voltage_Change_Init();
+  62:../user/source/main.c ****     /*µçÁ÷ÖØ¹ýÔØ²ÎÊýÉèÖÃ*/
+  63:../user/source/main.c ****     vCurrent_Limit_DefaultSet();
+  64:../user/source/main.c ****     /*µçÁ¿ÐÞ¸ÄµÄÉÏÏÂÏÞÖµÉèÎªÄ¬ÈÏÖµ£»¿ªÆôÐÞ¸Ä¹¦ÄÜ */
+  65:../user/source/main.c ****     vEnergy_Modify_Init();
+  66:../user/source/main.c ****     while (1)
+  67:../user/source/main.c ****     {
+  68:../user/source/main.c ****         vFeedExtWatchDog();
+  69:../user/source/main.c ****         /*ºìÍâ´®¿ÚÊÕÖ¡´¦Àí */
+  70:../user/source/main.c ****         if (blDrv_Buf_IsEmpty(pUartIR->pRsvbuf) == false)
+  71:../user/source/main.c ****         {
+  72:../user/source/main.c ****             if (blRecvFrame(pUartIR->pRsvbuf, ucApp_Buf_INFR))
+  73:../user/source/main.c ****             {
+  74:../user/source/main.c ****                 vINFRDataID_Handle(ucApp_Buf_INFR);
+  75:../user/source/main.c ****                 /*ºìÍâ¿Ú»ØÖ¡*/
+  76:../user/source/main.c ****                 if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
+  77:../user/source/main.c ****                 {
+  78:../user/source/main.c ****                     USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
+  79:../user/source/main.c ****                     USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
+  80:../user/source/main.c ****                 }
+  81:../user/source/main.c ****             }
+  82:../user/source/main.c ****         } //end ºìÍâÊÕÖ¡´¦Àí
+  83:../user/source/main.c ****         /*485¿ÚÊÕÖ¡´¦Àí*/
+  84:../user/source/main.c ****         switch (ProtocolType)
+  85:../user/source/main.c ****         {
+  86:../user/source/main.c ****         case none:
+  87:../user/source/main.c ****         {
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 3
 
 
-  88:../user/source/main.c ****             }
-  89:../user/source/main.c ****         } //end ºìÍâÊÕÖ¡´¦Àí
-  90:../user/source/main.c **** #endif
-  91:../user/source/main.c ****         switch (ProtocolType)
-  92:../user/source/main.c ****         {
-  93:../user/source/main.c ****         case none:
-  94:../user/source/main.c ****         {
-  95:../user/source/main.c ****             vFeedExtWatchDog();
-  96:../user/source/main.c ****             vLedRun(TICK_200MS);
-  97:../user/source/main.c ****             if (AutoBaud485.Uart_BaudRate == 0)
-  98:../user/source/main.c ****             {
-  99:../user/source/main.c ****                 if (AutoBaud485.irqCount > 0)
- 100:../user/source/main.c ****                 {
- 101:../user/source/main.c ****                     break;
- 102:../user/source/main.c ****                 }
- 103:../user/source/main.c ****                 else
- 104:../user/source/main.c ****                 {
- 105:../user/source/main.c ****                     EXTI_DeInit();
- 106:../user/source/main.c ****                     AutoBaud485.Uart_BaudRate = uwFindBaudRate(AutoBaud485.uwBaudelay);
- 107:../user/source/main.c ****                     vSystickSetAccuracy(1000); //systick=1ms
- 108:../user/source/main.c ****                     vSystickIntCmd(ENABLE);
- 109:../user/source/main.c ****                     vUart_EnableBaudrate(pUartZD, AutoBaud485.Uart_BaudRate); //Ê¹ÄÜ½ÓÊÕÖÐ¶Ï
- 110:../user/source/main.c ****                     vUart_EnableBaudrate(pUartDB, AutoBaud485.Uart_BaudRate);
- 111:../user/source/main.c ****                     /*½ÓÊÕºóÐø×Ö½Ú²¢ºöÂÔ*/
- 112:../user/source/main.c ****                     vFeedExtWatchDog();
- 113:../user/source/main.c ****                     Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
- 114:../user/source/main.c ****                     vBuf_Clear(pUartZD->pRsvbuf);
- 115:../user/source/main.c ****                 }
- 116:../user/source/main.c ****             }
- 117:../user/source/main.c ****             else
- 118:../user/source/main.c ****             {
- 119:../user/source/main.c ****                 /*Ê¶±ð¹æÔ¼ÀàÐÍ*/
- 120:../user/source/main.c ****                 Uart_idleReadEnable(pUartZD);
- 121:../user/source/main.c ****                 Uart_idleReadEnable(pUartDB);
- 122:../user/source/main.c ****                 if (FLAG_UartZD_HasData)
- 123:../user/source/main.c ****                 {
- 124:../user/source/main.c ****                     Uart_idleReadDisable(pUartZD);
- 125:../user/source/main.c ****                     FLAG_UartZD_HasData = false;
- 126:../user/source/main.c ****                     vFeedExtWatchDog();
- 127:../user/source/main.c ****                     dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
- 128:../user/source/main.c ****                     ProtocolType = GetProtocolType(ucApp_Buf_ZD2DB, dwLen);
- 129:../user/source/main.c ****                     Uart_idleReadEnable(pUartZD);
- 130:../user/source/main.c ****                 }
- 131:../user/source/main.c ****                 if (FLAG_UartDB_HasData)
- 132:../user/source/main.c ****                 {
- 133:../user/source/main.c ****                     Uart_idleReadDisable(pUartDB);
- 134:../user/source/main.c ****                     FLAG_UartDB_HasData = false;
- 135:../user/source/main.c ****                     vFeedExtWatchDog();
- 136:../user/source/main.c ****                     dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
- 137:../user/source/main.c ****                     ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //Ð£Ñé´íÎóÒ²ÄÛ¹ý£¿
- 138:../user/source/main.c ****                     Uart_idleReadEnable(pUartDB);
- 139:../user/source/main.c ****                 }
- 140:../user/source/main.c ****             }
- 141:../user/source/main.c ****             break;
- 142:../user/source/main.c ****         }
- 143:../user/source/main.c ****         case dlt698:
- 144:../user/source/main.c ****         {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 4
+  88:../user/source/main.c ****             vFeedExtWatchDog();
+  89:../user/source/main.c ****             vLedRun(TICK_200MS);
+  90:../user/source/main.c ****             if (AutoBaud485.Uart_BaudRate == 0)
+  91:../user/source/main.c ****             {
+  92:../user/source/main.c ****                 if (AutoBaud485.irqCount > 0)
+  93:../user/source/main.c ****                 {
+  94:../user/source/main.c ****                     break;
+  95:../user/source/main.c ****                 }
+  96:../user/source/main.c ****                 else
+  97:../user/source/main.c ****                 {
+  98:../user/source/main.c ****                     EXTI_DeInit();
+  99:../user/source/main.c ****                     AutoBaud485.Uart_BaudRate = uwFindBaudRate(AutoBaud485.uwBaudelay);
+ 100:../user/source/main.c ****                     vSystickSetAccuracy(1000); //systick=1ms
+ 101:../user/source/main.c ****                     vSystickIntCmd(ENABLE);
+ 102:../user/source/main.c ****                     vUart_EnableBaudrate(pUartZD, AutoBaud485.Uart_BaudRate); //Ê¹ÄÜ½ÓÊÕÖÐ¶Ï
+ 103:../user/source/main.c ****                     vUart_EnableBaudrate(pUartDB, AutoBaud485.Uart_BaudRate);
+ 104:../user/source/main.c ****                     /*½ÓÊÕºóÐø×Ö½Ú²¢ºöÂÔ*/
+ 105:../user/source/main.c ****                     vFeedExtWatchDog();
+ 106:../user/source/main.c ****                     Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
+ 107:../user/source/main.c ****                     vBuf_Clear(pUartZD->pRsvbuf);
+ 108:../user/source/main.c ****                     Uart_idleReadEnable(pUartZD);
+ 109:../user/source/main.c ****                     Uart_idleReadEnable(pUartDB);
+ 110:../user/source/main.c ****                 }
+ 111:../user/source/main.c ****             }
+ 112:../user/source/main.c ****             else
+ 113:../user/source/main.c ****             {
+ 114:../user/source/main.c ****                 /*Ê¶±ð¹æÔ¼ÀàÐÍ*/
+ 115:../user/source/main.c ****                 if (FLAG_UartZD_HasData)
+ 116:../user/source/main.c ****                 {
+ 117:../user/source/main.c ****                     Uart_idleReadDisable(pUartZD);
+ 118:../user/source/main.c ****                     FLAG_UartZD_HasData = false;
+ 119:../user/source/main.c ****                     vFeedExtWatchDog();
+ 120:../user/source/main.c ****                     dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
+ 121:../user/source/main.c ****                     ProtocolType = GetProtocolType(ucApp_Buf_ZD2DB, dwLen);
+ 122:../user/source/main.c ****                     Uart_idleReadEnable(pUartZD);
+ 123:../user/source/main.c ****                 }
+ 124:../user/source/main.c ****                 if (FLAG_UartDB_HasData)
+ 125:../user/source/main.c ****                 {
+ 126:../user/source/main.c ****                     Uart_idleReadDisable(pUartDB);
+ 127:../user/source/main.c ****                     FLAG_UartDB_HasData = false;
+ 128:../user/source/main.c ****                     vFeedExtWatchDog();
+ 129:../user/source/main.c ****                     dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
+ 130:../user/source/main.c ****                     ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //Ð£Ñé´íÎóÒ²ÄÛ¹ý£¿
+ 131:../user/source/main.c ****                     Uart_idleReadEnable(pUartDB);
+ 132:../user/source/main.c ****                 }
+ 133:../user/source/main.c ****             }
+ 134:../user/source/main.c ****             break;
+ 135:../user/source/main.c ****         }
+ 136:../user/source/main.c ****         case dlt698:
+ 137:../user/source/main.c ****         {
+ 138:../user/source/main.c ****             vFeedExtWatchDog();
+ 139:../user/source/main.c ****             vLedRun(TICK_1S);
+ 140:../user/source/main.c ****             Uart_idleReadEnable(pUartZD);
+ 141:../user/source/main.c ****             Uart_idleReadEnable(pUartDB);
+ 142:../user/source/main.c ****             if (FLAG_UartZD_HasData)
+ 143:../user/source/main.c ****             {
+ 144:../user/source/main.c ****                 Uart_idleReadDisable(pUartZD);
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 4
 
 
- 145:../user/source/main.c ****             vFeedExtWatchDog();
- 146:../user/source/main.c ****             vLedRun(TICK_1S);
- 147:../user/source/main.c ****             Uart_idleReadEnable(pUartZD);
- 148:../user/source/main.c ****             Uart_idleReadEnable(pUartDB);
- 149:../user/source/main.c ****             if (FLAG_UartZD_HasData)
- 150:../user/source/main.c ****             {
- 151:../user/source/main.c ****                 Uart_idleReadDisable(pUartZD);
- 152:../user/source/main.c ****                 FLAG_UartZD_HasData = false;
+ 145:../user/source/main.c ****                 FLAG_UartZD_HasData = false;
+ 146:../user/source/main.c ****                 vFeedExtWatchDog();
+ 147:../user/source/main.c ****                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
+ 148:../user/source/main.c ****                 Uart_idleReadEnable(pUartZD);
+ 149:../user/source/main.c ****                 break;
+ 150:../user/source/main.c ****             }
+ 151:../user/source/main.c ****             if (FLAG_UartDB_HasData)
+ 152:../user/source/main.c ****             {
  153:../user/source/main.c ****                 vFeedExtWatchDog();
- 154:../user/source/main.c ****                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
- 155:../user/source/main.c ****                 Uart_idleReadEnable(pUartZD);
- 156:../user/source/main.c ****                 break;
- 157:../user/source/main.c ****             }
- 158:../user/source/main.c ****             if (FLAG_UartDB_HasData)
- 159:../user/source/main.c ****             {
- 160:../user/source/main.c ****                 vFeedExtWatchDog();
- 161:../user/source/main.c ****                 Uart_idleReadDisable(pUartDB);
- 162:../user/source/main.c ****                 FLAG_UartDB_HasData = false;
- 163:../user/source/main.c ****                 dlt698Frame.pStart = NULL;
- 164:../user/source/main.c **** 
- 165:../user/source/main.c ****                 /*µç±í¿ÚÊÕÖ¡*/
- 166:../user/source/main.c ****                 if ((dwLen = Uart_Read(pUartDB, ucApp_Buf_DB2ZD, DRV_BUF_SIZE)) == 0)
- 167:../user/source/main.c ****                     break;
- 168:../user/source/main.c ****                 if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL) //Ð£Ñé´íÎó¾Í²»Í¸´«£
- 169:../user/source/main.c ****                 {
- 170:../user/source/main.c ****                     vFeedExtWatchDog();
- 171:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, 1000 * TICK_1MS);
- 172:../user/source/main.c ****                 }
- 173:../user/source/main.c ****                 else if (Voltage_Change_State != Voltage_NOChange)
- 174:../user/source/main.c ****                 {
- 175:../user/source/main.c ****                     if ((dwLen = dwGet698Apdu(&dlt698Frame, &pAPDU)) > 0)
- 176:../user/source/main.c ****                     {
- 177:../user/source/main.c ****                         if (dwAPduAnalyze(pAPDU, dwLen, &stCollData) > 0)
- 178:../user/source/main.c ****                         {
- 179:../user/source/main.c ****                             for (i = 0; i < stCollData.ucDataNum; i++)
- 180:../user/source/main.c ****                             {
- 181:../user/source/main.c ****                                 if (stCollData.stDataUnit[i].stOAD.OI_date == 0x2000) /*µçÑ¹OI*/
- 182:../user/source/main.c ****                                 {
- 183:../user/source/main.c ****                                     v698VoltageModify(&stCollData.stDataUnit[i]);
- 184:../user/source/main.c ****                                 }
- 185:../user/source/main.c ****                             }
- 186:../user/source/main.c ****                             dwReCalculateFCS(&dlt698Frame);
- 187:../user/source/main.c ****                         }
- 188:../user/source/main.c ****                     }
- 189:../user/source/main.c ****                     vFeedExtWatchDog();
- 190:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICK_50
- 191:../user/source/main.c ****                 }
- 192:../user/source/main.c ****             }
- 193:../user/source/main.c ****             Uart_idleReadEnable(pUartDB);
- 194:../user/source/main.c ****             break;
- 195:../user/source/main.c ****         }
- 196:../user/source/main.c ****         case dlt645:
- 197:../user/source/main.c ****         {
- 198:../user/source/main.c ****             vLedRun(TICK_1S);
- 199:../user/source/main.c ****             /*´®¿ÚÎÞÊÕ·¢Ê±Î¹¹·¼ä¸ôÎª1ms×óÓÒ*/
- 200:../user/source/main.c ****             vFeedExtWatchDog();
- 201:../user/source/main.c ****             /*¼¯ÖÐÆ÷²àÊý¾ÝÖ¡ÊÕÖ¡´¦Àí*/
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 5
+ 154:../user/source/main.c ****                 Uart_idleReadDisable(pUartDB);
+ 155:../user/source/main.c ****                 FLAG_UartDB_HasData = false;
+ 156:../user/source/main.c ****                 dlt698Frame.pStart = NULL;
+ 157:../user/source/main.c **** 
+ 158:../user/source/main.c ****                 /*µç±í¿ÚÊÕÖ¡*/
+ 159:../user/source/main.c ****                 if ((dwLen = Uart_Read(pUartDB, ucApp_Buf_DB2ZD, DRV_BUF_SIZE)) == 0)
+ 160:../user/source/main.c ****                     break;
+ 161:../user/source/main.c ****                 if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL ||
+ 162:../user/source/main.c ****                     Voltage_Change_State == Voltage_NOChange)
+ 163:../user/source/main.c ****                 {
+ 164:../user/source/main.c ****                     vFeedExtWatchDog();
+ 165:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, 1000 * TICK_1MS);
+ 166:../user/source/main.c ****                 }
+ 167:../user/source/main.c ****                 else
+ 168:../user/source/main.c ****                 {
+ 169:../user/source/main.c ****                     if ((dwLen = dwGet698Apdu(&dlt698Frame, &pAPDU)) > 0)
+ 170:../user/source/main.c ****                     {
+ 171:../user/source/main.c ****                         if (dwAPduAnalyze(pAPDU, dwLen, &stCollData) > 0)
+ 172:../user/source/main.c ****                         {
+ 173:../user/source/main.c ****                             for (i = 0; i < stCollData.ucDataNum; i++)
+ 174:../user/source/main.c ****                             {
+ 175:../user/source/main.c ****                                 if (stCollData.stDataUnit[i].stOAD.OI_date == 0x2000) /*µçÑ¹OI*/
+ 176:../user/source/main.c ****                                 {
+ 177:../user/source/main.c ****                                     v698VoltageModify(&stCollData.stDataUnit[i]);
+ 178:../user/source/main.c ****                                 }
+ 179:../user/source/main.c ****                             }
+ 180:../user/source/main.c ****                             dwReCalculateFCS(&dlt698Frame);
+ 181:../user/source/main.c ****                         }
+ 182:../user/source/main.c ****                     }
+ 183:../user/source/main.c ****                     vFeedExtWatchDog();
+ 184:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICK_50
+ 185:../user/source/main.c ****                 }
+ 186:../user/source/main.c ****             }
+ 187:../user/source/main.c ****             Uart_idleReadEnable(pUartDB);
+ 188:../user/source/main.c ****             break;
+ 189:../user/source/main.c ****         }
+ 190:../user/source/main.c ****         case dlt645:
+ 191:../user/source/main.c ****         {
+ 192:../user/source/main.c ****             vLedRun(TICK_1S);
+ 193:../user/source/main.c ****             /*´®¿ÚÎÞÊÕ·¢Ê±Î¹¹·¼ä¸ôÎª1ms×óÓÒ*/
+ 194:../user/source/main.c ****             vFeedExtWatchDog();
+ 195:../user/source/main.c ****             /*¼¯ÖÐÆ÷²àÊý¾ÝÖ¡ÊÕÖ¡´¦Àí*/
+ 196:../user/source/main.c ****             if (blDrv_Buf_IsEmpty(pUartZD->pRsvbuf) == false)
+ 197:../user/source/main.c ****             {
+ 198:../user/source/main.c ****                 RsvFrameHandle(ucApp_Buf_ZD2DB);
+ 199:../user/source/main.c ****             }
+ 200:../user/source/main.c ****             /*µç±í²àÊÕÖ¡´¦Àí*/
+ 201:../user/source/main.c ****             /*Î´ÊÕµ½µç±íÖ¡*/
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 5
 
 
- 202:../user/source/main.c ****             if (blDrv_Buf_IsEmpty(pUartZD->pRsvbuf) == false)
+ 202:../user/source/main.c ****             if (blDrv_Buf_IsEmpty(pUartDB->pRsvbuf) == true)
  203:../user/source/main.c ****             {
- 204:../user/source/main.c ****                 RsvFrameHandle(ucApp_Buf_ZD2DB);
+ 204:../user/source/main.c ****                 VoltageTimeOutHandle();
  205:../user/source/main.c ****             }
- 206:../user/source/main.c ****             /*µç±í²àÊÕÖ¡´¦Àí*/
- 207:../user/source/main.c ****             /*Î´ÊÕµ½µç±íÖ¡*/
- 208:../user/source/main.c ****             if (blDrv_Buf_IsEmpty(pUartDB->pRsvbuf) == true)
- 209:../user/source/main.c ****             {
- 210:../user/source/main.c ****                 VoltageTimeOutHandle();
- 211:../user/source/main.c ****             }
- 212:../user/source/main.c ****             /*ÊÕµ½µç±íÖ¡*/
- 213:../user/source/main.c ****             else
- 214:../user/source/main.c ****             {
- 215:../user/source/main.c ****                 /*·Ç·¨Ö¡*/
- 216:../user/source/main.c ****                 if (!blRecvFrame(pUartDB->pRsvbuf, ucApp_Buf_DB2ZD))
- 217:../user/source/main.c ****                 {
- 218:../user/source/main.c ****                     /*µçÑ¹»ØÖ¡³¬Ê±*/
- 219:../user/source/main.c ****                     if ((Voltage_Frame_Status == FrameAwaitingReply) &&
- 220:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 221:../user/source/main.c ****                     {
- 222:../user/source/main.c ****                         /*ÖÐ¼ÌÆ÷Ê¹ÓÃÉÏ´ÎµÄÕýÈ·µçÑ¹ÖµÌæ´ú»Ø¸´*/
- 223:../user/source/main.c ****                         if (blVoltage_Create(ucApp_Buf_ZD2DB))
- 224:../user/source/main.c ****                         {
- 225:../user/source/main.c ****                             ucDrv_Buf_PutBytes(ucApp_Buf_ZD2DB, pUartZD->pSndbuf, ucApp_Buf_ZD2DB[9
- 226:../user/source/main.c ****                             /*·¢ËÍµçÑ¹Ö¡*/
- 227:../user/source/main.c ****                             if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
- 228:../user/source/main.c ****                             {
- 229:../user/source/main.c ****                                 Uart_DataPut(USART1);
- 230:../user/source/main.c ****                                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
- 231:../user/source/main.c ****                                 Voltage_Frame_Status = FrameReplied;
- 232:../user/source/main.c ****                                 /*¼ÆÊ±Æ÷¸´Î»*/
- 233:../user/source/main.c ****                                 blFramesCounterStatus = false;
- 234:../user/source/main.c ****                                 uwTime2FramesCounter = 0;
- 235:../user/source/main.c ****                             }
- 236:../user/source/main.c ****                         }
- 237:../user/source/main.c ****                     }
- 238:../user/source/main.c ****                 }
- 239:../user/source/main.c ****                 /*ºÏ·¨Ö¡*/
- 240:../user/source/main.c ****                 else
- 241:../user/source/main.c ****                 {
- 242:../user/source/main.c ****                     vDBDataID_Handle(ucApp_Buf_DB2ZD);
- 243:../user/source/main.c ****                     ucDrv_Buf_PutBytes(ucApp_Buf_DB2ZD, pUartZD->pSndbuf, uc645DataDomainLength + 1
- 244:../user/source/main.c ****                     if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
- 245:../user/source/main.c ****                     {
- 246:../user/source/main.c ****                         Uart_DataPut(pUartZD->handler);
- 247:../user/source/main.c ****                     }
- 248:../user/source/main.c ****                 }
- 249:../user/source/main.c ****             }
- 250:../user/source/main.c ****             /*¿ÉÑ¡¹¦ÄÜ£ººìÍâÉèÖÃ²ÎÊý*/
- 251:../user/source/main.c **** #ifdef ENABLE_INFR
- 252:../user/source/main.c **** #endif
- 253:../user/source/main.c ****             break;
- 254:../user/source/main.c ****         } //end while
- 255:../user/source/main.c ****         default:
- 256:../user/source/main.c ****         {
- 257:../user/source/main.c ****             break;
- 258:../user/source/main.c ****         }
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 6
+ 206:../user/source/main.c ****             /*ÊÕµ½µç±íÖ¡*/
+ 207:../user/source/main.c ****             else
+ 208:../user/source/main.c ****             {
+ 209:../user/source/main.c ****                 /*·Ç·¨Ö¡*/
+ 210:../user/source/main.c ****                 if (!blRecvFrame(pUartDB->pRsvbuf, ucApp_Buf_DB2ZD))
+ 211:../user/source/main.c ****                 {
+ 212:../user/source/main.c ****                     /*µçÑ¹»ØÖ¡³¬Ê±*/
+ 213:../user/source/main.c ****                     if ((Voltage_Frame_Status == FrameAwaitingReply) &&
+ 214:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 215:../user/source/main.c ****                     {
+ 216:../user/source/main.c ****                         /*ÖÐ¼ÌÆ÷Ê¹ÓÃÉÏ´ÎµÄÕýÈ·µçÑ¹ÖµÌæ´ú»Ø¸´*/
+ 217:../user/source/main.c ****                         if (blVoltage_Create(ucApp_Buf_ZD2DB))
+ 218:../user/source/main.c ****                         {
+ 219:../user/source/main.c ****                             ucDrv_Buf_PutBytes(ucApp_Buf_ZD2DB, pUartZD->pSndbuf, ucApp_Buf_ZD2DB[9
+ 220:../user/source/main.c ****                             /*·¢ËÍµçÑ¹Ö¡*/
+ 221:../user/source/main.c ****                             if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
+ 222:../user/source/main.c ****                             {
+ 223:../user/source/main.c ****                                 Uart_DataPut(USART1);
+ 224:../user/source/main.c ****                                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
+ 225:../user/source/main.c ****                                 Voltage_Frame_Status = FrameReplied;
+ 226:../user/source/main.c ****                                 /*¼ÆÊ±Æ÷¸´Î»*/
+ 227:../user/source/main.c ****                                 blFramesCounterStatus = false;
+ 228:../user/source/main.c ****                                 uwTime2FramesCounter = 0;
+ 229:../user/source/main.c ****                             }
+ 230:../user/source/main.c ****                         }
+ 231:../user/source/main.c ****                     }
+ 232:../user/source/main.c ****                 }
+ 233:../user/source/main.c ****                 /*ºÏ·¨Ö¡*/
+ 234:../user/source/main.c ****                 else
+ 235:../user/source/main.c ****                 {
+ 236:../user/source/main.c ****                     vDBDataID_Handle(ucApp_Buf_DB2ZD);
+ 237:../user/source/main.c ****                     ucDrv_Buf_PutBytes(ucApp_Buf_DB2ZD, pUartZD->pSndbuf, uc645DataDomainLength + 1
+ 238:../user/source/main.c ****                     if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
+ 239:../user/source/main.c ****                     {
+ 240:../user/source/main.c ****                         Uart_DataPut(pUartZD->handler);
+ 241:../user/source/main.c ****                     }
+ 242:../user/source/main.c ****                 }
+ 243:../user/source/main.c ****             }
+ 244:../user/source/main.c ****             /*¿ÉÑ¡¹¦ÄÜ£ººìÍâÉèÖÃ²ÎÊý*/
+ 245:../user/source/main.c ****             /*¸Ã²¿·ÖÒÆÖ²µ½¹æÔ¼×´Ì¬»úÖ®Íâ£¬Óë698¹æÔ¼¹²ÓÃ*/
+ 246:../user/source/main.c ****             break;
+ 247:../user/source/main.c ****         } //end while
+ 248:../user/source/main.c ****         default:
+ 249:../user/source/main.c ****         {
+ 250:../user/source/main.c ****             break;
+ 251:../user/source/main.c ****         }
+ 252:../user/source/main.c ****         } //end switch
+ 253:../user/source/main.c ****     }     //end while
+ 254:../user/source/main.c **** } //end main
+ 255:../user/source/main.c **** 
+ 256:../user/source/main.c **** static void RsvFrameHandle(uint8_t *pucBuffer)
+ 257:../user/source/main.c **** {
+ 258:../user/source/main.c ****     /*Ö¡ºÏ·¨ÐÔÅÐ¶Ï*/
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 6
 
 
- 259:../user/source/main.c ****         } //end switch
- 260:../user/source/main.c ****     }     //end while
- 261:../user/source/main.c **** } //end main
- 262:../user/source/main.c **** 
- 263:../user/source/main.c **** static void RsvFrameHandle(uint8_t *pucBuffer)
- 264:../user/source/main.c **** {
- 265:../user/source/main.c ****     /*Ö¡ºÏ·¨ÐÔÅÐ¶Ï*/
- 266:../user/source/main.c ****     if (blRecvFrame(pUartZD->pRsvbuf, pucBuffer))
- 267:../user/source/main.c ****     {
- 268:../user/source/main.c ****         /*ÊÇ·ñÕÙ²âµçÑ¹*/
- 269:../user/source/main.c ****         if ((pucBuffer[8] == 0X11) &&
- 270:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
- 271:../user/source/main.c ****             (pucBuffer[12] == 0x34) &&
- 272:../user/source/main.c ****             (pucBuffer[13] == 0x35))
- 273:../user/source/main.c ****         {
- 274:../user/source/main.c ****             /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÖÃÎ»*/
- 275:../user/source/main.c ****             Voltage_Frame_Status = FrameAwaitingReply;
- 276:../user/source/main.c ****             /*¿ªÊ¼¼ÆÊ±*/
- 277:../user/source/main.c ****             blFramesCounterStatus = true;
- 278:../user/source/main.c ****         }
- 279:../user/source/main.c ****         /*×ª·¢ÕÙ²âÖ¡*/
- 280:../user/source/main.c ****         ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, uc645DataDomainLength + 12);
- 281:../user/source/main.c ****         if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
- 282:../user/source/main.c ****         {
- 283:../user/source/main.c ****             Uart_DataPut(pUartDB->handler);
- 284:../user/source/main.c ****         }
- 285:../user/source/main.c ****     }
- 286:../user/source/main.c **** }
- 287:../user/source/main.c **** 
- 288:../user/source/main.c **** static void VoltageTimeOutHandle(void)
- 289:../user/source/main.c **** {
- 290:../user/source/main.c ****     /*ÕÙ²âµçÑ¹³¬Ê±*/
- 291:../user/source/main.c ****     if ((Voltage_Frame_Status == FrameAwaitingReply) &&
- 292:../user/source/main.c ****         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 293:../user/source/main.c ****     {
- 294:../user/source/main.c ****         /*ÖÐ¼ÌÆ÷Ê¹ÓÃÉÏ´ÎµÄÕýÈ·µçÑ¹ÖµÌæ´ú»Ø¸´*/
- 295:../user/source/main.c ****         if (blVoltage_Create(ucApp_Buf_ZD2DB))
- 296:../user/source/main.c ****         {
- 297:../user/source/main.c ****             ucDrv_Buf_PutBytes(ucApp_Buf_ZD2DB, pUartZD->pSndbuf, ucApp_Buf_ZD2DB[9] + 12);
- 298:../user/source/main.c ****             if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
- 299:../user/source/main.c ****             {
- 300:../user/source/main.c ****                 Uart_DataPut(pUartZD->handler);
- 301:../user/source/main.c ****                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
- 302:../user/source/main.c ****                 Voltage_Frame_Status = FrameReplied;
- 303:../user/source/main.c ****                 /*¼ÆÊ±Æ÷¸´Î»*/
- 304:../user/source/main.c ****                 blFramesCounterStatus = false;
- 305:../user/source/main.c ****                 uwTime2FramesCounter = 0;
- 306:../user/source/main.c ****             }
- 307:../user/source/main.c ****         }
- 308:../user/source/main.c ****     }
- 309:../user/source/main.c **** }
- 310:../user/source/main.c **** /********************************************************************
- 311:../user/source/main.c **** * ¹¦    ÄÜ£º¸ù¾Ý´®¿Ú1Î»Êý¾ÝµçÆ½³ÖÐøÊ±¼ä¼ÆËã²¨ÌØÂÊ
- 312:../user/source/main.c **** * Êä    Èë£ºµçÆ½³ÖÐøÊ±¼ä
- 313:../user/source/main.c **** * Êä    ³ö£º¶ÔÓ¦²¨ÌØÂÊ
- 314:../user/source/main.c **** * Ëµ    Ãû£º
- 315:../user/source/main.c **** * ±à Ð´ ÈË£º
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 7
-
-
- 316:../user/source/main.c **** * ±àÐ´ÈÕÆÚ£º2018Äê9ÔÂ10ÈÕ16:01:21
- 317:../user/source/main.c **** **********************************************************************/
- 318:../user/source/main.c **** uint32_t uwFindBaudRate(uint32_t baudDelay)
- 319:../user/source/main.c **** {
-  29              		.loc 1 319 0
+ 259:../user/source/main.c ****     if (blRecvFrame(pUartZD->pRsvbuf, pucBuffer))
+ 260:../user/source/main.c ****     {
+ 261:../user/source/main.c ****         /*ÊÇ·ñÕÙ²âµçÑ¹*/
+ 262:../user/source/main.c ****         if ((pucBuffer[8] == 0X11) &&
+ 263:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
+ 264:../user/source/main.c ****             (pucBuffer[12] == 0x34) &&
+ 265:../user/source/main.c ****             (pucBuffer[13] == 0x35))
+ 266:../user/source/main.c ****         {
+ 267:../user/source/main.c ****             /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÖÃÎ»*/
+ 268:../user/source/main.c ****             Voltage_Frame_Status = FrameAwaitingReply;
+ 269:../user/source/main.c ****             /*¿ªÊ¼¼ÆÊ±*/
+ 270:../user/source/main.c ****             blFramesCounterStatus = true;
+ 271:../user/source/main.c ****         }
+ 272:../user/source/main.c ****         /*×ª·¢ÕÙ²âÖ¡*/
+ 273:../user/source/main.c ****         ucDrv_Buf_PutBytes(pucBuffer, pUartDB->pSndbuf, uc645DataDomainLength + 12);
+ 274:../user/source/main.c ****         if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
+ 275:../user/source/main.c ****         {
+ 276:../user/source/main.c ****             Uart_DataPut(pUartDB->handler);
+ 277:../user/source/main.c ****         }
+ 278:../user/source/main.c ****     }
+ 279:../user/source/main.c **** }
+ 280:../user/source/main.c **** 
+ 281:../user/source/main.c **** static void VoltageTimeOutHandle(void)
+ 282:../user/source/main.c **** {
+ 283:../user/source/main.c ****     /*ÕÙ²âµçÑ¹³¬Ê±*/
+ 284:../user/source/main.c ****     if ((Voltage_Frame_Status == FrameAwaitingReply) &&
+ 285:../user/source/main.c ****         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 286:../user/source/main.c ****     {
+ 287:../user/source/main.c ****         /*ÖÐ¼ÌÆ÷Ê¹ÓÃÉÏ´ÎµÄÕýÈ·µçÑ¹ÖµÌæ´ú»Ø¸´*/
+ 288:../user/source/main.c ****         if (blVoltage_Create(ucApp_Buf_ZD2DB))
+ 289:../user/source/main.c ****         {
+ 290:../user/source/main.c ****             ucDrv_Buf_PutBytes(ucApp_Buf_ZD2DB, pUartZD->pSndbuf, ucApp_Buf_ZD2DB[9] + 12);
+ 291:../user/source/main.c ****             if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
+ 292:../user/source/main.c ****             {
+ 293:../user/source/main.c ****                 Uart_DataPut(pUartZD->handler);
+ 294:../user/source/main.c ****                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
+ 295:../user/source/main.c ****                 Voltage_Frame_Status = FrameReplied;
+ 296:../user/source/main.c ****                 /*¼ÆÊ±Æ÷¸´Î»*/
+ 297:../user/source/main.c ****                 blFramesCounterStatus = false;
+ 298:../user/source/main.c ****                 uwTime2FramesCounter = 0;
+ 299:../user/source/main.c ****             }
+ 300:../user/source/main.c ****         }
+ 301:../user/source/main.c ****     }
+ 302:../user/source/main.c **** }
+ 303:../user/source/main.c **** /********************************************************************
+ 304:../user/source/main.c **** * ¹¦    ÄÜ£º¸ù¾Ý´®¿Ú1Î»Êý¾ÝµçÆ½³ÖÐøÊ±¼ä¼ÆËã²¨ÌØÂÊ
+ 305:../user/source/main.c **** * Êä    Èë£ºµçÆ½³ÖÐøÊ±¼ä
+ 306:../user/source/main.c **** * Êä    ³ö£º¶ÔÓ¦²¨ÌØÂÊ
+ 307:../user/source/main.c **** * Ëµ    Ãû£º
+ 308:../user/source/main.c **** * ±à Ð´ ÈË£º
+ 309:../user/source/main.c **** * ±àÐ´ÈÕÆÚ£º2018Äê9ÔÂ10ÈÕ16:01:21
+ 310:../user/source/main.c **** **********************************************************************/
+ 311:../user/source/main.c **** uint32_t uwFindBaudRate(uint32_t baudDelay)
+ 312:../user/source/main.c **** {
+  29              		.loc 1 312 0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 7
+
+
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33              		@ link register save eliminated.
   34              	.LVL0:
- 320:../user/source/main.c ****     /* Baud 1200 :1666us*/
- 321:../user/source/main.c ****     //if (baudDelay > 1500 && baudDelay < 1800)
- 322:../user/source/main.c ****     //   return 1200;
- 323:../user/source/main.c ****     /* Baud 1200:833us*/
- 324:../user/source/main.c ****     if (baudDelay > 820 && baudDelay < 850)
-  35              		.loc 1 324 0
+ 313:../user/source/main.c ****     /* Baud 1200 :1666us*/
+ 314:../user/source/main.c ****     //if (baudDelay > 1500 && baudDelay < 1800)
+ 315:../user/source/main.c ****     //   return 1200;
+ 316:../user/source/main.c ****     /* Baud 1200:833us*/
+ 317:../user/source/main.c ****     if (baudDelay > 820 && baudDelay < 850)
+  35              		.loc 1 317 0
   36 0000 A0F23533 		subw	r3, r0, #821
   37 0004 1C2B     		cmp	r3, #28
   38 0006 0DD9     		bls	.L3
- 325:../user/source/main.c ****         return 1200;
- 326:../user/source/main.c ****     /* Baud 2400:417us*/
- 327:../user/source/main.c ****     else if (baudDelay > 400 && baudDelay < 430)
-  39              		.loc 1 327 0
+ 318:../user/source/main.c ****         return 1200;
+ 319:../user/source/main.c ****     /* Baud 2400:417us*/
+ 320:../user/source/main.c ****     else if (baudDelay > 400 && baudDelay < 430)
+  39              		.loc 1 320 0
   40 0008 A0F29113 		subw	r3, r0, #401
   41 000c 1C2B     		cmp	r3, #28
   42 000e 0CD9     		bls	.L4
- 328:../user/source/main.c ****         return 2400;
- 329:../user/source/main.c ****     /* Baud 4800:208us*/
- 330:../user/source/main.c ****     else if (baudDelay > 190 && baudDelay < 220)
-  43              		.loc 1 330 0
+ 321:../user/source/main.c ****         return 2400;
+ 322:../user/source/main.c ****     /* Baud 4800:208us*/
+ 323:../user/source/main.c ****     else if (baudDelay > 190 && baudDelay < 220)
+  43              		.loc 1 323 0
   44 0010 A0F1BF03 		sub	r3, r0, #191
   45 0014 1C2B     		cmp	r3, #28
   46 0016 0BD9     		bls	.L5
- 331:../user/source/main.c ****         return 4800;
- 332:../user/source/main.c ****     /* Baud 9600 :104us*/
- 333:../user/source/main.c ****     else if (baudDelay > 90 && baudDelay < 120)
-  47              		.loc 1 333 0
+ 324:../user/source/main.c ****         return 4800;
+ 325:../user/source/main.c ****     /* Baud 9600 :104us*/
+ 326:../user/source/main.c ****     else if (baudDelay > 90 && baudDelay < 120)
+  47              		.loc 1 326 0
   48 0018 5B38     		subs	r0, r0, #91
   49              	.LVL1:
   50 001a 1C28     		cmp	r0, #28
   51 001c 0BD8     		bhi	.L6
- 334:../user/source/main.c ****         return 9600;
-  52              		.loc 1 334 0
+ 327:../user/source/main.c ****         return 9600;
+  52              		.loc 1 327 0
   53 001e 4FF41650 		mov	r0, #9600
   54              	.LVL2:
   55 0022 7047     		bx	lr
   56              	.LVL3:
   57              	.L3:
- 325:../user/source/main.c ****     /* Baud 2400:417us*/
-  58              		.loc 1 325 0
+ 318:../user/source/main.c ****     /* Baud 2400:417us*/
+  58              		.loc 1 318 0
   59 0024 4FF49660 		mov	r0, #1200
   60              	.LVL4:
   61 0028 7047     		bx	lr
   62              	.LVL5:
   63              	.L4:
- 328:../user/source/main.c ****     /* Baud 4800:208us*/
-  64              		.loc 1 328 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 8
-
-
+ 321:../user/source/main.c ****     /* Baud 4800:208us*/
+  64              		.loc 1 321 0
   65 002a 4FF41660 		mov	r0, #2400
   66              	.LVL6:
   67 002e 7047     		bx	lr
   68              	.LVL7:
   69              	.L5:
- 331:../user/source/main.c ****     /* Baud 9600 :104us*/
-  70              		.loc 1 331 0
+ 324:../user/source/main.c ****     /* Baud 9600 :104us*/
+  70              		.loc 1 324 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 8
+
+
   71 0030 4FF49650 		mov	r0, #4800
   72              	.LVL8:
   73 0034 7047     		bx	lr
   74              	.L6:
- 335:../user/source/main.c ****     else
- 336:../user/source/main.c ****         /*default baudrate*/
- 337:../user/source/main.c ****         return 2400;
-  75              		.loc 1 337 0
+ 328:../user/source/main.c ****     else
+ 329:../user/source/main.c ****         /*default baudrate*/
+ 330:../user/source/main.c ****         return 2400;
+  75              		.loc 1 330 0
   76 0036 4FF41660 		mov	r0, #2400
- 338:../user/source/main.c **** }
-  77              		.loc 1 338 0
+ 331:../user/source/main.c **** }
+  77              		.loc 1 331 0
   78 003a 7047     		bx	lr
   79              		.cfi_endproc
   80              	.LFE114:
@@ -448,8 +441,8 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
   85              		.thumb_func
   87              	RsvFrameHandle:
   88              	.LFB112:
- 264:../user/source/main.c ****     /*Ö¡ºÏ·¨ÐÔÅÐ¶Ï*/
-  89              		.loc 1 264 0
+ 257:../user/source/main.c ****     /*Ö¡ºÏ·¨ÐÔÅÐ¶Ï*/
+  89              		.loc 1 257 0
   90              		.cfi_startproc
   91              		@ args = 0, pretend = 0, frame = 0
   92              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -462,8 +455,8 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
   99              		.cfi_offset 5, -8
  100              		.cfi_offset 14, -4
  101 0002 0446     		mov	r4, r0
- 266:../user/source/main.c ****     {
- 102              		.loc 1 266 0
+ 259:../user/source/main.c ****     {
+ 102              		.loc 1 259 0
  103 0004 154B     		ldr	r3, .L11
  104 0006 1B68     		ldr	r3, [r3]
  105 0008 0146     		mov	r1, r0
@@ -472,48 +465,48 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  108 000c FFF7FEFF 		bl	blRecvFrame
  109              	.LVL11:
  110 0010 18B3     		cbz	r0, .L7
- 269:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
- 111              		.loc 1 269 0
+ 262:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
+ 111              		.loc 1 262 0
  112 0012 237A     		ldrb	r3, [r4, #8]	@ zero_extendqisi2
  113 0014 112B     		cmp	r3, #17
  114 0016 0ED1     		bne	.L9
- 270:../user/source/main.c ****             (pucBuffer[12] == 0x34) &&
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 9
-
-
- 115              		.loc 1 270 0 discriminator 1
+ 263:../user/source/main.c ****             (pucBuffer[12] == 0x34) &&
+ 115              		.loc 1 263 0 discriminator 1
  116 0018 A37A     		ldrb	r3, [r4, #10]	@ zero_extendqisi2
- 269:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
- 117              		.loc 1 269 0 discriminator 1
+ 262:../user/source/main.c ****             (pucBuffer[10] == 0x33) &&
+ 117              		.loc 1 262 0 discriminator 1
  118 001a 332B     		cmp	r3, #51
  119 001c 0BD1     		bne	.L9
- 271:../user/source/main.c ****             (pucBuffer[13] == 0x35))
- 120              		.loc 1 271 0
+ 264:../user/source/main.c ****             (pucBuffer[13] == 0x35))
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 9
+
+
+ 120              		.loc 1 264 0
  121 001e 237B     		ldrb	r3, [r4, #12]	@ zero_extendqisi2
- 270:../user/source/main.c ****             (pucBuffer[12] == 0x34) &&
- 122              		.loc 1 270 0
+ 263:../user/source/main.c ****             (pucBuffer[12] == 0x34) &&
+ 122              		.loc 1 263 0
  123 0020 342B     		cmp	r3, #52
  124 0022 08D1     		bne	.L9
- 272:../user/source/main.c ****         {
- 125              		.loc 1 272 0
+ 265:../user/source/main.c ****         {
+ 125              		.loc 1 265 0
  126 0024 637B     		ldrb	r3, [r4, #13]	@ zero_extendqisi2
- 271:../user/source/main.c ****             (pucBuffer[13] == 0x35))
- 127              		.loc 1 271 0
+ 264:../user/source/main.c ****             (pucBuffer[13] == 0x35))
+ 127              		.loc 1 264 0
  128 0026 352B     		cmp	r3, #53
  129 0028 05D1     		bne	.L9
- 275:../user/source/main.c ****             /*¿ªÊ¼¼ÆÊ±*/
- 130              		.loc 1 275 0
+ 268:../user/source/main.c ****             /*¿ªÊ¼¼ÆÊ±*/
+ 130              		.loc 1 268 0
  131 002a 0022     		movs	r2, #0
  132 002c 0C4B     		ldr	r3, .L11+4
  133 002e 1A70     		strb	r2, [r3]
- 277:../user/source/main.c ****         }
- 134              		.loc 1 277 0
+ 270:../user/source/main.c ****         }
+ 134              		.loc 1 270 0
  135 0030 0122     		movs	r2, #1
  136 0032 0C4B     		ldr	r3, .L11+8
  137 0034 1A70     		strb	r2, [r3]
  138              	.L9:
- 280:../user/source/main.c ****         if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
- 139              		.loc 1 280 0
+ 273:../user/source/main.c ****         if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
+ 139              		.loc 1 273 0
  140 0036 0C4D     		ldr	r5, .L11+12
  141 0038 2B68     		ldr	r3, [r5]
  142 003a 0C4A     		ldr	r2, .L11+16
@@ -523,24 +516,21 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  146 0042 2046     		mov	r0, r4
  147 0044 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
  148              	.LVL12:
- 281:../user/source/main.c ****         {
- 149              		.loc 1 281 0
+ 274:../user/source/main.c ****         {
+ 149              		.loc 1 274 0
  150 0048 2B68     		ldr	r3, [r5]
  151 004a 9868     		ldr	r0, [r3, #8]
  152 004c FFF7FEFF 		bl	blDrv_Buf_IsEmpty
  153              	.LVL13:
  154 0050 18B9     		cbnz	r0, .L7
- 283:../user/source/main.c ****         }
- 155              		.loc 1 283 0
+ 276:../user/source/main.c ****         }
+ 155              		.loc 1 276 0
  156 0052 2B68     		ldr	r3, [r5]
  157 0054 1868     		ldr	r0, [r3]
  158 0056 FFF7FEFF 		bl	Uart_DataPut
  159              	.LVL14:
  160              	.L7:
  161 005a 38BD     		pop	{r3, r4, r5, pc}
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 10
-
-
  162              	.LVL15:
  163              	.L12:
  164              		.align	2
@@ -548,6 +538,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  166 005c 00000000 		.word	pUartZD
  167 0060 00000000 		.word	Voltage_Frame_Status
  168 0064 00000000 		.word	blFramesCounterStatus
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 10
+
+
  169 0068 00000000 		.word	pUartDB
  170 006c 00000000 		.word	uc645DataDomainLength
  171              		.cfi_endproc
@@ -558,77 +551,77 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  177              		.thumb_func
  179              	VoltageTimeOutHandle:
  180              	.LFB113:
- 289:../user/source/main.c ****     /*ÕÙ²âµçÑ¹³¬Ê±*/
- 181              		.loc 1 289 0
+ 282:../user/source/main.c ****     /*ÕÙ²âµçÑ¹³¬Ê±*/
+ 181              		.loc 1 282 0
  182              		.cfi_startproc
  183              		@ args = 0, pretend = 0, frame = 0
  184              		@ frame_needed = 0, uses_anonymous_args = 0
- 291:../user/source/main.c ****         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 185              		.loc 1 291 0
+ 284:../user/source/main.c ****         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 185              		.loc 1 284 0
  186 0000 144B     		ldr	r3, .L17
  187 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  188 0004 23BB     		cbnz	r3, .L16
- 289:../user/source/main.c ****     /*ÕÙ²âµçÑ¹³¬Ê±*/
- 189              		.loc 1 289 0 discriminator 1
+ 282:../user/source/main.c ****     /*ÕÙ²âµçÑ¹³¬Ê±*/
+ 189              		.loc 1 282 0 discriminator 1
  190 0006 10B5     		push	{r4, lr}
  191              	.LCFI1:
  192              		.cfi_def_cfa_offset 8
  193              		.cfi_offset 4, -8
  194              		.cfi_offset 14, -4
- 292:../user/source/main.c ****     {
- 195              		.loc 1 292 0 discriminator 1
+ 285:../user/source/main.c ****     {
+ 195              		.loc 1 285 0 discriminator 1
  196 0008 1921     		movs	r1, #25
  197 000a 134B     		ldr	r3, .L17+4
  198 000c 1888     		ldrh	r0, [r3]
  199 000e FFF7FEFF 		bl	blTime2_Update
  200              	.LVL16:
- 291:../user/source/main.c ****         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 201              		.loc 1 291 0 discriminator 1
+ 284:../user/source/main.c ****         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 201              		.loc 1 284 0 discriminator 1
  202 0012 E0B1     		cbz	r0, .L13
- 295:../user/source/main.c ****         {
- 203              		.loc 1 295 0
+ 288:../user/source/main.c ****         {
+ 203              		.loc 1 288 0
  204 0014 1148     		ldr	r0, .L17+8
  205 0016 FFF7FEFF 		bl	blVoltage_Create
  206              	.LVL17:
  207 001a C0B1     		cbz	r0, .L13
- 297:../user/source/main.c ****             if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
- 208              		.loc 1 297 0
+ 290:../user/source/main.c ****             if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
+ 208              		.loc 1 290 0
  209 001c 104C     		ldr	r4, .L17+12
  210 001e 2368     		ldr	r3, [r4]
  211 0020 0E48     		ldr	r0, .L17+8
  212 0022 427A     		ldrb	r2, [r0, #9]	@ zero_extendqisi2
  213 0024 0C32     		adds	r2, r2, #12
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 11
-
-
  214 0026 9968     		ldr	r1, [r3, #8]
  215 0028 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
  216              	.LVL18:
- 298:../user/source/main.c ****             {
- 217              		.loc 1 298 0
+ 291:../user/source/main.c ****             {
+ 217              		.loc 1 291 0
  218 002c 2368     		ldr	r3, [r4]
  219 002e 9868     		ldr	r0, [r3, #8]
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 11
+
+
  220 0030 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
  221              	.LVL19:
  222 0034 58B9     		cbnz	r0, .L13
- 300:../user/source/main.c ****                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
- 223              		.loc 1 300 0
+ 293:../user/source/main.c ****                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
+ 223              		.loc 1 293 0
  224 0036 2368     		ldr	r3, [r4]
  225 0038 1868     		ldr	r0, [r3]
  226 003a FFF7FEFF 		bl	Uart_DataPut
  227              	.LVL20:
- 302:../user/source/main.c ****                 /*¼ÆÊ±Æ÷¸´Î»*/
- 228              		.loc 1 302 0
+ 295:../user/source/main.c ****                 /*¼ÆÊ±Æ÷¸´Î»*/
+ 228              		.loc 1 295 0
  229 003e 0122     		movs	r2, #1
  230 0040 044B     		ldr	r3, .L17
  231 0042 1A70     		strb	r2, [r3]
- 304:../user/source/main.c ****                 uwTime2FramesCounter = 0;
- 232              		.loc 1 304 0
+ 297:../user/source/main.c ****                 uwTime2FramesCounter = 0;
+ 232              		.loc 1 297 0
  233 0044 0023     		movs	r3, #0
  234 0046 074A     		ldr	r2, .L17+16
  235 0048 1370     		strb	r3, [r2]
- 305:../user/source/main.c ****             }
- 236              		.loc 1 305 0
+ 298:../user/source/main.c ****             }
+ 236              		.loc 1 298 0
  237 004a 034A     		ldr	r2, .L17+4
  238 004c 1380     		strh	r3, [r2]	@ movhi
  239              	.L13:
@@ -655,108 +648,108 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  261              		.thumb_func
  263              	vLedRun:
  264              	.LFB117:
- 339:../user/source/main.c **** 
- 340:../user/source/main.c **** /********************************************************************
- 341:../user/source/main.c **** * ¹¦    ÄÜ£º¼ÆËã´®¿Ú1Î»Êý¾ÝµçÆ½³ÖÐøÊ±¼ä
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 12
+ 332:../user/source/main.c **** 
+ 333:../user/source/main.c **** /********************************************************************
+ 334:../user/source/main.c **** * ¹¦    ÄÜ£º¼ÆËã´®¿Ú1Î»Êý¾ÝµçÆ½³ÖÐøÊ±¼ä
+ 335:../user/source/main.c **** * Êä    Èë£º³ÖÐøÊ±¼ä´æ´¢Î»ÖÃ
+ 336:../user/source/main.c **** * Êä    ³ö£ºNone
+ 337:../user/source/main.c **** * Ëµ    Ã÷£ºÖÐ¶Ï·þÎñº¯ÊýÖÐ¼ÇÂ¼n¸öÖÐ¶ÏµÄÊ±±ê
+ 338:../user/source/main.c **** *           ÏàÁÚÊ±±ê¼ÆËãÂö³å³ÖÐøÊ±¼ä
+ 339:../user/source/main.c **** *           ²éÕÒ×î¶Ì³ÖÐøÊ±¼ä
+ 340:../user/source/main.c **** * ±à Ð´ ÈË£º
+ 341:../user/source/main.c **** * ±àÐ´ÈÕÆÚ£º2018Äê9ÔÂ5ÈÕ15:08:58
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 12
 
 
- 342:../user/source/main.c **** * Êä    Èë£º³ÖÐøÊ±¼ä´æ´¢Î»ÖÃ
- 343:../user/source/main.c **** * Êä    ³ö£ºNone
- 344:../user/source/main.c **** * Ëµ    Ã÷£ºÖÐ¶Ï·þÎñº¯ÊýÖÐ¼ÇÂ¼n¸öÖÐ¶ÏµÄÊ±±ê
- 345:../user/source/main.c **** *           ÏàÁÚÊ±±ê¼ÆËãÂö³å³ÖÐøÊ±¼ä
- 346:../user/source/main.c **** *           ²éÕÒ×î¶Ì³ÖÐøÊ±¼ä
- 347:../user/source/main.c **** * ±à Ð´ ÈË£º
- 348:../user/source/main.c **** * ±àÐ´ÈÕÆÚ£º2018Äê9ÔÂ5ÈÕ15:08:58
- 349:../user/source/main.c **** **********************************************************************/
- 350:../user/source/main.c **** void vUartZD_BaudelayCal(volatile uint32_t *pBaudelay)
- 351:../user/source/main.c **** {
- 352:../user/source/main.c **** 
- 353:../user/source/main.c ****     static uint32_t LAST_TICK = 0xFFFFFFFF;
- 354:../user/source/main.c ****     uint32_t nowtick = 0;
- 355:../user/source/main.c ****     uint32_t tmpdelay = 0;
- 356:../user/source/main.c ****     AutoBaud485.irqCount--;
- 357:../user/source/main.c ****     /*È¡µ±Ç°tickÊý£¬0~0xFFFFÑ­»·*/
- 358:../user/source/main.c ****     nowtick = TICKS;
- 359:../user/source/main.c ****     /*³õ´ÎÊÕµ½´®¿ÚÊý¾Ý£¬ÏµÍ³tick×î´ó65535*/
- 360:../user/source/main.c ****     if (LAST_TICK != 0xFFFFFFFF)
- 361:../user/source/main.c ****     {
- 362:../user/source/main.c ****         /*ÓëlastickÏà¼õµÃµ½±¾´Îdelay*/
- 363:../user/source/main.c ****         tmpdelay = (nowtick + 0xFFFF - LAST_TICK) & 0xFFFF;
- 364:../user/source/main.c ****         /*µ±Ç°tickÊý´æÎªcount*/
- 365:../user/source/main.c ****         LAST_TICK = nowtick;
- 366:../user/source/main.c ****         /*ÓëÉÏ´Îdelay±È½Ï£¬È¡½ÏÐ¡Öµ´æÎªdelay*/
- 367:../user/source/main.c ****         if (tmpdelay < *pBaudelay)
- 368:../user/source/main.c ****         {
- 369:../user/source/main.c ****             *pBaudelay = tmpdelay;
- 370:../user/source/main.c ****         }
- 371:../user/source/main.c ****     }
- 372:../user/source/main.c ****     else //Ö®Ç°ÒÑÓÐ±ßÑØÖÐ¶Ï
- 373:../user/source/main.c ****     {
- 374:../user/source/main.c ****         /*µ±Ç°tickÊý´æÎªlastick*/
- 375:../user/source/main.c ****         /*delay= 0xFFFFFFFF*/
- 376:../user/source/main.c ****         LAST_TICK = nowtick;
- 377:../user/source/main.c ****     }
- 378:../user/source/main.c **** }
- 379:../user/source/main.c **** 
- 380:../user/source/main.c **** void vAutoSetBaudrate(void)
- 381:../user/source/main.c **** {
- 382:../user/source/main.c ****     vSystickSetAccuracy(1000000); //SysTick = 1us
- 383:../user/source/main.c ****     vSystickIntCmd(ENABLE);
- 384:../user/source/main.c ****     /*TICKÊ¹ÄÜºó²ÅÄÜ³õÊ¼»¯Íâ²¿ÖÐ¶Ï*/
- 385:../user/source/main.c ****     vExti_Init(); //
- 386:../user/source/main.c ****     AutoBaud485.irqCount = 100;
- 387:../user/source/main.c ****     AutoBaud485.uwBaudelay = 0xFFFFFFFF;
- 388:../user/source/main.c ****     while (AutoBaud485.irqCount)
- 389:../user/source/main.c ****     {
- 390:../user/source/main.c ****         vFeedExtWatchDog();
- 391:../user/source/main.c ****     }
- 392:../user/source/main.c ****     EXTI_DeInit();
- 393:../user/source/main.c ****     AutoBaud485.Uart_BaudRate = uwFindBaudRate(AutoBaud485.uwBaudelay);
- 394:../user/source/main.c ****     vSystickSetAccuracy(1000); //systick=1ms
- 395:../user/source/main.c ****     vSystickIntCmd(ENABLE);
- 396:../user/source/main.c ****     vUart_EnableBaudrate(pUartZD, AutoBaud485.Uart_BaudRate); //Ê¹ÄÜ½ÓÊÕÖÐ¶Ï
- 397:../user/source/main.c ****     vUart_EnableBaudrate(pUartDB, AutoBaud485.Uart_BaudRate);
- 398:../user/source/main.c ****     /*½ÓÊÕºóÐø×Ö½Ú²¢ºöÂÔ*/
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 13
+ 342:../user/source/main.c **** **********************************************************************/
+ 343:../user/source/main.c **** void vUartZD_BaudelayCal(volatile uint32_t *pBaudelay)
+ 344:../user/source/main.c **** {
+ 345:../user/source/main.c **** 
+ 346:../user/source/main.c ****     static uint32_t LAST_TICK = 0xFFFFFFFF;
+ 347:../user/source/main.c ****     uint32_t nowtick = 0;
+ 348:../user/source/main.c ****     uint32_t tmpdelay = 0;
+ 349:../user/source/main.c ****     AutoBaud485.irqCount--;
+ 350:../user/source/main.c ****     /*È¡µ±Ç°tickÊý£¬0~0xFFFFÑ­»·*/
+ 351:../user/source/main.c ****     nowtick = TICKS;
+ 352:../user/source/main.c ****     /*³õ´ÎÊÕµ½´®¿ÚÊý¾Ý£¬ÏµÍ³tick×î´ó65535*/
+ 353:../user/source/main.c ****     if (LAST_TICK != 0xFFFFFFFF)
+ 354:../user/source/main.c ****     {
+ 355:../user/source/main.c ****         /*ÓëlastickÏà¼õµÃµ½±¾´Îdelay*/
+ 356:../user/source/main.c ****         tmpdelay = (nowtick + 0xFFFF - LAST_TICK) & 0xFFFF;
+ 357:../user/source/main.c ****         /*µ±Ç°tickÊý´æÎªcount*/
+ 358:../user/source/main.c ****         LAST_TICK = nowtick;
+ 359:../user/source/main.c ****         /*ÓëÉÏ´Îdelay±È½Ï£¬È¡½ÏÐ¡Öµ´æÎªdelay*/
+ 360:../user/source/main.c ****         if (tmpdelay < *pBaudelay)
+ 361:../user/source/main.c ****         {
+ 362:../user/source/main.c ****             *pBaudelay = tmpdelay;
+ 363:../user/source/main.c ****         }
+ 364:../user/source/main.c ****     }
+ 365:../user/source/main.c ****     else //Ö®Ç°ÒÑÓÐ±ßÑØÖÐ¶Ï
+ 366:../user/source/main.c ****     {
+ 367:../user/source/main.c ****         /*µ±Ç°tickÊý´æÎªlastick*/
+ 368:../user/source/main.c ****         /*delay= 0xFFFFFFFF*/
+ 369:../user/source/main.c ****         LAST_TICK = nowtick;
+ 370:../user/source/main.c ****     }
+ 371:../user/source/main.c **** }
+ 372:../user/source/main.c **** 
+ 373:../user/source/main.c **** void vAutoSetBaudrate(void)
+ 374:../user/source/main.c **** {
+ 375:../user/source/main.c ****     vSystickSetAccuracy(1000000); //SysTick = 1us
+ 376:../user/source/main.c ****     vSystickIntCmd(ENABLE);
+ 377:../user/source/main.c ****     /*TICKÊ¹ÄÜºó²ÅÄÜ³õÊ¼»¯Íâ²¿ÖÐ¶Ï*/
+ 378:../user/source/main.c ****     vExti_Init(); //
+ 379:../user/source/main.c ****     AutoBaud485.irqCount = 100;
+ 380:../user/source/main.c ****     AutoBaud485.uwBaudelay = 0xFFFFFFFF;
+ 381:../user/source/main.c ****     while (AutoBaud485.irqCount)
+ 382:../user/source/main.c ****     {
+ 383:../user/source/main.c ****         vFeedExtWatchDog();
+ 384:../user/source/main.c ****     }
+ 385:../user/source/main.c ****     EXTI_DeInit();
+ 386:../user/source/main.c ****     AutoBaud485.Uart_BaudRate = uwFindBaudRate(AutoBaud485.uwBaudelay);
+ 387:../user/source/main.c ****     vSystickSetAccuracy(1000); //systick=1ms
+ 388:../user/source/main.c ****     vSystickIntCmd(ENABLE);
+ 389:../user/source/main.c ****     vUart_EnableBaudrate(pUartZD, AutoBaud485.Uart_BaudRate); //Ê¹ÄÜ½ÓÊÕÖÐ¶Ï
+ 390:../user/source/main.c ****     vUart_EnableBaudrate(pUartDB, AutoBaud485.Uart_BaudRate);
+ 391:../user/source/main.c ****     /*½ÓÊÕºóÐø×Ö½Ú²¢ºöÂÔ*/
+ 392:../user/source/main.c ****     vFeedExtWatchDog();
+ 393:../user/source/main.c ****     Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
+ 394:../user/source/main.c ****     vBuf_Clear(pUartZD->pRsvbuf);
+ 395:../user/source/main.c **** 
+ 396:../user/source/main.c **** #if 0
+ 397:../user/source/main.c ****     Uart_ITReadEnable(pUartZD);
+ 398:../user/source/main.c ****     /*last loop do not clear FLAG,second loop do not receive second frame*/
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 13
 
 
- 399:../user/source/main.c ****     vFeedExtWatchDog();
- 400:../user/source/main.c ****     Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
- 401:../user/source/main.c ****     vBuf_Clear(pUartZD->pRsvbuf);
- 402:../user/source/main.c **** 
- 403:../user/source/main.c **** #if 0
- 404:../user/source/main.c ****     Uart_ITReadEnable(pUartZD);
- 405:../user/source/main.c ****     /*last loop do not clear FLAG,second loop do not receive second frame*/
- 406:../user/source/main.c ****     while (!FLAG_UartZD_HasData)
+ 399:../user/source/main.c ****     while (!FLAG_UartZD_HasData)
+ 400:../user/source/main.c ****     {
+ 401:../user/source/main.c ****         vFeedExtWatchDog();
+ 402:../user/source/main.c ****     }
+ 403:../user/source/main.c ****     Uart_ITReadDisable(pUartZD);
+ 404:../user/source/main.c ****     FLAG_UartZD_HasData = false;
+ 405:../user/source/main.c ****     pdataDown->len = Uart_Read(pUartZD, (uint8_t *)pdataDown, BUF_SIZE);
+ 406:../user/source/main.c ****     if (pdataDown->len == 0)
  407:../user/source/main.c ****     {
- 408:../user/source/main.c ****         vFeedExtWatchDog();
- 409:../user/source/main.c ****     }
- 410:../user/source/main.c ****     Uart_ITReadDisable(pUartZD);
- 411:../user/source/main.c ****     FLAG_UartZD_HasData = false;
- 412:../user/source/main.c ****     pdataDown->len = Uart_Read(pUartZD, (uint8_t *)pdataDown, BUF_SIZE);
- 413:../user/source/main.c ****     if (pdataDown->len == 0)
- 414:../user/source/main.c ****     {
- 415:../user/source/main.c ****         UartDB_BaudRate = 0;
- 416:../user/source/main.c ****         continue;
- 417:../user/source/main.c ****     }
- 418:../user/source/main.c ****     do
- 419:../user/source/main.c ****     {
- 420:../user/source/main.c ****         vFeedExtWatchDog();
- 421:../user/source/main.c ****         vUart_EnableBaudrate(pUartDB, UartDB_BaudRate);
- 422:../user/source/main.c ****         Uart_OnceWrite(pUartDB, (uint8_t *)pdataDown, pdataDown->len, 1000);
- 423:../user/source/main.c ****         pdataUp->len = Uart_IdleRead(pUartDB, (uint8_t *)pdataUp, BUF_SIZE, 500);
- 424:../user/source/main.c ****         pframe = pGetpFrame((uint8_t *)pdataUp, pdataUp->len);
- 425:../user/source/main.c ****         /*9600 -> 4800 -> 2400 -> 1200*/
- 426:../user/source/main.c ****         UartDB_BaudRate = UartDB_BaudRate >> 1;
- 427:../user/source/main.c ****     } while (pframe == NULL && UartDB_BaudRate > 600);
- 428:../user/source/main.c ****     /*if no reply from DB,UartDB_BaudRate always == 600*/
- 429:../user/source/main.c ****     //} while (UartDB_BaudRate < 1200); //²¨ÌØÂÊÆ¥ÅäÍê³É
- 430:../user/source/main.c **** #endif
- 431:../user/source/main.c **** }
- 432:../user/source/main.c **** void vLedRun(uint32_t delay)
- 433:../user/source/main.c **** {
- 265              		.loc 1 433 0
+ 408:../user/source/main.c ****         UartDB_BaudRate = 0;
+ 409:../user/source/main.c ****         continue;
+ 410:../user/source/main.c ****     }
+ 411:../user/source/main.c ****     do
+ 412:../user/source/main.c ****     {
+ 413:../user/source/main.c ****         vFeedExtWatchDog();
+ 414:../user/source/main.c ****         vUart_EnableBaudrate(pUartDB, UartDB_BaudRate);
+ 415:../user/source/main.c ****         Uart_OnceWrite(pUartDB, (uint8_t *)pdataDown, pdataDown->len, 1000);
+ 416:../user/source/main.c ****         pdataUp->len = Uart_IdleRead(pUartDB, (uint8_t *)pdataUp, BUF_SIZE, 500);
+ 417:../user/source/main.c ****         pframe = pGetpFrame((uint8_t *)pdataUp, pdataUp->len);
+ 418:../user/source/main.c ****         /*9600 -> 4800 -> 2400 -> 1200*/
+ 419:../user/source/main.c ****         UartDB_BaudRate = UartDB_BaudRate >> 1;
+ 420:../user/source/main.c ****     } while (pframe == NULL && UartDB_BaudRate > 600);
+ 421:../user/source/main.c ****     /*if no reply from DB,UartDB_BaudRate always == 600*/
+ 422:../user/source/main.c ****     //} while (UartDB_BaudRate < 1200); //²¨ÌØÂÊÆ¥ÅäÍê³É
+ 423:../user/source/main.c **** #endif
+ 424:../user/source/main.c **** }
+ 425:../user/source/main.c **** void vLedRun(uint32_t delay)
+ 426:../user/source/main.c **** {
+ 265              		.loc 1 426 0
  266              		.cfi_startproc
  267              		@ args = 0, pretend = 0, frame = 0
  268              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -766,9 +759,9 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  272              		.cfi_def_cfa_offset 8
  273              		.cfi_offset 3, -8
  274              		.cfi_offset 14, -4
- 434:../user/source/main.c ****     static uint32_t last_tick = 0;
- 435:../user/source/main.c ****     if (TICKS - last_tick > delay)
- 275              		.loc 1 435 0
+ 427:../user/source/main.c ****     static uint32_t last_tick = 0;
+ 428:../user/source/main.c ****     if (TICKS - last_tick > delay)
+ 275              		.loc 1 428 0
  276 0002 0F4B     		ldr	r3, .L23
  277 0004 1A68     		ldr	r2, [r3]
  278 0006 0F4B     		ldr	r3, .L23+4
@@ -776,26 +769,26 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  280 000a D31A     		subs	r3, r2, r3
  281 000c 8342     		cmp	r3, r0
  282 000e 15D9     		bls	.L19
- 436:../user/source/main.c ****     {
- 437:../user/source/main.c ****         last_tick = TICKS;
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 14
-
-
- 283              		.loc 1 437 0
+ 429:../user/source/main.c ****     {
+ 430:../user/source/main.c ****         last_tick = TICKS;
+ 283              		.loc 1 430 0
  284 0010 0C4B     		ldr	r3, .L23+4
  285 0012 1A60     		str	r2, [r3]
- 438:../user/source/main.c ****         if (Bit_SET == GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13))
- 286              		.loc 1 438 0
+ 431:../user/source/main.c ****         if (Bit_SET == GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13))
+ 286              		.loc 1 431 0
  287 0014 4FF40051 		mov	r1, #8192
  288 0018 0B48     		ldr	r0, .L23+8
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 14
+
+
  289              	.LVL22:
  290 001a FFF7FEFF 		bl	GPIO_ReadOutputDataBit
  291              	.LVL23:
  292 001e 0128     		cmp	r0, #1
  293 0020 06D1     		bne	.L21
- 439:../user/source/main.c ****         {
- 440:../user/source/main.c ****             GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET); //À­µÍPC13
- 294              		.loc 1 440 0
+ 432:../user/source/main.c ****         {
+ 433:../user/source/main.c ****             GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_RESET); //À­µÍPC13
+ 294              		.loc 1 433 0
  295 0022 0022     		movs	r2, #0
  296 0024 4FF40051 		mov	r1, #8192
  297 0028 0748     		ldr	r0, .L23+8
@@ -803,11 +796,11 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  299              	.LVL24:
  300 002e 08BD     		pop	{r3, pc}
  301              	.L21:
- 441:../user/source/main.c ****         }
- 442:../user/source/main.c ****         else
- 443:../user/source/main.c ****         {
- 444:../user/source/main.c ****             GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);
- 302              		.loc 1 444 0
+ 434:../user/source/main.c ****         }
+ 435:../user/source/main.c ****         else
+ 436:../user/source/main.c ****         {
+ 437:../user/source/main.c ****             GPIO_WriteBit(GPIOC, GPIO_Pin_13, Bit_SET);
+ 302              		.loc 1 437 0
  303 0030 0122     		movs	r2, #1
  304 0032 4FF40051 		mov	r1, #8192
  305 0036 0448     		ldr	r0, .L23+8
@@ -830,7 +823,7 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  323              		.thumb_func
  325              	main:
  326              	.LFB111:
-  35:../user/source/main.c ****     ProtocolDef ProtocolType = none;
+  35:../user/source/main.c ****     /*485¿Ú²¨ÌØÂÊÀàÐÍ*/
  327              		.loc 1 35 0
  328              		.cfi_startproc
  329              		@ args = 0, pretend = 0, frame = 24
@@ -838,9 +831,6 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  331 0000 70B5     		push	{r4, r5, r6, lr}
  332              	.LCFI4:
  333              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 15
-
-
  334              		.cfi_offset 4, -16
  335              		.cfi_offset 5, -12
  336              		.cfi_offset 6, -8
@@ -848,937 +838,940 @@ ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 1
  338 0002 86B0     		sub	sp, sp, #24
  339              	.LCFI5:
  340              		.cfi_def_cfa_offset 40
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 15
+
+
  341              	.LVL26:
-  37:../user/source/main.c ****     uint32_t dwLen = 0;
- 342              		.loc 1 37 0
+  39:../user/source/main.c ****     uint32_t dwLen = 0;
+ 342              		.loc 1 39 0
  343 0004 0023     		movs	r3, #0
  344 0006 0593     		str	r3, [sp, #20]
  345              	.LVL27:
-  42:../user/source/main.c ****     while (uwBootDelay--)
- 346              		.loc 1 42 0
+  44:../user/source/main.c ****     /*¼¯ÖÐÆ÷ÉÏµç¹ý³ÌÖÐ485×ÜÏßÓÐÂÒÂë£¬´ËÊ±²»ÄÜÊ¶±ð²¨ÌØÂÊ*/
+ 346              		.loc 1 44 0
  347 0008 FFF7FEFF 		bl	vGPIO_Init
  348              	.LVL28:
-  43:../user/source/main.c ****     {
- 349              		.loc 1 43 0
+  46:../user/source/main.c ****     {
+ 349              		.loc 1 46 0
  350 000c 01E0     		b	.L26
  351              	.L27:
-  45:../user/source/main.c ****     }
- 352              		.loc 1 45 0
+  48:../user/source/main.c ****     }
+ 352              		.loc 1 48 0
  353 000e FFF7FEFF 		bl	vFeedExtWatchDog
  354              	.LVL29:
  355              	.L26:
-  43:../user/source/main.c ****     {
- 356              		.loc 1 43 0
- 357 0012 A14A     		ldr	r2, .L49
+  46:../user/source/main.c ****     {
+ 356              		.loc 1 46 0
+ 357 0012 AD4A     		ldr	r2, .L50
  358 0014 1368     		ldr	r3, [r2]
  359 0016 591E     		subs	r1, r3, #1
  360 0018 1160     		str	r1, [r2]
  361 001a 002B     		cmp	r3, #0
  362 001c F7D1     		bne	.L27
-  47:../user/source/main.c ****     //SysTick_Config(SysTick_100Ms);
- 363              		.loc 1 47 0
+  50:../user/source/main.c ****     vInterFlash_Init();
+ 363              		.loc 1 50 0
  364 001e 4FF4C060 		mov	r0, #1536
  365 0022 FFF7FEFF 		bl	NVIC_PriorityGroupConfig
  366              	.LVL30:
-  52:../user/source/main.c ****     //vGPIO_Init();
- 367              		.loc 1 52 0
+  51:../user/source/main.c ****     vFeedExtWatchDog();
+ 367              		.loc 1 51 0
  368 0026 FFF7FEFF 		bl	vInterFlash_Init
  369              	.LVL31:
-  54:../user/source/main.c ****     vTimer_Init();
- 370              		.loc 1 54 0
+  52:../user/source/main.c ****     vTimer_Init();
+ 370              		.loc 1 52 0
  371 002a FFF7FEFF 		bl	vFeedExtWatchDog
  372              	.LVL32:
-  55:../user/source/main.c ****     vLed_Light();
- 373              		.loc 1 55 0
+  53:../user/source/main.c ****     vLed_Light();
+ 373              		.loc 1 53 0
  374 002e FFF7FEFF 		bl	vTimer_Init
  375              	.LVL33:
-  56:../user/source/main.c **** #if 1
- 376              		.loc 1 56 0
+  54:../user/source/main.c ****     vSystickSetAccuracy(1000000); //SysTick = 1us
+ 376              		.loc 1 54 0
  377 0032 FFF7FEFF 		bl	vLed_Light
  378              	.LVL34:
-  58:../user/source/main.c ****     vSystickIntCmd(ENABLE);
- 379              		.loc 1 58 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 16
-
-
- 380 0036 9948     		ldr	r0, .L49+4
+  55:../user/source/main.c ****     vSystickIntCmd(ENABLE);
+ 379              		.loc 1 55 0
+ 380 0036 A548     		ldr	r0, .L50+4
  381 0038 FFF7FEFF 		bl	vSystickSetAccuracy
  382              	.LVL35:
-  59:../user/source/main.c ****     /*TICKÊ¹ÄÜºó²ÅÄÜ³õÊ¼»¯Íâ²¿ÖÐ¶Ï*/
- 383              		.loc 1 59 0
+  56:../user/source/main.c ****     /*TICKÊ¹ÄÜºó²ÅÄÜ³õÊ¼»¯Íâ²¿ÖÐ¶Ï*/
+ 383              		.loc 1 56 0
  384 003c 0120     		movs	r0, #1
  385 003e FFF7FEFF 		bl	vSystickIntCmd
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 16
+
+
  386              	.LVL36:
-  61:../user/source/main.c ****     vUart_EnableBaudrate(pUartIR, 1200);
- 387              		.loc 1 61 0
+  58:../user/source/main.c ****     vUart_EnableBaudrate(pUartIR, 1200);
+ 387              		.loc 1 58 0
  388 0042 FFF7FEFF 		bl	vExti_Init
  389              	.LVL37:
-  62:../user/source/main.c **** #endif
- 390              		.loc 1 62 0
+  59:../user/source/main.c ****     /*µçÑ¹ÐÞ¸ÄµÄÉÏÏÂÏÞÖµÉèÎªÄ¬ÈÏÖµ£»¿ªÆôÐÞ¸Ä¹¦ÄÜ */
+ 390              		.loc 1 59 0
  391 0046 4FF49661 		mov	r1, #1200
- 392 004a 954B     		ldr	r3, .L49+8
+ 392 004a A14B     		ldr	r3, .L50+8
  393 004c 1868     		ldr	r0, [r3]
  394 004e FFF7FEFF 		bl	vUart_EnableBaudrate
  395              	.LVL38:
-  66:../user/source/main.c ****     /*µçÁ÷ÖØ¹ýÔØ²ÎÊýÉèÖÃ*/
- 396              		.loc 1 66 0
+  61:../user/source/main.c ****     /*µçÁ÷ÖØ¹ýÔØ²ÎÊýÉèÖÃ*/
+ 396              		.loc 1 61 0
  397 0052 FFF7FEFF 		bl	Voltage_Change_Init
  398              	.LVL39:
-  68:../user/source/main.c ****     /*µçÁ¿ÐÞ¸ÄµÄÉÏÏÂÏÞÖµÉèÎªÄ¬ÈÏÖµ£»¿ªÆôÐÞ¸Ä¹¦ÄÜ */
- 399              		.loc 1 68 0
+  63:../user/source/main.c ****     /*µçÁ¿ÐÞ¸ÄµÄÉÏÏÂÏÞÖµÉèÎªÄ¬ÈÏÖµ£»¿ªÆôÐÞ¸Ä¹¦ÄÜ */
+ 399              		.loc 1 63 0
  400 0056 FFF7FEFF 		bl	vCurrent_Limit_DefaultSet
  401              	.LVL40:
-  70:../user/source/main.c ****     while (1)
- 402              		.loc 1 70 0
+  65:../user/source/main.c ****     while (1)
+ 402              		.loc 1 65 0
  403 005a FFF7FEFF 		bl	vEnergy_Modify_Init
  404              	.LVL41:
-  36:../user/source/main.c ****     uint8_t *pAPDU = NULL;
- 405              		.loc 1 36 0
+  37:../user/source/main.c ****     /*698Ö¡APDUÊý¾Ý¶ÎÖ¸Õë*/
+ 405              		.loc 1 37 0
  406 005e 0224     		movs	r4, #2
  407              	.LVL42:
  408              	.L29:
-  76:../user/source/main.c ****         {
- 409              		.loc 1 76 0
- 410 0060 8F4B     		ldr	r3, .L49+8
- 411 0062 1B68     		ldr	r3, [r3]
- 412 0064 5868     		ldr	r0, [r3, #4]
- 413 0066 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 414              	.LVL43:
- 415 006a D0B9     		cbnz	r0, .L30
-  78:../user/source/main.c ****             {
- 416              		.loc 1 78 0
- 417 006c 8C4B     		ldr	r3, .L49+8
- 418 006e 1B68     		ldr	r3, [r3]
- 419 0070 8C49     		ldr	r1, .L49+12
- 420 0072 5868     		ldr	r0, [r3, #4]
- 421 0074 FFF7FEFF 		bl	blRecvFrame
- 422              	.LVL44:
- 423 0078 98B1     		cbz	r0, .L30
-  80:../user/source/main.c ****                 /*ºìÍâ¿Ú»ØÖ¡*/
- 424              		.loc 1 80 0
- 425 007a 8A48     		ldr	r0, .L49+12
- 426 007c FFF7FEFF 		bl	vINFRDataID_Handle
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 17
+  68:../user/source/main.c ****         /*ºìÍâ´®¿ÚÊÕÖ¡´¦Àí */
+ 409              		.loc 1 68 0
+ 410 0060 FFF7FEFF 		bl	vFeedExtWatchDog
+ 411              	.LVL43:
+  70:../user/source/main.c ****         {
+ 412              		.loc 1 70 0
+ 413 0064 9A4B     		ldr	r3, .L50+8
+ 414 0066 1B68     		ldr	r3, [r3]
+ 415 0068 5868     		ldr	r0, [r3, #4]
+ 416 006a FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 417              	.LVL44:
+ 418 006e D0B9     		cbnz	r0, .L30
+  72:../user/source/main.c ****             {
+ 419              		.loc 1 72 0
+ 420 0070 974B     		ldr	r3, .L50+8
+ 421 0072 1B68     		ldr	r3, [r3]
+ 422 0074 9749     		ldr	r1, .L50+12
+ 423 0076 5868     		ldr	r0, [r3, #4]
+ 424 0078 FFF7FEFF 		bl	blRecvFrame
+ 425              	.LVL45:
+ 426 007c 98B1     		cbz	r0, .L30
+  74:../user/source/main.c ****                 /*ºìÍâ¿Ú»ØÖ¡*/
+ 427              		.loc 1 74 0
+ 428 007e 9548     		ldr	r0, .L50+12
+ 429 0080 FFF7FEFF 		bl	vINFRDataID_Handle
+ 430              	.LVL46:
+  76:../user/source/main.c ****                 {
+ 431              		.loc 1 76 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 17
 
 
- 427              	.LVL45:
-  82:../user/source/main.c ****                 {
- 428              		.loc 1 82 0
- 429 0080 874B     		ldr	r3, .L49+8
- 430 0082 1B68     		ldr	r3, [r3]
- 431 0084 9868     		ldr	r0, [r3, #8]
- 432 0086 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 433              	.LVL46:
- 434 008a 50B9     		cbnz	r0, .L30
-  84:../user/source/main.c ****                     //TIM_CCxCmd(TIM5, TIM_Channel_2, TIM_CCx_Enable);
- 435              		.loc 1 84 0
- 436 008c 864D     		ldr	r5, .L49+16
- 437 008e 0022     		movs	r2, #0
- 438 0090 8649     		ldr	r1, .L49+20
- 439 0092 2846     		mov	r0, r5
- 440 0094 FFF7FEFF 		bl	USART_ITConfig
- 441              	.LVL47:
-  86:../user/source/main.c ****                 }
- 442              		.loc 1 86 0
- 443 0098 0122     		movs	r2, #1
- 444 009a 8549     		ldr	r1, .L49+24
- 445 009c 2846     		mov	r0, r5
- 446 009e FFF7FEFF 		bl	USART_ITConfig
- 447              	.LVL48:
- 448              	.L30:
-  91:../user/source/main.c ****         {
- 449              		.loc 1 91 0
- 450 00a2 012C     		cmp	r4, #1
- 451 00a4 7ED0     		beq	.L31
- 452 00a6 002C     		cmp	r4, #0
- 453 00a8 00F03681 		beq	.L32
- 454 00ac 022C     		cmp	r4, #2
- 455 00ae D7D1     		bne	.L29
-  95:../user/source/main.c ****             vLedRun(TICK_200MS);
- 456              		.loc 1 95 0
- 457 00b0 FFF7FEFF 		bl	vFeedExtWatchDog
- 458              	.LVL49:
-  96:../user/source/main.c ****             if (AutoBaud485.Uart_BaudRate == 0)
- 459              		.loc 1 96 0
- 460 00b4 7F4B     		ldr	r3, .L49+28
- 461 00b6 1B68     		ldr	r3, [r3]
- 462 00b8 7F48     		ldr	r0, .L49+32
- 463 00ba A0FB0330 		umull	r3, r0, r0, r3
- 464 00be 8008     		lsrs	r0, r0, #2
- 465 00c0 FFF7FEFF 		bl	vLedRun
- 466              	.LVL50:
-  97:../user/source/main.c ****             {
- 467              		.loc 1 97 0
- 468 00c4 7D4B     		ldr	r3, .L49+36
- 469 00c6 9B68     		ldr	r3, [r3, #8]
- 470 00c8 5BBB     		cbnz	r3, .L34
-  99:../user/source/main.c ****                 {
- 471              		.loc 1 99 0
- 472 00ca 7C4B     		ldr	r3, .L49+36
- 473 00cc 1B68     		ldr	r3, [r3]
- 474 00ce 002B     		cmp	r3, #0
- 475 00d0 C6D1     		bne	.L29
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 18
+ 432 0084 924B     		ldr	r3, .L50+8
+ 433 0086 1B68     		ldr	r3, [r3]
+ 434 0088 9868     		ldr	r0, [r3, #8]
+ 435 008a FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 436              	.LVL47:
+ 437 008e 50B9     		cbnz	r0, .L30
+  78:../user/source/main.c ****                     USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
+ 438              		.loc 1 78 0
+ 439 0090 914D     		ldr	r5, .L50+16
+ 440 0092 0022     		movs	r2, #0
+ 441 0094 9149     		ldr	r1, .L50+20
+ 442 0096 2846     		mov	r0, r5
+ 443 0098 FFF7FEFF 		bl	USART_ITConfig
+ 444              	.LVL48:
+  79:../user/source/main.c ****                 }
+ 445              		.loc 1 79 0
+ 446 009c 0122     		movs	r2, #1
+ 447 009e 9049     		ldr	r1, .L50+24
+ 448 00a0 2846     		mov	r0, r5
+ 449 00a2 FFF7FEFF 		bl	USART_ITConfig
+ 450              	.LVL49:
+ 451              	.L30:
+  84:../user/source/main.c ****         {
+ 452              		.loc 1 84 0
+ 453 00a6 012C     		cmp	r4, #1
+ 454 00a8 7DD0     		beq	.L31
+ 455 00aa 002C     		cmp	r4, #0
+ 456 00ac 00F03281 		beq	.L32
+ 457 00b0 022C     		cmp	r4, #2
+ 458 00b2 D5D1     		bne	.L29
+  88:../user/source/main.c ****             vLedRun(TICK_200MS);
+ 459              		.loc 1 88 0
+ 460 00b4 FFF7FEFF 		bl	vFeedExtWatchDog
+ 461              	.LVL50:
+  89:../user/source/main.c ****             if (AutoBaud485.Uart_BaudRate == 0)
+ 462              		.loc 1 89 0
+ 463 00b8 8A4B     		ldr	r3, .L50+28
+ 464 00ba 1B68     		ldr	r3, [r3]
+ 465 00bc 8A48     		ldr	r0, .L50+32
+ 466 00be A0FB0330 		umull	r3, r0, r0, r3
+ 467 00c2 8008     		lsrs	r0, r0, #2
+ 468 00c4 FFF7FEFF 		bl	vLedRun
+ 469              	.LVL51:
+  90:../user/source/main.c ****             {
+ 470              		.loc 1 90 0
+ 471 00c8 884B     		ldr	r3, .L50+36
+ 472 00ca 9B68     		ldr	r3, [r3, #8]
+ 473 00cc 002B     		cmp	r3, #0
+ 474 00ce 31D1     		bne	.L34
+  92:../user/source/main.c ****                 {
+ 475              		.loc 1 92 0
+ 476 00d0 864B     		ldr	r3, .L50+36
+ 477 00d2 1B68     		ldr	r3, [r3]
+ 478 00d4 002B     		cmp	r3, #0
+ 479 00d6 C3D1     		bne	.L29
+  98:../user/source/main.c ****                     AutoBaud485.Uart_BaudRate = uwFindBaudRate(AutoBaud485.uwBaudelay);
+ 480              		.loc 1 98 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 18
 
 
- 105:../user/source/main.c ****                     AutoBaud485.Uart_BaudRate = uwFindBaudRate(AutoBaud485.uwBaudelay);
- 476              		.loc 1 105 0
- 477 00d2 FFF7FEFF 		bl	EXTI_DeInit
- 478              	.LVL51:
- 106:../user/source/main.c ****                     vSystickSetAccuracy(1000); //systick=1ms
- 479              		.loc 1 106 0
- 480 00d6 794D     		ldr	r5, .L49+36
- 481 00d8 6868     		ldr	r0, [r5, #4]
- 482 00da FFF7FEFF 		bl	uwFindBaudRate
- 483              	.LVL52:
- 484 00de A860     		str	r0, [r5, #8]
- 107:../user/source/main.c ****                     vSystickIntCmd(ENABLE);
- 485              		.loc 1 107 0
- 486 00e0 4FF47A70 		mov	r0, #1000
- 487 00e4 FFF7FEFF 		bl	vSystickSetAccuracy
- 488              	.LVL53:
- 108:../user/source/main.c ****                     vUart_EnableBaudrate(pUartZD, AutoBaud485.Uart_BaudRate); //Ê¹ÄÜ½ÓÊÕÖÐ¶Ï
- 489              		.loc 1 108 0
- 490 00e8 0120     		movs	r0, #1
- 491 00ea FFF7FEFF 		bl	vSystickIntCmd
+ 481 00d8 FFF7FEFF 		bl	EXTI_DeInit
+ 482              	.LVL52:
+  99:../user/source/main.c ****                     vSystickSetAccuracy(1000); //systick=1ms
+ 483              		.loc 1 99 0
+ 484 00dc 834E     		ldr	r6, .L50+36
+ 485 00de 7068     		ldr	r0, [r6, #4]
+ 486 00e0 FFF7FEFF 		bl	uwFindBaudRate
+ 487              	.LVL53:
+ 488 00e4 B060     		str	r0, [r6, #8]
+ 100:../user/source/main.c ****                     vSystickIntCmd(ENABLE);
+ 489              		.loc 1 100 0
+ 490 00e6 4FF47A70 		mov	r0, #1000
+ 491 00ea FFF7FEFF 		bl	vSystickSetAccuracy
  492              	.LVL54:
- 109:../user/source/main.c ****                     vUart_EnableBaudrate(pUartDB, AutoBaud485.Uart_BaudRate);
- 493              		.loc 1 109 0
- 494 00ee A968     		ldr	r1, [r5, #8]
- 495 00f0 734E     		ldr	r6, .L49+40
- 496 00f2 3068     		ldr	r0, [r6]
- 497 00f4 FFF7FEFF 		bl	vUart_EnableBaudrate
- 498              	.LVL55:
- 110:../user/source/main.c ****                     /*½ÓÊÕºóÐø×Ö½Ú²¢ºöÂÔ*/
- 499              		.loc 1 110 0
- 500 00f8 A968     		ldr	r1, [r5, #8]
- 501 00fa 724B     		ldr	r3, .L49+44
- 502 00fc 1868     		ldr	r0, [r3]
- 503 00fe FFF7FEFF 		bl	vUart_EnableBaudrate
- 504              	.LVL56:
- 112:../user/source/main.c ****                     Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
- 505              		.loc 1 112 0
- 506 0102 FFF7FEFF 		bl	vFeedExtWatchDog
- 507              	.LVL57:
- 113:../user/source/main.c ****                     vBuf_Clear(pUartZD->pRsvbuf);
- 508              		.loc 1 113 0
- 509 0106 6B4B     		ldr	r3, .L49+28
- 510 0108 1B68     		ldr	r3, [r3]
- 511 010a 5B08     		lsrs	r3, r3, #1
- 512 010c 4FF47A72 		mov	r2, #1000
- 513 0110 6D49     		ldr	r1, .L49+48
- 514 0112 3068     		ldr	r0, [r6]
- 515 0114 FFF7FEFF 		bl	Uart_IdleRead
- 516              	.LVL58:
- 114:../user/source/main.c ****                 }
- 517              		.loc 1 114 0
- 518 0118 3368     		ldr	r3, [r6]
- 519 011a 5868     		ldr	r0, [r3, #4]
- 520 011c FFF7FEFF 		bl	vBuf_Clear
- 521              	.LVL59:
- 522 0120 9EE7     		b	.L29
- 523              	.L34:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 19
+ 101:../user/source/main.c ****                     vUart_EnableBaudrate(pUartZD, AutoBaud485.Uart_BaudRate); //Ê¹ÄÜ½ÓÊÕÖÐ¶Ï
+ 493              		.loc 1 101 0
+ 494 00ee 0120     		movs	r0, #1
+ 495 00f0 FFF7FEFF 		bl	vSystickIntCmd
+ 496              	.LVL55:
+ 102:../user/source/main.c ****                     vUart_EnableBaudrate(pUartDB, AutoBaud485.Uart_BaudRate);
+ 497              		.loc 1 102 0
+ 498 00f4 B168     		ldr	r1, [r6, #8]
+ 499 00f6 7E4D     		ldr	r5, .L50+40
+ 500 00f8 2868     		ldr	r0, [r5]
+ 501 00fa FFF7FEFF 		bl	vUart_EnableBaudrate
+ 502              	.LVL56:
+ 103:../user/source/main.c ****                     /*½ÓÊÕºóÐø×Ö½Ú²¢ºöÂÔ*/
+ 503              		.loc 1 103 0
+ 504 00fe B168     		ldr	r1, [r6, #8]
+ 505 0100 7C4E     		ldr	r6, .L50+44
+ 506 0102 3068     		ldr	r0, [r6]
+ 507 0104 FFF7FEFF 		bl	vUart_EnableBaudrate
+ 508              	.LVL57:
+ 105:../user/source/main.c ****                     Uart_IdleRead(pUartZD, ucApp_Buf_ZD2DB, DRV_BUF_SIZE, TICK_500MS);
+ 509              		.loc 1 105 0
+ 510 0108 FFF7FEFF 		bl	vFeedExtWatchDog
+ 511              	.LVL58:
+ 106:../user/source/main.c ****                     vBuf_Clear(pUartZD->pRsvbuf);
+ 512              		.loc 1 106 0
+ 513 010c 754B     		ldr	r3, .L50+28
+ 514 010e 1B68     		ldr	r3, [r3]
+ 515 0110 5B08     		lsrs	r3, r3, #1
+ 516 0112 4FF47A72 		mov	r2, #1000
+ 517 0116 7849     		ldr	r1, .L50+48
+ 518 0118 2868     		ldr	r0, [r5]
+ 519 011a FFF7FEFF 		bl	Uart_IdleRead
+ 520              	.LVL59:
+ 107:../user/source/main.c ****                     Uart_idleReadEnable(pUartZD);
+ 521              		.loc 1 107 0
+ 522 011e 2B68     		ldr	r3, [r5]
+ 523 0120 5868     		ldr	r0, [r3, #4]
+ 524 0122 FFF7FEFF 		bl	vBuf_Clear
+ 525              	.LVL60:
+ 108:../user/source/main.c ****                     Uart_idleReadEnable(pUartDB);
+ 526              		.loc 1 108 0
+ 527 0126 2868     		ldr	r0, [r5]
+ 528 0128 FFF7FEFF 		bl	Uart_idleReadEnable
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 19
 
 
- 120:../user/source/main.c ****                 Uart_idleReadEnable(pUartDB);
- 524              		.loc 1 120 0
- 525 0122 674B     		ldr	r3, .L49+40
- 526 0124 1868     		ldr	r0, [r3]
- 527 0126 FFF7FEFF 		bl	Uart_idleReadEnable
- 528              	.LVL60:
- 121:../user/source/main.c ****                 if (FLAG_UartZD_HasData)
- 529              		.loc 1 121 0
- 530 012a 664B     		ldr	r3, .L49+44
- 531 012c 1868     		ldr	r0, [r3]
+ 529              	.LVL61:
+ 109:../user/source/main.c ****                 }
+ 530              		.loc 1 109 0
+ 531 012c 3068     		ldr	r0, [r6]
  532 012e FFF7FEFF 		bl	Uart_idleReadEnable
- 533              	.LVL61:
- 122:../user/source/main.c ****                 {
- 534              		.loc 1 122 0
- 535 0132 664B     		ldr	r3, .L49+52
- 536 0134 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 537 0136 BBB1     		cbz	r3, .L36
- 124:../user/source/main.c ****                     FLAG_UartZD_HasData = false;
- 538              		.loc 1 124 0
- 539 0138 614D     		ldr	r5, .L49+40
- 540 013a 2868     		ldr	r0, [r5]
- 541 013c FFF7FEFF 		bl	Uart_idleReadDisable
- 542              	.LVL62:
- 125:../user/source/main.c ****                     vFeedExtWatchDog();
- 543              		.loc 1 125 0
- 544 0140 0022     		movs	r2, #0
- 545 0142 624B     		ldr	r3, .L49+52
- 546 0144 1A70     		strb	r2, [r3]
- 126:../user/source/main.c ****                     dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
- 547              		.loc 1 126 0
- 548 0146 FFF7FEFF 		bl	vFeedExtWatchDog
- 549              	.LVL63:
- 127:../user/source/main.c ****                     ProtocolType = GetProtocolType(ucApp_Buf_ZD2DB, dwLen);
- 550              		.loc 1 127 0
- 551 014a 5F4C     		ldr	r4, .L49+48
- 552              	.LVL64:
- 553 014c 5D4B     		ldr	r3, .L49+44
- 554 014e 1A68     		ldr	r2, [r3]
- 555 0150 2146     		mov	r1, r4
- 556 0152 2868     		ldr	r0, [r5]
- 557 0154 FFF7FEFF 		bl	dwUartCopy
- 558              	.LVL65:
- 128:../user/source/main.c ****                     Uart_idleReadEnable(pUartZD);
- 559              		.loc 1 128 0
- 560 0158 0146     		mov	r1, r0
- 561 015a 2046     		mov	r0, r4
- 562              	.LVL66:
- 563 015c FFF7FEFF 		bl	GetProtocolType
+ 533              	.LVL62:
+ 534 0132 95E7     		b	.L29
+ 535              	.L34:
+ 115:../user/source/main.c ****                 {
+ 536              		.loc 1 115 0
+ 537 0134 714B     		ldr	r3, .L50+52
+ 538 0136 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 539 0138 BBB1     		cbz	r3, .L36
+ 117:../user/source/main.c ****                     FLAG_UartZD_HasData = false;
+ 540              		.loc 1 117 0
+ 541 013a 6D4D     		ldr	r5, .L50+40
+ 542 013c 2868     		ldr	r0, [r5]
+ 543 013e FFF7FEFF 		bl	Uart_idleReadDisable
+ 544              	.LVL63:
+ 118:../user/source/main.c ****                     vFeedExtWatchDog();
+ 545              		.loc 1 118 0
+ 546 0142 0022     		movs	r2, #0
+ 547 0144 6D4B     		ldr	r3, .L50+52
+ 548 0146 1A70     		strb	r2, [r3]
+ 119:../user/source/main.c ****                     dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
+ 549              		.loc 1 119 0
+ 550 0148 FFF7FEFF 		bl	vFeedExtWatchDog
+ 551              	.LVL64:
+ 120:../user/source/main.c ****                     ProtocolType = GetProtocolType(ucApp_Buf_ZD2DB, dwLen);
+ 552              		.loc 1 120 0
+ 553 014c 6A4C     		ldr	r4, .L50+48
+ 554              	.LVL65:
+ 555 014e 694B     		ldr	r3, .L50+44
+ 556 0150 1A68     		ldr	r2, [r3]
+ 557 0152 2146     		mov	r1, r4
+ 558 0154 2868     		ldr	r0, [r5]
+ 559 0156 FFF7FEFF 		bl	dwUartCopy
+ 560              	.LVL66:
+ 121:../user/source/main.c ****                     Uart_idleReadEnable(pUartZD);
+ 561              		.loc 1 121 0
+ 562 015a 0146     		mov	r1, r0
+ 563 015c 2046     		mov	r0, r4
  564              	.LVL67:
- 565 0160 0446     		mov	r4, r0
+ 565 015e FFF7FEFF 		bl	GetProtocolType
  566              	.LVL68:
- 129:../user/source/main.c ****                 }
- 567              		.loc 1 129 0
- 568 0162 2868     		ldr	r0, [r5]
- 569 0164 FFF7FEFF 		bl	Uart_idleReadEnable
- 570              	.LVL69:
- 571              	.L36:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 20
+ 567 0162 0446     		mov	r4, r0
+ 568              	.LVL69:
+ 122:../user/source/main.c ****                 }
+ 569              		.loc 1 122 0
+ 570 0164 2868     		ldr	r0, [r5]
+ 571 0166 FFF7FEFF 		bl	Uart_idleReadEnable
+ 572              	.LVL70:
+ 573              	.L36:
+ 124:../user/source/main.c ****                 {
+ 574              		.loc 1 124 0
+ 575 016a 654B     		ldr	r3, .L50+56
+ 576 016c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 20
 
 
- 131:../user/source/main.c ****                 {
- 572              		.loc 1 131 0
- 573 0168 594B     		ldr	r3, .L49+56
- 574 016a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 575 016c 002B     		cmp	r3, #0
- 576 016e 3FF477AF 		beq	.L29
- 133:../user/source/main.c ****                     FLAG_UartDB_HasData = false;
- 577              		.loc 1 133 0
- 578 0172 544D     		ldr	r5, .L49+44
- 579 0174 2868     		ldr	r0, [r5]
- 580 0176 FFF7FEFF 		bl	Uart_idleReadDisable
- 581              	.LVL70:
- 134:../user/source/main.c ****                     vFeedExtWatchDog();
- 582              		.loc 1 134 0
- 583 017a 0022     		movs	r2, #0
- 584 017c 544B     		ldr	r3, .L49+56
- 585 017e 1A70     		strb	r2, [r3]
- 135:../user/source/main.c ****                     dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
- 586              		.loc 1 135 0
- 587 0180 FFF7FEFF 		bl	vFeedExtWatchDog
- 588              	.LVL71:
- 136:../user/source/main.c ****                     ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //Ð£Ñé´íÎóÒ²ÄÛ¹ý£¿
- 589              		.loc 1 136 0
- 590 0184 534C     		ldr	r4, .L49+60
- 591              	.LVL72:
- 592 0186 4E4B     		ldr	r3, .L49+40
- 593 0188 1A68     		ldr	r2, [r3]
- 594 018a 2146     		mov	r1, r4
- 595 018c 2868     		ldr	r0, [r5]
- 596 018e FFF7FEFF 		bl	dwUartCopy
- 597              	.LVL73:
- 137:../user/source/main.c ****                     Uart_idleReadEnable(pUartDB);
- 598              		.loc 1 137 0
- 599 0192 0146     		mov	r1, r0
- 600 0194 2046     		mov	r0, r4
- 601              	.LVL74:
- 602 0196 FFF7FEFF 		bl	GetProtocolType
+ 577 016e 002B     		cmp	r3, #0
+ 578 0170 3FF476AF 		beq	.L29
+ 126:../user/source/main.c ****                     FLAG_UartDB_HasData = false;
+ 579              		.loc 1 126 0
+ 580 0174 5F4D     		ldr	r5, .L50+44
+ 581 0176 2868     		ldr	r0, [r5]
+ 582 0178 FFF7FEFF 		bl	Uart_idleReadDisable
+ 583              	.LVL71:
+ 127:../user/source/main.c ****                     vFeedExtWatchDog();
+ 584              		.loc 1 127 0
+ 585 017c 0022     		movs	r2, #0
+ 586 017e 604B     		ldr	r3, .L50+56
+ 587 0180 1A70     		strb	r2, [r3]
+ 128:../user/source/main.c ****                     dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
+ 588              		.loc 1 128 0
+ 589 0182 FFF7FEFF 		bl	vFeedExtWatchDog
+ 590              	.LVL72:
+ 129:../user/source/main.c ****                     ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //Ð£Ñé´íÎóÒ²ÄÛ¹ý£¿
+ 591              		.loc 1 129 0
+ 592 0186 5F4C     		ldr	r4, .L50+60
+ 593              	.LVL73:
+ 594 0188 594B     		ldr	r3, .L50+40
+ 595 018a 1A68     		ldr	r2, [r3]
+ 596 018c 2146     		mov	r1, r4
+ 597 018e 2868     		ldr	r0, [r5]
+ 598 0190 FFF7FEFF 		bl	dwUartCopy
+ 599              	.LVL74:
+ 130:../user/source/main.c ****                     Uart_idleReadEnable(pUartDB);
+ 600              		.loc 1 130 0
+ 601 0194 0146     		mov	r1, r0
+ 602 0196 2046     		mov	r0, r4
  603              	.LVL75:
- 604 019a 0446     		mov	r4, r0
+ 604 0198 FFF7FEFF 		bl	GetProtocolType
  605              	.LVL76:
- 138:../user/source/main.c ****                 }
- 606              		.loc 1 138 0
- 607 019c 2868     		ldr	r0, [r5]
- 608 019e FFF7FEFF 		bl	Uart_idleReadEnable
- 609              	.LVL77:
- 610 01a2 5DE7     		b	.L29
- 611              	.L31:
- 145:../user/source/main.c ****             vLedRun(TICK_1S);
- 612              		.loc 1 145 0
- 613 01a4 FFF7FEFF 		bl	vFeedExtWatchDog
- 614              	.LVL78:
- 146:../user/source/main.c ****             Uart_idleReadEnable(pUartZD);
- 615              		.loc 1 146 0
- 616 01a8 424B     		ldr	r3, .L49+28
- 617 01aa 1868     		ldr	r0, [r3]
- 618 01ac FFF7FEFF 		bl	vLedRun
- 619              	.LVL79:
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 21
+ 606 019c 0446     		mov	r4, r0
+ 607              	.LVL77:
+ 131:../user/source/main.c ****                 }
+ 608              		.loc 1 131 0
+ 609 019e 2868     		ldr	r0, [r5]
+ 610 01a0 FFF7FEFF 		bl	Uart_idleReadEnable
+ 611              	.LVL78:
+ 612 01a4 5CE7     		b	.L29
+ 613              	.L31:
+ 138:../user/source/main.c ****             vLedRun(TICK_1S);
+ 614              		.loc 1 138 0
+ 615 01a6 FFF7FEFF 		bl	vFeedExtWatchDog
+ 616              	.LVL79:
+ 139:../user/source/main.c ****             Uart_idleReadEnable(pUartZD);
+ 617              		.loc 1 139 0
+ 618 01aa 4E4B     		ldr	r3, .L50+28
+ 619 01ac 1868     		ldr	r0, [r3]
+ 620 01ae FFF7FEFF 		bl	vLedRun
+ 621              	.LVL80:
+ 140:../user/source/main.c ****             Uart_idleReadEnable(pUartDB);
+ 622              		.loc 1 140 0
+ 623 01b2 4F4B     		ldr	r3, .L50+40
+ 624 01b4 1868     		ldr	r0, [r3]
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 21
 
 
- 147:../user/source/main.c ****             Uart_idleReadEnable(pUartDB);
- 620              		.loc 1 147 0
- 621 01b0 434B     		ldr	r3, .L49+40
- 622 01b2 1868     		ldr	r0, [r3]
- 623 01b4 FFF7FEFF 		bl	Uart_idleReadEnable
- 624              	.LVL80:
- 148:../user/source/main.c ****             if (FLAG_UartZD_HasData)
- 625              		.loc 1 148 0
- 626 01b8 424B     		ldr	r3, .L49+44
- 627 01ba 1868     		ldr	r0, [r3]
- 628 01bc FFF7FEFF 		bl	Uart_idleReadEnable
- 629              	.LVL81:
- 149:../user/source/main.c ****             {
- 630              		.loc 1 149 0
- 631 01c0 424B     		ldr	r3, .L49+52
- 632 01c2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 633 01c4 93B1     		cbz	r3, .L37
- 151:../user/source/main.c ****                 FLAG_UartZD_HasData = false;
- 634              		.loc 1 151 0
- 635 01c6 3E4D     		ldr	r5, .L49+40
- 636 01c8 2868     		ldr	r0, [r5]
- 637 01ca FFF7FEFF 		bl	Uart_idleReadDisable
- 638              	.LVL82:
- 152:../user/source/main.c ****                 vFeedExtWatchDog();
- 639              		.loc 1 152 0
- 640 01ce 0022     		movs	r2, #0
- 641 01d0 3E4B     		ldr	r3, .L49+52
- 642 01d2 1A70     		strb	r2, [r3]
- 153:../user/source/main.c ****                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
- 643              		.loc 1 153 0
- 644 01d4 FFF7FEFF 		bl	vFeedExtWatchDog
- 645              	.LVL83:
- 154:../user/source/main.c ****                 Uart_idleReadEnable(pUartZD);
- 646              		.loc 1 154 0
- 647 01d8 3A4B     		ldr	r3, .L49+44
- 648 01da 1A68     		ldr	r2, [r3]
- 649 01dc 3A49     		ldr	r1, .L49+48
- 650 01de 2868     		ldr	r0, [r5]
- 651 01e0 FFF7FEFF 		bl	dwUartCopy
- 652              	.LVL84:
- 155:../user/source/main.c ****                 break;
- 653              		.loc 1 155 0
- 654 01e4 2868     		ldr	r0, [r5]
- 655 01e6 FFF7FEFF 		bl	Uart_idleReadEnable
- 656              	.LVL85:
- 156:../user/source/main.c ****             }
- 657              		.loc 1 156 0
- 658 01ea 39E7     		b	.L29
- 659              	.L37:
- 158:../user/source/main.c ****             {
- 660              		.loc 1 158 0
- 661 01ec 384B     		ldr	r3, .L49+56
- 662 01ee 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 663 01f0 002B     		cmp	r3, #0
- 664 01f2 00F08C80 		beq	.L38
- 160:../user/source/main.c ****                 Uart_idleReadDisable(pUartDB);
- 665              		.loc 1 160 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 22
+ 625 01b6 FFF7FEFF 		bl	Uart_idleReadEnable
+ 626              	.LVL81:
+ 141:../user/source/main.c ****             if (FLAG_UartZD_HasData)
+ 627              		.loc 1 141 0
+ 628 01ba 4E4B     		ldr	r3, .L50+44
+ 629 01bc 1868     		ldr	r0, [r3]
+ 630 01be FFF7FEFF 		bl	Uart_idleReadEnable
+ 631              	.LVL82:
+ 142:../user/source/main.c ****             {
+ 632              		.loc 1 142 0
+ 633 01c2 4E4B     		ldr	r3, .L50+52
+ 634 01c4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 635 01c6 93B1     		cbz	r3, .L37
+ 144:../user/source/main.c ****                 FLAG_UartZD_HasData = false;
+ 636              		.loc 1 144 0
+ 637 01c8 494D     		ldr	r5, .L50+40
+ 638 01ca 2868     		ldr	r0, [r5]
+ 639 01cc FFF7FEFF 		bl	Uart_idleReadDisable
+ 640              	.LVL83:
+ 145:../user/source/main.c ****                 vFeedExtWatchDog();
+ 641              		.loc 1 145 0
+ 642 01d0 0022     		movs	r2, #0
+ 643 01d2 4A4B     		ldr	r3, .L50+52
+ 644 01d4 1A70     		strb	r2, [r3]
+ 146:../user/source/main.c ****                 dwLen = dwUartCopy(pUartZD, ucApp_Buf_ZD2DB, pUartDB);
+ 645              		.loc 1 146 0
+ 646 01d6 FFF7FEFF 		bl	vFeedExtWatchDog
+ 647              	.LVL84:
+ 147:../user/source/main.c ****                 Uart_idleReadEnable(pUartZD);
+ 648              		.loc 1 147 0
+ 649 01da 464B     		ldr	r3, .L50+44
+ 650 01dc 1A68     		ldr	r2, [r3]
+ 651 01de 4649     		ldr	r1, .L50+48
+ 652 01e0 2868     		ldr	r0, [r5]
+ 653 01e2 FFF7FEFF 		bl	dwUartCopy
+ 654              	.LVL85:
+ 148:../user/source/main.c ****                 break;
+ 655              		.loc 1 148 0
+ 656 01e6 2868     		ldr	r0, [r5]
+ 657 01e8 FFF7FEFF 		bl	Uart_idleReadEnable
+ 658              	.LVL86:
+ 149:../user/source/main.c ****             }
+ 659              		.loc 1 149 0
+ 660 01ec 38E7     		b	.L29
+ 661              	.L37:
+ 151:../user/source/main.c ****             {
+ 662              		.loc 1 151 0
+ 663 01ee 444B     		ldr	r3, .L50+56
+ 664 01f0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 665 01f2 002B     		cmp	r3, #0
+ 666 01f4 63D0     		beq	.L38
+ 153:../user/source/main.c ****                 Uart_idleReadDisable(pUartDB);
+ 667              		.loc 1 153 0
+ 668 01f6 FFF7FEFF 		bl	vFeedExtWatchDog
+ 669              	.LVL87:
+ 154:../user/source/main.c ****                 FLAG_UartDB_HasData = false;
+ 670              		.loc 1 154 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 22
 
 
- 666 01f6 FFF7FEFF 		bl	vFeedExtWatchDog
- 667              	.LVL86:
- 161:../user/source/main.c ****                 FLAG_UartDB_HasData = false;
- 668              		.loc 1 161 0
- 669 01fa 324D     		ldr	r5, .L49+44
- 670 01fc 2868     		ldr	r0, [r5]
- 671 01fe FFF7FEFF 		bl	Uart_idleReadDisable
- 672              	.LVL87:
- 162:../user/source/main.c ****                 dlt698Frame.pStart = NULL;
- 673              		.loc 1 162 0
- 674 0202 0023     		movs	r3, #0
- 675 0204 324A     		ldr	r2, .L49+56
- 676 0206 1370     		strb	r3, [r2]
- 163:../user/source/main.c **** 
- 677              		.loc 1 163 0
- 678 0208 0193     		str	r3, [sp, #4]
- 166:../user/source/main.c ****                     break;
- 679              		.loc 1 166 0
- 680 020a 4FF47A72 		mov	r2, #1000
- 681 020e 3149     		ldr	r1, .L49+60
- 682 0210 2868     		ldr	r0, [r5]
- 683 0212 FFF7FEFF 		bl	Uart_Read
- 684              	.LVL88:
- 685 0216 0546     		mov	r5, r0
- 686 0218 0028     		cmp	r0, #0
- 687 021a 3FF421AF 		beq	.L29
- 168:../user/source/main.c ****                 {
- 688              		.loc 1 168 0
- 689 021e 01AA     		add	r2, sp, #4
- 690 0220 0146     		mov	r1, r0
- 691 0222 2C48     		ldr	r0, .L49+60
- 692              	.LVL89:
- 693 0224 FFF7FEFF 		bl	pGetpFrame
+ 671 01fa 3E4D     		ldr	r5, .L50+44
+ 672 01fc 2868     		ldr	r0, [r5]
+ 673 01fe FFF7FEFF 		bl	Uart_idleReadDisable
+ 674              	.LVL88:
+ 155:../user/source/main.c ****                 dlt698Frame.pStart = NULL;
+ 675              		.loc 1 155 0
+ 676 0202 0023     		movs	r3, #0
+ 677 0204 3E4A     		ldr	r2, .L50+56
+ 678 0206 1370     		strb	r3, [r2]
+ 156:../user/source/main.c **** 
+ 679              		.loc 1 156 0
+ 680 0208 0193     		str	r3, [sp, #4]
+ 159:../user/source/main.c ****                     break;
+ 681              		.loc 1 159 0
+ 682 020a 4FF47A72 		mov	r2, #1000
+ 683 020e 3D49     		ldr	r1, .L50+60
+ 684 0210 2868     		ldr	r0, [r5]
+ 685 0212 FFF7FEFF 		bl	Uart_Read
+ 686              	.LVL89:
+ 687 0216 0546     		mov	r5, r0
+ 688 0218 0028     		cmp	r0, #0
+ 689 021a 3FF421AF 		beq	.L29
+ 161:../user/source/main.c ****                     Voltage_Change_State == Voltage_NOChange)
+ 690              		.loc 1 161 0
+ 691 021e 01AA     		add	r2, sp, #4
+ 692 0220 0146     		mov	r1, r0
+ 693 0222 3848     		ldr	r0, .L50+60
  694              	.LVL90:
- 695 0228 90B9     		cbnz	r0, .L39
- 170:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, 1000 * TICK_1MS);
- 696              		.loc 1 170 0
- 697 022a FFF7FEFF 		bl	vFeedExtWatchDog
- 698              	.LVL91:
- 171:../user/source/main.c ****                 }
- 699              		.loc 1 171 0
- 700 022e 214B     		ldr	r3, .L49+28
- 701 0230 1B68     		ldr	r3, [r3]
- 702 0232 294A     		ldr	r2, .L49+64
- 703 0234 A2FB0323 		umull	r2, r3, r2, r3
- 704 0238 9B09     		lsrs	r3, r3, #6
- 705 023a 4FF47A72 		mov	r2, #1000
- 706 023e 02FB03F3 		mul	r3, r2, r3
- 707 0242 2A46     		mov	r2, r5
- 708 0244 2349     		ldr	r1, .L49+60
- 709 0246 1E48     		ldr	r0, .L49+40
- 710 0248 0068     		ldr	r0, [r0]
- 711 024a FFF7FEFF 		bl	Uart_OnceWrite
- 712              	.LVL92:
- 713 024e 5EE0     		b	.L38
- 714              	.L39:
- 173:../user/source/main.c ****                 {
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 23
+ 695 0224 FFF7FEFF 		bl	pGetpFrame
+ 696              	.LVL91:
+ 697 0228 10B1     		cbz	r0, .L39
+ 162:../user/source/main.c ****                 {
+ 698              		.loc 1 162 0 discriminator 1
+ 699 022a 374B     		ldr	r3, .L50+64
+ 700 022c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 161:../user/source/main.c ****                     Voltage_Change_State == Voltage_NOChange)
+ 701              		.loc 1 161 0 discriminator 1
+ 702 022e 93B9     		cbnz	r3, .L40
+ 703              	.L39:
+ 164:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, 1000 * TICK_1MS);
+ 704              		.loc 1 164 0
+ 705 0230 FFF7FEFF 		bl	vFeedExtWatchDog
+ 706              	.LVL92:
+ 165:../user/source/main.c ****                 }
+ 707              		.loc 1 165 0
+ 708 0234 2B4B     		ldr	r3, .L50+28
+ 709 0236 1B68     		ldr	r3, [r3]
+ 710 0238 344A     		ldr	r2, .L50+68
+ 711 023a A2FB0323 		umull	r2, r3, r2, r3
+ 712 023e 9B09     		lsrs	r3, r3, #6
+ 713 0240 4FF47A72 		mov	r2, #1000
+ 714 0244 02FB03F3 		mul	r3, r2, r3
+ 715 0248 2A46     		mov	r2, r5
+ 716 024a 2E49     		ldr	r1, .L50+60
+ 717 024c 2848     		ldr	r0, .L50+40
+ 718 024e 0068     		ldr	r0, [r0]
+ 719 0250 FFF7FEFF 		bl	Uart_OnceWrite
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 23
 
 
- 715              		.loc 1 173 0
- 716 0250 224B     		ldr	r3, .L49+68
- 717 0252 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 718 0254 002B     		cmp	r3, #0
- 719 0256 5AD0     		beq	.L38
- 175:../user/source/main.c ****                     {
- 720              		.loc 1 175 0
- 721 0258 05A9     		add	r1, sp, #20
- 722 025a 01A8     		add	r0, sp, #4
- 723 025c FFF7FEFF 		bl	dwGet698Apdu
- 724              	.LVL93:
- 725 0260 0146     		mov	r1, r0
- 726 0262 0028     		cmp	r0, #0
- 727 0264 46D0     		beq	.L40
- 177:../user/source/main.c ****                         {
- 728              		.loc 1 177 0
- 729 0266 1E4A     		ldr	r2, .L49+72
- 730 0268 0598     		ldr	r0, [sp, #20]
- 731              	.LVL94:
- 732 026a FFF7FEFF 		bl	dwAPduAnalyze
+ 720              	.LVL93:
+ 721 0254 33E0     		b	.L38
+ 722              	.L40:
+ 169:../user/source/main.c ****                     {
+ 723              		.loc 1 169 0
+ 724 0256 05A9     		add	r1, sp, #20
+ 725 0258 01A8     		add	r0, sp, #4
+ 726 025a FFF7FEFF 		bl	dwGet698Apdu
+ 727              	.LVL94:
+ 728 025e 0146     		mov	r1, r0
+ 729 0260 00B3     		cbz	r0, .L41
+ 171:../user/source/main.c ****                         {
+ 730              		.loc 1 171 0
+ 731 0262 2B4A     		ldr	r2, .L50+72
+ 732 0264 0598     		ldr	r0, [sp, #20]
  733              	.LVL95:
- 734 026e 0028     		cmp	r0, #0
- 735 0270 38DC     		bgt	.L47
- 736 0272 3FE0     		b	.L40
- 737              	.LVL96:
- 738              	.L43:
- 181:../user/source/main.c ****                                 {
- 739              		.loc 1 181 0
- 740 0274 05EB4502 		add	r2, r5, r5, lsl #1
- 741 0278 9300     		lsls	r3, r2, #2
- 742 027a 194A     		ldr	r2, .L49+72
- 743 027c 1344     		add	r3, r3, r2
- 744 027e 1B89     		ldrh	r3, [r3, #8]
- 745 0280 B3F5005F 		cmp	r3, #8192
- 746 0284 06D1     		bne	.L42
- 183:../user/source/main.c ****                                 }
- 747              		.loc 1 183 0
- 748 0286 05EB4503 		add	r3, r5, r5, lsl #1
- 749 028a 9800     		lsls	r0, r3, #2
- 750 028c 0830     		adds	r0, r0, #8
- 751 028e 1044     		add	r0, r0, r2
- 752 0290 FFF7FEFF 		bl	v698VoltageModify
- 753              	.LVL97:
- 754              	.L42:
- 179:../user/source/main.c ****                             {
- 755              		.loc 1 179 0 discriminator 2
- 756 0294 0135     		adds	r5, r5, #1
- 757              	.LVL98:
- 758 0296 26E0     		b	.L41
- 759              	.L50:
- 760              		.align	2
- 761              	.L49:
- 762 0298 00000000 		.word	.LANCHOR1
- 763 029c 40420F00 		.word	1000000
- 764 02a0 00000000 		.word	pUartIR
- 765 02a4 00000000 		.word	ucApp_Buf_INFR
- 766 02a8 00440040 		.word	1073759232
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 24
+ 734 0266 FFF7FEFF 		bl	dwAPduAnalyze
+ 735              	.LVL96:
+ 736 026a 0028     		cmp	r0, #0
+ 737 026c 12DC     		bgt	.L48
+ 738 026e 19E0     		b	.L41
+ 739              	.LVL97:
+ 740              	.L44:
+ 175:../user/source/main.c ****                                 {
+ 741              		.loc 1 175 0
+ 742 0270 05EB4502 		add	r2, r5, r5, lsl #1
+ 743 0274 9300     		lsls	r3, r2, #2
+ 744 0276 264A     		ldr	r2, .L50+72
+ 745 0278 1344     		add	r3, r3, r2
+ 746 027a 1B89     		ldrh	r3, [r3, #8]
+ 747 027c B3F5005F 		cmp	r3, #8192
+ 748 0280 06D1     		bne	.L43
+ 177:../user/source/main.c ****                                 }
+ 749              		.loc 1 177 0
+ 750 0282 05EB4503 		add	r3, r5, r5, lsl #1
+ 751 0286 9800     		lsls	r0, r3, #2
+ 752 0288 0830     		adds	r0, r0, #8
+ 753 028a 1044     		add	r0, r0, r2
+ 754 028c FFF7FEFF 		bl	v698VoltageModify
+ 755              	.LVL98:
+ 756              	.L43:
+ 173:../user/source/main.c ****                             {
+ 757              		.loc 1 173 0 discriminator 2
+ 758 0290 0135     		adds	r5, r5, #1
+ 759              	.LVL99:
+ 760 0292 00E0     		b	.L42
+ 761              	.LVL100:
+ 762              	.L48:
+ 763 0294 0025     		movs	r5, #0
+ 764              	.L42:
+ 765              	.LVL101:
+ 173:../user/source/main.c ****                             {
+ 766              		.loc 1 173 0 is_stmt 0 discriminator 1
+ 767 0296 1E4B     		ldr	r3, .L50+72
+ 768 0298 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 769 029a 9D42     		cmp	r5, r3
+ 770 029c E8D3     		bcc	.L44
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 24
 
 
- 767 02ac 05010500 		.word	327941
- 768 02b0 07010700 		.word	459015
- 769 02b4 00000000 		.word	gSystickAccuracy
- 770 02b8 CDCCCCCC 		.word	-858993459
- 771 02bc 00000000 		.word	.LANCHOR2
- 772 02c0 00000000 		.word	pUartZD
- 773 02c4 00000000 		.word	pUartDB
- 774 02c8 00000000 		.word	ucApp_Buf_ZD2DB
- 775 02cc 00000000 		.word	.LANCHOR3
- 776 02d0 00000000 		.word	.LANCHOR4
- 777 02d4 00000000 		.word	ucApp_Buf_DB2ZD
- 778 02d8 D34D6210 		.word	274877907
- 779 02dc 00000000 		.word	Voltage_Change_State
- 780 02e0 00000000 		.word	stCollData
- 781              	.LVL99:
- 782              	.L47:
- 783 02e4 0025     		movs	r5, #0
- 784              	.L41:
- 785              	.LVL100:
- 179:../user/source/main.c ****                             {
- 786              		.loc 1 179 0 is_stmt 0 discriminator 1
- 787 02e6 3F4B     		ldr	r3, .L51
- 788 02e8 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
- 789 02ea 9D42     		cmp	r5, r3
- 790 02ec C2D3     		bcc	.L43
- 186:../user/source/main.c ****                         }
- 791              		.loc 1 186 0 is_stmt 1
- 792 02ee 01A8     		add	r0, sp, #4
- 793 02f0 FFF7FEFF 		bl	dwReCalculateFCS
- 794              	.LVL101:
- 795              	.L40:
- 189:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICK_50
- 796              		.loc 1 189 0
- 797 02f4 FFF7FEFF 		bl	vFeedExtWatchDog
- 798              	.LVL102:
- 190:../user/source/main.c ****                 }
- 799              		.loc 1 190 0
- 800 02f8 BDF81020 		ldrh	r2, [sp, #16]
- 801 02fc 3A4B     		ldr	r3, .L51+4
- 802 02fe 1B68     		ldr	r3, [r3]
- 803 0300 5B08     		lsrs	r3, r3, #1
- 804 0302 0232     		adds	r2, r2, #2
- 805 0304 0199     		ldr	r1, [sp, #4]
- 806 0306 3948     		ldr	r0, .L51+8
- 807 0308 0068     		ldr	r0, [r0]
- 808 030a FFF7FEFF 		bl	Uart_OnceWrite
- 809              	.LVL103:
- 810              	.L38:
- 193:../user/source/main.c ****             break;
- 811              		.loc 1 193 0
- 812 030e 384B     		ldr	r3, .L51+12
- 813 0310 1868     		ldr	r0, [r3]
- 814 0312 FFF7FEFF 		bl	Uart_idleReadEnable
- 815              	.LVL104:
- 194:../user/source/main.c ****         }
- 816              		.loc 1 194 0
- 817 0316 A3E6     		b	.L29
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 25
+ 180:../user/source/main.c ****                         }
+ 771              		.loc 1 180 0 is_stmt 1
+ 772 029e 01A8     		add	r0, sp, #4
+ 773 02a0 FFF7FEFF 		bl	dwReCalculateFCS
+ 774              	.LVL102:
+ 775              	.L41:
+ 183:../user/source/main.c ****                     Uart_OnceWrite(pUartZD, dlt698Frame.pStart, dlt698Frame.uwFramelen + 2, TICK_50
+ 776              		.loc 1 183 0
+ 777 02a4 FFF7FEFF 		bl	vFeedExtWatchDog
+ 778              	.LVL103:
+ 184:../user/source/main.c ****                 }
+ 779              		.loc 1 184 0
+ 780 02a8 BDF81020 		ldrh	r2, [sp, #16]
+ 781 02ac 0D4B     		ldr	r3, .L50+28
+ 782 02ae 1B68     		ldr	r3, [r3]
+ 783 02b0 5B08     		lsrs	r3, r3, #1
+ 784 02b2 0232     		adds	r2, r2, #2
+ 785 02b4 0199     		ldr	r1, [sp, #4]
+ 786 02b6 0E48     		ldr	r0, .L50+40
+ 787 02b8 0068     		ldr	r0, [r0]
+ 788 02ba FFF7FEFF 		bl	Uart_OnceWrite
+ 789              	.LVL104:
+ 790              	.L38:
+ 187:../user/source/main.c ****             break;
+ 791              		.loc 1 187 0
+ 792 02be 0D4B     		ldr	r3, .L50+44
+ 793 02c0 1868     		ldr	r0, [r3]
+ 794 02c2 FFF7FEFF 		bl	Uart_idleReadEnable
+ 795              	.LVL105:
+ 188:../user/source/main.c ****         }
+ 796              		.loc 1 188 0
+ 797 02c6 CBE6     		b	.L29
+ 798              	.L51:
+ 799              		.align	2
+ 800              	.L50:
+ 801 02c8 00000000 		.word	.LANCHOR1
+ 802 02cc 40420F00 		.word	1000000
+ 803 02d0 00000000 		.word	pUartIR
+ 804 02d4 00000000 		.word	ucApp_Buf_INFR
+ 805 02d8 00440040 		.word	1073759232
+ 806 02dc 05010500 		.word	327941
+ 807 02e0 07010700 		.word	459015
+ 808 02e4 00000000 		.word	gSystickAccuracy
+ 809 02e8 CDCCCCCC 		.word	-858993459
+ 810 02ec 00000000 		.word	.LANCHOR2
+ 811 02f0 00000000 		.word	pUartZD
+ 812 02f4 00000000 		.word	pUartDB
+ 813 02f8 00000000 		.word	ucApp_Buf_ZD2DB
+ 814 02fc 00000000 		.word	.LANCHOR3
+ 815 0300 00000000 		.word	.LANCHOR4
+ 816 0304 00000000 		.word	ucApp_Buf_DB2ZD
+ 817 0308 00000000 		.word	Voltage_Change_State
+ 818 030c D34D6210 		.word	274877907
+ 819 0310 00000000 		.word	stCollData
+ 820              	.L32:
+ 192:../user/source/main.c ****             /*´®¿ÚÎÞÊÕ·¢Ê±Î¹¹·¼ä¸ôÎª1ms×óÓÒ*/
+ 821              		.loc 1 192 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 25
 
 
- 818              	.L32:
- 198:../user/source/main.c ****             /*´®¿ÚÎÞÊÕ·¢Ê±Î¹¹·¼ä¸ôÎª1ms×óÓÒ*/
- 819              		.loc 1 198 0
- 820 0318 334B     		ldr	r3, .L51+4
- 821 031a 1868     		ldr	r0, [r3]
- 822 031c FFF7FEFF 		bl	vLedRun
- 823              	.LVL105:
- 200:../user/source/main.c ****             /*¼¯ÖÐÆ÷²àÊý¾ÝÖ¡ÊÕÖ¡´¦Àí*/
- 824              		.loc 1 200 0
- 825 0320 FFF7FEFF 		bl	vFeedExtWatchDog
- 826              	.LVL106:
+ 822 0314 324B     		ldr	r3, .L52
+ 823 0316 1868     		ldr	r0, [r3]
+ 824 0318 FFF7FEFF 		bl	vLedRun
+ 825              	.LVL106:
+ 194:../user/source/main.c ****             /*¼¯ÖÐÆ÷²àÊý¾ÝÖ¡ÊÕÖ¡´¦Àí*/
+ 826              		.loc 1 194 0
+ 827 031c FFF7FEFF 		bl	vFeedExtWatchDog
+ 828              	.LVL107:
+ 196:../user/source/main.c ****             {
+ 829              		.loc 1 196 0
+ 830 0320 304B     		ldr	r3, .L52+4
+ 831 0322 1B68     		ldr	r3, [r3]
+ 832 0324 5868     		ldr	r0, [r3, #4]
+ 833 0326 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 834              	.LVL108:
+ 835 032a 10B9     		cbnz	r0, .L45
+ 198:../user/source/main.c ****             }
+ 836              		.loc 1 198 0
+ 837 032c 2E48     		ldr	r0, .L52+8
+ 838 032e FFF7FEFF 		bl	RsvFrameHandle
+ 839              	.LVL109:
+ 840              	.L45:
  202:../user/source/main.c ****             {
- 827              		.loc 1 202 0
- 828 0324 314B     		ldr	r3, .L51+8
- 829 0326 1B68     		ldr	r3, [r3]
- 830 0328 5868     		ldr	r0, [r3, #4]
- 831 032a FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 832              	.LVL107:
- 833 032e 10B9     		cbnz	r0, .L44
+ 841              		.loc 1 202 0
+ 842 0332 2E4B     		ldr	r3, .L52+12
+ 843 0334 1B68     		ldr	r3, [r3]
+ 844 0336 5868     		ldr	r0, [r3, #4]
+ 845 0338 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 846              	.LVL110:
+ 847 033c 10B1     		cbz	r0, .L46
  204:../user/source/main.c ****             }
- 834              		.loc 1 204 0
- 835 0330 3048     		ldr	r0, .L51+16
- 836 0332 FFF7FEFF 		bl	RsvFrameHandle
- 837              	.LVL108:
- 838              	.L44:
- 208:../user/source/main.c ****             {
- 839              		.loc 1 208 0
- 840 0336 2E4B     		ldr	r3, .L51+12
- 841 0338 1B68     		ldr	r3, [r3]
- 842 033a 5868     		ldr	r0, [r3, #4]
- 843 033c FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 844              	.LVL109:
- 845 0340 10B1     		cbz	r0, .L45
- 210:../user/source/main.c ****             }
- 846              		.loc 1 210 0
- 847 0342 FFF7FEFF 		bl	VoltageTimeOutHandle
- 848              	.LVL110:
- 849 0346 8BE6     		b	.L29
- 850              	.L45:
- 216:../user/source/main.c ****                 {
- 851              		.loc 1 216 0
- 852 0348 294B     		ldr	r3, .L51+12
- 853 034a 1B68     		ldr	r3, [r3]
- 854 034c 2A49     		ldr	r1, .L51+20
- 855 034e 5868     		ldr	r0, [r3, #4]
- 856 0350 FFF7FEFF 		bl	blRecvFrame
- 857              	.LVL111:
- 858 0354 0028     		cmp	r0, #0
- 859 0356 2CD1     		bne	.L46
- 219:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 860              		.loc 1 219 0
- 861 0358 284B     		ldr	r3, .L51+24
- 862 035a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 863 035c 002B     		cmp	r3, #0
- 864 035e 7FF47FAE 		bne	.L29
- 220:../user/source/main.c ****                     {
- 865              		.loc 1 220 0 discriminator 1
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 26
+ 848              		.loc 1 204 0
+ 849 033e FFF7FEFF 		bl	VoltageTimeOutHandle
+ 850              	.LVL111:
+ 851 0342 8DE6     		b	.L29
+ 852              	.L46:
+ 210:../user/source/main.c ****                 {
+ 853              		.loc 1 210 0
+ 854 0344 294B     		ldr	r3, .L52+12
+ 855 0346 1B68     		ldr	r3, [r3]
+ 856 0348 2949     		ldr	r1, .L52+16
+ 857 034a 5868     		ldr	r0, [r3, #4]
+ 858 034c FFF7FEFF 		bl	blRecvFrame
+ 859              	.LVL112:
+ 860 0350 0028     		cmp	r0, #0
+ 861 0352 2CD1     		bne	.L47
+ 213:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 862              		.loc 1 213 0
+ 863 0354 274B     		ldr	r3, .L52+20
+ 864 0356 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 865 0358 002B     		cmp	r3, #0
+ 866 035a 7FF481AE 		bne	.L29
+ 214:../user/source/main.c ****                     {
+ 867              		.loc 1 214 0 discriminator 1
+ 868 035e 1921     		movs	r1, #25
+ 869 0360 254B     		ldr	r3, .L52+24
+ 870 0362 1888     		ldrh	r0, [r3]
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 26
 
 
- 866 0362 1921     		movs	r1, #25
- 867 0364 264B     		ldr	r3, .L51+28
- 868 0366 1888     		ldrh	r0, [r3]
- 869 0368 FFF7FEFF 		bl	blTime2_Update
- 870              	.LVL112:
- 219:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
- 871              		.loc 1 219 0 discriminator 1
- 872 036c 0028     		cmp	r0, #0
- 873 036e 3FF477AE 		beq	.L29
- 223:../user/source/main.c ****                         {
- 874              		.loc 1 223 0
- 875 0372 2048     		ldr	r0, .L51+16
- 876 0374 FFF7FEFF 		bl	blVoltage_Create
- 877              	.LVL113:
- 878 0378 0028     		cmp	r0, #0
- 879 037a 3FF471AE 		beq	.L29
- 225:../user/source/main.c ****                             /*·¢ËÍµçÑ¹Ö¡*/
- 880              		.loc 1 225 0
- 881 037e 1B4D     		ldr	r5, .L51+8
- 882 0380 2B68     		ldr	r3, [r5]
- 883 0382 1C48     		ldr	r0, .L51+16
- 884 0384 427A     		ldrb	r2, [r0, #9]	@ zero_extendqisi2
- 885 0386 9968     		ldr	r1, [r3, #8]
- 886 0388 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
- 887              	.LVL114:
- 227:../user/source/main.c ****                             {
- 888              		.loc 1 227 0
- 889 038c 2B68     		ldr	r3, [r5]
- 890 038e 9868     		ldr	r0, [r3, #8]
- 891 0390 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 892              	.LVL115:
- 893 0394 0028     		cmp	r0, #0
- 894 0396 7FF463AE 		bne	.L29
- 229:../user/source/main.c ****                                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
- 895              		.loc 1 229 0
- 896 039a 1A48     		ldr	r0, .L51+32
- 897 039c FFF7FEFF 		bl	Uart_DataPut
- 898              	.LVL116:
- 231:../user/source/main.c ****                                 /*¼ÆÊ±Æ÷¸´Î»*/
- 899              		.loc 1 231 0
- 900 03a0 0122     		movs	r2, #1
- 901 03a2 164B     		ldr	r3, .L51+24
- 902 03a4 1A70     		strb	r2, [r3]
- 233:../user/source/main.c ****                                 uwTime2FramesCounter = 0;
- 903              		.loc 1 233 0
- 904 03a6 0023     		movs	r3, #0
- 905 03a8 174A     		ldr	r2, .L51+36
- 906 03aa 1370     		strb	r3, [r2]
- 234:../user/source/main.c ****                             }
- 907              		.loc 1 234 0
- 908 03ac 144A     		ldr	r2, .L51+28
- 909 03ae 1380     		strh	r3, [r2]	@ movhi
- 910 03b0 56E6     		b	.L29
- 911              	.L46:
- 242:../user/source/main.c ****                     ucDrv_Buf_PutBytes(ucApp_Buf_DB2ZD, pUartZD->pSndbuf, uc645DataDomainLength + 1
- 912              		.loc 1 242 0
- 913 03b2 114E     		ldr	r6, .L51+20
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 27
+ 871 0364 FFF7FEFF 		bl	blTime2_Update
+ 872              	.LVL113:
+ 213:../user/source/main.c ****                         (blTime2_Update(uwTime2FramesCounter, DLT645_FRAMES_DELAY_MAX)))
+ 873              		.loc 1 213 0 discriminator 1
+ 874 0368 0028     		cmp	r0, #0
+ 875 036a 3FF479AE 		beq	.L29
+ 217:../user/source/main.c ****                         {
+ 876              		.loc 1 217 0
+ 877 036e 1E48     		ldr	r0, .L52+8
+ 878 0370 FFF7FEFF 		bl	blVoltage_Create
+ 879              	.LVL114:
+ 880 0374 0028     		cmp	r0, #0
+ 881 0376 3FF473AE 		beq	.L29
+ 219:../user/source/main.c ****                             /*·¢ËÍµçÑ¹Ö¡*/
+ 882              		.loc 1 219 0
+ 883 037a 1A4D     		ldr	r5, .L52+4
+ 884 037c 2B68     		ldr	r3, [r5]
+ 885 037e 1A48     		ldr	r0, .L52+8
+ 886 0380 427A     		ldrb	r2, [r0, #9]	@ zero_extendqisi2
+ 887 0382 9968     		ldr	r1, [r3, #8]
+ 888 0384 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
+ 889              	.LVL115:
+ 221:../user/source/main.c ****                             {
+ 890              		.loc 1 221 0
+ 891 0388 2B68     		ldr	r3, [r5]
+ 892 038a 9868     		ldr	r0, [r3, #8]
+ 893 038c FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 894              	.LVL116:
+ 895 0390 0028     		cmp	r0, #0
+ 896 0392 7FF465AE 		bne	.L29
+ 223:../user/source/main.c ****                                 /*µÈ´ýµçÑ¹»ØÖ¡×´Ì¬ÇåÎ»*/
+ 897              		.loc 1 223 0
+ 898 0396 1948     		ldr	r0, .L52+28
+ 899 0398 FFF7FEFF 		bl	Uart_DataPut
+ 900              	.LVL117:
+ 225:../user/source/main.c ****                                 /*¼ÆÊ±Æ÷¸´Î»*/
+ 901              		.loc 1 225 0
+ 902 039c 0122     		movs	r2, #1
+ 903 039e 154B     		ldr	r3, .L52+20
+ 904 03a0 1A70     		strb	r2, [r3]
+ 227:../user/source/main.c ****                                 uwTime2FramesCounter = 0;
+ 905              		.loc 1 227 0
+ 906 03a2 0023     		movs	r3, #0
+ 907 03a4 164A     		ldr	r2, .L52+32
+ 908 03a6 1370     		strb	r3, [r2]
+ 228:../user/source/main.c ****                             }
+ 909              		.loc 1 228 0
+ 910 03a8 134A     		ldr	r2, .L52+24
+ 911 03aa 1380     		strh	r3, [r2]	@ movhi
+ 912 03ac 58E6     		b	.L29
+ 913              	.L47:
+ 236:../user/source/main.c ****                     ucDrv_Buf_PutBytes(ucApp_Buf_DB2ZD, pUartZD->pSndbuf, uc645DataDomainLength + 1
+ 914              		.loc 1 236 0
+ 915 03ae 104E     		ldr	r6, .L52+16
+ 916 03b0 3046     		mov	r0, r6
+ 917 03b2 FFF7FEFF 		bl	vDBDataID_Handle
+ 918              	.LVL118:
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 27
 
 
- 914 03b4 3046     		mov	r0, r6
- 915 03b6 FFF7FEFF 		bl	vDBDataID_Handle
- 916              	.LVL117:
- 243:../user/source/main.c ****                     if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
- 917              		.loc 1 243 0
- 918 03ba 0C4D     		ldr	r5, .L51+8
- 919 03bc 2B68     		ldr	r3, [r5]
- 920 03be 134A     		ldr	r2, .L51+40
- 921 03c0 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
- 922 03c2 0C32     		adds	r2, r2, #12
- 923 03c4 9968     		ldr	r1, [r3, #8]
- 924 03c6 3046     		mov	r0, r6
- 925 03c8 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
- 926              	.LVL118:
- 244:../user/source/main.c ****                     {
- 927              		.loc 1 244 0
- 928 03cc 2B68     		ldr	r3, [r5]
- 929 03ce 9868     		ldr	r0, [r3, #8]
- 930 03d0 FFF7FEFF 		bl	blDrv_Buf_IsEmpty
- 931              	.LVL119:
- 932 03d4 0028     		cmp	r0, #0
- 933 03d6 7FF443AE 		bne	.L29
- 246:../user/source/main.c ****                     }
- 934              		.loc 1 246 0
- 935 03da 2B68     		ldr	r3, [r5]
- 936 03dc 1868     		ldr	r0, [r3]
- 937 03de FFF7FEFF 		bl	Uart_DataPut
- 938              	.LVL120:
- 939 03e2 3DE6     		b	.L29
- 940              	.L52:
- 941              		.align	2
- 942              	.L51:
- 943 03e4 00000000 		.word	stCollData
- 944 03e8 00000000 		.word	gSystickAccuracy
- 945 03ec 00000000 		.word	pUartZD
- 946 03f0 00000000 		.word	pUartDB
- 947 03f4 00000000 		.word	ucApp_Buf_ZD2DB
- 948 03f8 00000000 		.word	ucApp_Buf_DB2ZD
- 949 03fc 00000000 		.word	Voltage_Frame_Status
- 950 0400 00000000 		.word	uwTime2FramesCounter
- 951 0404 00380140 		.word	1073821696
- 952 0408 00000000 		.word	blFramesCounterStatus
- 953 040c 00000000 		.word	uc645DataDomainLength
- 954              		.cfi_endproc
- 955              	.LFE111:
- 957              		.section	.text.vUartZD_BaudelayCal,"ax",%progbits
- 958              		.align	2
- 959              		.global	vUartZD_BaudelayCal
- 960              		.thumb
- 961              		.thumb_func
- 963              	vUartZD_BaudelayCal:
- 964              	.LFB115:
- 351:../user/source/main.c **** 
- 965              		.loc 1 351 0
- 966              		.cfi_startproc
- 967              		@ args = 0, pretend = 0, frame = 0
- 968              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 28
+ 237:../user/source/main.c ****                     if (!blDrv_Buf_IsEmpty(pUartZD->pSndbuf))
+ 919              		.loc 1 237 0
+ 920 03b6 0B4D     		ldr	r5, .L52+4
+ 921 03b8 2B68     		ldr	r3, [r5]
+ 922 03ba 124A     		ldr	r2, .L52+36
+ 923 03bc 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 924 03be 0C32     		adds	r2, r2, #12
+ 925 03c0 9968     		ldr	r1, [r3, #8]
+ 926 03c2 3046     		mov	r0, r6
+ 927 03c4 FFF7FEFF 		bl	ucDrv_Buf_PutBytes
+ 928              	.LVL119:
+ 238:../user/source/main.c ****                     {
+ 929              		.loc 1 238 0
+ 930 03c8 2B68     		ldr	r3, [r5]
+ 931 03ca 9868     		ldr	r0, [r3, #8]
+ 932 03cc FFF7FEFF 		bl	blDrv_Buf_IsEmpty
+ 933              	.LVL120:
+ 934 03d0 0028     		cmp	r0, #0
+ 935 03d2 7FF445AE 		bne	.L29
+ 240:../user/source/main.c ****                     }
+ 936              		.loc 1 240 0
+ 937 03d6 2B68     		ldr	r3, [r5]
+ 938 03d8 1868     		ldr	r0, [r3]
+ 939 03da FFF7FEFF 		bl	Uart_DataPut
+ 940              	.LVL121:
+ 941 03de 3FE6     		b	.L29
+ 942              	.L53:
+ 943              		.align	2
+ 944              	.L52:
+ 945 03e0 00000000 		.word	gSystickAccuracy
+ 946 03e4 00000000 		.word	pUartZD
+ 947 03e8 00000000 		.word	ucApp_Buf_ZD2DB
+ 948 03ec 00000000 		.word	pUartDB
+ 949 03f0 00000000 		.word	ucApp_Buf_DB2ZD
+ 950 03f4 00000000 		.word	Voltage_Frame_Status
+ 951 03f8 00000000 		.word	uwTime2FramesCounter
+ 952 03fc 00380140 		.word	1073821696
+ 953 0400 00000000 		.word	blFramesCounterStatus
+ 954 0404 00000000 		.word	uc645DataDomainLength
+ 955              		.cfi_endproc
+ 956              	.LFE111:
+ 958              		.section	.text.vUartZD_BaudelayCal,"ax",%progbits
+ 959              		.align	2
+ 960              		.global	vUartZD_BaudelayCal
+ 961              		.thumb
+ 962              		.thumb_func
+ 964              	vUartZD_BaudelayCal:
+ 965              	.LFB115:
+ 344:../user/source/main.c **** 
+ 966              		.loc 1 344 0
+ 967              		.cfi_startproc
+ 968              		@ args = 0, pretend = 0, frame = 0
+ 969              		@ frame_needed = 0, uses_anonymous_args = 0
+ 970              		@ link register save eliminated.
+ 971              	.LVL122:
+ 349:../user/source/main.c ****     /*È¡µ±Ç°tickÊý£¬0~0xFFFFÑ­»·*/
+ 972              		.loc 1 349 0
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 28
 
 
- 969              		@ link register save eliminated.
- 970              	.LVL121:
- 356:../user/source/main.c ****     /*È¡µ±Ç°tickÊý£¬0~0xFFFFÑ­»·*/
- 971              		.loc 1 356 0
- 972 0000 0C4A     		ldr	r2, .L56
- 973 0002 1368     		ldr	r3, [r2]
- 974 0004 013B     		subs	r3, r3, #1
- 975 0006 1360     		str	r3, [r2]
- 358:../user/source/main.c ****     /*³õ´ÎÊÕµ½´®¿ÚÊý¾Ý£¬ÏµÍ³tick×î´ó65535*/
- 976              		.loc 1 358 0
- 977 0008 0B4B     		ldr	r3, .L56+4
- 978 000a 1A68     		ldr	r2, [r3]
- 979              	.LVL122:
- 360:../user/source/main.c ****     {
- 980              		.loc 1 360 0
- 981 000c 0B4B     		ldr	r3, .L56+8
- 982 000e 1B68     		ldr	r3, [r3]
- 983 0010 B3F1FF3F 		cmp	r3, #-1
- 984 0014 0BD0     		beq	.L54
- 363:../user/source/main.c ****         /*µ±Ç°tickÊý´æÎªcount*/
- 985              		.loc 1 363 0
- 986 0016 D31A     		subs	r3, r2, r3
- 987 0018 03F57F43 		add	r3, r3, #65280
- 988 001c FF33     		adds	r3, r3, #255
- 989 001e 9BB2     		uxth	r3, r3
- 990              	.LVL123:
- 365:../user/source/main.c ****         /*ÓëÉÏ´Îdelay±È½Ï£¬È¡½ÏÐ¡Öµ´æÎªdelay*/
- 991              		.loc 1 365 0
- 992 0020 0649     		ldr	r1, .L56+8
- 993 0022 0A60     		str	r2, [r1]
- 367:../user/source/main.c ****         {
- 994              		.loc 1 367 0
- 995 0024 0268     		ldr	r2, [r0]
- 996              	.LVL124:
- 997 0026 9342     		cmp	r3, r2
- 998 0028 03D2     		bcs	.L53
- 369:../user/source/main.c ****         }
- 999              		.loc 1 369 0
- 1000 002a 0360     		str	r3, [r0]
- 1001              	.LVL125:
- 1002 002c 7047     		bx	lr
- 1003              	.LVL126:
- 1004              	.L54:
- 376:../user/source/main.c ****     }
- 1005              		.loc 1 376 0
- 1006 002e 034B     		ldr	r3, .L56+8
- 1007 0030 1A60     		str	r2, [r3]
- 1008              	.LVL127:
- 1009              	.L53:
- 1010 0032 7047     		bx	lr
- 1011              	.L57:
- 1012              		.align	2
- 1013              	.L56:
- 1014 0034 00000000 		.word	.LANCHOR2
- 1015 0038 00000000 		.word	TICKS
- 1016 003c 00000000 		.word	.LANCHOR5
- 1017              		.cfi_endproc
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 29
+ 973 0000 0C4A     		ldr	r2, .L57
+ 974 0002 1368     		ldr	r3, [r2]
+ 975 0004 013B     		subs	r3, r3, #1
+ 976 0006 1360     		str	r3, [r2]
+ 351:../user/source/main.c ****     /*³õ´ÎÊÕµ½´®¿ÚÊý¾Ý£¬ÏµÍ³tick×î´ó65535*/
+ 977              		.loc 1 351 0
+ 978 0008 0B4B     		ldr	r3, .L57+4
+ 979 000a 1A68     		ldr	r2, [r3]
+ 980              	.LVL123:
+ 353:../user/source/main.c ****     {
+ 981              		.loc 1 353 0
+ 982 000c 0B4B     		ldr	r3, .L57+8
+ 983 000e 1B68     		ldr	r3, [r3]
+ 984 0010 B3F1FF3F 		cmp	r3, #-1
+ 985 0014 0BD0     		beq	.L55
+ 356:../user/source/main.c ****         /*µ±Ç°tickÊý´æÎªcount*/
+ 986              		.loc 1 356 0
+ 987 0016 D31A     		subs	r3, r2, r3
+ 988 0018 03F57F43 		add	r3, r3, #65280
+ 989 001c FF33     		adds	r3, r3, #255
+ 990 001e 9BB2     		uxth	r3, r3
+ 991              	.LVL124:
+ 358:../user/source/main.c ****         /*ÓëÉÏ´Îdelay±È½Ï£¬È¡½ÏÐ¡Öµ´æÎªdelay*/
+ 992              		.loc 1 358 0
+ 993 0020 0649     		ldr	r1, .L57+8
+ 994 0022 0A60     		str	r2, [r1]
+ 360:../user/source/main.c ****         {
+ 995              		.loc 1 360 0
+ 996 0024 0268     		ldr	r2, [r0]
+ 997              	.LVL125:
+ 998 0026 9342     		cmp	r3, r2
+ 999 0028 03D2     		bcs	.L54
+ 362:../user/source/main.c ****         }
+ 1000              		.loc 1 362 0
+ 1001 002a 0360     		str	r3, [r0]
+ 1002              	.LVL126:
+ 1003 002c 7047     		bx	lr
+ 1004              	.LVL127:
+ 1005              	.L55:
+ 369:../user/source/main.c ****     }
+ 1006              		.loc 1 369 0
+ 1007 002e 034B     		ldr	r3, .L57+8
+ 1008 0030 1A60     		str	r2, [r3]
+ 1009              	.LVL128:
+ 1010              	.L54:
+ 1011 0032 7047     		bx	lr
+ 1012              	.L58:
+ 1013              		.align	2
+ 1014              	.L57:
+ 1015 0034 00000000 		.word	.LANCHOR2
+ 1016 0038 00000000 		.word	TICKS
+ 1017 003c 00000000 		.word	.LANCHOR5
+ 1018              		.cfi_endproc
+ 1019              	.LFE115:
+ 1021              		.global	uwBootDelay
+ 1022              		.global	AutoBaud485
+ 1023              		.global	FLAG_UartDB_HasData
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 29
 
 
- 1018              	.LFE115:
- 1020              		.global	uwBootDelay
- 1021              		.global	AutoBaud485
- 1022              		.global	FLAG_UartDB_HasData
- 1023              		.global	FLAG_UartZD_HasData
- 1024              		.comm	stCollData,1532,4
- 1025              		.comm	gSystickAccuracy,4,4
- 1026              		.section	.data.AutoBaud485,"aw",%progbits
- 1027              		.align	2
- 1028              		.set	.LANCHOR2,. + 0
- 1031              	AutoBaud485:
- 1032 0000 64000000 		.word	100
- 1033 0004 FFFFFFFF 		.word	-1
- 1034 0008 00000000 		.word	0
- 1035              		.section	.bss.FLAG_UartDB_HasData,"aw",%nobits
- 1036              		.set	.LANCHOR4,. + 0
- 1039              	FLAG_UartDB_HasData:
- 1040 0000 00       		.space	1
- 1041              		.section	.bss.last_tick.7492,"aw",%nobits
- 1042              		.align	2
- 1043              		.set	.LANCHOR0,. + 0
- 1046              	last_tick.7492:
- 1047 0000 00000000 		.space	4
- 1048              		.section	.data.uwBootDelay,"aw",%progbits
- 1049              		.align	2
- 1050              		.set	.LANCHOR1,. + 0
- 1053              	uwBootDelay:
- 1054 0000 80841E00 		.word	2000000
- 1055              		.section	.data.LAST_TICK.7480,"aw",%progbits
- 1056              		.align	2
- 1057              		.set	.LANCHOR5,. + 0
- 1060              	LAST_TICK.7480:
- 1061 0000 FFFFFFFF 		.word	-1
- 1062              		.section	.bss.FLAG_UartZD_HasData,"aw",%nobits
- 1063              		.set	.LANCHOR3,. + 0
- 1066              	FLAG_UartZD_HasData:
- 1067 0000 00       		.space	1
- 1068              		.text
- 1069              	.Letext0:
- 1070              		.file 2 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\machine\\_defaul
- 1071              		.file 3 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
- 1072              		.file 4 "../cmsis/include/stm32f37x.h"
- 1073              		.file 5 "../stdperiph/include/stm32f37x_gpio.h"
- 1074              		.file 6 "../user/include/BaseDef.h"
- 1075              		.file 7 "../user/include/main.h"
- 1076              		.file 8 "../user/include/Uart.h"
- 1077              		.file 9 "../user/include/DLT645.h"
- 1078              		.file 10 "../user/include/DLT698_45.h"
- 1079              		.file 11 "../user/include/DLT698.h"
- 1080              		.file 12 "../user/include/protocol.h"
- 1081              		.file 13 "../cmsis/include/core_cm4.h"
- 1082              		.file 14 "../user/include/Time.h"
- 1083              		.file 15 "../user/include/GPIO.h"
- 1084              		.file 16 "../stdperiph/include/stm32f37x_misc.h"
- 1085              		.file 17 "../user/include/Flash.h"
- 1086              		.file 18 "../stdperiph/include/stm32f37x_usart.h"
- 1087              		.file 19 "../stdperiph/include/stm32f37x_exti.h"
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 30
-
-
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 31
+ 1024              		.global	FLAG_UartZD_HasData
+ 1025              		.comm	stCollData,1532,4
+ 1026              		.comm	gSystickAccuracy,4,4
+ 1027              		.section	.data.AutoBaud485,"aw",%progbits
+ 1028              		.align	2
+ 1029              		.set	.LANCHOR2,. + 0
+ 1032              	AutoBaud485:
+ 1033 0000 64000000 		.word	100
+ 1034 0004 FFFFFFFF 		.word	-1
+ 1035 0008 00000000 		.word	0
+ 1036              		.section	.bss.FLAG_UartDB_HasData,"aw",%nobits
+ 1037              		.set	.LANCHOR4,. + 0
+ 1040              	FLAG_UartDB_HasData:
+ 1041 0000 00       		.space	1
+ 1042              		.section	.bss.last_tick.7492,"aw",%nobits
+ 1043              		.align	2
+ 1044              		.set	.LANCHOR0,. + 0
+ 1047              	last_tick.7492:
+ 1048 0000 00000000 		.space	4
+ 1049              		.section	.data.uwBootDelay,"aw",%progbits
+ 1050              		.align	2
+ 1051              		.set	.LANCHOR1,. + 0
+ 1054              	uwBootDelay:
+ 1055 0000 80841E00 		.word	2000000
+ 1056              		.section	.data.LAST_TICK.7480,"aw",%progbits
+ 1057              		.align	2
+ 1058              		.set	.LANCHOR5,. + 0
+ 1061              	LAST_TICK.7480:
+ 1062 0000 FFFFFFFF 		.word	-1
+ 1063              		.section	.bss.FLAG_UartZD_HasData,"aw",%nobits
+ 1064              		.set	.LANCHOR3,. + 0
+ 1067              	FLAG_UartZD_HasData:
+ 1068 0000 00       		.space	1
+ 1069              		.text
+ 1070              	.Letext0:
+ 1071              		.file 2 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\machine\\_defaul
+ 1072              		.file 3 "d:\\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1073              		.file 4 "../cmsis/include/stm32f37x.h"
+ 1074              		.file 5 "../stdperiph/include/stm32f37x_gpio.h"
+ 1075              		.file 6 "../user/include/BaseDef.h"
+ 1076              		.file 7 "../user/include/main.h"
+ 1077              		.file 8 "../user/include/Uart.h"
+ 1078              		.file 9 "../user/include/DLT645.h"
+ 1079              		.file 10 "../user/include/DLT698_45.h"
+ 1080              		.file 11 "../user/include/DLT698.h"
+ 1081              		.file 12 "../user/include/protocol.h"
+ 1082              		.file 13 "../cmsis/include/core_cm4.h"
+ 1083              		.file 14 "../user/include/Time.h"
+ 1084              		.file 15 "../user/include/GPIO.h"
+ 1085              		.file 16 "../stdperiph/include/stm32f37x_misc.h"
+ 1086              		.file 17 "../user/include/Flash.h"
+ 1087              		.file 18 "../stdperiph/include/stm32f37x_usart.h"
+ 1088              		.file 19 "../stdperiph/include/stm32f37x_exti.h"
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 30
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:22     .text.uwFindBaudRate:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:26     .text.uwFindBaudRate:00000000 uwFindBaudRate
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:83     .text.RsvFrameHandle:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:87     .text.RsvFrameHandle:00000000 RsvFrameHandle
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:166    .text.RsvFrameHandle:0000005c $d
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:175    .text.VoltageTimeOutHandle:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:179    .text.VoltageTimeOutHandle:00000000 VoltageTimeOutHandle
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:250    .text.VoltageTimeOutHandle:00000054 $d
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:259    .text.vLedRun:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:263    .text.vLedRun:00000000 vLedRun
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:313    .text.vLedRun:00000040 $d
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:320    .text.main:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:325    .text.main:00000000 main
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:762    .text.main:00000298 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:22     .text.uwFindBaudRate:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:26     .text.uwFindBaudRate:00000000 uwFindBaudRate
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:83     .text.RsvFrameHandle:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:87     .text.RsvFrameHandle:00000000 RsvFrameHandle
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:166    .text.RsvFrameHandle:0000005c $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:175    .text.VoltageTimeOutHandle:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:179    .text.VoltageTimeOutHandle:00000000 VoltageTimeOutHandle
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:250    .text.VoltageTimeOutHandle:00000054 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:259    .text.vLedRun:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:263    .text.vLedRun:00000000 vLedRun
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:313    .text.vLedRun:00000040 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:320    .text.main:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:325    .text.main:00000000 main
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:801    .text.main:000002c8 $d
                             *COM*:00000004 gSystickAccuracy
                             *COM*:000005fc stCollData
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:783    .text.main:000002e4 $t
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:943    .text.main:000003e4 $d
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:958    .text.vUartZD_BaudelayCal:00000000 $t
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:963    .text.vUartZD_BaudelayCal:00000000 vUartZD_BaudelayCal
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1014   .text.vUartZD_BaudelayCal:00000034 $d
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1053   .data.uwBootDelay:00000000 uwBootDelay
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1031   .data.AutoBaud485:00000000 AutoBaud485
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1039   .bss.FLAG_UartDB_HasData:00000000 FLAG_UartDB_HasData
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1066   .bss.FLAG_UartZD_HasData:00000000 FLAG_UartZD_HasData
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1027   .data.AutoBaud485:00000000 $d
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1040   .bss.FLAG_UartDB_HasData:00000000 $d
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1042   .bss.last_tick.7492:00000000 $d
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1046   .bss.last_tick.7492:00000000 last_tick.7492
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1049   .data.uwBootDelay:00000000 $d
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1056   .data.LAST_TICK.7480:00000000 $d
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1060   .data.LAST_TICK.7480:00000000 LAST_TICK.7480
-C:\Users\strag\AppData\Local\Temp\cccNloGd.s:1067   .bss.FLAG_UartZD_HasData:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:822    .text.main:00000314 $t
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:945    .text.main:000003e0 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:959    .text.vUartZD_BaudelayCal:00000000 $t
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:964    .text.vUartZD_BaudelayCal:00000000 vUartZD_BaudelayCal
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1015   .text.vUartZD_BaudelayCal:00000034 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1054   .data.uwBootDelay:00000000 uwBootDelay
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1032   .data.AutoBaud485:00000000 AutoBaud485
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1040   .bss.FLAG_UartDB_HasData:00000000 FLAG_UartDB_HasData
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1067   .bss.FLAG_UartZD_HasData:00000000 FLAG_UartZD_HasData
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1028   .data.AutoBaud485:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1041   .bss.FLAG_UartDB_HasData:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1043   .bss.last_tick.7492:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1047   .bss.last_tick.7492:00000000 last_tick.7492
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1050   .data.uwBootDelay:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1057   .data.LAST_TICK.7480:00000000 $d
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1061   .data.LAST_TICK.7480:00000000 LAST_TICK.7480
+C:\Users\strag\AppData\Local\Temp\ccmRSDee.s:1068   .bss.FLAG_UartZD_HasData:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
@@ -1801,7 +1794,7 @@ TICKS
 vGPIO_Init
 vFeedExtWatchDog
 NVIC_PriorityGroupConfig
-ARM GAS  C:\Users\strag\AppData\Local\Temp\cccNloGd.s 			page 32
+ARM GAS  C:\Users\strag\AppData\Local\Temp\ccmRSDee.s 			page 31
 
 
 vInterFlash_Init
@@ -1829,9 +1822,9 @@ Uart_OnceWrite
 dwGet698Apdu
 dwAPduAnalyze
 v698VoltageModify
+dwReCalculateFCS
 pUartIR
 ucApp_Buf_INFR
 ucApp_Buf_DB2ZD
 Voltage_Change_State
-dwReCalculateFCS
 vDBDataID_Handle
