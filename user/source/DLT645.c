@@ -3040,33 +3040,37 @@ void vLoadProfile_Current_Modify(uint8_t *pucbuffer)
 }
 
 /*
-江西：01
-山东：02
-重庆：03
+地区1字节（山东=01；重庆=02，江西04，通用07）
+规约1字节（645规约=01；698规约=02；自适应=03）
+功能1字节（电压=01；电流=02；负载=04；电量=08）
+版本号1字节（版本号：1~0xFF）
+发布日期4字节（发布日期：20190125）
 */
 void vRead_Version(uint8_t *pucbuffer)
 {
     uint8_t i;
     pucbuffer[8] = 0x91;
     pucbuffer[9] = 0x08;
-    pucbuffer[14] = 0x03; //地区
-    pucbuffer[15] = 0x05; //日月年
-    pucbuffer[16] = 0x11;
-    pucbuffer[17] = 0x18;
-    pucbuffer[18] = 0;
-    for (i = 0; i < 18; i++)
+    pucbuffer[14] = VERSION_REGION;   //地区
+    pucbuffer[15] = VERSION_PROTOCAL; //日月年
+    pucbuffer[16] = VERSION_NUM;
+    pucbuffer[17] = DEC2BCD(20);
+    pucbuffer[18] = DEC2BCD(VERSION_YEAR);
+    pucbuffer[19] = DEC2BCD(VERSION_MON);
+    pucbuffer[20] = DEC2BCD(VERSION_DAY);
+    pucbuffer[21] = 0;
+    for (i = 0; i < 21; i++)
     {
-        pucbuffer[18] += pucbuffer[i];
+        pucbuffer[21] += pucbuffer[i];
     }
-    pucbuffer[19] = 0x16;
-    uc645DataDomainLength = 8;
-    ucDrv_Buf_PutBytes(pucbuffer, pUartDB->pSndbuf, 20);
+    pucbuffer[22] = 0x16;
+    ucDrv_Buf_PutBytes(pucbuffer, pUartDB->pSndbuf, 23);
     if (!blDrv_Buf_IsEmpty(pUartDB->pSndbuf))
     {
         Uart_DataPut(USART3);
     }
     /*红外口回复*/
-    ucDrv_Buf_PutBytes(pucbuffer, pUartIR->pSndbuf, 20);
+    ucDrv_Buf_PutBytes(pucbuffer, pUartIR->pSndbuf, 23);
     if (!blDrv_Buf_IsEmpty(pUartIR->pSndbuf))
     {
         USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);

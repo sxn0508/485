@@ -4,6 +4,21 @@
 #include "stm32f37x.h"
 #include "BaseDef.h"
 
+/*
+地区1字节（山东=01；重庆=02，江西04，通用07）
+规约1字节（645规约=01；698规约=02；自适应=03）
+功能1字节（电压=01；电流=02；负载=04；电量=08）
+版本号1字节（版本号：1~0xFF）
+发布日期4字节（发布日期：20190125）
+*/
+#define VERSION_REGION 7
+#define VERSION_PROTOCAL 3
+#define VERSION_FUNCTION 9
+#define VERSION_NUM 0
+#define VERSION_YEAR 19
+#define VERSION_MON 01
+#define VERSION_DAY 26
+
 /***************
  *默认功能：修改电压上限值，电压值不回时替代回帧
  *可选功能1：修改电流短路、断路、反向事件，通过屏蔽电表运行状态字相应位实现

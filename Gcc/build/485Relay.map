@@ -2564,7 +2564,7 @@ OUTPUT(build/485Relay.elf elf32-littlearm)
  .debug_ranges  0x00000d70       0x98 build/Uart.o
  .debug_ranges  0x00000e08       0x20 build/startup_stm32f37x_gcc.o
 
-.debug_line     0x00000000     0x4a8a
+.debug_line     0x00000000     0x4a8c
  .debug_line    0x00000000      0x205 build/stm32f37x_exti.o
  .debug_line    0x00000205      0x41d build/stm32f37x_flash.o
  .debug_line    0x00000622      0x28d build/stm32f37x_gpio.o
@@ -2573,17 +2573,17 @@ OUTPUT(build/485Relay.elf elf32-littlearm)
  .debug_line    0x00000ef7      0x1ed build/stm32f37x_syscfg.o
  .debug_line    0x000010e4      0x933 build/stm32f37x_tim.o
  .debug_line    0x00001a17      0x545 build/stm32f37x_usart.o
- .debug_line    0x00001f5c      0xd23 build/DLT645.o
- .debug_line    0x00002c7f      0x8d2 build/DLT698.o
- .debug_line    0x00003551      0x1ef build/Flash.o
- .debug_line    0x00003740      0x218 build/GPIO.o
- .debug_line    0x00003958      0x341 build/main.o
- .debug_line    0x00003c99      0x262 build/protocol.o
- .debug_line    0x00003efb      0x2d7 build/stm32f37x_it.o
- .debug_line    0x000041d2      0x1a4 build/system_stm32f37x.o
- .debug_line    0x00004376      0x222 build/Time.o
- .debug_line    0x00004598      0x46e build/Uart.o
- .debug_line    0x00004a06       0x84 build/startup_stm32f37x_gcc.o
+ .debug_line    0x00001f5c      0xd25 build/DLT645.o
+ .debug_line    0x00002c81      0x8d2 build/DLT698.o
+ .debug_line    0x00003553      0x1ef build/Flash.o
+ .debug_line    0x00003742      0x218 build/GPIO.o
+ .debug_line    0x0000395a      0x341 build/main.o
+ .debug_line    0x00003c9b      0x262 build/protocol.o
+ .debug_line    0x00003efd      0x2d7 build/stm32f37x_it.o
+ .debug_line    0x000041d4      0x1a4 build/system_stm32f37x.o
+ .debug_line    0x00004378      0x222 build/Time.o
+ .debug_line    0x0000459a      0x46e build/Uart.o
+ .debug_line    0x00004a08       0x84 build/startup_stm32f37x_gcc.o
 
 .debug_str      0x00000000     0x4056
  .debug_str     0x00000000      0x32f build/stm32f37x_exti.o
