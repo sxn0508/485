@@ -37,13 +37,15 @@ const DefDataIDHandle INFRDataID_Handle_List[] = {
     {{0X33, 0X76, 0X34, 0X33}, vEnergy_Modify_ReadSet},   //扩充：正向有功电能量修改读取设：置
     {{0X33, 0X77, 0X34, 0X33}, vEnergy_Modify_ReadValue}, //扩充：正向有功电能量修改读取设：置
 #endif
-    /*电流重过载*/
+/*电流重过载*/
+#ifdef ENABLE_CURRENT_LIMIT
     {{0X33, 0X37, 0X35, 0X35}, vCurrent_Limit_Set},                    //扩充：设置电流重过载参数:电流上限
     {{0X33, 0X38, 0X35, 0X35}, vCurrent_Limit_ReadSet},                //扩充：设置电流重过载参数:电流上限读取
     {{0X33, 0X39, 0X35, 0X35}, vCurrent_CTRatio_Set},                  //扩充：设置电流重过载参数:二次侧CT变比
     {{0X33, 0X3A, 0X35, 0X35}, vCurrent_CTRatio_ReadSet},              //扩充：读取电流重过载参数:二次侧CT变比
     {{0X33, 0X3B, 0X35, 0X35}, vCurrent_TransFormer_Capacity_ReadSet}, //扩充：读取电流重过载参数:变压器容量
-    {{0X32, 0X32, 0X32, 0X32}, vRead_Version},                         //扩充：读取程序版本
+#endif
+    {{0X32, 0X32, 0X32, 0X32}, vRead_Version}, //扩充：读取程序版本
 };
 const DefDataIDHandle DBDataID_Handle_List[] = {
     {{0X33, 0X34, 0X34, 0X35}, vVoltageHandle}, //A相电压ID_02010100,
@@ -61,12 +63,6 @@ const DefDataIDHandle DBDataID_Handle_List[] = {
     {{0X33, 0X35, 0X35, 0X35}, vCurrent_Limit_Modify}, //B相电流ID_02020200,
     {{0X33, 0X36, 0X35, 0X35}, vCurrent_Limit_Modify}, //C相电流ID_02020300,
     {{0X33, 0X32, 0X35, 0X35}, vCurrent_Limit_Modify}, //电流数据块ID_0202FF00,
-    /*电流重过载*/
-    {{0X33, 0X37, 0X35, 0X35}, vCurrent_Limit_Set},                    //扩充：设置电流重过载参数:电流上限
-    {{0X33, 0X38, 0X35, 0X35}, vCurrent_Limit_ReadSet},                //扩充：设置电流重过载参数:电流上限读取
-    {{0X33, 0X39, 0X35, 0X35}, vCurrent_CTRatio_Set},                  //扩充：设置电流重过载参数:二次侧CT变比
-    {{0X33, 0X3A, 0X35, 0X35}, vCurrent_CTRatio_ReadSet},              //扩充：读取电流重过载参数:二次侧CT变比
-    {{0X33, 0X3B, 0X35, 0X35}, vCurrent_TransFormer_Capacity_ReadSet}, //扩充：读取电流重过载参数:变压器容量
 #endif
 #endif
     {{0X37, 0X38, 0X33, 0X38}, Estatus_Modify_CurrentEvent}, //电表运行状态字4ID_04000504,
@@ -74,39 +70,44 @@ const DefDataIDHandle DBDataID_Handle_List[] = {
     {{0X39, 0X38, 0X33, 0X38}, Estatus_Modify_CurrentEvent}, //电表运行状态字6ID_04000506,
     {{0X3A, 0X38, 0X33, 0X38}, Estatus_Modify_CurrentEvent}, //电表运行状态字7ID_04000507,
     {{0X32, 0X38, 0X33, 0X38}, Estatus_Modify_CurrentEvent}, //电表运行状态字数据块ID_040005FF,
-#ifdef ENABLE_ENERGY_MODIFY
-    {{0X33, 0X33, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功总电能ID_00010000,
-    {{0X33, 0X34, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功费率1电能ID_00010100,
-    {{0X33, 0X35, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功费率2电能ID_00010200,
-    {{0X33, 0X36, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功费率3电能ID_00010300,
-    {{0X33, 0X37, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功费率4电能ID_00010400,
-    {{0X33, 0X32, 0X34, 0X33}, vNowEnergy_Modifier},      //当前正向有功电能数据块ID_0001FF00,
-    {{0X33, 0X33, 0X48, 0X33}, vNowEnergy_Modifier},      //当前A相正向有功ID_00150000,
-    {{0X33, 0X33, 0X5C, 0X33}, vNowEnergy_Modifier},      //当前B相正向有功ID_00290000,
-    {{0X33, 0X33, 0X70, 0X33}, vNowEnergy_Modifier},      //当前C相正向有功ID_003D0000,
-    {{0X34, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},      //上1日冻结正向有功电能数据（费率1~4）ID_05060101,
-    {{0X35, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},      //上2日冻结正向有功电能数据（费率1~4）ID_05060102,
-    {{0X36, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},      //上3日冻结正向有功电能数据（费率1~4） ID_05060103,
-    {{0X34, 0X33, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功总电能ID_00010001,
-    {{0X34, 0X34, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功费率1电能ID_00010101,
-    {{0X34, 0X35, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功费率1电能 ID_00010201,
-    {{0X34, 0X36, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功费率1电能ID_00010301,
-    {{0X34, 0X37, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功费率1电能ID_00010401,
-    {{0X34, 0X32, 0X34, 0X33}, vAccountEnergy_Modify},    //上1结算日正向有功电能数据块ID_0001FF01,
-    {{0X34, 0X33, 0X48, 0X33}, vAccountEnergy_Modify},    //上1结算日A相正向有功电能ID_00150001,
-    {{0X34, 0X33, 0X5C, 0X33}, vAccountEnergy_Modify},    //上1结算日B相正向有功电能ID_00290001,
-    {{0X34, 0X33, 0X70, 0X33}, vAccountEnergy_Modify},    //上1结算日C相正向有功电能ID_003D0001,
+    {{0X33, 0X33, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功总电能ID_00010000,
+    {{0X33, 0X34, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功费率1电能ID_00010100,
+    {{0X33, 0X35, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功费率2电能ID_00010200,
+    {{0X33, 0X36, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功费率3电能ID_00010300,
+    {{0X33, 0X37, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功费率4电能ID_00010400,
+    {{0X33, 0X32, 0X34, 0X33}, vNowEnergy_Modifier},         //当前正向有功电能数据块ID_0001FF00,
+    {{0X33, 0X33, 0X48, 0X33}, vNowEnergy_Modifier},         //当前A相正向有功ID_00150000,
+    {{0X33, 0X33, 0X5C, 0X33}, vNowEnergy_Modifier},         //当前B相正向有功ID_00290000,
+    {{0X33, 0X33, 0X70, 0X33}, vNowEnergy_Modifier},         //当前C相正向有功ID_003D0000,
+    {{0X34, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},         //上1日冻结正向有功电能数据（费率1~4）ID_05060101,
+    /*{{0X35, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},*/     //上2日冻结正向有功电能数据（费率1~4）ID_05060102,
+    /*{{0X36, 0X34, 0X39, 0X38}, vDayfrozen_Modifier},*/     //上3日冻结正向有功电能数据（费率1~4） ID_05060103,
+    {{0X34, 0X33, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功总电能ID_00010001,
+    {{0X34, 0X34, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功费率1电能ID_00010101,
+    {{0X34, 0X35, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功费率1电能 ID_00010201,
+    {{0X34, 0X36, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功费率1电能ID_00010301,
+    {{0X34, 0X37, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功费率1电能ID_00010401,
+    {{0X34, 0X32, 0X34, 0X33}, vAccountEnergy_Modify},       //上1结算日正向有功电能数据块ID_0001FF01,
+    {{0X34, 0X33, 0X48, 0X33}, vAccountEnergy_Modify},       //上1结算日A相正向有功电能ID_00150001,
+    {{0X34, 0X33, 0X5C, 0X33}, vAccountEnergy_Modify},       //上1结算日B相正向有功电能ID_00290001,
+    {{0X34, 0X33, 0X70, 0X33}, vAccountEnergy_Modify},       //上1结算日C相正向有功电能ID_003D0001,
+    {{0X33, 0X37, 0X34, 0X35}, Get_VChange_State},           //扩充：电压修改使能/禁能ID_02010400,
+    {{0X33, 0X38, 0X34, 0X35}, Set_Voltage_Limit},           //扩充：电压限值设置ID_02010500,
+    {{0X33, 0X39, 0X34, 0X35}, Query_Voltage_Limit},         //扩充：电压限值查询ID_02010600,
+    {{0X33, 0X3A, 0X34, 0X35}, Default_Reset},               //扩充：电压修改功能恢复出厂设置ID_02010700,
+
+    /*电流重过载*/
+    {{0X33, 0X37, 0X35, 0X35}, vCurrent_Limit_Set},                    //扩充：设置电流重过载参数:电流上限
+    {{0X33, 0X38, 0X35, 0X35}, vCurrent_Limit_ReadSet},                //扩充：设置电流重过载参数:电流上限读取
+    {{0X33, 0X39, 0X35, 0X35}, vCurrent_CTRatio_Set},                  //扩充：设置电流重过载参数:二次侧CT变比
+    {{0X33, 0X3A, 0X35, 0X35}, vCurrent_CTRatio_ReadSet},              //扩充：读取电流重过载参数:二次侧CT变比
+    {{0X33, 0X3B, 0X35, 0X35}, vCurrent_TransFormer_Capacity_ReadSet}, //扩充：读取电流重过载参数:变压器容量
+
     {{0X33, 0X73, 0X34, 0X33}, vEnergy_Modify_AbleSet},   //扩充：正向有功电能量修改使能/禁能ID_00014000,
     {{0X33, 0X74, 0X34, 0X33}, vEnergy_Modify_RaitoSet},  //扩充：正向有功电能量修改比例设置ID_00014100,
     {{0X33, 0X75, 0X34, 0X33}, vEnergy_Modify_Reset},     //扩充：正向有功电能量回复出厂设置ID_00014200,
     {{0X33, 0X76, 0X34, 0X33}, vEnergy_Modify_ReadSet},   //扩充：正向有功电能量修改读取设置
     {{0X33, 0X77, 0X34, 0X33}, vEnergy_Modify_ReadValue}, //扩充：正向有功电能量读取存储的真实值和修改值ID_00014200,
-#endif
-    {{0X33, 0X37, 0X34, 0X35}, Get_VChange_State},   //扩充：电压修改使能/禁能ID_02010400,
-    {{0X33, 0X38, 0X34, 0X35}, Set_Voltage_Limit},   //扩充：电压限值设置ID_02010500,
-    {{0X33, 0X39, 0X34, 0X35}, Query_Voltage_Limit}, //扩充：电压限值查询ID_02010600,
-    {{0X33, 0X3A, 0X34, 0X35}, Default_Reset},       //扩充：电压修改功能恢复出厂设置ID_02010700,
-
     /*4号补遗负荷曲线连续抄读部分中的电压曲线、电流曲线修改,2018年8月7日20:53:4：0*/
     {{0X33, 0X34, 0X43, 0X39}, vLoadProfile_Voltage_Modify}, //A相电压曲线连续抄读ID_06100101,
     {{0X34, 0X34, 0X43, 0X39}, vLoadProfile_Voltage_Modify}, //B电压数据块曲线连续抄读ID_06100102,
@@ -296,12 +297,12 @@ STATUS dwCheckFrame(uint8_t *pucBuffer)
 }
 
 /********************************************************************
- * 功    能：电表：侧收帧数据标识分析处理
- * 输    入：应用层缓存指针
- * 输    出：数据标识
+ * 功 能：电表：侧收帧数据标识分析处理
+ * 输 入：应用层缓存指针
+ * 输 出：数据标识
  * 编 写 人：王君龙
- * 编写日期：2018.5.8
- **********************************************************************/
+ * 编写日期：2018 .5.8 *
+ *********************************************************************/
 void vDBDataID_Handle(uint8_t *pucBuffer)
 {
     uint8_t i;
@@ -1865,14 +1866,27 @@ void vEnergy_Modify_Init(void)
  * 要    求：输出值扩大100倍
  * 编 写 人：王君龙
  * 编写日期：2016.6.23
+ * 修改记录：2019-1-24 15:07:34，增加对0xEE的处理
  **********************************************************************/
 uint32_t Get_Energy(uint8_t FstByte, uint8_t ScdByte, uint8_t TirdByte, uint8_t ForthByte)
 {
+    uint8_t million = BCD2DEC(ForthByte - 0x33);
+    uint8_t tenkelio = BCD2DEC(TirdByte - 0x33);
+    uint8_t hundreds = BCD2DEC(ScdByte - 0x33);
+    uint8_t ones = BCD2DEC(FstByte - 0x33);
     uint32_t Energy = 0;
-    Energy = BCD2DEC(ForthByte - 0x33) * 1000000 +
-             BCD2DEC(TirdByte - 0x33) * 10000 +
-             BCD2DEC(ScdByte - 0x33) * 100 +
-             BCD2DEC(FstByte - 0x33);
+    if (
+        million < 100 &&
+        tenkelio < 100 &&
+        hundreds < 100 &&
+        ones < 100)
+    {
+        Energy = million * 1000000 + tenkelio * 10000 + hundreds * 100 + ones;
+    }
+    else
+    {
+        Energy = 0xFFFFFFFF;
+    }
     return Energy;
 }
 
@@ -1899,6 +1913,8 @@ void Fill_Energy(uint32_t energy, uint8_t *pFstByte, uint8_t *pScdByte, uint8_t 
  *           
  * 编 写 人：王君龙
  * 编写日期：2018.5.8
+ * 修改记录：2019-1-22 08:33:16
+ *          若新召测真实值小于存储的真实值，不再按满量程处理，防止出现超大电量。
  **********************************************************************/
 uint32_t vNow_Frozen_Modify_Mothod(uint32_t nowenergy, uint32_t RealValueAddr, uint32_t ModifiedValueAddr)
 {
@@ -1919,23 +1935,21 @@ uint32_t vNow_Frozen_Modify_Mothod(uint32_t nowenergy, uint32_t RealValueAddr, u
     }
     else
     {
-        /*计算真实的增量，打折后累加到上次的修改值*/
         /*电表值溢出后归零*/
         if (nowenergy < RealValue)
         {
-            //i= ((uint64_t)(nowenergy+ 99999999- RealValue)* ucDayfrozen_Modify_Ratio)/100;
-            /*2018-6-27 11:04:38：增加四舍五入，单次增加0.05kwh以下时，不修改*/
-            i = ((uint64_t)(nowenergy + 99999999 - RealValue) * ucDayfrozen_Modify_Ratio + 50) / 100;
+            /*i = ((uint64_t)(nowenergy + 99999999 - RealValue) * ucDayfrozen_Modify_Ratio + 50) / 100;*/
+            /*2019-1-22 08:35:57：若新召测值小于存储的真实值，认为数据异常，置增量为0*/
+            i = 0;
         }
         else
         {
+            /*2018-6-27 11:04:38：增加四舍五入，单次增加0.05kwh以下时，不修改*/
             i = ((uint64_t)(nowenergy - RealValue) * ucDayfrozen_Modify_Ratio + 50) / 100;
         }
         Modified_Value += (uint32_t)i;
         /*累计值溢出后归零*/
-        Modified_Value = (Modified_Value > 99999999
-                              ? Modified_Value - 99999999
-                              : Modified_Value);
+        Modified_Value = (Modified_Value > 99999999 ? Modified_Value - 99999999 : Modified_Value);
         /*将上送值存储为真实值*/
         Flash_Write_Word(RealValueAddr, nowenergy);
         /*新的修改值覆盖旧值存储*/

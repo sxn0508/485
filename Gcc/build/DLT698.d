@@ -1,5 +1,4 @@
-build/DLT698.d: ../user/source/DLT698.c ../user/include/DLT698.h \
- ../user/include/BaseDef.h ../user/include/DLT698_45.h \
+build/DLT698.d: ../user/source/DLT698.c ../user/include/Flash.h \
  ../cmsis/include/stm32f37x.h ../cmsis/include/core_cm4.h \
  ../cmsis/include/core_cmInstr.h ../cmsis/include/core_cmFunc.h \
  ../cmsis/include/core_cm4_simd.h ../cmsis/include/system_stm32f37x.h \
@@ -11,14 +10,12 @@ build/DLT698.d: ../user/source/DLT698.c ../user/include/DLT698.h \
  ../stdperiph/include/stm32f37x_rcc.h \
  ../stdperiph/include/stm32f37x_tim.h \
  ../stdperiph/include/stm32f37x_usart.h \
- ../stdperiph/include/stm32f37x_misc.h ../user/include/BaseDef.h \
- ../user/include/DLT645.h ../user/include/Uart.h ../user/include/main.h
+ ../stdperiph/include/stm32f37x_misc.h ../user/include/DLT698.h \
+ ../user/include/BaseDef.h ../user/include/DLT698_45.h \
+ ../user/include/BaseDef.h ../user/include/DLT645.h \
+ ../user/include/Uart.h ../user/include/main.h
 
-../user/include/DLT698.h:
-
-../user/include/BaseDef.h:
-
-../user/include/DLT698_45.h:
+../user/include/Flash.h:
 
 ../cmsis/include/stm32f37x.h:
 
@@ -51,6 +48,12 @@ build/DLT698.d: ../user/source/DLT698.c ../user/include/DLT698.h \
 ../stdperiph/include/stm32f37x_usart.h:
 
 ../stdperiph/include/stm32f37x_misc.h:
+
+../user/include/DLT698.h:
+
+../user/include/BaseDef.h:
+
+../user/include/DLT698_45.h:
 
 ../user/include/BaseDef.h:
 

@@ -33,7 +33,7 @@
                     "ignoreFailures": false
                 },
                 {
-                    "text": "file E:/485-Relay/Code/485-RELAY-01-18-11-05_Keil/Gcc/build/485Relay.elf",
+                    "text": "file E:/485-Relay/Code/master/Gcc/build/485Relay.elf",
                     //"text": "file D:/workspace/AutoBaud/build/AutoBaund.elf",
                     "description": "load file to gdb",
                     "ignoreFailures": false

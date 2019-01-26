@@ -1,3 +1,4 @@
+#include "Flash.h"
 #include "DLT698.h"
 #include "BaseDef.h"
 #include "DLT645.h"
@@ -1797,5 +1798,47 @@ void v698VoltageModify(DATA_UNIT *pDataUnit)
             }
             Ptr += 3;
         }
+    }
+}
+
+void v698EnergyModify(DATA_UNIT *pDataUnit)
+{
+    DATA_UNIT *pdata = pDataUnit;
+    UINT8 i;
+    /*Ptr是指向APDU数据段的指针，以下直接修改APDU原始帧*/
+    UINT8 *Ptr = pdata->ucPtr;
+    UINT8 ucArrays;
+    uint32_t dwEnergyValue[5];
+    bzero(dwEnergyValue, sizeof(dwEnergyValue));
+
+    if (pdata->ucVal == 0)
+        return;
+    if (*Ptr == 0) //NULL
+    {
+        return;
+    }
+    else if (*Ptr++ == 1) //array
+    {
+        ucArrays = *Ptr++; //电量值个数，对应总、尖、峰、平、谷
+        Ptr++;             //data
+        Ptr += 5;          //跳过正向有功总，从尖开始修改
+        for (i = 1; i < ucArrays; i++)
+        {
+            dwEnergyValue[i] = MAKE_LONG(MAKE_WORD(*Ptr, *(Ptr + 1)), MAKE_WORD(*(Ptr + 2), *(Ptr + 3)));
+            dwEnergyValue[i] = vNow_Frozen_Modify_Mothod(dwEnergyValue[i],
+                                                         FLASH_REAL_1DAYFROZEN_ADDR + 4 * i,
+                                                         FLASH_MODIFIED_1DAYFROZEN_ADDR + 4 * i);
+            *Ptr = MSB(MSW(dwEnergyValue[i]));
+            *(Ptr + 1) = LSB(MSW(dwEnergyValue[i]));
+            *(Ptr + 2) = MSB(LSW(dwEnergyValue[i]));
+            *(Ptr + 3) = LSB(LSW(dwEnergyValue[i]));
+            Ptr += 5; //1位类型加4位数据
+            dwEnergyValue[0] += dwEnergyValue[i];
+        }
+        Ptr -= 5 * ucArrays; //总
+        *Ptr = MSB(MSW(dwEnergyValue[0]));
+        *(Ptr + 1) = LSB(MSW(dwEnergyValue[0]));
+        *(Ptr + 2) = MSB(LSW(dwEnergyValue[0]));
+        *(Ptr + 3) = LSB(LSW(dwEnergyValue[0]));
     }
 }

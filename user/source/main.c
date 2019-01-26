@@ -25,6 +25,7 @@ struct AUTO_BAUD AutoBaud485 =
 /*上电后延时启动参数*/
 uint32_t uwBootDelay = 2000000;
 
+extern uint8_t Dayfrozen_Change_State;
 static void vLedRun(uint32_t delay);
 static void VoltageTimeOutHandle(void);
 static void RsvFrameHandle(uint8_t *pucBuffer);
@@ -127,7 +128,7 @@ int main(void)
                     FLAG_UartDB_HasData = false;
                     vFeedExtWatchDog();
                     dwLen = dwUartCopy(pUartDB, ucApp_Buf_DB2ZD, pUartZD);
-                    ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //校验错误也嫩过？
+                    ProtocolType = GetProtocolType(ucApp_Buf_DB2ZD, dwLen); //校验错误也过？
                     Uart_idleReadEnable(pUartDB);
                 }
             }
@@ -159,7 +160,8 @@ int main(void)
                 if ((dwLen = Uart_Read(pUartDB, ucApp_Buf_DB2ZD, DRV_BUF_SIZE)) == 0)
                     break;
                 if ((pGetpFrame(ucApp_Buf_DB2ZD, dwLen, &dlt698Frame)) == NULL ||
-                    Voltage_Change_State == Voltage_NOChange)
+                    (Voltage_Change_State == Voltage_NOChange &&
+                     Dayfrozen_Change_State == DAYFROZEN_NOCHANGE))
                 {
                     vFeedExtWatchDog();
                     Uart_OnceWrite(pUartZD, ucApp_Buf_DB2ZD, dwLen, 1000 * TICK_1MS);
@@ -168,13 +170,20 @@ int main(void)
                 {
                     if ((dwLen = dwGet698Apdu(&dlt698Frame, &pAPDU)) > 0)
                     {
+                        /*如果是GetRecordResponse，仅提取CSD==0的OAD*/
                         if (dwAPduAnalyze(pAPDU, dwLen, &stCollData) > 0)
                         {
                             for (i = 0; i < stCollData.ucDataNum; i++)
                             {
-                                if (stCollData.stDataUnit[i].stOAD.OI_date == 0x2000) /*电压OI*/
+                                if (stCollData.stDataUnit[i].stOAD.OI_date == OI_VOLTAGE) /*电压OI*/
                                 {
                                     v698VoltageModify(&stCollData.stDataUnit[i]);
+                                }
+                                else if (stCollData.stDataUnit[i].stOAD.OI_date == OI_FWACT && /*正向有功*/
+                                         stCollData.stMainOAD.OI_date == OI_DAY_FRZ &&         /*日冻结*/
+                                         stCollData.eDataCls == D_CLASS_DAY_FREEZE)
+                                {
+                                    v698EnergyModify(&stCollData.stDataUnit[i]);
                                 }
                             }
                             dwReCalculateFCS(&dlt698Frame);

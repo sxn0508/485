@@ -15,13 +15,13 @@
 #define FLASH_CURRENT_LIMIT_RATIO_ADDR 0x0801EF20 //变压器变比存储地址
 //#define FLASH_CURRENT_LIMIT_CAPACITY_ADDR				0x08031F24 //变压器容量存储地址
 
-#define FLASH_ENERGY_PAGE 0x0801F000              //电能量值存储页地址
-#define FLASH_REAL_1DAYFROZEN_ADDR 0x0801F000     //上1日冻结正向有功电能量真实值存储起始地址（总、尖、峰、平、谷）
-#define FLASH_REAL_2DAYFROZEN_ADDR 0x0801F014     //上2日冻结正向有功电能量真实值存储起始地址（总、尖、峰、平、谷）
-#define FLASH_REAL_3DAYFROZEN_ADDR 0x0801F028     //上3日冻结正向有功电能量真实值存储起始地址（总、尖、峰、平、谷）
-#define FLASH_MODIFIED_1DAYFROZEN_ADDR 0x0801F03C //上1日冻结正向有功电能量修改值存储起始地址（总、尖、峰、平、谷）
-#define FLASH_MODIFIED_2DAYFROZEN_ADDR 0x0801F050 //上2日冻结正向有功电能量修改值存储起始地址（总、尖、峰、平、谷）
-#define FLASH_MODIFIED_3DAYFROZEN_ADDR 0x0801F064 //上3日冻结正向有功电能量修改值存储起始地址（总、尖、峰、平、谷）
+#define FLASH_ENERGY_PAGE 0x0801F000                  //电能量值存储页地址
+#define FLASH_REAL_1DAYFROZEN_ADDR 0x0801F000         //上1日冻结正向有功电能量真实值存储起始地址（总、尖、峰、平、谷）
+/*#define FLASH_REAL_2DAYFROZEN_ADDR 0x0801F014*/     //上2日冻结正向有功电能量真实值存储起始地址（总、尖、峰、平、谷）
+/*#define FLASH_REAL_3DAYFROZEN_ADDR 0x0801F028*/     //上3日冻结正向有功电能量真实值存储起始地址（总、尖、峰、平、谷）
+#define FLASH_MODIFIED_1DAYFROZEN_ADDR 0x0801F03C     //上1日冻结正向有功电能量修改值存储起始地址（总、尖、峰、平、谷）
+/*#define FLASH_MODIFIED_2DAYFROZEN_ADDR 0x0801F050*/ //上2日冻结正向有功电能量修改值存储起始地址（总、尖、峰、平、谷）
+/*#define FLASH_MODIFIED_3DAYFROZEN_ADDR 0x0801F064*/ //上3日冻结正向有功电能量修改值存储起始地址（总、尖、峰、平、谷）
 
 #define FLASH_REAL_ALL_NOWENERGY_ADDR 0x0801F070     //当前正向有功总电能真实值存储地址
 #define FLASH_MODIFIED_ALL_NOWENERGY_ADDR 0x0801F074 //当前正向有功总电能修改值存储地址
